@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+/*
+  Better Earth Ventures — design tokens.
+
+  The palette is a proposal, not a lift from the Wix site (the live site is not readable
+  from this environment). Swap the hex values here and the whole site follows: components
+  reference the semantic tokens below, never a raw colour.
+*/
+
+:root {
+  color-scheme: light;
+
+  --bev-canvas: #fbfaf7;
+  --bev-canvas-raised: #ffffff;
+  --bev-canvas-sunk: #f2efe8;
+
+  --bev-ink: #0e1f19;
+  --bev-ink-muted: #4a5b54;
+  --bev-ink-faint: #7d8b85;
+
+  --bev-line: #e4e0d5;
+  --bev-line-strong: #cec8b8;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --bev-canvas: #0a1611;
+  --bev-canvas-raised: #12241c;
+  --bev-canvas-sunk: #071310;
+
+  --bev-ink: #eef4f0;
+  --bev-ink-muted: #a6b8b0;
+  --bev-ink-faint: #74877f;
+
+  --bev-line: #1e352b;
+  --bev-line-strong: #2b4a3b;
+}
+
+@theme inline {
+  --color-canvas: var(--bev-canvas);
+  --color-canvas-raised: var(--bev-canvas-raised);
+  --color-canvas-sunk: var(--bev-canvas-sunk);
+
+  --color-ink: var(--bev-ink);
+  --color-ink-muted: var(--bev-ink-muted);
+  --color-ink-faint: var(--bev-ink-faint);
+
+  --color-line: var(--bev-line);
+  --color-line-strong: var(--bev-line-strong);
+
+  /* Brand constants — identical in both themes. */
+  --color-forest: #14352a;
+  --color-moss: #2f6b4f;
+  --color-leaf: #4ca97a;
+  --color-signal: #c8f169;
+  --color-clay: #cf7a4e;
+  --color-sand: #e7dfd1;
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.5rem;
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - (var(--marquee-gap, 3rem) / 2)));
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bev-canvas);
+    color: var(--bev-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: #c8f169;
+    color: #14352a;
+  }
+
+  :focus-visible {
+    outline: 2px solid #2f6b4f;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .shell {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Fine paper grain — stops the large flat colour fields reading as plastic. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+}
