@@ -1,0 +1,8 @@
+# The Sanity Studio is a separate package deployed to Sanity hosting.
+# Vercel only builds the Next.js app, so don't ship the Studio in the build context.
+studio-bev-site/
+
+# Agent tooling and working directories.
+.agents/
+wix-export/
+docs/

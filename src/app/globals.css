@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/*
+  Better Earth Ventures — design tokens.
+
+  Colours are sampled directly from the previous Wix site so the rebuild is on-brand:
+  purple #540178, orange #ee792f, teal #12a19d, yellow #ffbf00, sky #3e9be9, ink #333.
+  Components reference the semantic tokens below, never a raw hex — so a future brand
+  refresh is a change to this file alone.
+*/
+
+:root {
+  color-scheme: light;
+
+  /* Warm paper base — the cream from the reference, not a cool white. */
+  --bev-canvas: #f6f2ea;
+  --bev-canvas-raised: #ffffff;
+  --bev-canvas-sunk: #ece5d9;
+
+  --bev-ink: #2f2b33;
+  --bev-ink-muted: #5b545f;
+  --bev-ink-faint: #8a828e;
+
+  --bev-line: #e3dccf;
+  --bev-line-strong: #cdc3b1;
+}
+
+@theme inline {
+  --color-canvas: var(--bev-canvas);
+  --color-canvas-raised: var(--bev-canvas-raised);
+  --color-canvas-sunk: var(--bev-canvas-sunk);
+
+  --color-ink: var(--bev-ink);
+  --color-ink-muted: var(--bev-ink-muted);
+  --color-ink-faint: var(--bev-ink-faint);
+
+  --color-line: var(--bev-line);
+  --color-line-strong: var(--bev-line-strong);
+
+  /* Brand */
+  --color-purple: #540178;
+  --color-purple-deep: #3d0158;
+  --color-purple-soft: #6d1e93;
+  --color-orange: #ee792f;
+  --color-orange-deep: #d4651e;
+  --color-teal: #12a19d;
+  --color-teal-deep: #0d827f;
+  --color-yellow: #ffbf00;
+  --color-sky: #3e9be9;
+
+  /*
+    One family, two roles. Display is the same face at heavier weight and tighter
+    tracking rather than a second font.
+  */
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - (var(--marquee-gap, 3rem) / 2)));
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bev-canvas);
+    color: var(--bev-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: #ffbf00;
+    color: #540178;
+  }
+
+  /* Headings default to the serif; body copy stays in Open Sans. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 2px solid #ee792f;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .shell {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 78rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  /*
+    Display is Fraunces, a variable serif. It carries weight optically, so it needs less
+    of it than Open Sans did — 600 reads heavier here than 800 did in the sans.
+  */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.03;
+    text-wrap: balance;
+  }
+
+  /* Section eyebrow — the old site's small caps label. */
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  /* The arch shape used on the expedition carousel portraits. */
+  .arch {
+    border-radius: 999px 999px 0.5rem 0.5rem;
+  }
+}
