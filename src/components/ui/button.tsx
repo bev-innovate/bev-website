@@ -4,17 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * Brand buttons. The old site used a solid orange pill as its primary action on both
+ * light and dark backgrounds — that carries over as `primary`.
+ */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 active:translate-y-px whitespace-nowrap",
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 active:translate-y-px whitespace-nowrap",
   {
     variants: {
       variant: {
         primary:
-          "bg-forest text-canvas hover:bg-moss shadow-[0_1px_2px_rgba(14,31,25,0.18)] hover:shadow-[0_6px_20px_-6px_rgba(20,53,42,0.5)]",
-        signal:
-          "bg-signal text-forest hover:brightness-105 shadow-[0_1px_2px_rgba(14,31,25,0.12)] hover:shadow-[0_6px_20px_-6px_rgba(200,241,105,0.7)]",
+          "bg-orange text-white hover:bg-orange-deep shadow-[0_1px_2px_rgba(51,51,51,0.15)] hover:shadow-[0_8px_22px_-8px_rgba(238,121,47,0.75)]",
+        purple: "bg-purple text-white hover:bg-purple-soft",
+        teal: "bg-teal text-white hover:bg-teal-deep",
+        white: "bg-white text-purple hover:bg-canvas-sunk",
         outline:
-          "border border-line-strong text-ink hover:border-forest hover:bg-canvas-sunk",
+          "border-2 border-current text-ink hover:bg-ink/5 [&.on-dark]:text-white",
         ghost: "text-ink hover:bg-canvas-sunk",
       },
       size: {

@@ -3,39 +3,25 @@
 /*
   Better Earth Ventures — design tokens.
 
-  The palette is a proposal, not a lift from the Wix site (the live site is not readable
-  from this environment). Swap the hex values here and the whole site follows: components
-  reference the semantic tokens below, never a raw colour.
+  Colours are sampled directly from the previous Wix site so the rebuild is on-brand:
+  purple #540178, orange #ee792f, teal #12a19d, yellow #ffbf00, sky #3e9be9, ink #333.
+  Components reference the semantic tokens below, never a raw hex — so a future brand
+  refresh is a change to this file alone.
 */
 
 :root {
   color-scheme: light;
 
-  --bev-canvas: #fbfaf7;
+  --bev-canvas: #ffffff;
   --bev-canvas-raised: #ffffff;
-  --bev-canvas-sunk: #f2efe8;
+  --bev-canvas-sunk: #f6f4f8;
 
-  --bev-ink: #0e1f19;
-  --bev-ink-muted: #4a5b54;
-  --bev-ink-faint: #7d8b85;
+  --bev-ink: #333333;
+  --bev-ink-muted: #5c5c63;
+  --bev-ink-faint: #8b8b94;
 
-  --bev-line: #e4e0d5;
-  --bev-line-strong: #cec8b8;
-}
-
-.dark {
-  color-scheme: dark;
-
-  --bev-canvas: #0a1611;
-  --bev-canvas-raised: #12241c;
-  --bev-canvas-sunk: #071310;
-
-  --bev-ink: #eef4f0;
-  --bev-ink-muted: #a6b8b0;
-  --bev-ink-faint: #74877f;
-
-  --bev-line: #1e352b;
-  --bev-line-strong: #2b4a3b;
+  --bev-line: #e6e2ea;
+  --bev-line-strong: #cfc8d6;
 }
 
 @theme inline {
@@ -50,18 +36,23 @@
   --color-line: var(--bev-line);
   --color-line-strong: var(--bev-line-strong);
 
-  /* Brand constants — identical in both themes. */
-  --color-forest: #14352a;
-  --color-moss: #2f6b4f;
-  --color-leaf: #4ca97a;
-  --color-signal: #c8f169;
-  --color-clay: #cf7a4e;
-  --color-sand: #e7dfd1;
+  /* Brand */
+  --color-purple: #540178;
+  --color-purple-deep: #3d0158;
+  --color-purple-soft: #6d1e93;
+  --color-orange: #ee792f;
+  --color-orange-deep: #d4651e;
+  --color-teal: #12a19d;
+  --color-teal-deep: #0d827f;
+  --color-yellow: #ffbf00;
+  --color-sky: #3e9be9;
 
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-
-  --radius-card: 1.5rem;
+  /*
+    One family, two roles. Poppins is the geometric sans the brand already uses; display
+    is the same face at heavier weight and tighter tracking rather than a second font.
+  */
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
 }
@@ -90,12 +81,12 @@
   }
 
   ::selection {
-    background-color: #c8f169;
-    color: #14352a;
+    background-color: #ffbf00;
+    color: #540178;
   }
 
   :focus-visible {
-    outline: 2px solid #2f6b4f;
+    outline: 2px solid #ee792f;
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -120,7 +111,7 @@
   .shell {
     width: 100%;
     margin-inline: auto;
-    max-width: 80rem;
+    max-width: 78rem;
     padding-inline: 1.25rem;
   }
 
@@ -130,18 +121,29 @@
     }
   }
 
-  /* Fine paper grain — stops the large flat colour fields reading as plastic. */
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Display headings: tight, confident, slightly condensed tracking. */
+  .display {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  /* Section eyebrow — the old site's small caps label. */
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
   .mask-fade-x {
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  /* The arch shape used on the expedition carousel portraits. */
+  .arch {
+    border-radius: 999px 999px 0.5rem 0.5rem;
   }
 }

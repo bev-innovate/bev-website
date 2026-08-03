@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
-import { CtaBand } from "@/components/site/cta-band";
-import { PageHeader } from "@/components/site/page-header";
-import { ProgrammeCard } from "@/components/site/programme-card";
+import { ProgrammeBlock } from "@/components/site/programme-block";
 import { Reveal } from "@/components/ui/reveal";
 import { getProgrammes } from "@/lib/content";
-import type { ProgrammeStatus } from "@/lib/types";
+import { programmesIntro } from "@/lib/seed-content";
 
 export const metadata: Metadata = {
   title: "Programmes",
-  description:
-    "Accelerators, competitions and convenings for climate and agrifood founders across Asia-Pacific — equity-free and built with EIT Climate-KIC, Innovate UK and partners across the region.",
+  description: programmesIntro.lede,
 };
 
-const groups: { status: ProgrammeStatus[]; title: string; note?: string }[] = [
-  { status: ["open", "upcoming"], title: "Open and upcoming" },
-  {
-    status: ["closed", "completed"],
-    title: "Previous editions",
-    note: "Applications are closed, but the cohorts, partners and outcomes are all here.",
-  },
+const stages = [
+  { key: "early" as const, label: "Early stage", tone: "purple" as const },
+  { key: "growth" as const, label: "Growth stage", tone: "orange" as const },
 ];
 
 export default async function ProgrammesPage() {
@@ -27,41 +21,73 @@ export default async function ProgrammesPage() {
 
   return (
     <>
-      <PageHeader
-        eyebrow="Programmes"
-        title="Equity-free programmes for the people building climate solutions in Asia-Pacific"
-        intro="We design and deliver acceleration pathways with global partners — then put founders in front of the investors, corporates and operators who decide whether a technology gets deployed."
-      />
+      <header className="relative isolate overflow-hidden bg-purple text-white">
+        <div aria-hidden className="absolute inset-0 -z-10">
+          <Image
+            src={programmesIntro.heroImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-purple/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-deep via-purple/75 to-orange/30" />
+        </div>
 
-      {groups.map((group) => {
-        const items = programmes.filter((p) => group.status.includes(p.status));
+        <div className="shell relative py-20 md:py-28">
+          <h1 className="display text-[clamp(2.25rem,5.5vw,3.75rem)]">
+            {programmesIntro.title}
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/85 md:text-xl">
+            {programmesIntro.lede}
+          </p>
+        </div>
+      </header>
+
+      <section className="py-16 md:py-20">
+        <div className="shell max-w-4xl space-y-5 text-[1.0625rem] leading-relaxed text-ink-muted">
+          {programmesIntro.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+          <p className="pt-2 font-semibold text-orange">{programmesIntro.highlight}</p>
+        </div>
+      </section>
+
+      {stages.map((stage) => {
+        const items = programmes.filter((p) => p.stage === stage.key);
         if (!items.length) return null;
 
         return (
-          <section key={group.title} className="shell pb-20 md:pb-24">
-            <div className="mb-10 flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-5">
-              <h2 className="font-display text-2xl font-semibold text-ink">{group.title}</h2>
-              {group.note ? <p className="text-sm text-ink-faint">{group.note}</p> : null}
-            </div>
+          <section
+            key={stage.key}
+            className={
+              // orange-deep rather than the brand orange: white body copy on #ee792f
+              // sits at ~2.9:1, which is below AA. See README.
+              stage.tone === "purple"
+                ? "bg-purple py-20 md:py-24"
+                : "bg-orange-deep py-20 md:py-24"
+            }
+          >
+            <div className="shell">
+              <Reveal>
+                <h2 className="eyebrow text-white/90">{stage.label}</h2>
+              </Reveal>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              {items.map((programme, i) => (
-                <Reveal key={programme.slug} delay={i * 0.05}>
-                  <ProgrammeCard programme={programme} />
-                </Reveal>
-              ))}
+              <div className="mt-14 space-y-20 md:space-y-28">
+                {items.map((programme, i) => (
+                  <ProgrammeBlock
+                    key={programme.slug}
+                    programme={programme}
+                    index={i}
+                    tone={stage.tone}
+                  />
+                ))}
+              </div>
             </div>
           </section>
         );
       })}
-
-      <CtaBand
-        eyebrow="Design a programme"
-        title="Need an acceleration pathway your portfolio will actually use?"
-        intro="We build bespoke programmes for corporates, funds and public agencies — from open call to Demo Day."
-        primary={{ href: "/contact", label: "Start a conversation" }}
-        secondary={{ href: "/approach", label: "See how we work" }}
-      />
     </>
   );
 }

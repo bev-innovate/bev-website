@@ -36,7 +36,7 @@ export function ProgrammeCard({
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-moss/25 via-leaf/15 to-signal/25" />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange/25 via-teal/15 to-yellow/25" />
         )}
         <div className="absolute top-4 left-4">
           <StatusBadge status={programme.status} />
@@ -45,7 +45,7 @@ export function ProgrammeCard({
 
       <div className="flex flex-1 flex-col p-7 md:p-8">
         {programme.kicker ? (
-          <p className="text-xs font-semibold tracking-[0.14em] text-moss uppercase">
+          <p className="text-xs font-semibold tracking-[0.14em] text-orange uppercase">
             {programme.kicker}
           </p>
         ) : null}
@@ -74,7 +74,7 @@ export function ProgrammeCard({
           </dl>
         ) : null}
 
-        <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-sm font-medium text-forest">
+        <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-sm font-medium text-purple">
           Programme details
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
         </span>

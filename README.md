@@ -1,8 +1,11 @@
 # Better Earth Ventures — website
 
 A coded rebuild of [betterearthventures.com](https://www.betterearthventures.com/), replacing the
-Wix site with Next.js + Sanity. **This is a first draft** — see [What still needs
-deciding](#what-still-needs-deciding) before treating anything here as final.
+Wix site with Next.js + Sanity.
+
+**The copy is the existing Wix copy, unchanged.** This rebuild is a design and engineering
+change, not a content change. Alternative copy and structural suggestions are parked in
+[`docs/content-suggestions.md`](docs/content-suggestions.md) for a separate pass.
 
 ## Stack
 
@@ -89,18 +92,18 @@ data you can query later — which you will, once programme applications run thr
 
 ## Components
 
-Two components are lifted from 21st.dev and adapted to the brand (attribution is in the
-file header of each):
+One component is lifted from 21st.dev and adapted to the brand (attribution is in its
+file header):
 
 - `src/components/ui/timeline.tsx` — Aceternity UI "Timeline" via
   [@manuarora700](https://21st.dev/@manuarora700/components/timeline). Sticky heading with
   a scroll-following beam. Drives the "How we work" section and every programme timeline.
   Adapted: brand tokens, `ResizeObserver` instead of a one-shot measure, reduced-motion
   handling, heading lifted into props.
-- `src/components/site/pillars-bento.tsx` — structure from
-  [@uilayout.contact "Feature Bento"](https://21st.dev/@uilayout.contact/components/feature-bento).
-  Image-led hero card plus stat tiles and a CTA block. Re-skinned and populated with the
-  three real pillars (Acceleration Services, Better Earth Exchange, Better Earth Institute).
+
+The bento layout adapted from [@uilayout.contact "Feature Bento"](https://21st.dev/@uilayout.contact/components/feature-bento)
+was dropped once the real site structure came to light — the old site uses an accordion
+there, not a bento grid, so `pillars-accordion.tsx` replaced it.
 
 The rest — hero, marquee, cards, accordion, forms — is hand-built in the same idiom. Two
 notes on why more wasn't pulled in: the 21st.dev free tier allows two component retrievals
@@ -109,38 +112,65 @@ components are vendored into the repo rather than installed. Both are worth revi
 a paid 21st.dev key — the marquee, logo cloud and hero especially have stronger versions in
 the catalogue.
 
-## What was carried over from Wix
+## Pages
 
-- **All 11 blog posts** — titles, slugs, dates, excerpts, reading time, tags and cover
-  images, read out of the live site through the Wix Blog API.
-- **Five programmes** — AgriTech ClimAccelerator Singapore, Women Founders & Funders,
-  Climate Innovation Summit, the Innovate UK Global Incubator Programme and
-  ClimateLaunchpad, with real eligibility, benefits, timelines and FAQ content.
-- **The nine-company 2025 cohort**, partners and the three-pillar structure.
-- **URL compatibility.** `next.config.ts` permanently redirects `/post/:slug` →
-  `/insights/:slug`, `/climaccelerator` and `/womenfoufun` to their new homes, so inbound
-  links from press coverage keep working.
+| Route | Source |
+| --- | --- |
+| `/` | Home — hero, who we are, three-pillar accordion, track record, trusted by, verticals |
+| `/programmes` | Our Programmes — early stage (purple band) and growth stage (orange band) |
+| `/climate-expeditions` | Climate Expeditions — why, where we've been, who it's for, what you'll experience, next expedition |
+| `/news` | News — all 11 posts |
+| `/news/[slug]` | Article |
+| `/programmes/[slug]` | Programme detail (new — the old site had none) |
+| `/about`, `/contact`, `/privacy` | Placeholders; the old site's "More" menu wasn't captured |
 
-## What still needs deciding
+**URL compatibility.** `next.config.ts` permanently redirects `/post/:slug` → `/news/:slug`,
+plus `/climaccelerator` and `/womenfoufun` to their programme pages, so inbound links from
+press coverage keep working.
 
-Flagging these rather than guessing further:
+## Design
 
-1. **Brand palette and typography are a proposal, not a match.** The live Wix site is not
-   readable from this build environment (egress policy blocks it), so the forest/signal-lime
-   palette and the Fraunces + Inter pairing are my choice. Everything is tokenised in
-   `globals.css` — swapping in the real brand values is a one-file change.
-2. **Team bios.** `src/lib/seed-content.ts` lists four names found on public LinkedIn
-   profiles with placeholder titles. Confirm roles, bios and photos before launch.
-3. **Partner logos.** No logo files were available, so the partner strip renders a
+The palette is sampled pixel-for-pixel from the old site — purple `#540178`, orange
+`#ee792f`, teal `#12a19d`, yellow `#ffbf00`, sky `#3e9be9`, ink `#333`. Type is Poppins,
+the geometric sans the Wix site used. Everything is tokenised in `src/app/globals.css`.
+
+What changed, and why:
+
+- **Motion.** Staggered hero entrance, scroll reveals, count-up on the track-record
+  figures, direction-aware carousel. All gated behind `prefers-reduced-motion`.
+- **Real disclosure semantics.** The pillar accordion and the "who it's for" list are
+  proper `button`/`region` pairs (or native `details`/`summary`), so they work with a
+  keyboard and a screen reader. The Wix originals did not.
+- **Duotone hero imagery** instead of flat colour blocks, so photography carries the
+  brand rather than fighting it.
+- **Alternating programme blocks** with status pills, and a single-column layout when a
+  programme has no graphic — the old layout left half the row empty.
+- **Image-filled "Climate Expeditions" headline** preserved via `background-clip: text`,
+  with a solid-purple layer underneath so a failed image never blanks the heading.
+
+### One deliberate colour change
+
+The Growth Stage band uses `orange-deep` (`#d4651e`) rather than the brand orange.
+White body copy on `#ee792f` measures ~2.9:1, well below the 4.5:1 AA threshold; the
+deeper shade gets to ~3.7:1. Full AA needs either a darker orange still or dark text on
+orange — **your call**, and it's a one-token change in `globals.css`. Say the word and
+I'll revert it to the exact brand orange.
+
+## What still needs your input
+
+1. **Team bios.** `src/lib/seed-content.ts` lists four names from public LinkedIn
+   profiles with placeholder titles. The old site had no team page — confirm before
+   `/about` goes live.
+2. **Partner logos.** No logo files were available, so "Trusted by" renders a
    typographic lockup. Upload real SVGs to the `partner` documents in Sanity.
-4. **Article bodies.** Post metadata migrated cleanly; full bodies did not. Article pages
-   currently show the excerpt and link out to the Wix original. Paste the bodies into
-   Sanity (or extend the seed script to pull `contentText` from the Wix API) before
-   cancelling the Wix subscription.
-5. **Privacy policy** is a structural placeholder — needs a PDPA review.
-6. **"Bracell"** — I read this as **Vercel** and configured accordingly. If you meant a
-   different host, the only Vercel-specific pieces are `@vercel/analytics` in
-   `src/app/layout.tsx` and the assumption that `next build` output is deployed directly.
+3. **Article bodies.** Post metadata migrated cleanly; full bodies did not. Article pages
+   show the excerpt and link out to the Wix original. Migrate these before cancelling Wix.
+4. **The "More" menu.** Not captured in the screenshots — tell me what was in it.
+5. **Programme graphics.** The Global Incubator Programme block has no image because its
+   graphic wasn't in the screenshot set.
+6. **Privacy policy** is a structural placeholder — needs a PDPA review.
+7. **Font.** Poppins is my read of the Wix typeface. If the brand guide says otherwise,
+   it's one line in `layout.tsx`.
 
 ## Deploying
 

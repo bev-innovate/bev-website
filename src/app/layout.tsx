@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
@@ -9,15 +9,11 @@ import { siteSettings as fallbackSettings } from "@/lib/seed-content";
 
 import "./globals.css";
 
-const inter = Inter({
+/** Poppins is the geometric sans the brand already uses across the Wix site. */
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -47,11 +43,11 @@ export default async function RootLayout({
   const settings = await getSiteSettings();
 
   return (
-    <html lang="en-SG" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en-SG" className={poppins.variable}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-full focus:bg-forest focus:px-5 focus:py-3 focus:text-sm focus:text-canvas"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-full focus:bg-purple focus:px-5 focus:py-3 focus:text-sm focus:text-canvas"
         >
           Skip to content
         </a>

@@ -34,9 +34,9 @@ export function CohortGrid({ companies }: { companies: Company[] }) {
               ) : null}
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {company.vertical ? <Badge tone="moss">{company.vertical}</Badge> : null}
+                {company.vertical ? <Badge tone="orange">{company.vertical}</Badge> : null}
                 {company.country ? <Badge>{company.country}</Badge> : null}
-                {company.womenCofounded ? <Badge tone="clay">Women co-founded</Badge> : null}
+                {company.womenCofounded ? <Badge tone="orange">Women co-founded</Badge> : null}
               </div>
             </Wrapper>
           </Reveal>

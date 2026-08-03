@@ -48,11 +48,19 @@ export interface Company {
   cohortYear?: number;
 }
 
+/** Colour a programme or card is themed with — mirrors the old site's block colours. */
+export type Accent = "purple" | "orange" | "teal" | "yellow" | "sky";
+
 export interface Programme {
   title: string;
   slug: string;
   kicker?: string;
+  /** Which part of the founder journey the programme serves. */
+  stage?: "early" | "growth";
+  accent?: Accent;
   summary: string;
+  /** Long-form paragraphs shown on the programmes listing. */
+  body?: string[];
   heroImage?: string | null;
   status: ProgrammeStatus;
   applyUrl?: string;
@@ -65,7 +73,8 @@ export interface Programme {
   faq?: FaqItem[];
   partners?: Partner[];
   cohort?: Company[];
-  body?: PortableTextBlock[];
+  /** Rich text, used only when the programme is authored in Sanity. */
+  richBody?: PortableTextBlock[];
   order?: number;
 }
 

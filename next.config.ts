@@ -20,8 +20,11 @@ const nextConfig: NextConfig = {
   */
   async redirects() {
     return [
-      { source: "/post/:slug", destination: "/insights/:slug", permanent: true },
-      { source: "/blog", destination: "/insights", permanent: true },
+      { source: "/post/:slug", destination: "/news/:slug", permanent: true },
+      { source: "/blog", destination: "/news", permanent: true },
+      { source: "/insights", destination: "/news", permanent: true },
+      { source: "/insights/:slug", destination: "/news/:slug", permanent: true },
+      { source: "/approach", destination: "/about", permanent: true },
       { source: "/climaccelerator", destination: "/programmes/climaccelerator", permanent: true },
       {
         source: "/womenfoufun",

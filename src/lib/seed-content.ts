@@ -1,13 +1,12 @@
 /**
- * Seed content for the first draft.
+ * Seed content — transcribed from the previous Wix site.
  *
- * Everything here mirrors real content pulled from the live Wix site (via the Wix Blog
- * API) and public announcements, so the rebuild is reviewable before Sanity is wired up.
- * Once the Sanity project exists, this file becomes the migration payload —
- * `npm run seed:sanity` pushes it into the dataset — and the site reads from the CMS.
+ * Copy is carried over as-is so this rebuild is a design change, not a content change.
+ * Blog metadata came from the Wix Blog API; page copy was transcribed from full-page
+ * screenshots of the four live pages (home, programmes, climate expeditions, news).
  *
- * Image URLs still point at Wix media. They render fine, but they should be migrated
- * into Sanity’s asset pipeline before the Wix subscription is cancelled.
+ * Once Sanity is wired up this file becomes the migration payload (`npm run seed`) and
+ * the site reads from the CMS instead.
  */
 
 import type {
@@ -24,30 +23,15 @@ const WIX_MEDIA = "https://static.wixstatic.com/media";
 
 export const siteSettings: SiteSettings = {
   title: "Better Earth Ventures",
-  tagline: "Climate and agrifood innovation, built for Asia-Pacific",
+  tagline: "Empowering innovators. For people, place, and planet.",
   description:
-    "Better Earth Ventures accelerates climate and agrifood tech startups across Asia-Pacific. We connect founders to capital, networks and strategic partners to scale solutions for people, place and planet.",
+    "We accelerate the solutions our planet needs by connecting the climatetech and sustainability ecosystem to support entrepreneurs in building ventures that protect people, restore ecosystems, and drive systemic change.",
   stats: [
-    {
-      value: "370+",
-      label: "Startups supported",
-      detail: "Across accelerators, incubators and market-immersion programmes",
-    },
-    {
-      value: "US$500m+",
-      label: "Raised by alumni",
-      detail: "Follow-on capital secured by companies our team has backed",
-    },
-    {
-      value: "50",
-      label: "Countries convening",
-      detail: "Climate Innovation Summit Singapore, October 2026",
-    },
-    {
-      value: "0%",
-      label: "Equity taken",
-      detail: "Our accelerator programmes are equity-free and fee-free",
-    },
+    { value: "370+", label: "startups accelerated" },
+    { value: "$500M", label: "raised collectively for these startups" },
+    { value: "100+", label: "investors in our network" },
+    { value: "60+", label: "corporations and government agency partners" },
+    { value: "120+", label: "global mentors who provide support and guidance to our innovators" },
   ],
   contact: {
     email: "hello@betterearthventures.com",
@@ -59,10 +43,149 @@ export const siteSettings: SiteSettings = {
   ],
   navigation: [
     { label: "Programmes", href: "/programmes" },
-    { label: "Approach", href: "/approach" },
-    { label: "Insights", href: "/insights" },
+    { label: "Climate Expeditions", href: "/climate-expeditions" },
+    { label: "News", href: "/news" },
     { label: "About", href: "/about" },
   ],
+};
+
+/** Home — "Who we are" intro block. */
+export const whoWeAre = {
+  eyebrow: "Who we are",
+  heading: "Better Earth Ventures is where ClimateTech founders come to scale.",
+  paragraphs: [
+    "Climate solutions don't fail for lack of ideas. They fail because scaling is hard.",
+    "Better Earth Ventures exists to change that.",
+    "We are a Singapore-based climate and agrifood innovation platform working at the point where ambition meets execution.",
+  ],
+  highlight:
+    "We support climate founders to turn validated solutions into scalable businesses, through carefully designed programmes, market immersion and deep ecosystem access.",
+  paragraphsAfter: [
+    "Our work brings together founders, investors, corporates, governments and research institutions to accelerate deployment in real markets, particularly across Asia-Pacific.",
+    "We back founders who are building commercially viable solutions with measurable impact across People, Place and Planet.",
+  ],
+  closing: "Join us in building a Better Earth, one solution at a time.",
+};
+
+/** Home — the three pillars, shown as an accordion on the old site. */
+export const pillars = [
+  {
+    title: "Better Earth Ventures",
+    slug: "ventures",
+    description:
+      "We design bespoke acceleration pathways to strengthen the success of startup and scaleup portfolios, leveraging our global network of mentors, collaborators, and strategic partners.",
+    outcomesLabel: "Outcomes include:",
+    outcomes: [
+      {
+        title: "Expand Overseas",
+        body: "Support startups and scaleups in growing their international presence and impact.",
+      },
+      {
+        title: "Boost Portfolio Attractiveness",
+        body: "Prepare startups to impress at Demo Day and raise investment with confidence.",
+      },
+      {
+        title: "Facilitate Successful Pilots",
+        body: "Enable productive startup–corporate collaborations that deliver real results.",
+      },
+      {
+        title: "Embed Innovation",
+        body: "Help organisations integrate cutting-edge solutions to stay ahead of the curve.",
+      },
+    ],
+    idealForLabel: "Ideal for:",
+    idealFor:
+      "Venture capital firms, corporate innovation teams, and government agencies seeking to drive impact through high-potential ventures.",
+  },
+  {
+    title: "Better Earth Exchange",
+    slug: "exchange",
+    description: "Where the sustainability community comes to connect, collaborate, and grow.",
+    body: [
+      "Through founder roundtables, curated events, and ecosystem gatherings, Better Earth Exchange fosters the trusted relationships that fuel innovation. We bring together entrepreneurs, investors, researchers, corporates, and change-makers to exchange insights, spark partnerships, and accelerate collective action.",
+      "Whether you're looking for inspiration, collaboration, or a community that understands your mission, this is your home base.",
+    ],
+  },
+  {
+    title: "Better Earth Institute",
+    slug: "institute",
+    description:
+      "The Better Earth Institute exists to illuminate the evolving sustainability and climate innovation landscape.",
+    body: [
+      "We collect, analyse, and share insights to help funders, founders, corporates, and governments navigate complexity, spot emerging trends, and make smarter decisions.",
+      "By mapping out who's doing what, and what's working, we accelerate collective action, reduce duplication, and surface new opportunities for collaboration and investment. Our research helps ensure that resources flow to the innovations that matter most.",
+    ],
+  },
+];
+
+/** Home — "Trusted by" logo row. */
+export const trustedBy: Partner[] = [
+  { name: "Innovate UK", tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/" },
+  { name: "AgFunder", tier: "ecosystem", url: "https://agfunder.com" },
+  { name: "Sustainable Living Lab", tier: "ecosystem" },
+  { name: "Start2 Group", tier: "ecosystem" },
+  { name: "Singapore Deep-Tech Alliance", tier: "ecosystem" },
+  { name: "AgriFutures Australia", tier: "ecosystem" },
+];
+
+/** Home — "Our Verticals: Driving Innovation in Vital Industries". */
+export const verticals = [
+  {
+    title: "Agriculture and Food",
+    image: `${WIX_MEDIA}/4d40e5_39d7da7e3ac3477090381929a58616f1~mv2.jpg`,
+    items: [
+      "Precision Agriculture",
+      "Controlled Environment Agriculture",
+      "Climate-Resilient Seed Genetics",
+      "Alternative Proteins",
+      "Circular Economy",
+    ],
+  },
+  {
+    title: "Urban Sustainability",
+    image: `${WIX_MEDIA}/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png`,
+    items: [
+      "Construction & Real Estate",
+      "Renewable Energy & Energy Efficiency",
+      "IoT and Connectivity",
+      "Smart Buildings and Materials",
+      "Urban Agriculture and Food Systems",
+    ],
+  },
+  {
+    title: "Sustainable Tourism",
+    image: `${WIX_MEDIA}/4d40e5_651b4396073a4a50bc3d12232183b33f~mv2.jpg`,
+    items: [
+      "Urban Mobility, Transportation and Logistics",
+      "Air Quality and Monitoring",
+      "Waste Management, Recycling and Plastic Reduction",
+      "Smart Destination Management",
+      "Zero-Waste Initiatives",
+    ],
+  },
+  {
+    title: "Manufacturing",
+    image: `${WIX_MEDIA}/4d40e5_3a23db5f0c994a59a0da891b7aa6a993~mv2.jpg`,
+    items: [
+      "Logistics Optimisation",
+      "Green Packaging and Sustainable Products",
+      "Carbon Capture and Sequestration, and Emissions Reduction",
+    ],
+  },
+];
+
+/** Programmes page — intro above the programme list. */
+export const programmesIntro = {
+  title: "Our Programmes",
+  lede: "We are dedicated to accelerating the development and deployment of transformative technologies and initiatives that mitigate climate change and promote sustainable living.",
+  heroImage: `${WIX_MEDIA}/4d40e5_70ceffdd6b544e22918ff8278784bf54~mv2.jpg`,
+  paragraphs: [
+    "At Better Earth Ventures, we are committed to creating meaningful climate impact at every stage of the innovation journey.",
+    "From sparking early-stage inspiration in future changemakers to supporting the growth and global scale-up of climate-positive technologies, our programmes are designed to meet founders where they are, and take them where they need to go.",
+    "With deep sector expertise, a global network, and a track record of delivering high-impact support, we help turn bold ideas into real-world solutions that move the needle on climate action.",
+  ],
+  highlight:
+    "Below are our current programmes, each designed to address a specific stage of the journey and drive tangible outcomes for founders, partners, and the planet.",
 };
 
 export const partners: Partner[] = [
@@ -70,83 +193,48 @@ export const partners: Partner[] = [
   { name: "ClimAccelerator", tier: "programme", url: "https://climaccelerator.climate-kic.org" },
   { name: "ClimateLaunchpad", tier: "programme", url: "https://climatelaunchpad.org" },
   { name: "Innovate UK", tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/" },
-  { name: "PepsiCo Greenhouse", tier: "programme" },
-  { name: "FTW Ventures", tier: "ecosystem", url: "https://www.ftw.vc" },
+  { name: "AgFunder", tier: "ecosystem", url: "https://agfunder.com" },
+  { name: "Singapore Deep-Tech Alliance", tier: "ecosystem" },
   { name: "MarTech Collective", tier: "ecosystem" },
   { name: "Tomorrow Studio Ventures", tier: "ecosystem" },
-  { name: "SGInnovate", tier: "ecosystem", url: "https://www.sginnovate.com" },
-  { name: "Singapore International Agri-Food Week", tier: "ecosystem" },
-  { name: "Wright Partners", tier: "ecosystem", url: "https://www.wright.partners" },
+  { name: "Sustainable Living Lab", tier: "ecosystem" },
+  { name: "AgriFutures Australia", tier: "ecosystem" },
+  { name: "Start2 Group", tier: "ecosystem" },
 ];
 
 export const companies: Company[] = [
-  {
-    name: "Algenie",
-    vertical: "Biotech & biomaterials",
-    blurb: "Scaling algae cultivation for low-carbon protein and materials.",
-    cohortYear: 2025,
-  },
-  {
-    name: "DayaTani",
-    country: "Indonesia",
-    vertical: "Agricultural value chain",
-    blurb: "Digitising smallholder supply chains to lift farmer incomes and traceability.",
-    cohortYear: 2025,
-  },
+  { name: "Algenie", vertical: "Biotech & biomaterials", cohortYear: 2025 },
+  { name: "DayaTani", country: "Indonesia", vertical: "Agricultural value chain", cohortYear: 2025 },
   {
     name: "KiwiLeather Innovations",
     country: "New Zealand",
     vertical: "Biotech & biomaterials",
-    blurb: "Turning fruit-industry side streams into next-generation leather alternatives.",
     cohortYear: 2025,
     womenCofounded: true,
   },
-  {
-    name: "LambdAI Space",
-    vertical: "Digital agriculture & smart farming",
-    blurb: "Earth-observation and AI for crop and climate-risk intelligence.",
-    cohortYear: 2025,
-  },
+  { name: "LambdAI Space", vertical: "Digital agriculture", cohortYear: 2025 },
   {
     name: "Living Roots",
     country: "Thailand",
     vertical: "Novel farming practices",
-    blurb: "Regenerative and syntropic agroforestry systems that rebuild soil carbon.",
     cohortYear: 2025,
     womenCofounded: true,
   },
   {
     name: "N&E Innovations",
     country: "Singapore",
-    vertical: "Agricultural value chain",
-    blurb: "Upcycling food waste into antimicrobial materials that extend shelf life.",
+    vertical: "Supply chain",
     cohortYear: 2025,
     womenCofounded: true,
   },
-  {
-    name: "Polar Cold",
-    vertical: "Water & energy management",
-    blurb: "Low-energy cold chain for perishables in tropical markets.",
-    cohortYear: 2025,
-  },
-  {
-    name: "Rainstick",
-    country: "Australia",
-    vertical: "Novel farming practices",
-    blurb: "Electric-field technology that raises crop yield and reduces input intensity.",
-    cohortYear: 2025,
-  },
-  {
-    name: "Stealth — enhanced rock weathering",
-    vertical: "Carbon management",
-    blurb: "Carbon removal through enhanced rock weathering on working farmland.",
-    cohortYear: 2025,
-  },
+  { name: "Polar Cold", vertical: "Water & energy management", cohortYear: 2025 },
+  { name: "Rainstick", country: "Australia", vertical: "Novel farming practices", cohortYear: 2025 },
+  { name: "Stealth — enhanced rock weathering", vertical: "Carbon management", cohortYear: 2025 },
 ];
 
 /**
- * Team names are sourced from public LinkedIn profiles. Titles and bios are placeholders —
- * confirm and replace before this goes live.
+ * Team names are from public LinkedIn profiles; titles and bios are placeholders.
+ * The old site had no team page — confirm before publishing /about.
  */
 export const people: Person[] = [
   { name: "Jamie Heng", role: "Better Earth Ventures", group: "team", order: 1 },
@@ -157,290 +245,221 @@ export const people: Person[] = [
 
 export const programmes: Programme[] = [
   {
-    title: "AgriTech ClimAccelerator Singapore",
-    slug: "climaccelerator",
-    kicker: "6-month accelerator · with EIT Climate-KIC",
-    summary:
-      "A six-month, equity-free accelerator for agritech founders building climate solutions for Asia-Pacific’s most critical food systems — delivered with EIT Climate-KIC’s ClimAccelerator, the world’s largest climate accelerator network.",
-    status: "closed",
-    heroImage: `${WIX_MEDIA}/4d40e5_70ceffdd6b544e22918ff8278784bf54~mv2.jpg`,
-    applicationDeadline: "2025-05-30",
-    order: 1,
-    keyFacts: [
-      { label: "Duration", value: "6 months" },
-      { label: "Equity taken", value: "None" },
-      { label: "Participation fee", value: "None" },
-      { label: "Demo Day", value: "Singapore" },
-    ],
-    verticals: [
-      {
-        title: "Novel farming practices",
-        description: "Controlled-environment, regenerative and agroforestry systems.",
-      },
-      {
-        title: "Agricultural value chain",
-        description: "Traceability, post-harvest loss and market access for smallholders.",
-      },
-      {
-        title: "Water & energy management",
-        description: "Irrigation, cold chain and on-farm energy efficiency.",
-      },
-      {
-        title: "Biotech & biomaterials",
-        description: "Inputs, alternative proteins and side-stream valorisation.",
-      },
-      {
-        title: "Carbon management",
-        description: "Measurement, removal and credible on-farm carbon pathways.",
-      },
-      {
-        title: "Digital agriculture & smart farming",
-        description: "Sensing, remote sensing and decision intelligence.",
-      },
-    ],
-    eligibility: [
-      "Incorporated in Singapore, Australia, Thailand, Vietnam, Indonesia or New Zealand",
-      "Technology Readiness Level 4 or higher — a validated prototype tested in a controlled environment",
-      "A minimum of two core team members committed to the programme",
-      "A climate-focused solution for food and agriculture",
-    ],
-    benefits: [
-      "Expert mentorship from operators and investors across Asia-Pacific",
-      "Business model and go-to-market refinement for regional scale",
-      "Climate impact measurement using EIT Climate-KIC methodology",
-      "Warm introductions to investors, grants and funding opportunities",
-      "Corporate pilot and partnership matching",
-      "Demo Day in Singapore in front of the region’s climate capital base",
-    ],
-    timeline: [
-      {
-        phase: "April 2025",
-        title: "Applications open",
-        description:
-          "The call goes out across Asia-Pacific for agritech founders working on climate and food security.",
-      },
-      {
-        phase: "30 May 2025",
-        title: "Applications close",
-        description: "Screening and selection against TRL, team and climate-impact criteria.",
-      },
-      {
-        phase: "July 2025",
-        title: "Cohort announced",
-        description:
-          "Nine standout companies join the inaugural cohort — nearly half co-founded by women.",
-      },
-      {
-        phase: "Jul – Nov 2025",
-        title: "Acceleration",
-        description:
-          "Mentorship, market immersion, impact measurement and investor readiness across six months.",
-      },
-      {
-        phase: "6 November 2025",
-        title: "Demo Day, Singapore",
-        description:
-          "The cohort presents to investors, corporates and ecosystem partners during Singapore International Agri-Food Week.",
-      },
-    ],
-    faq: [
-      {
-        question: "Do you take equity?",
-        answer:
-          "No. The programme is equity-free and there is no participation fee. Startups fund their own travel and accommodation for Demo Day in Singapore.",
-      },
-      {
-        question: "Is there direct funding?",
-        answer:
-          "The programme does not provide direct funding. Startups gain access to investors, grants and funding opportunities through our ecosystem.",
-      },
-      {
-        question: "Which countries are eligible?",
-        answer:
-          "Startups incorporated in Singapore, Australia, Thailand, Vietnam, Indonesia and New Zealand.",
-      },
-      {
-        question: "What stage should we be at?",
-        answer:
-          "Early- and growth-stage, at TRL 4 or above — you should have a validated prototype that has been tested in a controlled environment.",
-      },
-    ],
-    partners: [
-      { name: "EIT Climate-KIC", tier: "programme" },
-      { name: "ClimAccelerator", tier: "programme" },
-    ],
-    cohort: companies,
-  },
-  {
-    title: "Women Founders & Funders Singapore",
+    title: "Women Founders and Funders Singapore",
     slug: "women-founders-and-funders",
-    kicker: "Annual pitch event · Singapore International Agri-Food Week",
+    stage: "early",
+    kicker: "Early stage",
     summary:
-      "A pitch showcase and gathering that champions the ingenuity, resilience and impact of women shaping the future of food — and puts them in front of the investors and corporates who can back them.",
-    status: "closed",
+      "We believe that when women lead, systems change. That's why Women Founders and Funders Singapore will return on Wednesday 5 November, during Singapore International Agrifood Week (SIAW) to champion the ingenuity, resilience, and impact of women shaping the future of food.",
+    body: [
+      "Applications are now open for agrifoodtech entrepreneurs raising Seed or Series A rounds who are driving meaningful impact – especially those advancing diversity, inclusion or other social equity goals. We are looking for visionary founders whose businesses combine innovation, commercial strength and a deep commitment to sustainability.",
+    ],
+    status: "open",
+    accent: "teal",
     heroImage: `${WIX_MEDIA}/4d40e5_261dfed6d6c843418eca61bb147d4cff~mv2.jpg`,
-    order: 2,
-    keyFacts: [
-      { label: "Format", value: "Pitch event + networking" },
-      { label: "Held during", value: "Singapore Intl. Agri-Food Week" },
-      { label: "2024 attendance", value: "180+ leaders, 35% investors" },
-      { label: "2025 applicant countries", value: "15" },
-    ],
-    benefits: [
-      "Pitch to an audience of agrifoodtech investors and corporate partners",
-      "Selection into a cohort of ten founders profiled across the ecosystem",
-      "Introductions through FTW Ventures, Better Earth Ventures and co-host networks",
-      "Visibility during the region’s largest agrifood week",
-    ],
-    eligibility: [
-      "Agrifoodtech companies raising a Seed or Series A round",
-      "Women founders and co-founders driving measurable impact",
-      "Businesses advancing diversity, inclusion or other social equity goals",
-      "Available to pitch in person in Singapore on the event date",
-    ],
-    timeline: [
-      {
-        phase: "2024",
-        title: "First edition",
-        description:
-          "Over 180 leaders joined, 35% of them investors, with ten founders pitching in Singapore.",
-      },
-      {
-        phase: "2025",
-        title: "Geographic expansion",
-        description:
-          "Applications doubled to 15 countries — Singapore (31%), New Zealand (14%) and Thailand (11%) led submissions, marking a shift toward Southeast Asian innovation hubs.",
-      },
-      {
-        phase: "5 November 2025",
-        title: "Pitch event",
-        description:
-          "Ten agrifoodtech trailblazers pitch during Singapore International Agri-Food Week.",
-      },
-    ],
+    order: 1,
     partners: [
-      { name: "FTW Ventures", tier: "programme" },
       { name: "MarTech Collective", tier: "programme" },
       { name: "Tomorrow Studio Ventures", tier: "programme" },
     ],
   },
   {
-    title: "Climate Innovation Summit Singapore",
-    slug: "climate-innovation-summit",
-    kicker: "13 – 15 October 2026 · Singapore",
+    title: "ClimateLaunchpad Singapore",
+    slug: "climatelaunchpad",
+    stage: "early",
+    kicker: "Early stage",
     summary:
-      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world — anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC 2026 Showcase.",
-    status: "upcoming",
-    heroImage: `${WIX_MEDIA}/4d40e5_651b4396073a4a50bc3d12232183b33f~mv2.jpg`,
-    order: 0,
-    keyFacts: [
-      { label: "Dates", value: "13 – 15 October 2026" },
-      { label: "Location", value: "Singapore" },
-      { label: "Countries represented", value: "50" },
-      { label: "Anchored by", value: "ClimateLaunchpad Global Grand Final" },
+      "ClimateLaunchpad, powered by Climate-KIC, Europe's leading climate innovation agency, is the world's largest green business competition. It is designed to unlock the potential of early-stage climate entrepreneurs by offering world-class training, expert guidance, and international exposure.",
+    body: [
+      "The Singapore edition, led by Better Earth Ventures, is part of a global movement across nearly 100 countries. It empowers aspiring founders and young startups to transform their climate-positive ideas into scalable ventures through a proven program of coaching, validation, and competition.",
     ],
-    benefits: [
-      "Founder roundtables on what it actually takes to commercialise climate innovation",
-      "One-to-one mentor matching across the three days",
-      "Strategic introductions to corporates, investors and policymakers",
-      "The ClimateLaunchpad Global Grand Final, in its 13th year",
-      "PepsiCo Greenhouse Program APAC 2026 Showcase: IMPACT edition",
-    ],
-    timeline: [
-      {
-        phase: "Day one",
-        title: "Proof of concept",
-        description:
-          "Early-stage founders testing new ideas meet the mentors and operators who have done it before.",
-      },
-      {
-        phase: "Day two",
-        title: "Proof of value",
-        description:
-          "Honest conversations between entrepreneurs and customers about commercialising climate solutions.",
-      },
-      {
-        phase: "Day three",
-        title: "Global Grand Final",
-        description:
-          "ClimateLaunchpad crowns the world’s best green business ideas, alongside the PepsiCo Greenhouse APAC showcase.",
-      },
-    ],
+    status: "open",
+    accent: "purple",
+    applyUrl: "https://climatelaunchpad.org",
+    heroImage: `${WIX_MEDIA}/4d40e5_953e2f52c9014236a4b84dab52fc18d6~mv2.jpg`,
+    order: 2,
     partners: [
       { name: "ClimateLaunchpad", tier: "programme" },
       { name: "EIT Climate-KIC", tier: "programme" },
-      { name: "PepsiCo Greenhouse", tier: "programme" },
     ],
   },
   {
-    title: "Global Incubator Programme — Cleantech",
-    slug: "global-incubator-programme",
-    kicker: "Market immersion · with Innovate UK",
+    title: "AgriTech ClimAccelerator Singapore",
+    slug: "climaccelerator",
+    stage: "early",
+    kicker: "Early stage",
     summary:
-      "A market-immersion programme that lands international cleantech founders in Singapore and Southeast Asia — moving them beyond pitch decks into real conversations, pilots and partnerships.",
-    status: "completed",
+      "ClimAccelerator, powered by Climate KIC, Europe's leading climate innovation agency and community, is a global programme for startups to innovate, catalyse and scale the potential of their climate solutions. It brings together the force of a diverse, global, connected community with a strong knowledge base and support system for sourcing, selecting and training entrepreneurs on their journey.",
+    body: [
+      "The AgriTech ClimAccelerator Singapore provides a leading global platform for climate-focused startups across Asia-Pacific. The programme is scouting for startups from Australia, Indonesia, New Zealand, Singapore, Thailand, and Vietnam. Anchored in Singapore, the programme offers resources, networks, capital access, climate impact measurement, and connections to top investors and industry experts.",
+      "Startup applications are open for solutions in Novel Farming Practices, Biotech and Biomaterials, Supply chain, Water and Energy Management and Digital Agriculture at Technology Readiness Level (TRL) 4 or above, with validated prototypes ready for real-world testing.",
+    ],
+    status: "closed",
+    accent: "sky",
+    heroImage: `${WIX_MEDIA}/4d40e5_70ceffdd6b544e22918ff8278784bf54~mv2.jpg`,
+    applicationDeadline: "2025-05-30",
     order: 3,
     keyFacts: [
-      { label: "2025 cohort", value: "8 UK startups" },
-      { label: "Delivered with", value: "Innovate UK" },
-      { label: "Focus", value: "Cross-border scaling" },
-    ],
-    benefits: [
-      "Structured market immersion in Singapore and the wider region",
-      "Customer and partner discovery with real buyers, not panels",
-      "Regulatory and go-to-market orientation for Southeast Asia",
-      "Pilot and partnership matchmaking",
-    ],
-    timeline: [
-      {
-        phase: "2025",
-        title: "Eight UK cleantech startups",
-        description:
-          "Over months of market immersion, founders moved beyond pitch decks into real conversations, pilots and partnerships — from product to strategy, from potential to deployment.",
-      },
-    ],
-    partners: [{ name: "Innovate UK", tier: "programme" }],
-  },
-  {
-    title: "ClimateLaunchpad",
-    slug: "climatelaunchpad",
-    kicker: "The world’s largest green business ideas competition",
-    summary:
-      "The global competition for green business ideas, now in its 13th year. We run the Singapore national final and host the Global Grand Final in October 2026.",
-    status: "open",
-    order: 4,
-    applyUrl: "https://climatelaunchpad.org",
-    keyFacts: [
-      { label: "Edition", value: "13th year" },
-      { label: "Stage", value: "Idea to early prototype" },
-      { label: "Cost", value: "Free to enter" },
-      { label: "Global Grand Final", value: "Singapore, October 2026" },
-    ],
-    benefits: [
-      "Coaching and boot camp for early-stage green business ideas",
-      "A route into the EIT Climate-KIC acceleration pathway",
-      "National final, regional final and Global Grand Final stages",
-      "Global visibility across the ClimateLaunchpad alumni network",
+      { label: "Startups", value: "10" },
+      { label: "Countries", value: "6" },
+      { label: "Duration", value: "6 months" },
+      { label: "Focus areas", value: "6" },
     ],
     partners: [
-      { name: "ClimateLaunchpad", tier: "programme" },
       { name: "EIT Climate-KIC", tier: "programme" },
+      { name: "AgFunder", tier: "programme" },
+    ],
+    cohort: companies,
+  },
+  {
+    title: "Innovate UK Global Incubator Programme — Cleantech Singapore",
+    slug: "global-incubator-programme",
+    stage: "growth",
+    kicker: "Growth stage",
+    summary:
+      "The Global Incubator Programme, delivered by Better Earth Ventures in partnership with the Singapore Deep-Tech Alliance (SDTA) and powered by Innovate UK, supports a curated cohort of pioneering UK startups working at the forefront of cleantech and environmental sustainability.",
+    body: [
+      "Designed to accelerate international growth, the programme combines immersive in-market exposure with strategic mentoring, ecosystem engagement, and access to regional capital networks. Anchored in Singapore, it includes 2 tailored market immersion weeks, six months of virtual programming, and a high-profile final showcase during Singapore's SWITCH conference.",
+      "The Global Incubator Programme builds cross-border collaboration and equips climate innovators with the tools, knowledge, and connections to scale solutions that make a measurable impact.",
+    ],
+    status: "completed",
+    accent: "orange",
+    order: 4,
+    partners: [
+      { name: "Innovate UK", tier: "programme" },
+      { name: "Singapore Deep-Tech Alliance", tier: "programme" },
     ],
   },
 ];
 
-export const events: SiteEvent[] = [
-  {
-    title: "Climate Innovation Summit Singapore",
-    slug: "climate-innovation-summit-2026",
-    startDate: "2026-10-13T09:00:00+08:00",
-    endDate: "2026-10-15T18:00:00+08:00",
-    location: "Singapore",
-    summary:
-      "Entrepreneurs from 50 countries convene for three days of founder roundtables, mentor matching and the ClimateLaunchpad Global Grand Final.",
+/** Climate Expeditions page. */
+export const expeditions = {
+  title: "Climate Expeditions",
+  lede: "Curated, small-group immersion journeys into real-world climate and agrifood innovation sites across Southeast Asia.",
+  intro:
+    "We take you out of conference rooms and into farms, facilities, labs, and communities where climate solutions are being built, tested and scaled. These expeditions are designed for people shaping climate decisions who want grounded insight, beyond reports, pitch decks and finance spreadsheets.",
+  cta: { label: "Join the next expedition", href: "/contact" },
+  heroImage: `${WIX_MEDIA}/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png`,
+
+  why: {
+    title: "Why Better Earth's Climate Expeditions Exist",
+    paragraphs: [
+      "Working in climate or agrifood tech from an office only tells half the story. The real context - the forces that determine whether solutions succeed or fail live on the ground - in farms, processing facilities, coastal communities, labs, and remote regions where climate challenges are most visible.",
+      "Climate Expeditions are immersive learning journeys designed to give founders, investors, policymakers, and ecosystem builders a sharper intuition for how climate technologies collide with real-world constraints, and what it actually takes to scale climate solutions responsibly.",
+      "By experiencing the real-world interplay between technology, behaviour, economics, and environment first-hand, participants build the intuition and judgement needed to back, design, and support solutions that can truly work at scale.",
+    ],
+  },
+
+  whereWeveBeen: {
+    title: "Where We've Been",
+    lede: "Our Climate Expeditions have already taken us across Southeast Asia, visiting climate solutions at different stages of maturity and scale.",
+    places: [
+      {
+        location: "Malaysia",
+        name: "A Little Wild",
+        accent: "orange" as const,
+        body: "At A Little Wild in Kota Tinggi, we saw how a degraded palm plantation can be brought back to life through syntropic agroforestry, and learnt how to work with nature, not against it.",
+        image: `${WIX_MEDIA}/4d40e5_39d7da7e3ac3477090381929a58616f1~mv2.jpg`,
+      },
+      {
+        location: "Borneo",
+        name: "SEADLING",
+        accent: "yellow" as const,
+        body: "In Kota Kinabalu and Semporna, we visited SEADLING, a seaweed biotech company developing functional ingredients that naturally enhance the well-being of animals, plants, and humans.",
+        image: `${WIX_MEDIA}/4d40e5_105fe0aabe794ae7a563289b89677850~mv2.jpeg`,
+      },
+      {
+        location: "The Philippines",
+        name: "Polar Cold",
+        accent: "sky" as const,
+        body: "We visited Polar Cold in Manila, where they team is rethinking cold storage for food and pharma SMEs through modular, hyperlocal cold rooms that businesses can rent on demand.",
+        image: `${WIX_MEDIA}/4d40e5_3a23db5f0c994a59a0da891b7aa6a993~mv2.jpg`,
+      },
+    ],
+  },
+
+  whoFor: {
+    title: "Who Climate Expeditions Are For",
+    lede: "Climate decisions get clearer when you see the system up close. Whether you invest, build, regulate, or operate, these trips give you the context that slides, models, and boardrooms can't. Each group walks away with sharper judgement, fewer assumptions, and a more grounded sense of what scaling climate solutions in Asia actually demands.",
+    audiences: [
+      {
+        question: "Investors Seeking Sharper Conviction",
+        answer:
+          "See how climate solutions behave beyond pitch decks. Understand operational risk, adoption friction, and scale potential by observing how founders, farmers, and operators make decisions under real constraints in context.",
+      },
+      {
+        question: "Corporates Driving Sustainability and Supply Chain Transformation",
+        answer:
+          "Meet the suppliers, operators and innovators your sustainability commitments depend on, and see where technology genuinely changes the economics of a supply chain.",
+      },
+      {
+        question: "Government and Public Sector Leaders",
+        answer:
+          "Understand how policy lands on the ground — what accelerates adoption, what stalls it, and where public support makes the decisive difference.",
+      },
+      {
+        question: "Innovators and Builders in Adjacent Climate Fields",
+        answer:
+          "Pressure-test your assumptions against neighbouring parts of the system, and find the collaborations that only become obvious in person.",
+      },
+      {
+        question: "Ecosystem Leaders Who Need Grounded Insight",
+        answer:
+          "Programme designers, accelerator teams and researchers who need first-hand context to build things that actually serve founders in this region.",
+      },
+      {
+        question: "Anyone Who Wants to Understand Climate Systems at Their Roots",
+        answer:
+          "No prior sector experience required — only genuine curiosity about how climate solutions succeed or fail in the real world.",
+      },
+    ],
+  },
+
+  experience: {
+    title: "What You'll Experience",
+    slides: [
+      {
+        accent: "yellow" as const,
+        image: `${WIX_MEDIA}/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png`,
+        paragraphs: [
+          "You won't just tour farms or facilities.",
+          "You'll sit down with the founders and the people running these systems day to day.",
+          "You'll hear what actually keeps them up at night, what's working, and what still feels unsolved.",
+          "You'll speak directly with farmers who experience climate decisions first-hand.",
+        ],
+      },
+      {
+        accent: "orange" as const,
+        image: `${WIX_MEDIA}/4d40e5_105fe0aabe794ae7a563289b89677850~mv2.jpeg`,
+        paragraphs: [
+          "You'll speak with operators and stakeholders who give you an honest view of the challenges and the opportunities ahead.",
+          "You'll see how decisions get made in the field, how technology fits into their workflows, and where the biggest gaps still are.",
+          "You'll discover the geographical and regulatory contexts that these climate innovators find themselves in.",
+        ],
+      },
+      {
+        accent: "teal" as const,
+        image: `${WIX_MEDIA}/4d40e5_3a23db5f0c994a59a0da891b7aa6a993~mv2.jpg`,
+        paragraphs: [
+          "It's a rare chance to understand climate solutions the way practitioners see them, not the way they're pitched in slides.",
+          "You'll leave with a sharper understanding of how climate solutions actually get adopted. A network of fellow builders.",
+          "A stronger sense of scale and constraints. And most importantly, a new perspective on what it takes to shift entrenched systems in Asia.",
+        ],
+      },
+    ],
+  },
+
+  next: {
+    title: "The next Climate Expedition is coming",
+    paragraphs: [
+      "We're curating our April 2026 Climate Expedition and will be launching it soon.",
+      "If you're interested about learning directly from the ground, communities, and operators shaping climate resilience, this one's for you.",
+    ],
+    primary: { label: "I'm Interested", href: "/contact" },
+    secondary: { label: "Chat with the Team", href: "/contact" },
     image: `${WIX_MEDIA}/4d40e5_651b4396073a4a50bc3d12232183b33f~mv2.jpg`,
   },
-];
+};
 
 /** All 11 posts published on the Wix site, newest first. */
 export const posts: Post[] = [
@@ -458,7 +477,7 @@ export const posts: Post[] = [
   },
   {
     title:
-      "Applications are open for ClimateLaunchpad, the world’s largest green business ideas competition",
+      "Applications are open for ClimateLaunchpad, the world's largest green business ideas competition",
     slug: "applications-are-open-for-climatelaunchpad-the-world-s-largest-green-business-ideas-competition",
     publishedAt: "2026-03-10T06:59:15Z",
     readingTime: 4,
@@ -466,7 +485,7 @@ export const posts: Post[] = [
     featured: true,
     coverImage: `${WIX_MEDIA}/4d40e5_953e2f52c9014236a4b84dab52fc18d6~mv2.jpg`,
     excerpt:
-      "Applications are open for ClimateLaunchpad, the world’s largest green business ideas competition.",
+      "Applications are open for ClimateLaunchpad, the world's largest green business ideas competition.",
   },
   {
     title: "InnovateUK Global Incubator Programme Cleantech 2025",
@@ -487,7 +506,7 @@ export const posts: Post[] = [
     category: "Field notes",
     coverImage: `${WIX_MEDIA}/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png`,
     excerpt:
-      "On our Better Earth Ventures Climate Expedition in northern Thailand, I moved beyond pitch decks into the lived reality of regenerative agriculture. Real climate progress is relational, systemic, and slower than slides suggest.",
+      "On our Better Earth Ventures Climate Expedition in northern Thailand, I moved beyond pitch decks into the lived reality of regenerative agriculture. At Living Roots and community farms, I saw soil as a living system.",
   },
   {
     title: "Women Founders & Funders Singapore 2025: Celebrating Agrifood Innovation",
@@ -519,7 +538,7 @@ export const posts: Post[] = [
     tags: ["syntropicagroforestry", "syntropy"],
     coverImage: `${WIX_MEDIA}/4d40e5_39d7da7e3ac3477090381929a58616f1~mv2.jpg`,
     excerpt:
-      "Did you know there’s a 138-acre farm in Johor that grows food by accelerating natural processes? It uses no fertilizers and no chemicals.",
+      "Did you know there's a 138-acre farm in Johor that grows food by accelerating natural processes? It uses no fertilizers and no chemicals.",
   },
   {
     title: "Agritech ClimAccelerator Singapore: A New Era of Climate Innovation",
@@ -530,7 +549,7 @@ export const posts: Post[] = [
     tags: ["climacceleratorsg"],
     coverImage: `${WIX_MEDIA}/4d40e5_70ceffdd6b544e22918ff8278784bf54~mv2.jpg`,
     excerpt:
-      "Today we mark a milestone for the APAC climate innovation ecosystem — a new cohort of founders bringing bold ideas and deep conviction to the region’s urgent challenges.",
+      "Today we mark a milestone for the APAC climate innovation ecosystem — a new cohort of founders bringing bold ideas and deep conviction to the region's urgent challenges.",
   },
   {
     title: "Agritech ClimAccelerator launches in Singapore with Better Earth Ventures",
@@ -568,40 +587,9 @@ export const posts: Post[] = [
   },
 ].map((post) => ({
   ...post,
-  // Full article bodies still live on Wix. Until they are migrated into Sanity, the
-  // article page renders the excerpt and links out to the original.
+  // Full article bodies still live on Wix until they are migrated into Sanity.
   externalUrl: `https://www.betterearthventures.com/post/${post.slug}`,
 }));
 
-/** The three pillars the Wix site organises its offer around. */
-export const pillars = [
-  {
-    title: "Acceleration Services",
-    slug: "acceleration",
-    description:
-      "Bespoke acceleration pathways that strengthen the success of startup and scaleup portfolios, drawing on a global network of mentors, collaborators and strategic partners.",
-    points: [
-      "Programme design and delivery",
-      "Mentor and expert matching",
-      "Investor readiness and impact measurement",
-    ],
-  },
-  {
-    title: "Better Earth Exchange",
-    slug: "exchange",
-    description:
-      "Founder roundtables, curated events and ecosystem gatherings that build the trusted relationships innovation actually runs on — entrepreneurs, investors, researchers, corporates and change-makers in the same room.",
-    points: [
-      "Founder roundtables",
-      "Curated ecosystem events",
-      "Cross-border market immersion",
-    ],
-  },
-  {
-    title: "Better Earth Institute",
-    slug: "institute",
-    description:
-      "Research and field notes that illuminate the evolving sustainability and climate innovation landscape, so founders and funders can act on what is actually happening on the ground.",
-    points: ["Landscape research", "Field notes and expeditions", "Ecosystem intelligence"],
-  },
-];
+/** No events page existed on the old site; kept empty so the helper has a shape. */
+export const events: SiteEvent[] = [];

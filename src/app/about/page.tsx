@@ -75,7 +75,7 @@ export default async function AboutPage() {
                   <div key={stat.label}>
                     <dt className="sr-only">{stat.label}</dt>
                     <dd>
-                      <p className="font-display text-4xl font-semibold text-forest">
+                      <p className="font-display text-4xl font-semibold text-purple">
                         {stat.value}
                       </p>
                       <p className="mt-2 text-sm text-ink-muted">{stat.label}</p>
@@ -110,8 +110,8 @@ export default async function AboutPage() {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="grid h-full place-items-center bg-gradient-to-br from-moss/15 to-signal/20">
-                          <span className="font-display text-3xl font-semibold text-moss">
+                        <div className="grid h-full place-items-center bg-gradient-to-br from-orange/15 to-yellow/20">
+                          <span className="font-display text-3xl font-semibold text-orange">
                             {person.name
                               .split(" ")
                               .map((part) => part[0])
@@ -129,7 +129,7 @@ export default async function AboutPage() {
                         href={person.linkedin}
                         target="_blank"
                         rel="noreferrer noopener"
-                        className="mt-4 inline-flex items-center gap-1.5 text-sm text-moss hover:text-forest"
+                        className="mt-4 inline-flex items-center gap-1.5 text-sm text-orange hover:text-purple"
                       >
                         LinkedIn
                         <ArrowUpRight className="size-3.5" aria-hidden />

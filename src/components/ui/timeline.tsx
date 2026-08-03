@@ -63,7 +63,7 @@ export function Timeline({
           <div key={`${item.title}-${index}`} className="flex justify-start pt-10 md:gap-10 md:pt-24">
             <div className="sticky top-28 z-30 flex max-w-xs flex-col items-start self-start md:w-full md:max-w-sm md:flex-row md:items-center">
               <div className="absolute left-2 flex size-9 items-center justify-center rounded-full bg-canvas ring-1 ring-line">
-                <div className="size-3 rounded-full bg-moss" />
+                <div className="size-3 rounded-full bg-orange" />
               </div>
               <div className="hidden md:block md:pl-20">
                 <h3 className="font-display text-3xl font-semibold text-ink lg:text-4xl">
@@ -97,7 +97,7 @@ export function Timeline({
                 ? { height: "100%", opacity: 1 }
                 : { height: heightTransform, opacity: opacityTransform }
             }
-            className="absolute inset-x-0 top-0 w-px rounded-full bg-gradient-to-b from-moss via-leaf to-signal"
+            className="absolute inset-x-0 top-0 w-px rounded-full bg-gradient-to-b from-orange via-teal to-yellow"
           />
         </div>
       </div>

@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <div className="shell grid min-h-[60vh] place-items-center py-24 text-center">
       <div>
-        <p className="font-display text-7xl font-semibold text-moss">404</p>
+        <p className="font-display text-7xl font-semibold text-orange">404</p>
         <h1 className="mt-6 font-display text-3xl font-semibold text-ink">
           This page has been composted
         </h1>

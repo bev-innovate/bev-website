@@ -7,7 +7,7 @@ import { cn, formatDate } from "@/lib/utils";
 export function PostCard({ post, size = "md" }: { post: Post; size?: "md" | "lg" }) {
   return (
     <article className="group">
-      <Link href={`/insights/${post.slug}`} className="block">
+      <Link href={`/news/${post.slug}`} className="block">
         <div
           className={cn(
             "relative overflow-hidden rounded-2xl bg-canvas-sunk",
@@ -23,14 +23,14 @@ export function PostCard({ post, size = "md" }: { post: Post; size?: "md" | "lg"
               className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-moss/20 to-signal/20" />
+            <div className="absolute inset-0 bg-gradient-to-br from-orange/20 to-yellow/20" />
           )}
         </div>
 
         <div className="mt-5">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-faint">
             {post.category ? (
-              <span className="font-semibold tracking-[0.12em] text-moss uppercase">
+              <span className="font-semibold tracking-[0.12em] text-orange uppercase">
                 {post.category}
               </span>
             ) : null}
@@ -40,7 +40,7 @@ export function PostCard({ post, size = "md" }: { post: Post; size?: "md" | "lg"
 
           <h3
             className={cn(
-              "mt-2.5 font-display leading-snug font-semibold text-balance text-ink transition-colors group-hover:text-moss",
+              "mt-2.5 font-display leading-snug font-semibold text-balance text-ink transition-colors group-hover:text-orange",
               size === "lg" ? "text-2xl md:text-3xl" : "text-xl",
             )}
           >

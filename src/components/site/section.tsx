@@ -27,7 +27,7 @@ export function SectionHeading({
     >
       <div className={cn("max-w-2xl", align === "center" && "mx-auto")}>
         {eyebrow ? (
-          <p className="text-xs font-semibold tracking-[0.16em] text-moss uppercase">
+          <p className="text-xs font-semibold tracking-[0.16em] text-orange uppercase">
             {eyebrow}
           </p>
         ) : null}
@@ -48,13 +48,13 @@ export function Section({
   className,
   tone = "canvas",
   ...props
-}: React.HTMLAttributes<HTMLElement> & { tone?: "canvas" | "sunk" | "forest" }) {
+}: React.HTMLAttributes<HTMLElement> & { tone?: "canvas" | "sunk" | "purple" }) {
   return (
     <section
       className={cn(
         "py-20 md:py-28",
         tone === "sunk" && "bg-canvas-sunk",
-        tone === "forest" && "grain relative overflow-hidden bg-forest text-canvas",
+        tone === "purple" && "relative overflow-hidden bg-purple text-canvas",
         className,
       )}
       {...props}

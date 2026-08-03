@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const initial: FormState = { status: "idle" };
 
 const field =
-  "w-full rounded-xl border border-line bg-canvas-raised px-4 py-3 text-[0.9375rem] text-ink placeholder:text-ink-faint focus:border-moss focus:outline-none";
+  "w-full rounded-xl border border-line bg-canvas-raised px-4 py-3 text-[0.9375rem] text-ink placeholder:text-ink-faint focus:border-orange focus:outline-none";
 
 const topics = [
   { value: "programme", label: "Applying to a programme" },
@@ -32,7 +32,7 @@ function SubmitButton() {
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} className="mt-1.5 text-xs text-clay" role="alert">
+    <p id={id} className="mt-1.5 text-xs text-orange-deep" role="alert">
       {message}
     </p>
   );
@@ -45,12 +45,12 @@ export function EnquiryForm({ className }: { className?: string }) {
     return (
       <div
         className={cn(
-          "rounded-2xl border border-moss/30 bg-moss/8 p-8 text-center",
+          "rounded-2xl border border-orange/30 bg-orange/8 p-8 text-center",
           className,
         )}
         role="status"
       >
-        <div className="mx-auto grid size-11 place-items-center rounded-full bg-moss text-canvas">
+        <div className="mx-auto grid size-11 place-items-center rounded-full bg-orange text-canvas">
           <Check className="size-5" aria-hidden />
         </div>
         <p className="mt-4 font-display text-xl font-semibold text-ink">Message received</p>
@@ -143,7 +143,7 @@ export function EnquiryForm({ className }: { className?: string }) {
       />
 
       {state.status === "error" && state.message ? (
-        <p className="text-sm text-clay" role="alert">
+        <p className="text-sm text-orange-deep" role="alert">
           {state.message}
         </p>
       ) : null}

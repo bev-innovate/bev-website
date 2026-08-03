@@ -17,18 +17,18 @@ export function CtaBand({
 }) {
   return (
     <section className="shell py-20 md:py-24">
-      <div className="grain relative overflow-hidden rounded-[2rem] bg-forest px-8 py-16 text-canvas md:px-16 md:py-20">
+      <div className="relative overflow-hidden rounded-[2rem] bg-purple px-8 py-16 text-canvas md:px-16 md:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-24 -right-16 size-96 rounded-full bg-signal/20 blur-[100px]"
+          className="pointer-events-none absolute -top-24 -right-16 size-96 rounded-full bg-yellow/20 blur-[100px]"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-32 -left-24 size-96 rounded-full bg-leaf/15 blur-[110px]"
+          className="pointer-events-none absolute -bottom-32 -left-24 size-96 rounded-full bg-teal/15 blur-[110px]"
         />
 
         <div className="relative max-w-3xl">
-          <p className="text-xs font-semibold tracking-[0.16em] text-signal uppercase">
+          <p className="text-xs font-semibold tracking-[0.16em] text-yellow uppercase">
             {eyebrow}
           </p>
           <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.03] font-semibold tracking-tight text-balance">
@@ -38,7 +38,7 @@ export function CtaBand({
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-canvas/75">{intro}</p>
           ) : null}
           <div className="mt-9 flex flex-wrap gap-3">
-            <ButtonLink href={primary.href} variant="signal" size="lg">
+            <ButtonLink href={primary.href} variant="primary" size="lg">
               {primary.label}
               <ArrowRight className="size-4" aria-hidden />
             </ButtonLink>

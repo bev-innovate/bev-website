@@ -21,19 +21,19 @@ const components: PortableTextComponents = {
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="mt-10 border-l-2 border-signal pl-6 font-display text-2xl leading-snug text-ink">
+      <blockquote className="mt-10 border-l-2 border-yellow pl-6 font-display text-2xl leading-snug text-ink">
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="mt-6 space-y-2.5 pl-5 text-[1.0625rem] leading-[1.7] text-ink-muted [&>li]:list-disc [&>li]:marker:text-moss">
+      <ul className="mt-6 space-y-2.5 pl-5 text-[1.0625rem] leading-[1.7] text-ink-muted [&>li]:list-disc [&>li]:marker:text-orange">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="mt-6 space-y-2.5 pl-5 text-[1.0625rem] leading-[1.7] text-ink-muted [&>li]:list-decimal [&>li]:marker:text-moss">
+      <ol className="mt-6 space-y-2.5 pl-5 text-[1.0625rem] leading-[1.7] text-ink-muted [&>li]:list-decimal [&>li]:marker:text-orange">
         {children}
       </ol>
     ),
@@ -48,12 +48,12 @@ const components: PortableTextComponents = {
           href={href}
           target="_blank"
           rel="noreferrer noopener"
-          className="text-moss underline underline-offset-4 hover:text-forest"
+          className="text-orange underline underline-offset-4 hover:text-purple"
         >
           {children}
         </a>
       ) : (
-        <Link href={href} className="text-moss underline underline-offset-4 hover:text-forest">
+        <Link href={href} className="text-orange underline underline-offset-4 hover:text-purple">
           {children}
         </Link>
       );
@@ -78,7 +78,7 @@ const components: PortableTextComponents = {
       <aside
         className={
           value?.tone === "highlight"
-            ? "mt-10 rounded-2xl bg-signal/25 p-6 text-[1.0625rem] leading-relaxed text-forest"
+            ? "mt-10 rounded-2xl bg-yellow/25 p-6 text-[1.0625rem] leading-relaxed text-purple"
             : "mt-10 rounded-2xl border border-line bg-canvas-sunk p-6 text-[1.0625rem] leading-relaxed text-ink-muted"
         }
       >

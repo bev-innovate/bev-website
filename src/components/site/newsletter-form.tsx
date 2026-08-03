@@ -16,7 +16,7 @@ function SubmitButton() {
       type="submit"
       disabled={pending}
       aria-label="Subscribe"
-      className="absolute top-1.5 right-1.5 grid size-9 place-items-center rounded-full bg-signal text-forest transition-transform hover:scale-105 disabled:opacity-60"
+      className="absolute top-1.5 right-1.5 grid size-9 place-items-center rounded-full bg-yellow text-purple transition-transform hover:scale-105 disabled:opacity-60"
     >
       <ArrowRight className={cn("size-4", pending && "animate-pulse")} aria-hidden />
     </button>
@@ -29,7 +29,7 @@ export function NewsletterForm({ className }: { className?: string }) {
   if (state.status === "success") {
     return (
       <p
-        className={cn("flex items-center gap-2 text-sm text-signal", className)}
+        className={cn("flex items-center gap-2 text-sm text-yellow", className)}
         role="status"
       >
         <Check className="size-4" aria-hidden />
@@ -53,7 +53,7 @@ export function NewsletterForm({ className }: { className?: string }) {
           placeholder="you@organisation.com"
           aria-invalid={state.fieldErrors?.email ? true : undefined}
           aria-describedby={state.fieldErrors?.email ? "newsletter-error" : undefined}
-          className="h-12 w-full rounded-full border border-canvas/20 bg-canvas/5 pr-12 pl-5 text-sm text-canvas placeholder:text-canvas/40 focus:border-signal focus:outline-none"
+          className="h-12 w-full rounded-full border border-canvas/20 bg-canvas/5 pr-12 pl-5 text-sm text-canvas placeholder:text-canvas/40 focus:border-yellow focus:outline-none"
         />
         {/* Honeypot */}
         <input
@@ -67,7 +67,7 @@ export function NewsletterForm({ className }: { className?: string }) {
         <SubmitButton />
       </div>
       {state.fieldErrors?.email || state.message ? (
-        <p id="newsletter-error" className="mt-2 text-xs text-clay" role="alert">
+        <p id="newsletter-error" className="mt-2 text-xs text-orange-deep" role="alert">
           {state.fieldErrors?.email ?? state.message}
         </p>
       ) : null}

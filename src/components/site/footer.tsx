@@ -8,26 +8,26 @@ const columns = [
   {
     title: "Programmes",
     links: [
-      { label: "AgriTech ClimAccelerator", href: "/programmes/climaccelerator" },
       { label: "Women Founders & Funders", href: "/programmes/women-founders-and-funders" },
-      { label: "Climate Innovation Summit", href: "/programmes/climate-innovation-summit" },
-      { label: "ClimateLaunchpad", href: "/programmes/climatelaunchpad" },
+      { label: "ClimateLaunchpad Singapore", href: "/programmes/climatelaunchpad" },
+      { label: "AgriTech ClimAccelerator", href: "/programmes/climaccelerator" },
+      { label: "Global Incubator Programme", href: "/programmes/global-incubator-programme" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "Approach", href: "/approach" },
+      { label: "Climate Expeditions", href: "/climate-expeditions" },
+      { label: "News", href: "/news" },
       { label: "About", href: "/about" },
-      { label: "Insights", href: "/insights" },
-      { label: "Contact", href: "/contact" },
+      { label: "Contact Us", href: "/contact" },
     ],
   },
 ];
 
 export function Footer({ settings }: { settings: SiteSettings }) {
   return (
-    <footer className="grain relative overflow-hidden bg-forest text-canvas">
+    <footer className="relative overflow-hidden bg-purple text-canvas">
       <div className="shell relative z-10 py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr]">
           <div>
@@ -38,7 +38,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               {settings.contact.location} · {" "}
               <a
                 href={`mailto:${settings.contact.email}`}
-                className="underline decoration-signal/60 underline-offset-4 hover:text-signal"
+                className="underline decoration-yellow/60 underline-offset-4 hover:text-yellow"
               >
                 {settings.contact.email}
               </a>
@@ -47,7 +47,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
 
           {columns.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <h2 className="text-xs font-semibold tracking-[0.16em] text-signal uppercase">
+              <h2 className="text-xs font-semibold tracking-[0.16em] text-yellow uppercase">
                 {column.title}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -66,7 +66,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           ))}
 
           <div>
-            <h2 className="text-xs font-semibold tracking-[0.16em] text-signal uppercase">
+            <h2 className="text-xs font-semibold tracking-[0.16em] text-yellow uppercase">
               Stay close to the work
             </h2>
             <p className="mt-5 text-sm text-canvas/70">
@@ -87,7 +87,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                 href={social.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-1 text-xs text-canvas/60 transition-colors hover:text-signal"
+                className="inline-flex items-center gap-1 text-xs text-canvas/60 transition-colors hover:text-yellow"
               >
                 {social.platform}
                 <ArrowUpRight className="size-3" aria-hidden />

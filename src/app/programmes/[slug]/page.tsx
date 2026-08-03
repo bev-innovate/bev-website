@@ -47,7 +47,7 @@ export default async function ProgrammePage({ params }: Params) {
 
   return (
     <>
-      <header className="grain relative overflow-hidden bg-forest pt-14 pb-16 text-canvas md:pt-20 md:pb-20">
+      <header className="relative overflow-hidden bg-purple pt-14 pb-16 text-canvas md:pt-20 md:pb-20">
         {programme.heroImage ? (
           <>
             <Image
@@ -58,7 +58,7 @@ export default async function ProgrammePage({ params }: Params) {
               sizes="100vw"
               className="object-cover opacity-25"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/85 to-forest/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-purple via-purple/85 to-purple/60" />
           </>
         ) : null}
 
@@ -78,7 +78,7 @@ export default async function ProgrammePage({ params }: Params) {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <ButtonLink href={ctaHref} variant="signal" size="lg">
+            <ButtonLink href={ctaHref} variant="primary" size="lg">
               {ctaLabel}
               <ArrowUpRight className="size-4" aria-hidden />
             </ButtonLink>
@@ -92,8 +92,8 @@ export default async function ProgrammePage({ params }: Params) {
           {programme.keyFacts?.length ? (
             <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-canvas/15 md:grid-cols-4">
               {programme.keyFacts.map((fact) => (
-                <div key={fact.label} className="bg-forest px-6 py-5">
-                  <dt className="text-[0.6875rem] tracking-[0.14em] text-signal uppercase">
+                <div key={fact.label} className="bg-purple px-6 py-5">
+                  <dt className="text-[0.6875rem] tracking-[0.14em] text-yellow uppercase">
                     {fact.label}
                   </dt>
                   <dd className="mt-1.5 font-display text-xl font-semibold">{fact.value}</dd>
@@ -142,7 +142,7 @@ export default async function ProgrammePage({ params }: Params) {
                 <ul className="mt-8 space-y-4">
                   {programme.benefits.map((benefit) => (
                     <li key={benefit} className="flex items-start gap-3">
-                      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-moss text-canvas">
+                      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-orange text-canvas">
                         <Check className="size-3" aria-hidden />
                       </span>
                       <span className="text-[0.9375rem] leading-relaxed text-ink">{benefit}</span>

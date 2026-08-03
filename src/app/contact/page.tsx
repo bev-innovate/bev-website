@@ -45,7 +45,7 @@ export default async function ContactPage() {
         <div>
           <dl className="space-y-6">
             <div className="flex items-start gap-4">
-              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-moss/12 text-moss">
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-orange/12 text-orange">
                 <Mail className="size-4" aria-hidden />
               </span>
               <div>
@@ -53,7 +53,7 @@ export default async function ContactPage() {
                 <dd className="mt-1">
                   <a
                     href={`mailto:${settings.contact.email}`}
-                    className="text-ink-muted underline underline-offset-4 hover:text-moss"
+                    className="text-ink-muted underline underline-offset-4 hover:text-orange"
                   >
                     {settings.contact.email}
                   </a>
@@ -62,7 +62,7 @@ export default async function ContactPage() {
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-moss/12 text-moss">
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-orange/12 text-orange">
                 <MapPin className="size-4" aria-hidden />
               </span>
               <div>

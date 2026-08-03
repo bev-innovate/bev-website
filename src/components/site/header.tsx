@@ -33,7 +33,7 @@ export function Header({ navigation }: { navigation: NavItem[] }) {
   return (
     <header
       /*
-        Always opaque. Programme pages open on a dark forest hero, and a transparent
+        Always opaque. Programme pages open on a dark purple hero, and a transparent
         header would drop the wordmark and nav to unreadable contrast over it.
       */
       className={cn(

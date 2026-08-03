@@ -47,17 +47,17 @@ export default async function InsightPage({ params }: Params) {
     <article className="pb-20 md:pb-28">
       <div className="shell pt-10">
         <Link
-          href="/insights"
+          href="/news"
           className="inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink"
         >
           <ArrowLeft className="size-4" aria-hidden />
-          All insights
+          All news
         </Link>
       </div>
 
       <header className="shell mt-8 max-w-3xl">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-ink-faint">
-          {post.category ? <Badge tone="moss">{post.category}</Badge> : null}
+          {post.category ? <Badge tone="orange">{post.category}</Badge> : null}
           <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
           {post.readingTime ? <span>{post.readingTime} min read</span> : null}
         </div>
@@ -104,7 +104,7 @@ export default async function InsightPage({ params }: Params) {
                 href={post.externalUrl}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-moss hover:text-forest"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-orange hover:text-purple"
               >
                 Read the original
                 <ArrowUpRight className="size-4" aria-hidden />
