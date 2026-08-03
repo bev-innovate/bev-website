@@ -16,6 +16,13 @@
  * interrupted run can simply be restarted.
  */
 
+import { config } from "dotenv";
+
+// tsx does not read .env files on its own, so load them explicitly.
+// .env.local wins over .env, matching Next.js' precedence.
+config({ path: ".env.local" });
+config({ path: ".env" });
+
 import { createWriteStream } from "node:fs";
 import { mkdir, readdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";

@@ -8,6 +8,13 @@
  * pipeline, which is what finally cuts the dependency on the old site.
  */
 
+import { config } from "dotenv";
+
+// tsx does not read .env files on its own, so load them explicitly.
+// .env.local wins over .env, matching Next.js' precedence.
+config({ path: ".env.local" });
+config({ path: ".env" });
+
 import { createClient } from "next-sanity";
 
 import {

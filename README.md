@@ -60,8 +60,13 @@ image upload returned 403. The documents are all there; the pictures are not.
 **Re-run the seed from your machine** to fix it — Wix is reachable from there:
 
 ```bash
-npm run seed       # needs .env.local, see below
+cp .env.example .env.local     # then paste in your editor token
+npm run seed
 ```
+
+The scripts load `.env.local` themselves via dotenv — `tsx` does not do it for you, so
+without that file you get `Missing NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_API_WRITE_TOKEN`
+even when the project is configured.
 
 It is idempotent, so re-running only fills in what's missing.
 

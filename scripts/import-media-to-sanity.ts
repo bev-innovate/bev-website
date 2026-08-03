@@ -15,6 +15,13 @@
  * asset ids rather than creating duplicates.
  */
 
+import { config } from "dotenv";
+
+// tsx does not read .env files on its own, so load them explicitly.
+// .env.local wins over .env, matching Next.js' precedence.
+config({ path: ".env.local" });
+config({ path: ".env" });
+
 import { createReadStream } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
