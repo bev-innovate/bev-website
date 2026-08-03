@@ -37,7 +37,7 @@ export default async function AboutPage() {
           <Reveal>
             <div className="relative aspect-4/3 overflow-hidden rounded-[1.75rem] bg-canvas-sunk">
               <Image
-                src="https://static.wixstatic.com/media/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png"
+                src="/images/climate-expedition-1.webp"
                 alt="Better Earth Ventures climate expedition in northern Thailand"
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"

@@ -24,7 +24,7 @@ export default async function HomePage() {
         intro={settings.description}
         primary={{ label: "Join Our Upcoming Expedition", href: "/climate-expeditions" }}
         secondary={{ label: "Connect With Us", href: "/contact" }}
-        image="https://static.wixstatic.com/media/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png"
+        image="/images/hero-miscellaneous-climaccelerator-2025-cohort-photo.webp"
       />
 
       {/* Who we are — the positioning statement, set as a two-column editorial block. */}

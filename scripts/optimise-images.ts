@@ -25,6 +25,9 @@ const SIZES = [
   { suffix: "-sm", width: 800 },
 ];
 
+/** Logos are small, need their alpha channel, and never want a 1600px variant. */
+const LOGO_SIZES = [{ suffix: "", width: 480 }];
+
 const INPUT_EXT = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".tif", ".tiff", ".heic"]);
 
 function slugify(name: string) {
@@ -77,8 +80,10 @@ async function run() {
 
   let before = 0;
   let after = 0;
+  const failures: { file: string; reason: string }[] = [];
 
   for (const { file, rel } of sources) {
+    try {
     const info = await stat(file);
     before += info.size;
 
@@ -87,8 +92,9 @@ async function run() {
     const image = sharp(file, { failOn: "none" }).rotate(); // honour EXIF orientation
     const meta = await image.metadata();
 
+    const isLogo = rel.toLowerCase().includes("logo");
     const written: string[] = [];
-    for (const size of SIZES) {
+    for (const size of isLogo ? LOGO_SIZES : SIZES) {
       const outName = `${name}${size.suffix}.webp`;
       const outPath = path.join(OUT, outName);
 
@@ -96,7 +102,8 @@ async function run() {
       const buffer = await image
         .clone()
         .resize({ width: size.width, withoutEnlargement: true })
-        .webp({ quality: 78, effort: 5 })
+        // Logos re-compress badly at lossy quality; near-lossless keeps edges crisp.
+        .webp(isLogo ? { nearLossless: true, quality: 90 } : { quality: 78, effort: 5 })
         .toBuffer();
 
       await writeFile(outPath, buffer);
@@ -106,7 +113,7 @@ async function run() {
 
     manifest[name] = {
       src: written[0],
-      srcSmall: written[1],
+      srcSmall: written[1] ?? written[0],
       width: Math.min(meta.width ?? 1600, 1600),
       height: Math.round(
         ((meta.height ?? 900) * Math.min(meta.width ?? 1600, 1600)) / (meta.width ?? 1600),
@@ -115,6 +122,11 @@ async function run() {
     };
 
     console.log(`  ${path.basename(file)} → ${written[0]}`);
+    } catch (error) {
+      // One unreadable source (a HEIC with an oversized iref box, say) should not
+      // abort the other seventy-nine.
+      failures.push({ file: path.relative(SOURCE, file), reason: (error as Error).message });
+    }
   }
 
   const saved = before === 0 ? 0 : Math.round((1 - after / before) * 100);
@@ -122,8 +134,14 @@ async function run() {
 
   await writeFile(path.join(OUT, "manifest.json"), JSON.stringify(manifest, null, 2));
 
+  const converted = Object.keys(manifest).length;
+  if (failures.length) {
+    console.log(`\n${failures.length} could not be read:`);
+    for (const f of failures) console.log(`  - ${f.file}: ${f.reason.split("\n")[0]}`);
+  }
+
   console.log(
-    `\n${sources.length} images → ${sources.length * SIZES.length} WebP files.\n` +
+    `\n${converted} of ${sources.length} images converted.\n` +
       `${(before / 1024 / 1024).toFixed(1)} MB in, ${(after / 1024 / 1024).toFixed(1)} MB out ` +
       `(${saved}% smaller).\n` +
       `Manifest: public/images/manifest.json`,

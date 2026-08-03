@@ -108,7 +108,7 @@ export function PillarsAccordion({ items }: { items: Pillar[] }) {
         <div className="sticky top-28">
           <div className="relative aspect-square overflow-hidden rounded-2xl">
             <Image
-              src="https://static.wixstatic.com/media/4d40e5_70ceffdd6b544e22918ff8278784bf54~mv2.jpg"
+              src="/images/hero-miscellaneous-a7400018-medium-edited.webp"
               alt="Better Earth Ventures cohort members celebrating together"
               fill
               sizes="(min-width: 1024px) 36vw, 100vw"

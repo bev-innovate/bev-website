@@ -21,6 +21,9 @@ import type {
 
 const WIX_MEDIA = "https://static.wixstatic.com/media";
 
+/** Optimised WebP in public/images, produced by `npm run images`. */
+const IMG = "/images";
+
 export const siteSettings: SiteSettings = {
   title: "Better Earth Ventures",
   tagline: "Empowering innovators. For people, place, and planet.",
@@ -120,19 +123,19 @@ export const pillars = [
 
 /** Home — "Trusted by" logo row. */
 export const trustedBy: Partner[] = [
-  { name: "Innovate UK", tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/" },
-  { name: "AgFunder", tier: "ecosystem", url: "https://agfunder.com" },
-  { name: "Sustainable Living Lab", tier: "ecosystem" },
-  { name: "Start2 Group", tier: "ecosystem" },
-  { name: "Singapore Deep-Tech Alliance", tier: "ecosystem" },
-  { name: "AgriFutures Australia", tier: "ecosystem" },
+  { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/" },
+  { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "ecosystem", url: "https://agfunder.com" },
+  { name: "Sustainable Living Lab", logo: `${IMG}/logos-sl2-logo.webp`, tier: "ecosystem" },
+  { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem" },
+  { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "ecosystem" },
+  { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem" },
 ];
 
 /** Home — "Our Verticals: Driving Innovation in Vital Industries". */
 export const verticals = [
   {
     title: "Agriculture and Food",
-    image: `${WIX_MEDIA}/4d40e5_39d7da7e3ac3477090381929a58616f1~mv2.jpg`,
+    image: `${IMG}/climate-expedition-a-little-wild.webp`,
     items: [
       "Precision Agriculture",
       "Controlled Environment Agriculture",
@@ -143,7 +146,7 @@ export const verticals = [
   },
   {
     title: "Urban Sustainability",
-    image: `${WIX_MEDIA}/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png`,
+    image: `${IMG}/hero-miscellaneous-singapore-gardens.webp`,
     items: [
       "Construction & Real Estate",
       "Renewable Energy & Energy Efficiency",
@@ -154,7 +157,7 @@ export const verticals = [
   },
   {
     title: "Sustainable Tourism",
-    image: `${WIX_MEDIA}/4d40e5_651b4396073a4a50bc3d12232183b33f~mv2.jpg`,
+    image: `${IMG}/hero-miscellaneous-singapore-gardens-2.webp`,
     items: [
       "Urban Mobility, Transportation and Logistics",
       "Air Quality and Monitoring",
@@ -165,7 +168,7 @@ export const verticals = [
   },
   {
     title: "Manufacturing",
-    image: `${WIX_MEDIA}/4d40e5_3a23db5f0c994a59a0da891b7aa6a993~mv2.jpg`,
+    image: `${IMG}/hero-miscellaneous-bev-indigo-18.webp`,
     items: [
       "Logistics Optimisation",
       "Green Packaging and Sustainable Products",
@@ -178,7 +181,7 @@ export const verticals = [
 export const programmesIntro = {
   title: "Our Programmes",
   lede: "We are dedicated to accelerating the development and deployment of transformative technologies and initiatives that mitigate climate change and promote sustainable living.",
-  heroImage: `${WIX_MEDIA}/4d40e5_70ceffdd6b544e22918ff8278784bf54~mv2.jpg`,
+  heroImage: `${IMG}/programmes-climaccelearator-cohort-announcement-1-1920-x-1080.webp`,
   paragraphs: [
     "At Better Earth Ventures, we are committed to creating meaningful climate impact at every stage of the innovation journey.",
     "From sparking early-stage inspiration in future changemakers to supporting the growth and global scale-up of climate-positive technologies, our programmes are designed to meet founders where they are, and take them where they need to go.",
@@ -189,17 +192,17 @@ export const programmesIntro = {
 };
 
 export const partners: Partner[] = [
-  { name: "EIT Climate-KIC", tier: "programme", url: "https://www.climate-kic.org" },
+  { name: "EIT Climate-KIC", logo: `${IMG}/logos-climatekic-logo.webp`, tier: "programme", url: "https://www.climate-kic.org" },
   { name: "ClimAccelerator", tier: "programme", url: "https://climaccelerator.climate-kic.org" },
   { name: "ClimateLaunchpad", tier: "programme", url: "https://climatelaunchpad.org" },
-  { name: "Innovate UK", tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/" },
-  { name: "AgFunder", tier: "ecosystem", url: "https://agfunder.com" },
-  { name: "Singapore Deep-Tech Alliance", tier: "ecosystem" },
-  { name: "MarTech Collective", tier: "ecosystem" },
-  { name: "Tomorrow Studio Ventures", tier: "ecosystem" },
-  { name: "Sustainable Living Lab", tier: "ecosystem" },
-  { name: "AgriFutures Australia", tier: "ecosystem" },
-  { name: "Start2 Group", tier: "ecosystem" },
+  { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/" },
+  { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "ecosystem", url: "https://agfunder.com" },
+  { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "ecosystem" },
+  { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "ecosystem" },
+  { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "ecosystem" },
+  { name: "Sustainable Living Lab", logo: `${IMG}/logos-sl2-logo.webp`, tier: "ecosystem" },
+  { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem" },
+  { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem" },
 ];
 
 export const companies: Company[] = [
@@ -257,11 +260,11 @@ export const programmes: Programme[] = [
     ],
     status: "open",
     accent: "teal",
-    heroImage: `${WIX_MEDIA}/4d40e5_261dfed6d6c843418eca61bb147d4cff~mv2.jpg`,
+    heroImage: `${IMG}/programmes-women-founders-and-funders-1.webp`,
     order: 1,
     partners: [
-      { name: "MarTech Collective", tier: "programme" },
-      { name: "Tomorrow Studio Ventures", tier: "programme" },
+      { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "programme" },
+      { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "programme" },
     ],
   },
   {
@@ -278,11 +281,11 @@ export const programmes: Programme[] = [
     status: "open",
     accent: "purple",
     applyUrl: "https://climatelaunchpad.org",
-    heroImage: `${WIX_MEDIA}/4d40e5_953e2f52c9014236a4b84dab52fc18d6~mv2.jpg`,
+    heroImage: `${IMG}/programmes-climatelaunchpad-2026.webp`,
     order: 2,
     partners: [
       { name: "ClimateLaunchpad", tier: "programme" },
-      { name: "EIT Climate-KIC", tier: "programme" },
+      { name: "EIT Climate-KIC", logo: `${IMG}/logos-climatekic-logo.webp`, tier: "programme" },
     ],
   },
   {
@@ -299,7 +302,7 @@ export const programmes: Programme[] = [
     ],
     status: "closed",
     accent: "sky",
-    heroImage: `${WIX_MEDIA}/4d40e5_70ceffdd6b544e22918ff8278784bf54~mv2.jpg`,
+    heroImage: `${IMG}/programmes-climaccelearator-cohort-announcement-1-1920-x-1080.webp`,
     applicationDeadline: "2025-05-30",
     order: 3,
     keyFacts: [
@@ -309,8 +312,8 @@ export const programmes: Programme[] = [
       { label: "Focus areas", value: "6" },
     ],
     partners: [
-      { name: "EIT Climate-KIC", tier: "programme" },
-      { name: "AgFunder", tier: "programme" },
+      { name: "EIT Climate-KIC", logo: `${IMG}/logos-climatekic-logo.webp`, tier: "programme" },
+      { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "programme" },
     ],
     cohort: companies,
   },
@@ -328,10 +331,11 @@ export const programmes: Programme[] = [
     ],
     status: "completed",
     accent: "orange",
+    heroImage: `${IMG}/programmes-cleantech-connect.webp`,
     order: 4,
     partners: [
-      { name: "Innovate UK", tier: "programme" },
-      { name: "Singapore Deep-Tech Alliance", tier: "programme" },
+      { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme" },
+      { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "programme" },
     ],
   },
 ];
@@ -343,7 +347,7 @@ export const expeditions = {
   intro:
     "We take you out of conference rooms and into farms, facilities, labs, and communities where climate solutions are being built, tested and scaled. These expeditions are designed for people shaping climate decisions who want grounded insight, beyond reports, pitch decks and finance spreadsheets.",
   cta: { label: "Join the next expedition", href: "/contact" },
-  heroImage: `${WIX_MEDIA}/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png`,
+  heroImage: `${IMG}/climate-expedition-1.webp`,
 
   why: {
     title: "Why Better Earth's Climate Expeditions Exist",
@@ -363,21 +367,21 @@ export const expeditions = {
         name: "A Little Wild",
         accent: "orange" as const,
         body: "At A Little Wild in Kota Tinggi, we saw how a degraded palm plantation can be brought back to life through syntropic agroforestry, and learnt how to work with nature, not against it.",
-        image: `${WIX_MEDIA}/4d40e5_39d7da7e3ac3477090381929a58616f1~mv2.jpg`,
+        image: `${IMG}/climate-expedition-a-little-wild.webp`,
       },
       {
         location: "Borneo",
         name: "SEADLING",
         accent: "yellow" as const,
         body: "In Kota Kinabalu and Semporna, we visited SEADLING, a seaweed biotech company developing functional ingredients that naturally enhance the well-being of animals, plants, and humans.",
-        image: `${WIX_MEDIA}/4d40e5_105fe0aabe794ae7a563289b89677850~mv2.jpeg`,
+        image: `${IMG}/climate-expedition-seadling.webp`,
       },
       {
         location: "The Philippines",
         name: "Polar Cold",
         accent: "sky" as const,
         body: "We visited Polar Cold in Manila, where they team is rethinking cold storage for food and pharma SMEs through modular, hyperlocal cold rooms that businesses can rent on demand.",
-        image: `${WIX_MEDIA}/4d40e5_3a23db5f0c994a59a0da891b7aa6a993~mv2.jpg`,
+        image: `${IMG}/climate-expedition-polar-cold.webp`,
       },
     ],
   },
@@ -424,7 +428,7 @@ export const expeditions = {
     slides: [
       {
         accent: "yellow" as const,
-        image: `${WIX_MEDIA}/4d40e5_2ba3bf2f6d204d70be08a3687871425e~mv2.png`,
+        image: `${IMG}/climate-expedition-10.webp`,
         paragraphs: [
           "You won't just tour farms or facilities.",
           "You'll sit down with the founders and the people running these systems day to day.",
@@ -434,7 +438,7 @@ export const expeditions = {
       },
       {
         accent: "orange" as const,
-        image: `${WIX_MEDIA}/4d40e5_105fe0aabe794ae7a563289b89677850~mv2.jpeg`,
+        image: `${IMG}/climate-expedition-seadling.webp`,
         paragraphs: [
           "You'll speak with operators and stakeholders who give you an honest view of the challenges and the opportunities ahead.",
           "You'll see how decisions get made in the field, how technology fits into their workflows, and where the biggest gaps still are.",
@@ -443,7 +447,7 @@ export const expeditions = {
       },
       {
         accent: "teal" as const,
-        image: `${WIX_MEDIA}/4d40e5_3a23db5f0c994a59a0da891b7aa6a993~mv2.jpg`,
+        image: `${IMG}/climate-expedition-polar-cold.webp`,
         paragraphs: [
           "It's a rare chance to understand climate solutions the way practitioners see them, not the way they're pitched in slides.",
           "You'll leave with a sharper understanding of how climate solutions actually get adopted. A network of fellow builders.",
@@ -461,7 +465,7 @@ export const expeditions = {
     ],
     primary: { label: "I'm Interested", href: "/contact" },
     secondary: { label: "Chat with the Team", href: "/contact" },
-    image: `${WIX_MEDIA}/4d40e5_651b4396073a4a50bc3d12232183b33f~mv2.jpg`,
+    image: `${IMG}/climate-expedition-12.webp`,
   },
 };
 
