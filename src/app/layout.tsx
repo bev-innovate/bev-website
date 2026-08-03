@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
@@ -9,11 +9,11 @@ import { siteSettings as fallbackSettings } from "@/lib/seed-content";
 
 import "./globals.css";
 
-/** Poppins is the geometric sans the brand already uses across the Wix site. */
-const poppins = Poppins({
+/** Open Sans — variable weight, so headings can reach 800 without a second file. */
+const openSans = Open_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-open-sans",
   display: "swap",
 });
 
@@ -43,7 +43,7 @@ export default async function RootLayout({
   const settings = await getSiteSettings();
 
   return (
-    <html lang="en-SG" className={poppins.variable}>
+    <html lang="en-SG" className={openSans.variable}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

@@ -48,11 +48,11 @@
   --color-sky: #3e9be9;
 
   /*
-    One family, two roles. Poppins is the geometric sans the brand already uses; display
-    is the same face at heavier weight and tighter tracking rather than a second font.
+    One family, two roles. Display is the same face at heavier weight and tighter
+    tracking rather than a second font.
   */
-  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
 
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
 }
@@ -122,9 +122,13 @@
   }
 
   /* Display headings: tight, confident, slightly condensed tracking. */
+  /*
+    Open Sans is humanist and runs wider than a geometric sans, so display type needs
+    more weight and tighter tracking to hold the same presence at the same size.
+  */
   .display {
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    letter-spacing: -0.025em;
     line-height: 1.05;
     text-wrap: balance;
   }

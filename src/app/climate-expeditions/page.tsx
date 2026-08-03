@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import { AudienceGrid } from "@/components/site/audience-grid";
 import { ExpeditionCarousel } from "@/components/site/expedition-carousel";
-import { Accordion } from "@/components/ui/accordion";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { expeditions } from "@/lib/seed-content";
@@ -122,8 +122,8 @@ export default function ClimateExpeditionsPage() {
             <p className="mt-6 leading-relaxed text-white/90">{expeditions.whoFor.lede}</p>
           </div>
 
-          <div className="mx-auto mt-12 max-w-4xl">
-            <Accordion items={expeditions.whoFor.audiences} tone="onTeal" />
+          <div className="mx-auto mt-14 max-w-5xl">
+            <AudienceGrid audiences={expeditions.whoFor.audiences} />
           </div>
         </div>
       </section>
@@ -133,7 +133,7 @@ export default function ClimateExpeditionsPage() {
           <h2 className="display text-center text-[clamp(1.75rem,3.6vw,2.5rem)] text-ink">
             {expeditions.experience.title}
           </h2>
-          <div className="mt-14">
+          <div className="mx-auto mt-16 max-w-5xl">
             <ExpeditionCarousel slides={expeditions.experience.slides} />
           </div>
         </div>

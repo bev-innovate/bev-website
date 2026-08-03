@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 
@@ -13,18 +13,34 @@ type Slide = {
   paragraphs: string[];
 };
 
-const accentClass = {
+const panel = {
   yellow: "bg-yellow text-ink",
-  orange: "bg-orange text-white",
+  orange: "bg-orange-deep text-white",
   teal: "bg-teal text-white",
 } as const;
 
+/** The offset frame sitting behind the photograph. */
+const frame = {
+  yellow: "bg-yellow/35",
+  orange: "bg-orange/30",
+  teal: "bg-teal/30",
+} as const;
+
+const bar = {
+  yellow: "bg-yellow",
+  orange: "bg-orange-deep",
+  teal: "bg-teal",
+} as const;
+
 /**
- * "What You'll Experience" carousel.
+ * "What You'll Experience".
  *
- * The old site used a Wix slider with arrows and dots. Rebuilt with keyboard support
- * (arrow keys), a live region so screen readers hear slide changes, and direction-aware
- * transitions. Alternating image/text sides come from the original design.
+ * Rebuilt from the Wix slider. Changes: the photograph is larger and sits in an offset
+ * colour frame, the copy panel overlaps it with real elevation, dots become a segmented
+ * progress bar that shows how much is left, and the arrows are grouped next to the
+ * counter instead of floating at the screen edges where they read as page navigation.
+ *
+ * Keyboard: left/right arrows. Screen readers get a live region announcing each change.
  */
 export function ExpeditionCarousel({ slides }: { slides: Slide[] }) {
   const [[index, direction], setState] = useState<[number, number]>([0, 0]);
@@ -39,7 +55,6 @@ export function ExpeditionCarousel({ slides }: { slides: Slide[] }) {
   );
 
   const slide = slides[index];
-  const flipped = index % 2 === 1;
 
   return (
     <div
@@ -51,80 +66,98 @@ export function ExpeditionCarousel({ slides }: { slides: Slide[] }) {
         if (e.key === "ArrowRight") go(index + 1);
         if (e.key === "ArrowLeft") go(index - 1);
       }}
-      className="relative"
+      className="rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-purple"
     >
-      <div className="flex items-center gap-2 md:gap-6">
-        <button
-          type="button"
-          onClick={() => go(index - 1)}
-          aria-label="Previous slide"
-          className="grid size-10 shrink-0 place-items-center rounded-full text-ink-faint transition-colors hover:bg-canvas-sunk hover:text-ink"
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={reduce ? false : { opacity: 0, x: direction * 32 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={reduce ? undefined : { opacity: 0, x: direction * -32 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="grid items-center gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-0"
         >
-          <ChevronLeft className="size-6" />
-        </button>
+          <div className="relative mx-auto w-full max-w-xs sm:max-w-sm lg:mx-0">
+            {/* Offset frame, echoing the panel colour. */}
+            <div
+              aria-hidden
+              className={cn(
+                "absolute -top-4 -left-4 hidden rounded-t-full rounded-b-2xl lg:block",
+                "h-full w-full",
+                frame[slide.accent],
+              )}
+            />
+            <div className="relative aspect-4/5 w-full overflow-hidden rounded-t-full rounded-b-2xl bg-canvas-sunk">
+              <Image
+                src={slide.image}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 34vw, 80vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
 
-        <div className="min-h-[26rem] flex-1 md:min-h-[30rem]">
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={index}
-              custom={direction}
-              initial={reduce ? false : { opacity: 0, x: direction * 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={reduce ? undefined : { opacity: 0, x: direction * -40 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="grid items-center gap-0 md:grid-cols-2"
+          <div
+            className={cn(
+              "relative z-10 flex min-h-64 flex-col justify-center rounded-2xl p-8 shadow-[0_24px_60px_-32px_rgba(51,51,51,0.55)] md:p-10 lg:-ml-20",
+              panel[slide.accent],
+            )}
+          >
+            <div className="space-y-4 text-[0.9375rem] leading-relaxed md:text-base">
+              {slide.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Controls: counter, progress, arrows — grouped so they read as one object. */}
+      <div className="mt-10 flex items-center justify-center gap-6">
+        <p className="text-sm font-semibold text-ink tabular-nums">
+          <span className="text-purple">{String(index + 1).padStart(2, "0")}</span>
+          <span className="text-ink-faint"> / {String(slides.length).padStart(2, "0")}</span>
+        </p>
+
+        <div className="flex flex-1 gap-1.5 sm:max-w-56">
+          {slides.map((s, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              aria-current={i === index}
+              className="group h-2 flex-1 rounded-full bg-line-strong"
             >
-              <div className={cn("relative", flipped && "md:order-2")}>
-                <div className="arch relative mx-auto aspect-3/4 w-full max-w-[22rem] overflow-hidden">
-                  <Image
-                    src={slide.image}
-                    alt=""
-                    fill
-                    sizes="(min-width: 768px) 22rem, 80vw"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-
-              <div
+              <span
                 className={cn(
-                  "relative z-10 space-y-4 p-8 text-[0.9375rem] leading-relaxed md:p-10",
-                  accentClass[slide.accent],
-                  flipped ? "md:order-1 md:-mr-16" : "md:-ml-16",
+                  "block h-full rounded-full transition-all duration-500",
+                  i === index ? `w-full ${bar[s.accent]}` : "w-0 group-hover:w-1/3 bg-ink-faint",
                 )}
-              >
-                {slide.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              />
+            </button>
+          ))}
         </div>
 
-        <button
-          type="button"
-          onClick={() => go(index + 1)}
-          aria-label="Next slide"
-          className="grid size-10 shrink-0 place-items-center rounded-full text-ink-faint transition-colors hover:bg-canvas-sunk hover:text-ink"
-        >
-          <ChevronRight className="size-6" />
-        </button>
-      </div>
-
-      <div className="mt-8 flex justify-center gap-3">
-        {slides.map((_, i) => (
+        <div className="flex gap-2">
           <button
-            key={i}
             type="button"
-            onClick={() => go(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            aria-current={i === index}
-            className={cn(
-              "size-2.5 rounded-full transition-colors",
-              i === index ? "bg-purple" : "bg-line-strong hover:bg-ink-faint",
-            )}
-          />
-        ))}
+            onClick={() => go(index - 1)}
+            aria-label="Previous slide"
+            className="grid size-10 place-items-center rounded-full border border-line-strong text-ink transition-colors hover:border-purple hover:bg-purple hover:text-white"
+          >
+            <ArrowLeft className="size-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => go(index + 1)}
+            aria-label="Next slide"
+            className="grid size-10 place-items-center rounded-full border border-line-strong text-ink transition-colors hover:border-purple hover:bg-purple hover:text-white"
+          >
+            <ArrowRight className="size-4" />
+          </button>
+        </div>
       </div>
 
       <p aria-live="polite" className="sr-only">
