@@ -21,9 +21,12 @@ const stageLabel: Record<NonNullable<Programme["stage"]>, string> = {
 export function ProgrammeCard({
   programme,
   featured = false,
+  compact = false,
 }: {
   programme: Programme;
   featured?: boolean;
+  /** Tighter padding and type for three-up previews. */
+  compact?: boolean;
 }) {
   return (
     <Link
@@ -56,8 +59,8 @@ export function ProgrammeCard({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-7 md:p-8">
-        {/* Stage and themes — the scannable taxonomy. */}
+      <div className={cn("flex flex-1 flex-col", compact ? "p-6" : "p-7 md:p-8")}>
+        {/* Stage and themes: the scannable taxonomy. */}
         <div className="flex flex-wrap items-center gap-2">
           {programme.stage ? (
             <span className="rounded-full bg-purple px-2.5 py-1 text-[0.6875rem] font-semibold tracking-wide text-white uppercase">
@@ -83,17 +86,17 @@ export function ProgrammeCard({
         <h3
           className={cn(
             "display mt-2 text-ink",
-            featured ? "text-3xl md:text-4xl" : "text-2xl",
+            featured ? "text-3xl md:text-4xl" : compact ? "text-xl" : "text-2xl",
           )}
         >
           {programme.title}
         </h3>
 
-        <p className="mt-3 line-clamp-3 text-[0.9375rem] leading-relaxed text-ink-muted">
+        <p className={cn("mt-3 leading-relaxed text-ink-muted", compact ? "line-clamp-2 text-sm" : "line-clamp-3 text-[0.9375rem]")}>
           {programme.summary}
         </p>
 
-        {programme.keyFacts?.length ? (
+        {!compact && programme.keyFacts?.length ? (
           <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
             {programme.keyFacts.slice(0, featured ? 4 : 2).map((fact) => (
               <div key={fact.label}>
@@ -106,7 +109,7 @@ export function ProgrammeCard({
           </dl>
         ) : null}
 
-        <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-sm font-semibold text-purple">
+        <span className={cn("mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-purple", compact ? "pt-5" : "pt-7")}>
           Programme details
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
         </span>

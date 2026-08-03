@@ -40,18 +40,18 @@ export function SummitSignup({
   const [state, formAction] = useActionState(subscribeAction, initial);
 
   return (
-    <section id="signup" className="scroll-mt-24 bg-bark py-20 text-canvas md:py-28">
-      <div aria-hidden className="contours pointer-events-none absolute inset-x-0 text-clay opacity-20" />
+    <section id="signup" className="relative scroll-mt-24 overflow-hidden bg-mangrove py-20 text-white md:py-28">
+      <div aria-hidden className="contours pointer-events-none absolute inset-0 text-white opacity-20" />
       <div className="shell">
         <div className="mx-auto max-w-2xl text-center">
-          <Label className="justify-center text-clay">{label}</Label>
+          <Label className="justify-center text-white/70">{label}</Label>
           <h2 className="display mt-5 text-[clamp(1.75rem,3.6vw,2.6rem)]">{heading}</h2>
-          <p className="mt-4 leading-relaxed text-canvas/75">{body}</p>
+          <p className="mt-4 leading-relaxed text-white/80">{body}</p>
 
           {state.status === "success" ? (
             <p
               role="status"
-              className="mt-10 inline-flex items-center gap-2 rounded-full bg-canvas/10 px-5 py-3 text-sm text-clay"
+              className="mt-10 inline-flex items-center gap-2 rounded-full bg-white/15 px-5 py-3 text-sm text-white"
             >
               <Check className="size-4" aria-hidden />
               {state.message}
@@ -71,7 +71,7 @@ export function SummitSignup({
                   placeholder="you@organisation.com"
                   aria-invalid={state.fieldErrors?.email ? true : undefined}
                   aria-describedby={state.fieldErrors?.email ? "summit-email-error" : undefined}
-                  className="h-13 w-full rounded-full border border-canvas/25 bg-canvas/5 px-6 text-sm text-canvas placeholder:text-canvas/40 focus:border-clay focus:outline-none"
+                  className="h-13 w-full rounded-full border border-white/30 bg-white/10 px-6 text-sm text-white placeholder:text-white/50 focus:border-white focus:outline-none"
                 />
                 {/* Honeypot */}
                 <input
@@ -86,7 +86,7 @@ export function SummitSignup({
               </div>
 
               {state.fieldErrors?.email || state.message ? (
-                <p id="summit-email-error" role="alert" className="mt-3 text-sm text-clay">
+                <p id="summit-email-error" role="alert" className="mt-3 text-sm text-white">
                   {state.fieldErrors?.email ?? state.message}
                 </p>
               ) : null}
@@ -94,7 +94,7 @@ export function SummitSignup({
           )}
 
           <p
-            className="label-mono mt-8 normal-case text-canvas/45"
+            className="label-mono mt-8 normal-case text-white/60"
             style={{ letterSpacing: "0.04em" }}
           >
             {footnote}

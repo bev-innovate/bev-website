@@ -39,7 +39,7 @@ async function persist(table: string, row: Record<string, unknown>) {
   const supabase = getSupabaseAdmin();
 
   if (!supabase) {
-    console.info(`[forms] Supabase not configured — ${table} submission not persisted`, row);
+    console.info(`[forms] Supabase not configured: ${table} submission not persisted`, row);
     return { ok: true as const, persisted: false as const };
   }
 
@@ -115,7 +115,7 @@ export async function enquiryAction(
   return {
     status: "success",
     message: isSupabaseConfigured
-      ? "Thanks — we’ve got it. Expect a reply within a few working days."
-      : "Thanks — message received.",
+      ? "Thanks: we’ve got it. Expect a reply within a few working days."
+      : "Thanks: message received.",
   };
 }

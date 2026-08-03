@@ -33,13 +33,11 @@ export interface SummitStartup {
 export const summit = {
   slug: "summit",
   name: "Climate Innovation Summit Singapore",
-  edition: "Inaugural edition",
 
   hero: {
-    eyebrow: "Flagship event · 2026",
     headline: "Where climate solutions meet proof of value",
     standfirst:
-      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world — anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase.",
+      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase.",
     /** Rendered as a monospace data row under the headline. */
     facts: [
       { label: "Dates", value: "13 – 15 October 2026", tbc: false },
@@ -50,7 +48,6 @@ export const summit = {
     primary: { label: "Register your interest", href: "#signup" },
     secondary: { label: "Partner with us", href: "/contact" },
     image: `${IMG}/hero-miscellaneous-singapore-gardens.webp`,
-    caption: "Gardens by the Bay, Singapore — host city, October 2026",
   },
 
   partners: {
@@ -59,7 +56,7 @@ export const summit = {
       { name: "ClimateLaunchpad", logo: `${IMG}/logos-climatekic-logo.webp`, note: "Powered by Climate-KIC" },
     ],
     supportedBy: [
-      { name: "Government of Ireland — International Development Programme", logo: null },
+      { name: "Government of Ireland: International Development Programme", logo: null },
       { name: "Bank of America", logo: null },
       { name: "Greenhouse", logo: null },
       { name: "Sustainability Women", logo: null },
@@ -68,10 +65,10 @@ export const summit = {
 
   about: {
     label: "What is the summit",
-    heading: "A working summit, not a conference",
+    heading: "Three days built around commercial outcomes",
     paragraphs: [
-      "The Climate Innovation Summit Singapore exists to move climate solutions from proof of concept to proof of value. Founders arrive with something built; they leave with the customers, capital and partnerships that decide whether it scales.",
-      "It is anchored by two things that already draw the world to Singapore: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase.",
+      "The Climate Innovation Summit Singapore moves climate solutions from proof of concept to proof of value. Founders arrive with something built. They leave with the customers, capital and partnerships that decide whether it scales.",
+      "The programme is anchored by two events that already draw the world to Singapore: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase.",
     ],
     /** Specimen grid — the measurable claims. */
     specimens: [
@@ -84,20 +81,19 @@ export const summit = {
   },
 
   strands: {
-    label: "What will happen",
     heading: "Four strands running across three days",
     intro:
-      "Each strand is designed to produce something concrete — a pilot conversation, a term sheet, a policy commitment — rather than a panel recording.",
+      "Every strand is designed to produce something concrete: a pilot conversation, a term sheet, a policy commitment.",
     items: [
       {
         ref: "ST-01",
         title: "Founder roundtables",
-        body: "Closed-door sessions where early-stage founders put real commercialisation problems to operators who have solved them.",
+        body: "Closed-door sessions where early-stage founders put live commercialisation problems to operators who have solved them.",
       },
       {
         ref: "ST-02",
         title: "Proof of value showcase",
-        body: "Companies present deployed technology and the evidence behind it — pilots run, yields moved, emissions avoided.",
+        body: "Companies present deployed technology and the evidence behind it: pilots run, yields moved, emissions avoided.",
       },
       {
         ref: "ST-03",
@@ -115,7 +111,6 @@ export const summit = {
   timeline: {
     label: "Timeline",
     heading: "Three days, one arc",
-    note: "Draft running order — sessions and times to be confirmed.",
     days: [
       {
         ref: "D-01",
@@ -123,7 +118,7 @@ export const summit = {
         title: "Proof of concept",
         blocks: [
           { time: "09:00", title: "Opening and framing", tbc: true },
-          { time: "10:30", title: "Founder roundtables — round one", tbc: true },
+          { time: "10:30", title: "Founder roundtables: round one", tbc: true },
           { time: "14:00", title: "Deep-dive clinics by sector", tbc: true },
           { time: "18:00", title: "Welcome reception", tbc: true },
         ],
@@ -155,7 +150,6 @@ export const summit = {
   speakers: {
     label: "Speakers",
     heading: "Who you will hear from",
-    note: "Speaker line-up in confirmation. Names below are placeholders.",
     items: Array.from({ length: 8 }, (_, i) => ({
       name: "To be announced",
       role: "Role to be confirmed",
@@ -168,7 +162,6 @@ export const summit = {
   startups: {
     label: "Startups featured",
     heading: "Companies on the floor",
-    note: "Final cohort confirmed closer to the date. Shown here: 2025 AgriTech ClimAccelerator alumni.",
     items: [
       {
         name: "Algenie",

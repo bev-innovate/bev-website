@@ -21,7 +21,7 @@ const placeAccent = {
 export default function ClimateExpeditionsPage() {
   return (
     <>
-      {/* Split hero — type on the left, full-bleed landscape on the right. */}
+      {/* Split hero: type on the left, full-bleed landscape on the right. */}
       <header className="grid items-stretch lg:grid-cols-2">
         <div className="order-2 flex items-center py-16 lg:order-1 lg:py-24">
           <div className="shell lg:mx-0 lg:max-w-xl lg:pr-12">

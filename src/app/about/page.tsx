@@ -29,7 +29,7 @@ export default async function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="A Singapore-based platform for climate and agrifood innovation"
-        intro="We connect founders to the capital, networks and strategic partners they need to scale solutions for people, place and planet — across the Asia-Pacific region where the stakes for food and climate are highest."
+        intro="We connect founders to the capital, networks and strategic partners they need to scale solutions for people, place and planet: across the Asia-Pacific region where the stakes for food and climate are highest."
       />
 
       <Section className="pt-0">
@@ -66,7 +66,7 @@ export default async function AboutPage() {
                 <p>
                   We spend as much time on farms and factory floors as we do in boardrooms.
                   Real climate progress is relational, systemic and slower than slides
-                  suggest — designing for that is the whole job.
+                  suggest: designing for that is the whole job.
                 </p>
               </div>
 
@@ -153,7 +153,7 @@ export default async function AboutPage() {
       <CtaBand
         eyebrow="Work with us"
         title="Come and build the region’s climate infrastructure with us."
-        intro="Founders, mentors, corporates and funders — there is a way in for each of you."
+        intro="Founders, mentors, corporates and funders: there is a way in for each of you."
         primary={{ href: "/contact", label: "Get in touch" }}
         secondary={{ href: "/programmes", label: "See programmes" }}
       />

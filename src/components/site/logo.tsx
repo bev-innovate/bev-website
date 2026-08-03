@@ -11,7 +11,7 @@ export function Logo({ className }: { className?: string }) {
     <Link
       href="/"
       className={cn("group inline-flex items-center gap-2.5", className)}
-      aria-label="Better Earth Ventures — home"
+      aria-label="Better Earth Ventures: home"
     >
       <svg viewBox="0 0 32 32" className="size-7 shrink-0" aria-hidden>
         <circle cx="16" cy="16" r="14" className="fill-purple" />

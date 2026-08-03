@@ -26,15 +26,18 @@ const IMG = "/images";
 
 export const siteSettings: SiteSettings = {
   title: "Better Earth Ventures",
-  tagline: "Empowering innovators. For people, place, and planet.",
+  tagline: "Closing the gap between climate innovation and cross-border impact",
   description:
-    "We accelerate the solutions our planet needs by connecting the climatetech and sustainability ecosystem to support entrepreneurs in building ventures that protect people, restore ecosystems, and drive systemic change.",
+    "We help international climate and innovation companies scale in Singapore and Southeast Asia by creating tangible commercial outcomes through trusted local market access, strategic partnerships, and growth-focused ecosystem support.",
   stats: [
-    { value: "370+", label: "startups accelerated" },
-    { value: "$500M", label: "raised collectively for these startups" },
-    { value: "100+", label: "investors in our network" },
-    { value: "60+", label: "corporations and government agency partners" },
-    { value: "120+", label: "global mentors who provide support and guidance to our innovators" },
+    { value: "70", label: "Startups accelerated" },
+    { value: "100+", label: "Further start-ups mentored" },
+    { value: "48%", label: "Women-led startups" },
+    { value: "$120m", label: "USD in funding" },
+    { value: "2200+", label: "Event attendees, ~82% decision makers" },
+    { value: "98%", label: "Programme satisfaction score" },
+    { value: "700+", label: "Jobs created" },
+    { value: "15", label: "Markets for cross-border collaborations" },
   ],
   contact: {
     email: "hello@betterearthventures.com",
@@ -58,17 +61,62 @@ export const whoWeAre = {
   eyebrow: "Who we are",
   heading: "Better Earth Ventures is where ClimateTech founders come to scale.",
   paragraphs: [
-    "Climate solutions don't fail for lack of ideas. They fail because scaling is hard.",
-    "Better Earth Ventures exists to change that.",
-    "We are a Singapore-based climate and agrifood innovation platform working at the point where ambition meets execution.",
+    "At Better Earth Ventures, we are dedicated to accelerating the development and deployment of transformative technologies and initiatives that mitigate climate change and promote sustainable living.",
   ],
   highlight:
-    "We support climate founders to turn validated solutions into scalable businesses, through carefully designed programmes, market immersion and deep ecosystem access.",
+    "Through collaboration, mentorship, and strategic partnerships, we empower visionary entrepreneurs to scale their solutions, driving tangible impact and paving the way for a resilient and thriving planet.",
   paragraphsAfter: [
     "Our work brings together founders, investors, corporates, governments and research institutions to accelerate deployment in real markets, particularly across Asia-Pacific.",
-    "We back founders who are building commercially viable solutions with measurable impact across People, Place and Planet.",
   ],
   closing: "Join us in building a Better Earth, one solution at a time.",
+};
+
+/** Home — how the engagements are delivered. Four pillars, each with formats. */
+export const delivery = {
+  eyebrow: "How we work",
+  heading: "How we deliver climate innovation engagements",
+  intro:
+    "Through extensive research, we have mapped out the four critical failure points for scaling climatetech ventures.",
+  pillars: [
+    {
+      title: "Curated Innovation Programmes",
+      points: [
+        "Define challenge areas aligned with sector priorities",
+        "Engage relevant industry and institutional stakeholders",
+        "Recruit high-quality local and international ventures",
+        "Provide tailored mentoring and deployment-focused support",
+      ],
+      formats:
+        "Accelerators, innovation challenges, competitions, hackathons, youth initiatives, market immersions",
+    },
+    {
+      title: "Strategic Showcases & Convenings",
+      points: [
+        "Curate investor- and industry-facing demo platforms",
+        "Elevate ecosystem visibility within priority sectors",
+        "Facilitate targeted networking and partnership development",
+      ],
+      formats: "Demo Days, investor showcases, thematic summits",
+    },
+    {
+      title: "Applied Thought Leadership & Sector Dialogues",
+      points: [
+        "Surface structural challenges in climate sectors",
+        "Facilitate informed cross-sector conversations",
+        "Strengthen ecosystem literacy around capital and deployment realities",
+      ],
+      formats: "Expert roundtables, financing dialogues, sector briefings",
+    },
+    {
+      title: "Immersive & Experiential Learning",
+      points: [
+        "Expose stakeholders to real operating environments",
+        "Enable meaningful interaction across the value chain",
+        "Strengthen understanding of deployment constraints",
+      ],
+      formats: "Climate expeditions, field immersions, value-chain visits",
+    },
+  ],
 };
 
 /** Home — the three pillars, shown as an accordion on the old site. */
@@ -122,58 +170,73 @@ export const pillars = [
   },
 ];
 
-/** Home — "Trusted by" logo row. */
+/** Home: the full logo wall. Every logo file in public/images is represented. */
 export const trustedBy: Partner[] = [
-  { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/" },
-  { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "ecosystem", url: "https://agfunder.com" },
+  { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme" },
+  { name: "EIT Climate-KIC", logo: `${IMG}/logos-climatekic-logo.webp`, tier: "programme" },
+  { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "ecosystem" },
+  { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "ecosystem" },
   { name: "Sustainable Living Lab", logo: `${IMG}/logos-sl2-logo.webp`, tier: "ecosystem" },
   { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem" },
-  { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "ecosystem" },
   { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem" },
+  { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "ecosystem" },
+  { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "ecosystem" },
+  { name: "Tenity", logo: `${IMG}/logos-tenity-logo.webp`, tier: "ecosystem" },
+  { name: "JETRO", logo: `${IMG}/logos-jetro-logo.webp`, tier: "ecosystem" },
+  { name: "Deep Tech Canada", logo: `${IMG}/logos-deep-tech-canada-logo.webp`, tier: "ecosystem" },
+  { name: "Rebbeck Consulting", logo: `${IMG}/logos-rebbeck-consulting-logo.webp`, tier: "ecosystem" },
+  { name: "HEX", logo: `${IMG}/logos-hex-logo.webp`, tier: "ecosystem" },
 ];
 
-/** Home — "Our Verticals: Driving Innovation in Vital Industries". */
+/**
+ * Home — "Our sectors of focus".
+ *
+ * TODO: images are placeholders drawn from the existing library. Clean Cities,
+ * Circularity and Industrial Decarbonisation have no matching photography yet.
+ */
 export const verticals = [
   {
     title: "Agriculture and Food",
     image: `${IMG}/climate-expedition-a-little-wild.webp`,
     items: [
-      "Precision Agriculture",
-      "Controlled Environment Agriculture",
-      "Climate-Resilient Seed Genetics",
-      "Alternative Proteins",
-      "Circular Economy",
+      "Precision ag",
+      "Biological inputs",
+      "Climate-resilient crops",
+      "Alternative proteins",
+      "Ag supply chain tech",
     ],
   },
   {
-    title: "Urban Sustainability",
+    title: "Clean Cities",
     image: `${IMG}/hero-miscellaneous-singapore-gardens.webp`,
     items: [
-      "Construction & Real Estate",
-      "Renewable Energy & Energy Efficiency",
-      "IoT and Connectivity",
-      "Smart Buildings and Materials",
-      "Urban Agriculture and Food Systems",
+      "Energy efficiency",
+      "Urban mobility",
+      "District systems",
+      "Waste-to-value",
+      "Resilient infrastructure",
     ],
   },
   {
-    title: "Sustainable Tourism",
-    image: `${IMG}/hero-miscellaneous-singapore-gardens-2.webp`,
+    title: "Circularity and Advanced Materials",
+    image: `${IMG}/climate-expedition-seadling.webp`,
     items: [
-      "Urban Mobility, Transportation and Logistics",
-      "Air Quality and Monitoring",
-      "Waste Management, Recycling and Plastic Reduction",
-      "Smart Destination Management",
-      "Zero-Waste Initiatives",
+      "Waste valorisation",
+      "Bio-based materials",
+      "Sustainable packaging",
+      "Recycling tech",
+      "Carbon-derived materials",
     ],
   },
   {
-    title: "Manufacturing",
-    image: `${IMG}/hero-miscellaneous-bev-indigo-18.webp`,
+    title: "Industrial Decarbonisation",
+    image: `${IMG}/climate-expedition-polar-cold.webp`,
     items: [
-      "Logistics Optimisation",
-      "Green Packaging and Sustainable Products",
-      "Carbon Capture and Sequestration, and Emissions Reduction",
+      "Electrification",
+      "Hydrogen",
+      "CCUS",
+      "Process optimisation",
+      "Low-carbon materials",
     ],
   },
 ];
@@ -233,7 +296,7 @@ export const companies: Company[] = [
   },
   { name: "Polar Cold", vertical: "Water & energy management", cohortYear: 2025 },
   { name: "Rainstick", country: "Australia", vertical: "Novel farming practices", cohortYear: 2025 },
-  { name: "Stealth — enhanced rock weathering", vertical: "Carbon management", cohortYear: 2025 },
+  { name: "Stealth (enhanced rock weathering)", vertical: "Carbon management", cohortYear: 2025 },
 ];
 
 /**
@@ -319,7 +382,7 @@ export const programmes: Programme[] = [
     cohort: companies,
   },
   {
-    title: "Innovate UK Global Incubator Programme — Cleantech Singapore",
+    title: "Innovate UK Global Incubator Programme: Cleantech Singapore",
     slug: "global-incubator-programme",
     themes: ["Cleantech", "Market expansion"],
     stage: "growth",
@@ -367,7 +430,7 @@ export const expeditions = {
         location: "Malaysia",
         name: "A Little Wild",
         accent: "orange" as const,
-        body: "At A Little Wild in Kota Tinggi, we saw how a degraded palm plantation can be brought back to life through syntropic agroforestry, and learnt how to work with nature, not against it.",
+        body: "At A Little Wild in Kota Tinggi, we saw how a degraded palm plantation can be brought back to life through syntropic agroforestry, and learnt how to work with the grain of nature.",
         image: `${IMG}/climate-expedition-a-little-wild.webp`,
       },
       {
@@ -404,7 +467,7 @@ export const expeditions = {
       {
         question: "Government and Public Sector Leaders",
         answer:
-          "Understand how policy lands on the ground — what accelerates adoption, what stalls it, and where public support makes the decisive difference.",
+          "Understand how policy lands on the ground: what accelerates adoption, what stalls it, and where public support makes the decisive difference.",
       },
       {
         question: "Innovators and Builders in Adjacent Climate Fields",
@@ -419,7 +482,7 @@ export const expeditions = {
       {
         question: "Anyone Who Wants to Understand Climate Systems at Their Roots",
         answer:
-          "No prior sector experience required — only genuine curiosity about how climate solutions succeed or fail in the real world.",
+          "No prior sector experience required: only genuine curiosity about how climate solutions succeed or fail in the real world.",
       },
     ],
   },
@@ -450,7 +513,7 @@ export const expeditions = {
         accent: "teal" as const,
         image: `${IMG}/climate-expedition-polar-cold.webp`,
         paragraphs: [
-          "It's a rare chance to understand climate solutions the way practitioners see them, not the way they're pitched in slides.",
+          "It's a rare chance to understand climate solutions the way practitioners see them.",
           "You'll leave with a sharper understanding of how climate solutions actually get adopted. A network of fellow builders.",
           "A stronger sense of scale and constraints. And most importantly, a new perspective on what it takes to shift entrenched systems in Asia.",
         ],
@@ -526,7 +589,7 @@ export const posts: Post[] = [
     tags: ["womenfoufun"],
     coverImage: `${WIX_MEDIA}/4d40e5_261dfed6d6c843418eca61bb147d4cff~mv2.jpg`,
     excerpt:
-      "These founders were selected from a competitive pool spanning 15 countries — a 2x increase — with Singapore, New Zealand and Thailand leading submissions and signalling a shift toward Southeast Asian innovation hubs.",
+      "These founders were selected from a competitive pool spanning 15 countries: a 2x increase, with Singapore, New Zealand and Thailand leading submissions and signalling a shift toward Southeast Asian innovation hubs.",
   },
   {
     title: "Women Founders & Funders: A Movement for Change",
@@ -558,7 +621,7 @@ export const posts: Post[] = [
     tags: ["climacceleratorsg"],
     coverImage: `${WIX_MEDIA}/4d40e5_70ceffdd6b544e22918ff8278784bf54~mv2.jpg`,
     excerpt:
-      "Today we mark a milestone for the APAC climate innovation ecosystem — a new cohort of founders bringing bold ideas and deep conviction to the region's urgent challenges.",
+      "Today we mark a milestone for the APAC climate innovation ecosystem: a new cohort of founders bringing bold ideas and deep conviction to the region's urgent challenges.",
   },
   {
     title: "Agritech ClimAccelerator launches in Singapore with Better Earth Ventures",

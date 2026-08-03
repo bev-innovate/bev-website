@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 export default function SummitPage() {
   return (
     <>
-      <SummitHero hero={summit.hero} name={summit.name} edition={summit.edition} />
+      <SummitHero hero={summit.hero} name={summit.name} />
       <SummitPartners partners={summit.partners} />
       <SummitAbout about={summit.about} />
 
@@ -47,7 +47,7 @@ export default function SummitPage() {
       <SummitCtaStrip
         text="Want to speak, sponsor or bring a delegation?"
         cta={{ label: "Talk to the team", href: "/contact" }}
-        tone="moss"
+        tone="mangrove"
       />
 
       <SummitStartups startups={summit.startups} />

@@ -36,15 +36,15 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.betterearthventures.com",
   ),
   title: {
-    default: `${fallbackSettings.title} — ${fallbackSettings.tagline}`,
-    template: `%s — ${fallbackSettings.title}`,
+    default: `${fallbackSettings.title}: ${fallbackSettings.tagline}`,
+    template: `%s: ${fallbackSettings.title}`,
   },
   description: fallbackSettings.description,
   openGraph: {
     type: "website",
     locale: "en_SG",
     siteName: fallbackSettings.title,
-    title: `${fallbackSettings.title} — ${fallbackSettings.tagline}`,
+    title: `${fallbackSettings.title}: ${fallbackSettings.tagline}`,
     description: fallbackSettings.description,
   },
   twitter: { card: "summary_large_image" },

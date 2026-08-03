@@ -51,7 +51,7 @@ export function SectionHead({
   align = "left",
   onDark = false,
 }: {
-  label: string;
+  label?: string;
   heading: string;
   intro?: string;
   note?: string;
@@ -60,11 +60,12 @@ export function SectionHead({
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      <Label className={onDark ? "text-clay" : undefined}>{label}</Label>
+      {label ? <Label className={onDark ? "text-clay" : undefined}>{label}</Label> : null}
       <div
         aria-hidden
         className={cn(
-          "tick-rule mt-3 h-1.5",
+          "tick-rule h-1.5",
+          label ? "mt-3" : "",
           align === "center" ? "mx-auto w-24" : "w-24",
           onDark ? "text-clay/50" : "text-line-strong",
         )}

@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-import { Caption, Label, SectionHead, Tbc } from "@/components/summit/primitives";
+import { Label, SectionHead, Tbc } from "@/components/summit/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import type { summit } from "@/lib/summit-content";
@@ -11,37 +11,34 @@ type Summit = typeof summit;
 
 /* ── Hero ───────────────────────────────────────────────────────────────────── */
 
-export function SummitHero({ hero, name, edition }: { hero: Summit["hero"]; name: string; edition: string }) {
+export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string }) {
   return (
-    <header className="relative isolate overflow-hidden bg-bark text-canvas">
+    <header className="relative isolate overflow-hidden bg-sand text-ink">
       <div aria-hidden className="absolute inset-0 -z-10">
         <Image src={hero.image} alt="" fill priority sizes="100vw" className="object-cover" />
         {/* Material Evidence: the photograph carries the surface, type sits cleanly over it. */}
-        <div className="absolute inset-0 bg-bark/78" />
-        <div className="absolute inset-0 bg-gradient-to-t from-bark via-bark/60 to-bark/30" />
+        <div className="absolute inset-0 bg-sand/88" />
+        <div className="absolute inset-0 bg-gradient-to-t from-sand via-sand/80 to-sand/55" />
         {/* Systems and Signals: isolines as structure. */}
-        <div className="contours absolute inset-0 text-clay opacity-40" />
+        <div className="contours absolute inset-0 text-mangrove opacity-30" />
       </div>
 
       <div className="shell relative py-20 md:py-28 lg:py-36">
-        <Label className="text-clay">{edition}</Label>
-        <p className="label-mono mt-4 text-canvas/70">{hero.eyebrow}</p>
-
-        <h1 className="display mt-5 max-w-4xl text-[clamp(2.25rem,5.6vw,4.25rem)]">{name}</h1>
-        <p className="display mt-3 max-w-3xl text-[clamp(1.25rem,2.4vw,1.75rem)] text-clay italic">
+        <h1 className="display max-w-4xl text-[clamp(2.25rem,5.6vw,4.25rem)] text-ink">{name}</h1>
+        <p className="display mt-3 max-w-3xl text-[clamp(1.25rem,2.4vw,1.75rem)] text-terracotta">
           {hero.headline}
         </p>
 
-        <p className="mt-7 max-w-2xl text-lg leading-relaxed text-canvas/80">{hero.standfirst}</p>
+        <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-muted">{hero.standfirst}</p>
 
-        {/* Monospace data row — the field-notes specimen header. */}
-        <dl className="mt-10 grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-lg bg-canvas/15 sm:grid-cols-4">
+        {/* Monospace data row: the field-notes specimen header. */}
+        <dl className="mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
           {hero.facts.map((fact) => (
-            <div key={fact.label} className="bg-bark px-4 py-4">
-              <dt className="label-mono text-canvas/50">{fact.label}</dt>
-              <dd className="mt-1.5 flex items-center gap-2 text-sm font-semibold text-canvas">
+            <div key={fact.label} className="rounded-lg border border-line bg-canvas-raised px-4 py-4">
+              <dt className="label-mono text-ink-faint">{fact.label}</dt>
+              <dd className="mt-1.5 flex items-center gap-2 text-sm font-semibold text-ink">
                 {fact.value}
-                {fact.tbc ? <Tbc className="text-clay" /> : null}
+                {fact.tbc ? <Tbc /> : null}
               </dd>
             </div>
           ))}
@@ -56,13 +53,11 @@ export function SummitHero({ hero, name, edition }: { hero: Summit["hero"]; name
             href={hero.secondary.href}
             size="lg"
             variant="outline"
-            className="border-canvas/40 text-canvas hover:bg-canvas/10"
+            className="border-ink/25 text-ink hover:bg-ink/5"
           >
             {hero.secondary.label}
           </ButtonLink>
         </div>
-
-        <Caption>{hero.caption}</Caption>
       </div>
     </header>
   );
@@ -129,10 +124,10 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
             ))}
           </div>
 
-          {/* Specimen grid — the measurable claims, numbered like plates. */}
-          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-4">
+          {/* Specimen grid: the measurable claims, numbered like plates. */}
+          <dl className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {about.specimens.map((item) => (
-              <div key={item.ref} className="bg-canvas-raised px-5 py-5">
+              <div key={item.ref} className="rounded-lg border border-line bg-canvas-raised px-5 py-5">
                 <dt className="label-mono text-ink-faint">{item.ref}</dt>
                 <dd className="mt-2">
                   <span className="display flex items-center gap-2 text-2xl text-terracotta">
@@ -159,9 +154,6 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
                 className="object-cover"
               />
             </div>
-            <figcaption>
-              <Caption>Regenerative agroforestry, Johor — the systems the summit is about</Caption>
-            </figcaption>
           </figure>
         </Reveal>
       </div>
@@ -175,12 +167,12 @@ export function SummitStrands({ strands }: { strands: Summit["strands"] }) {
   return (
     <section className="bg-canvas-sunk py-20 md:py-28">
       <div className="shell">
-        <SectionHead label={strands.label} heading={strands.heading} intro={strands.intro} />
+        <SectionHead heading={strands.heading} intro={strands.intro} />
 
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
+        <ul className="mt-14 grid gap-5 md:grid-cols-2">
           {strands.items.map((item, i) => (
             <Reveal as="li" key={item.ref} delay={Math.min(i, 3) * 0.06}>
-              <article className="h-full bg-canvas-raised p-8 md:p-10">
+              <article className="h-full rounded-xl border border-line bg-canvas-raised p-8 md:p-10">
                 <Label refCode={item.ref}>Strand</Label>
                 <h3 className="display mt-4 text-2xl text-ink">{item.title}</h3>
                 <p className="mt-3 leading-relaxed text-ink-muted">{item.body}</p>
@@ -199,7 +191,7 @@ export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
   return (
     <section className="py-20 md:py-28">
       <div className="shell">
-        <SectionHead label={timeline.label} heading={timeline.heading} note={timeline.note} />
+        <SectionHead label={timeline.label} heading={timeline.heading} />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-3">
           {timeline.days.map((day, i) => (
@@ -248,15 +240,13 @@ export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
   return (
     <section
       data-theme="fieldnotes"
-      className="relative overflow-hidden bg-bark py-20 text-canvas md:py-28"
+      className="relative overflow-hidden bg-sand py-20 md:py-28"
     >
-      <div aria-hidden className="contours absolute inset-0 text-clay opacity-25" />
+      <div aria-hidden className="contours absolute inset-0 text-mangrove opacity-20" />
       <div className="shell relative">
         <SectionHead
           label={speakers.label}
           heading={speakers.heading}
-          note={speakers.note}
-          onDark
         />
 
         <ul className="mt-14 grid gap-x-6 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
@@ -273,18 +263,18 @@ export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
                       className="object-cover"
                     />
                   ) : (
-                    <span className="label-mono absolute inset-0 grid place-items-center text-[0.5625rem] text-canvas/40">
+                    <span className="label-mono absolute inset-0 grid place-items-center text-[0.5625rem] text-ink-faint">
                       {speaker.ref.replace("SPK-", "")}
                     </span>
                   )}
                 </div>
 
                 <div className="min-w-0">
-                  <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-canvas">
+                  <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink">
                     {speaker.name}
-                    {speaker.tbc ? <Tbc className="text-clay" /> : null}
+                    {speaker.tbc ? <Tbc /> : null}
                   </p>
-                  <p className="mt-0.5 truncate text-xs text-canvas/60">
+                  <p className="mt-0.5 truncate text-xs text-ink-muted">
                     {speaker.role} · {speaker.org}
                   </p>
                 </div>
@@ -303,12 +293,12 @@ export function SummitStartups({ startups }: { startups: Summit["startups"] }) {
   return (
     <section className="py-20 md:py-28">
       <div className="shell">
-        <SectionHead label={startups.label} heading={startups.heading} note={startups.note} />
+        <SectionHead label={startups.label} heading={startups.heading} />
 
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {startups.items.map((company, i) => (
             <Reveal as="li" key={company.ref} delay={Math.min(i, 5) * 0.05}>
-              <article className="flex h-full flex-col bg-canvas-raised p-7">
+              <article className="flex h-full flex-col rounded-xl border border-line bg-canvas-raised p-7">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="display text-xl text-ink">{company.name}</h3>
                   <span className="label-mono shrink-0 pt-1 text-ink-faint">{company.ref}</span>
@@ -345,7 +335,7 @@ export function SummitCtaStrip({
 }: {
   text: string;
   cta?: { label: string; href: string };
-  tone?: "terracotta" | "moss";
+  tone?: "terracotta" | "mangrove";
 }) {
   return (
     <section className={cn("py-10", tone === "terracotta" ? "bg-terracotta" : "bg-moss")}>

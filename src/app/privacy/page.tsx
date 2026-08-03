@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 /*
-  Placeholder. Replace with copy reviewed against Singapore’s PDPA before launch —
+  Placeholder. Replace with copy reviewed against Singapore’s PDPA before launch -
   this text is a structural stand-in, not legal advice.
 */
 const sections = [
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
 
       <div className="shell max-w-2xl pb-24">
         <p className="rounded-xl border border-orange-deep/30 bg-orange-deep/8 px-5 py-4 text-sm text-ink-muted">
-          Draft policy — to be reviewed against Singapore&rsquo;s Personal Data Protection Act
+          Draft policy: to be reviewed against Singapore&rsquo;s Personal Data Protection Act
           before launch.
         </p>
 

@@ -58,16 +58,16 @@
 
 /* The Summit runs the field-notes earth palette; registry blocks follow it here. */
 [data-theme="fieldnotes"] {
-  --background: #2f2a22;
-  --foreground: #f6f2ea;
-  --card: color-mix(in srgb, #f6f2ea 8%, transparent);
-  --card-foreground: #f6f2ea;
-  --muted: color-mix(in srgb, #f6f2ea 10%, transparent);
-  --muted-foreground: color-mix(in srgb, #f6f2ea 60%, transparent);
+  --background: #efe7d8;
+  --foreground: #33302a;
+  --card: #ffffff;
+  --card-foreground: #33302a;
+  --muted: #e5dbc8;
+  --muted-foreground: #6a6459;
   --primary: #b4552f;
-  --primary-foreground: #f6f2ea;
-  --accent: #d9a689;
-  --border: color-mix(in srgb, #f6f2ea 20%, transparent);
+  --primary-foreground: #ffffff;
+  --accent: #2f8f86;
+  --border: #d8ccb6;
 }
 
 @theme inline {
@@ -128,8 +128,11 @@
   /* Field-notes earth tones, used on the Summit page. */
   --color-terracotta: #b4552f;
   --color-clay: #d9a689;
-  --color-moss: #4a5a3c;
-  --color-bark: #2f2a22;
+  /* Mangrove turquoise carries the accent bands in place of the olive. */
+  --color-mangrove: #2f8f86;
+  --color-mangrove-deep: #1f6d66;
+  --color-sand: #efe7d8;
+  --color-bark: #f1e9dc;
 
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
 }

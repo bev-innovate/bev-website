@@ -1,5 +1,6 @@
 import { Hero } from "@/components/site/hero";
 import { ProgrammeCard } from "@/components/site/programme-card";
+import { Delivery } from "@/components/site/delivery";
 import { PartnerMarquee } from "@/components/site/partner-marquee";
 import { PillarsAccordion } from "@/components/site/pillars-accordion";
 import { TrackRecord } from "@/components/site/track-record";
@@ -7,15 +8,14 @@ import { Verticals } from "@/components/site/verticals";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { getProgrammes, getSiteSettings } from "@/lib/content";
-import { pillars, trustedBy, verticals, whoWeAre } from "@/lib/seed-content";
+import { delivery, pillars, trustedBy, verticals, whoWeAre } from "@/lib/seed-content";
 import { ArrowRight } from "lucide-react";
 
 export default async function HomePage() {
   const [settings, programmes] = await Promise.all([getSiteSettings(), getProgrammes()]);
 
   // Lead with whatever is open, falling back to the first programme.
-  const featured = programmes.find((p) => p.status === "open") ?? programmes[0];
-  const rest = programmes.filter((p) => p.slug !== featured?.slug).slice(0, 2);
+  const preview = programmes.slice(0, 3);
 
   return (
     <>
@@ -27,7 +27,7 @@ export default async function HomePage() {
         image="/images/hero-miscellaneous-climaccelerator-2025-cohort-photo.webp"
       />
 
-      {/* Who we are — the positioning statement, set as a two-column editorial block. */}
+      {/* Who we are: the positioning statement, set as a two-column editorial block. */}
       <section className="py-20 md:py-28">
         <div className="shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <Reveal>
@@ -59,9 +59,16 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <Delivery
+        eyebrow={delivery.eyebrow}
+        heading={delivery.heading}
+        intro={delivery.intro}
+        pillars={delivery.pillars}
+      />
+
       <section className="bg-purple py-20 text-white md:py-24">
         <div className="shell">
-          <h2 className="eyebrow text-white/80">Who we are</h2>
+          <h2 className="eyebrow text-white/80">What we run</h2>
           <div className="mt-10">
             <PillarsAccordion items={pillars} />
           </div>
@@ -70,7 +77,7 @@ export default async function HomePage() {
 
       <TrackRecord stats={settings.stats} />
 
-      {featured ? (
+      {preview.length ? (
         <section className="bg-canvas-sunk py-20 md:py-24">
           <div className="shell">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -90,13 +97,10 @@ export default async function HomePage() {
               </ButtonLink>
             </div>
 
-            <div className="mt-12 grid gap-5 md:grid-cols-2">
-              <Reveal className="md:col-span-2">
-                <ProgrammeCard programme={featured} featured />
-              </Reveal>
-              {rest.map((programme, i) => (
-                <Reveal key={programme.slug} delay={(i + 1) * 0.06}>
-                  <ProgrammeCard programme={programme} />
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {preview.map((programme, i) => (
+                <Reveal key={programme.slug} delay={i * 0.06}>
+                  <ProgrammeCard programme={programme} compact />
                 </Reveal>
               ))}
             </div>

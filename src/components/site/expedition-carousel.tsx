@@ -113,7 +113,7 @@ export function ExpeditionCarousel({ slides }: { slides: Slide[] }) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Controls: counter, progress, arrows — grouped so they read as one object. */}
+      {/* Controls: counter, progress, arrows: grouped so they read as one object. */}
       <div className="mt-10 flex items-center justify-center gap-6">
         <p className="text-sm font-semibold text-ink tabular-nums">
           <span className="text-purple">{String(index + 1).padStart(2, "0")}</span>
