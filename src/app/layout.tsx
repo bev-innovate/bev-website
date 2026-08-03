@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { Fraunces, Open_Sans } from "next/font/google";
+import { Fraunces, IBM_Plex_Mono, Open_Sans } from "next/font/google";
 
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
@@ -20,6 +20,14 @@ const openSans = Open_Sans({
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
+  display: "swap",
+});
+
+/** Monospace carries the annotation/label register on the Summit page. */
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
   display: "swap",
 });
 
@@ -49,7 +57,7 @@ export default async function RootLayout({
   const settings = await getSiteSettings();
 
   return (
-    <html lang="en-SG" className={`${openSans.variable} ${fraunces.variable}`}>
+    <html lang="en-SG" className={`${openSans.variable} ${fraunces.variable} ${plexMono.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

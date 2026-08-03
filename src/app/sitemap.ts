@@ -7,7 +7,7 @@ const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.betterearthventure
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [programmes, posts] = await Promise.all([getProgrammes(), getPosts()]);
 
-  const staticRoutes = ["", "/programmes", "/climate-expeditions", "/news", "/about", "/contact"].map(
+  const staticRoutes = ["", "/summit", "/programmes", "/climate-expeditions", "/news", "/about", "/contact"].map(
     (path) => ({
       url: `${base}${path}`,
       lastModified: new Date(),

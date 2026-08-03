@@ -45,6 +45,7 @@ export const siteSettings: SiteSettings = {
     { platform: "YouTube", url: "https://www.youtube.com/@betterearthventures" },
   ],
   navigation: [
+    { label: "Summit", href: "/summit" },
     { label: "Programmes", href: "/programmes" },
     { label: "Climate Expeditions", href: "/climate-expeditions" },
     { label: "News", href: "/news" },

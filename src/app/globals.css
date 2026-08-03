@@ -54,6 +54,13 @@
   */
   --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Field-notes earth tones, used on the Summit page. */
+  --color-terracotta: #b4552f;
+  --color-clay: #d9a689;
+  --color-moss: #4a5a3c;
+  --color-bark: #2f2a22;
 
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
 }
@@ -147,6 +154,36 @@
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+  }
+
+  /*
+    Field Notes register: monospace, letterspaced, small. Used for specimen labels,
+    timestamps and annotation captions on the Summit page.
+  */
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Systems and Signals: isolines used as structure, not decoration for its own sake. */
+  .contours {
+    background-image: repeating-radial-gradient(
+      circle at 20% 30%,
+      transparent 0 38px,
+      color-mix(in srgb, currentColor 12%, transparent) 38px 39px
+    );
+  }
+
+  /* Measurement rule — the hairline tick strip under section headings. */
+  .tick-rule {
+    background-image: repeating-linear-gradient(
+      to right,
+      currentColor 0 1px,
+      transparent 1px 12px
+    );
   }
 
   .mask-fade-x {
