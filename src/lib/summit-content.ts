@@ -35,7 +35,8 @@ export const summit = {
   name: "Climate Innovation Summit Singapore",
 
   hero: {
-    headline: "Where climate solutions meet proof of value",
+    /** Matches the line set into the key visual, so the page and the artwork agree. */
+    headline: "Where climate founders come to scale",
     standfirst:
       "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase.",
     /** Rendered as a monospace data row under the headline. */
@@ -47,7 +48,11 @@ export const summit = {
     ],
     primary: { label: "Register your interest", href: "#signup" },
     secondary: { label: "Partner with us", href: "/contact" },
-    image: `${IMG}/hero-miscellaneous-singapore-gardens.webp`,
+    /**
+     * The official key visual, cropped above its partner strip. It carries the summit
+     * name and line already, so nothing is overlaid on it.
+     */
+    image: `${IMG}/summit-key-visual.webp`,
   },
 
   partners: {

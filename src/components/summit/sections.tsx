@@ -15,22 +15,39 @@ type Summit = typeof summit;
 export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string }) {
   return (
     <header className="relative isolate overflow-hidden bg-sand text-ink">
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <Image src={hero.image} alt="" fill priority sizes="100vw" className="object-cover" />
-        {/* Material Evidence: the photograph carries the surface, type sits cleanly over it. */}
-        <div className="absolute inset-0 bg-sand/88" />
-        <div className="absolute inset-0 bg-gradient-to-t from-sand via-sand/80 to-sand/55" />
-        {/* Systems and Signals: isolines as structure. */}
+      {/*
+        The official key visual, full bleed. It already carries the summit name and line,
+        so nothing is set over it: the type below restates them for search and screen
+        readers, which a raster lockup cannot do on its own.
+
+        The asset is 2.24:1. Narrow viewports use a taller frame anchored left, where the
+        title sits, rather than letterboxing the whole thing down to a strip.
+      */}
+      <div className="relative aspect-4/3 w-full sm:aspect-2/1 lg:aspect-[1600/715]">
+        <Image
+          src={hero.image}
+          alt={`${name}: ${hero.headline}`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-left lg:object-center"
+        />
+      </div>
+
+      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-2/3">
+        {/* Systems and Signals: isolines as structure under the copy block. */}
         <div className="contours absolute inset-0 text-mangrove opacity-30" />
       </div>
 
-      <div className="shell relative py-20 md:py-28 lg:py-36">
-        <h1 className="display max-w-4xl text-[clamp(2.25rem,5.6vw,4.25rem)] text-ink">{name}</h1>
-        <p className="display mt-3 max-w-3xl text-[clamp(1.25rem,2.4vw,1.75rem)] text-terracotta">
-          {hero.headline}
-        </p>
+      <div className="shell relative py-14 md:py-20">
+        {/*
+          The artwork above already sets the name and the line at full scale, so the
+          heading here is sized as a summary rather than a second hero. It stays an h1
+          because the artwork's title is a raster.
+        */}
+        <h1 className="display max-w-3xl text-[clamp(1.6rem,3vw,2.25rem)] text-ink">{name}</h1>
 
-        <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-muted">{hero.standfirst}</p>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{hero.standfirst}</p>
 
         {/* The standing facts, on the same card primitive as the rest of the page. */}
         <dl className="mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">

@@ -19,7 +19,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: summit.name,
     description: summit.hero.standfirst,
-    images: [summit.hero.image],
+    // The uncropped key visual, partner strip and all: it is the complete title card,
+    // and its 16:9 is closer to what social previews expect than the page crop.
+    images: ["/images/programmes-climate-innovation-summit-singapore.webp"],
   },
 };
 
