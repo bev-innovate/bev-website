@@ -60,19 +60,23 @@ export function SectionHead({
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      {label ? <Label className={onDark ? "text-clay" : undefined}>{label}</Label> : null}
-      <div
-        aria-hidden
-        className={cn(
-          "tick-rule h-1.5",
-          label ? "mt-3" : "",
-          align === "center" ? "mx-auto w-24" : "w-24",
-          onDark ? "text-clay/50" : "text-line-strong",
-        )}
-      />
+      {label ? (
+        <>
+          <Label className={onDark ? "text-clay" : undefined}>{label}</Label>
+          <div
+            aria-hidden
+            className={cn(
+              "tick-rule mt-3 h-1.5 w-24",
+              align === "center" && "mx-auto",
+              onDark ? "text-clay/50" : "text-line-strong",
+            )}
+          />
+        </>
+      ) : null}
       <h2
         className={cn(
-          "display mt-5 text-[clamp(1.75rem,3.6vw,2.6rem)]",
+          "display text-[clamp(1.75rem,3.6vw,2.6rem)]",
+          label && "mt-5",
           onDark ? "text-canvas" : "text-ink",
         )}
       >

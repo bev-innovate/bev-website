@@ -331,7 +331,7 @@ export function SummitCtaStrip({
   tone?: "terracotta" | "mangrove";
 }) {
   return (
-    <section className={cn("py-10", tone === "terracotta" ? "bg-terracotta" : "bg-moss")}>
+    <section className={cn("py-10", tone === "terracotta" ? "bg-terracotta" : "bg-mangrove")}>
       <div className="shell flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="display max-w-2xl text-xl text-canvas md:text-2xl">{text}</p>
         <ButtonLink href={cta.href} variant="white" className="shrink-0">
