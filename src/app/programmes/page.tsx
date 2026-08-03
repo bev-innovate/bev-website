@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import { ProgrammeBlock } from "@/components/site/programme-block";
+import { ProgrammeCard } from "@/components/site/programme-card";
 import { Reveal } from "@/components/ui/reveal";
 import { getProgrammes } from "@/lib/content";
 import { programmesIntro } from "@/lib/seed-content";
@@ -11,13 +11,12 @@ export const metadata: Metadata = {
   description: programmesIntro.lede,
 };
 
-const stages = [
-  { key: "early" as const, label: "Early stage", tone: "purple" as const },
-  { key: "growth" as const, label: "Growth stage", tone: "orange" as const },
-];
-
 export default async function ProgrammesPage() {
   const programmes = await getProgrammes();
+
+  // Lead with something open where possible; the rest fall into the grid below.
+  const featured = programmes.find((p) => p.status === "open") ?? programmes[0];
+  const rest = programmes.filter((p) => p.slug !== featured?.slug);
 
   return (
     <>
@@ -36,9 +35,7 @@ export default async function ProgrammesPage() {
         </div>
 
         <div className="shell relative py-20 md:py-28">
-          <h1 className="display text-[clamp(2.25rem,5.5vw,3.75rem)]">
-            {programmesIntro.title}
-          </h1>
+          <h1 className="display text-[clamp(2.25rem,5.5vw,3.75rem)]">{programmesIntro.title}</h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/85 md:text-xl">
             {programmesIntro.lede}
           </p>
@@ -50,44 +47,24 @@ export default async function ProgrammesPage() {
           {programmesIntro.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
-          <p className="pt-2 font-semibold text-orange">{programmesIntro.highlight}</p>
+          <p className="pt-2 font-semibold text-orange-deep">{programmesIntro.highlight}</p>
         </div>
       </section>
 
-      {stages.map((stage) => {
-        const items = programmes.filter((p) => p.stage === stage.key);
-        if (!items.length) return null;
-
-        return (
-          <section
-            key={stage.key}
-            className={
-              // orange-deep rather than the brand orange: white body copy on #ee792f
-              // sits at ~2.9:1, which is below AA. See README.
-              stage.tone === "purple"
-                ? "bg-purple py-20 md:py-24"
-                : "bg-orange-deep py-20 md:py-24"
-            }
-          >
-            <div className="shell">
-              <Reveal>
-                <h2 className="eyebrow text-white/90">{stage.label}</h2>
-              </Reveal>
-
-              <div className="mt-14 space-y-20 md:space-y-28">
-                {items.map((programme, i) => (
-                  <ProgrammeBlock
-                    key={programme.slug}
-                    programme={programme}
-                    index={i}
-                    tone={stage.tone}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })}
+      <section className="pb-24 md:pb-32">
+        <div className="shell grid gap-5 md:grid-cols-2">
+          {featured ? (
+            <Reveal className="md:col-span-2">
+              <ProgrammeCard programme={featured} featured />
+            </Reveal>
+          ) : null}
+          {rest.map((programme, i) => (
+            <Reveal key={programme.slug} delay={(i + 1) * 0.06}>
+              <ProgrammeCard programme={programme} />
+            </Reveal>
+          ))}
+        </div>
+      </section>
     </>
   );
 }

@@ -32,6 +32,26 @@ export const programme = defineType({
       initialValue: "early",
     }),
     defineField({
+      name: "themes",
+      title: "Themes",
+      description: "Subject-matter labels shown on the programme card.",
+      type: "array",
+      of: [{ type: "string" }],
+      options: {
+        layout: "tags",
+        list: [
+          "Agrifood",
+          "Agritech",
+          "Climate innovation",
+          "Cleantech",
+          "Market expansion",
+          "Gender equity",
+          "Competition",
+          "Convening",
+        ],
+      },
+    }),
+    defineField({
       name: "accent",
       title: "Accent colour",
       type: "string",

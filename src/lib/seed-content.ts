@@ -247,8 +247,9 @@ export const programmes: Programme[] = [
   {
     title: "Women Founders and Funders Singapore",
     slug: "women-founders-and-funders",
+    themes: ["Agrifood", "Gender equity", "Convening"],
     stage: "early",
-    kicker: "Early stage",
+    kicker: "Pitch event · during Singapore Intl. Agrifood Week",
     summary:
       "We believe that when women lead, systems change. That's why Women Founders and Funders Singapore will return on Wednesday 5 November, during Singapore International Agrifood Week (SIAW) to champion the ingenuity, resilience, and impact of women shaping the future of food.",
     body: [
@@ -266,8 +267,9 @@ export const programmes: Programme[] = [
   {
     title: "ClimateLaunchpad Singapore",
     slug: "climatelaunchpad",
+    themes: ["Climate innovation", "Competition"],
     stage: "early",
-    kicker: "Early stage",
+    kicker: "Global competition · powered by Climate-KIC",
     summary:
       "ClimateLaunchpad, powered by Climate-KIC, Europe's leading climate innovation agency, is the world's largest green business competition. It is designed to unlock the potential of early-stage climate entrepreneurs by offering world-class training, expert guidance, and international exposure.",
     body: [
@@ -286,8 +288,9 @@ export const programmes: Programme[] = [
   {
     title: "AgriTech ClimAccelerator Singapore",
     slug: "climaccelerator",
+    themes: ["Agritech", "Climate innovation"],
     stage: "early",
-    kicker: "Early stage",
+    kicker: "6-month accelerator · powered by Climate KIC",
     summary:
       "ClimAccelerator, powered by Climate KIC, Europe's leading climate innovation agency and community, is a global programme for startups to innovate, catalyse and scale the potential of their climate solutions. It brings together the force of a diverse, global, connected community with a strong knowledge base and support system for sourcing, selecting and training entrepreneurs on their journey.",
     body: [
@@ -314,8 +317,9 @@ export const programmes: Programme[] = [
   {
     title: "Innovate UK Global Incubator Programme — Cleantech Singapore",
     slug: "global-incubator-programme",
+    themes: ["Cleantech", "Market expansion"],
     stage: "growth",
-    kicker: "Growth stage",
+    kicker: "Market immersion · powered by Innovate UK",
     summary:
       "The Global Incubator Programme, delivered by Better Earth Ventures in partnership with the Singapore Deep-Tech Alliance (SDTA) and powered by Innovate UK, supports a curated cohort of pioneering UK startups working at the forefront of cleantech and environmental sustainability.",
     body: [

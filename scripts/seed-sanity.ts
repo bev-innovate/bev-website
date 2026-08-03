@@ -150,6 +150,7 @@ async function run() {
       kicker: programme.kicker,
       stage: programme.stage,
       accent: programme.accent,
+      themes: programme.themes,
       summary: programme.summary,
       body: programme.body,
       status: programme.status,

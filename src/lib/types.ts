@@ -58,6 +58,8 @@ export interface Programme {
   /** Which part of the founder journey the programme serves. */
   stage?: "early" | "growth";
   accent?: Accent;
+  /** Subject-matter labels shown on the programme card. */
+  themes?: string[];
   summary: string;
   /** Long-form paragraphs shown on the programmes listing. */
   body?: string[];

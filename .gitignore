@@ -58,3 +58,7 @@ studio-bev-site/.sanity/
 # Reference screenshots of the old Wix site — kept in history at 38150ba,
 # removed from the tip so clones do not pull 45 MB of PNGs.
 screenshots of old site/
+
+# Source photography — converted into public/images/ by `npm run images`.
+# Keep originals out of git; the optimised WebP output is what ships.
+images/
