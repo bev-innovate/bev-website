@@ -1,0 +1,541 @@
+{
+  "climate-expedition-1": {
+    "src": "/images/climate-expedition-1.webp",
+    "srcSmall": "/images/climate-expedition-1-sm.webp",
+    "width": 1080,
+    "height": 1920,
+    "savedPct": 90
+  },
+  "climate-expedition-10": {
+    "src": "/images/climate-expedition-10.webp",
+    "srcSmall": "/images/climate-expedition-10-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-11": {
+    "src": "/images/climate-expedition-11.webp",
+    "srcSmall": "/images/climate-expedition-11-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-12": {
+    "src": "/images/climate-expedition-12.webp",
+    "srcSmall": "/images/climate-expedition-12-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-1768789434789": {
+    "src": "/images/climate-expedition-1768789434789.webp",
+    "srcSmall": "/images/climate-expedition-1768789434789-sm.webp",
+    "width": 640,
+    "height": 480,
+    "savedPct": 90
+  },
+  "climate-expedition-1768789451226": {
+    "src": "/images/climate-expedition-1768789451226.webp",
+    "srcSmall": "/images/climate-expedition-1768789451226-sm.webp",
+    "width": 640,
+    "height": 480,
+    "savedPct": 90
+  },
+  "climate-expedition-1768789475736": {
+    "src": "/images/climate-expedition-1768789475736.webp",
+    "srcSmall": "/images/climate-expedition-1768789475736-sm.webp",
+    "width": 640,
+    "height": 360,
+    "savedPct": 90
+  },
+  "climate-expedition-3": {
+    "src": "/images/climate-expedition-3.webp",
+    "srcSmall": "/images/climate-expedition-3-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-4": {
+    "src": "/images/climate-expedition-4.webp",
+    "srcSmall": "/images/climate-expedition-4-sm.webp",
+    "width": 1080,
+    "height": 1920,
+    "savedPct": 90
+  },
+  "climate-expedition-5": {
+    "src": "/images/climate-expedition-5.webp",
+    "srcSmall": "/images/climate-expedition-5-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-6": {
+    "src": "/images/climate-expedition-6.webp",
+    "srcSmall": "/images/climate-expedition-6-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-7": {
+    "src": "/images/climate-expedition-7.webp",
+    "srcSmall": "/images/climate-expedition-7-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-8": {
+    "src": "/images/climate-expedition-8.webp",
+    "srcSmall": "/images/climate-expedition-8-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-9": {
+    "src": "/images/climate-expedition-9.webp",
+    "srcSmall": "/images/climate-expedition-9-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-a-little-wild": {
+    "src": "/images/climate-expedition-a-little-wild.webp",
+    "srcSmall": "/images/climate-expedition-a-little-wild-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-img-3188": {
+    "src": "/images/climate-expedition-img-3188.webp",
+    "srcSmall": "/images/climate-expedition-img-3188-sm.webp",
+    "width": 1600,
+    "height": 1200,
+    "savedPct": 90
+  },
+  "climate-expedition-pxl-20260116-033239312-edited-edited": {
+    "src": "/images/climate-expedition-pxl-20260116-033239312-edited-edited.webp",
+    "srcSmall": "/images/climate-expedition-pxl-20260116-033239312-edited-edited-sm.webp",
+    "width": 1200,
+    "height": 676,
+    "savedPct": 90
+  },
+  "climate-expedition-polar-cold-9": {
+    "src": "/images/climate-expedition-polar-cold-9.webp",
+    "srcSmall": "/images/climate-expedition-polar-cold-9-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-seadling": {
+    "src": "/images/climate-expedition-seadling.webp",
+    "srcSmall": "/images/climate-expedition-seadling-sm.webp",
+    "width": 1600,
+    "height": 918,
+    "savedPct": 90
+  },
+  "climate-expedition-screenshot-2026-01-13-at-3-17-15-pm": {
+    "src": "/images/climate-expedition-screenshot-2026-01-13-at-3-17-15-pm.webp",
+    "srcSmall": "/images/climate-expedition-screenshot-2026-01-13-at-3-17-15-pm-sm.webp",
+    "width": 1600,
+    "height": 899,
+    "savedPct": 90
+  },
+  "climate-expedition-seadling-1": {
+    "src": "/images/climate-expedition-seadling-1.webp",
+    "srcSmall": "/images/climate-expedition-seadling-1-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-polar-cold": {
+    "src": "/images/climate-expedition-polar-cold.webp",
+    "srcSmall": "/images/climate-expedition-polar-cold-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "climate-expedition-seadling-jan-2026-img-3171": {
+    "src": "/images/climate-expedition-seadling-jan-2026-img-3171.webp",
+    "srcSmall": "/images/climate-expedition-seadling-jan-2026-img-3171-sm.webp",
+    "width": 1600,
+    "height": 1200,
+    "savedPct": 90
+  },
+  "climate-expedition-seadling-jan-2026-img-3293": {
+    "src": "/images/climate-expedition-seadling-jan-2026-img-3293.webp",
+    "srcSmall": "/images/climate-expedition-seadling-jan-2026-img-3293-sm.webp",
+    "width": 1600,
+    "height": 1200,
+    "savedPct": 90
+  },
+  "climate-expedition-seadling-jan-2026-pxl-20260116-105016500": {
+    "src": "/images/climate-expedition-seadling-jan-2026-pxl-20260116-105016500.webp",
+    "srcSmall": "/images/climate-expedition-seadling-jan-2026-pxl-20260116-105016500-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-2": {
+    "src": "/images/hero-miscellaneous-2.webp",
+    "srcSmall": "/images/hero-miscellaneous-2-sm.webp",
+    "width": 1366,
+    "height": 768,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-a7400018-medium-edited": {
+    "src": "/images/hero-miscellaneous-a7400018-medium-edited.webp",
+    "srcSmall": "/images/hero-miscellaneous-a7400018-medium-edited-sm.webp",
+    "width": 640,
+    "height": 427,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-bev-indigo-18": {
+    "src": "/images/hero-miscellaneous-bev-indigo-18.webp",
+    "srcSmall": "/images/hero-miscellaneous-bev-indigo-18-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-climaccelerator-2025-cohort-photo": {
+    "src": "/images/hero-miscellaneous-climaccelerator-2025-cohort-photo.webp",
+    "srcSmall": "/images/hero-miscellaneous-climaccelerator-2025-cohort-photo-sm.webp",
+    "width": 1500,
+    "height": 1001,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-singapore-gardens-2": {
+    "src": "/images/hero-miscellaneous-singapore-gardens-2.webp",
+    "srcSmall": "/images/hero-miscellaneous-singapore-gardens-2-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-singapore-gardens": {
+    "src": "/images/hero-miscellaneous-singapore-gardens.webp",
+    "srcSmall": "/images/hero-miscellaneous-singapore-gardens-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-women-founders-and-funders": {
+    "src": "/images/hero-miscellaneous-women-founders-and-funders.webp",
+    "srcSmall": "/images/hero-miscellaneous-women-founders-and-funders-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-iuk-cleantech": {
+    "src": "/images/hero-miscellaneous-iuk-cleantech.webp",
+    "srcSmall": "/images/hero-miscellaneous-iuk-cleantech-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "hero-miscellaneous-iuk-enterprise-singapore-group": {
+    "src": "/images/hero-miscellaneous-iuk-enterprise-singapore-group.webp",
+    "srcSmall": "/images/hero-miscellaneous-iuk-enterprise-singapore-group-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "logos-agfunder-logo": {
+    "src": "/images/logos-agfunder-logo.webp",
+    "srcSmall": "/images/logos-agfunder-logo.webp",
+    "width": 1000,
+    "height": 248,
+    "savedPct": 90
+  },
+  "logos-agrifutures-logo": {
+    "src": "/images/logos-agrifutures-logo.webp",
+    "srcSmall": "/images/logos-agrifutures-logo.webp",
+    "width": 1500,
+    "height": 890,
+    "savedPct": 90
+  },
+  "logos-better-earth-ventures-logo-lockup-2": {
+    "src": "/images/logos-better-earth-ventures-logo-lockup-2.webp",
+    "srcSmall": "/images/logos-better-earth-ventures-logo-lockup-2.webp",
+    "width": 1600,
+    "height": 374,
+    "savedPct": 90
+  },
+  "logos-better-earth-ventures-logo": {
+    "src": "/images/logos-better-earth-ventures-logo.webp",
+    "srcSmall": "/images/logos-better-earth-ventures-logo.webp",
+    "width": 1080,
+    "height": 1080,
+    "savedPct": 90
+  },
+  "logos-climatekic-logo": {
+    "src": "/images/logos-climatekic-logo.webp",
+    "srcSmall": "/images/logos-climatekic-logo.webp",
+    "width": 422,
+    "height": 234,
+    "savedPct": 90
+  },
+  "logos-deep-tech-canada-logo": {
+    "src": "/images/logos-deep-tech-canada-logo.webp",
+    "srcSmall": "/images/logos-deep-tech-canada-logo.webp",
+    "width": 633,
+    "height": 234,
+    "savedPct": 90
+  },
+  "logos-favicon": {
+    "src": "/images/logos-favicon.webp",
+    "srcSmall": "/images/logos-favicon.webp",
+    "width": 96,
+    "height": 96,
+    "savedPct": 90
+  },
+  "logos-hex-logo": {
+    "src": "/images/logos-hex-logo.webp",
+    "srcSmall": "/images/logos-hex-logo.webp",
+    "width": 422,
+    "height": 234,
+    "savedPct": 90
+  },
+  "logos-innovate-uk-logo": {
+    "src": "/images/logos-innovate-uk-logo.webp",
+    "srcSmall": "/images/logos-innovate-uk-logo.webp",
+    "width": 1500,
+    "height": 890,
+    "savedPct": 90
+  },
+  "logos-jetro-logo": {
+    "src": "/images/logos-jetro-logo.webp",
+    "srcSmall": "/images/logos-jetro-logo.webp",
+    "width": 422,
+    "height": 234,
+    "savedPct": 90
+  },
+  "logos-logo-mark": {
+    "src": "/images/logos-logo-mark.webp",
+    "srcSmall": "/images/logos-logo-mark.webp",
+    "width": 1080,
+    "height": 1080,
+    "savedPct": 90
+  },
+  "logos-martech-collective-logo": {
+    "src": "/images/logos-martech-collective-logo.webp",
+    "srcSmall": "/images/logos-martech-collective-logo.webp",
+    "width": 1600,
+    "height": 800,
+    "savedPct": 90
+  },
+  "logos-rebbeck-consulting-logo": {
+    "src": "/images/logos-rebbeck-consulting-logo.webp",
+    "srcSmall": "/images/logos-rebbeck-consulting-logo.webp",
+    "width": 1600,
+    "height": 690,
+    "savedPct": 90
+  },
+  "logos-sdta-logo": {
+    "src": "/images/logos-sdta-logo.webp",
+    "srcSmall": "/images/logos-sdta-logo.webp",
+    "width": 1500,
+    "height": 890,
+    "savedPct": 90
+  },
+  "logos-sl2-logo": {
+    "src": "/images/logos-sl2-logo.webp",
+    "srcSmall": "/images/logos-sl2-logo.webp",
+    "width": 1500,
+    "height": 890,
+    "savedPct": 90
+  },
+  "logos-start2group-logo": {
+    "src": "/images/logos-start2group-logo.webp",
+    "srcSmall": "/images/logos-start2group-logo.webp",
+    "width": 1500,
+    "height": 890,
+    "savedPct": 90
+  },
+  "logos-tenity-logo": {
+    "src": "/images/logos-tenity-logo.webp",
+    "srcSmall": "/images/logos-tenity-logo.webp",
+    "width": 422,
+    "height": 234,
+    "savedPct": 90
+  },
+  "logos-tomorrow-studio-ventures-logo": {
+    "src": "/images/logos-tomorrow-studio-ventures-logo.webp",
+    "srcSmall": "/images/logos-tomorrow-studio-ventures-logo.webp",
+    "width": 1600,
+    "height": 988,
+    "savedPct": 90
+  },
+  "programmes-cleantech-connect": {
+    "src": "/images/programmes-cleantech-connect.webp",
+    "srcSmall": "/images/programmes-cleantech-connect-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "programmes-climaccelearator-cohort-announcement-1-1920-x-1080": {
+    "src": "/images/programmes-climaccelearator-cohort-announcement-1-1920-x-1080.webp",
+    "srcSmall": "/images/programmes-climaccelearator-cohort-announcement-1-1920-x-1080-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "programmes-climaccelerator": {
+    "src": "/images/programmes-climaccelerator.webp",
+    "srcSmall": "/images/programmes-climaccelerator-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "programmes-climatelaunchpad-2026": {
+    "src": "/images/programmes-climatelaunchpad-2026.webp",
+    "srcSmall": "/images/programmes-climatelaunchpad-2026-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "programmes-martech-collective-immersion": {
+    "src": "/images/programmes-martech-collective-immersion.webp",
+    "srcSmall": "/images/programmes-martech-collective-immersion-sm.webp",
+    "width": 1600,
+    "height": 837,
+    "savedPct": 90
+  },
+  "programmes-women-founders-and-funders-1": {
+    "src": "/images/programmes-women-founders-and-funders-1.webp",
+    "srcSmall": "/images/programmes-women-founders-and-funders-1-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "programmes-climate-innovation-summit-singapore": {
+    "src": "/images/programmes-climate-innovation-summit-singapore.webp",
+    "srcSmall": "/images/programmes-climate-innovation-summit-singapore-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "programmes-cultivating-connections": {
+    "src": "/images/programmes-cultivating-connections.webp",
+    "srcSmall": "/images/programmes-cultivating-connections-sm.webp",
+    "width": 1600,
+    "height": 837,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-1753712542439": {
+    "src": "/images/women-founders-and-funders-2025-1753712542439.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-1753712542439-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-1-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-1-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-1-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-14-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-14-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-14-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-15-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-15-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-15-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-17-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-17-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-17-of-30-sm.webp",
+    "width": 1600,
+    "height": 2400,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-2-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-2-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-2-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-26-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-26-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-26-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-3-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-3-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-3-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-5-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-5-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-5-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-rush-9-of-30": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-9-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-rush-9-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-finals-101-of-133": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-finals-101-of-133.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-finals-101-of-133-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-finals-108-of-133": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-finals-108-of-133.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-finals-108-of-133-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-20241120-womenfounders-martech-finals-112-of-133": {
+    "src": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-finals-112-of-133.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-20241120-womenfounders-martech-finals-112-of-133-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-rush-19-of-30": {
+    "src": "/images/women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-rush-19-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-rush-19-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-rush-29-of-30": {
+    "src": "/images/women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-rush-29-of-30.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-rush-29-of-30-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-finals-128-of-133": {
+    "src": "/images/women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-finals-128-of-133.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-copy-of-20241120-womenfounders-martech-finals-128-of-133-sm.webp",
+    "width": 1600,
+    "height": 1067,
+    "savedPct": 90
+  },
+  "women-founders-and-funders-2025-women-founders-funders": {
+    "src": "/images/women-founders-and-funders-2025-women-founders-funders.webp",
+    "srcSmall": "/images/women-founders-and-funders-2025-women-founders-funders-sm.webp",
+    "width": 1600,
+    "height": 900,
+    "savedPct": 90
+  }
+}
