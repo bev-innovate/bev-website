@@ -8,13 +8,24 @@ export const person = defineType({
     defineField({ name: "name", type: "string", validation: (r) => r.required() }),
     defineField({ name: "role", type: "string" }),
     defineField({
+      name: "location",
+      type: "string",
+      description: "Staff only. Groups the team list on /about, e.g. Singapore, Europe, India.",
+    }),
+    defineField({
+      name: "organisation",
+      type: "string",
+      description: "Advisors only: where they work. Shown under their role.",
+    }),
+    defineField({
       name: "group",
       type: "string",
       options: {
         list: [
           { title: "Team", value: "team" },
+          { title: "Expert", value: "expert" },
           { title: "Mentor", value: "mentor" },
-          { title: "Advisor", value: "advisor" },
+          { title: "Advisory board", value: "advisor" },
         ],
         layout: "radio",
       },

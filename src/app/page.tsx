@@ -45,7 +45,7 @@ export default async function HomePage() {
         github.com/tailark/blocks): the heading sits in the narrow column, the prose in the
         wide one behind a left rule.
       */}
-      <section className="py-20 md:py-28">
+      <section className="py-16 md:py-20">
         <div className="shell grid gap-10 lg:grid-cols-5 lg:gap-0">
           <Reveal className="lg:col-span-2">
             <div className="lg:sticky lg:top-28 lg:pr-12">
@@ -87,12 +87,14 @@ export default async function HomePage() {
       />
 
       {preview.length ? (
-        <section className="py-20 md:py-24">
+        <section className="py-16 md:py-20">
           <div className="shell">
             <div className="flex flex-wrap items-end justify-between gap-6">
-              <div className="max-w-2xl">
+              <div className="max-w-3xl">
                 <span className="text-primary">Programmes</span>
-                <h2 className="mt-4 font-display text-[clamp(1.9rem,4vw,3rem)] font-semibold text-ink">
+                {/* `text-nowrap` from md up: the line is short enough to hold, and
+                    breaking it after "where" reads as a mistake. */}
+                <h2 className="mt-4 font-display text-[clamp(1.9rem,4vw,3rem)] font-semibold text-ink md:text-nowrap">
                   Meet founders where they are
                 </h2>
                 <p className="mt-4 text-lg leading-relaxed text-muted-foreground">

@@ -11,7 +11,8 @@
     "seed": "tsx scripts/seed-sanity.ts",
     "export:wix": "tsx scripts/export-wix-media.ts",
     "import:media": "tsx scripts/import-media-to-sanity.ts",
-    "images": "tsx scripts/optimise-images.ts"
+    "images": "tsx scripts/optimise-images.ts",
+    "sync:people": "tsx scripts/sync-people.ts"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",
@@ -29,6 +30,7 @@
     "next-sanity": "^13.2.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },

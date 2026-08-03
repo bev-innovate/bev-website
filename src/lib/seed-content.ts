@@ -219,7 +219,7 @@ export const verticals = [
   },
   {
     title: "Clean Cities",
-    image: `${IMG}/hero-miscellaneous-singapore-gardens.webp`,
+    image: `${IMG}/sectors-clean-cities.webp`,
     items: [
       "Energy efficiency",
       "Urban mobility",
@@ -230,7 +230,7 @@ export const verticals = [
   },
   {
     title: "Circularity and Advanced Materials",
-    image: `${IMG}/climate-expedition-seadling.webp`,
+    image: `${IMG}/sectors-circularity.webp`,
     items: [
       "Waste valorisation",
       "Bio-based materials",
@@ -241,7 +241,7 @@ export const verticals = [
   },
   {
     title: "Industrial Decarbonisation",
-    image: `${IMG}/climate-expedition-polar-cold.webp`,
+    image: `${IMG}/sectors-industrial-decarbonisation.webp`,
     items: [
       "Electrification",
       "Hydrogen",
@@ -311,14 +311,48 @@ export const companies: Company[] = [
 ];
 
 /**
- * Team names are from public LinkedIn profiles; titles and bios are placeholders.
- * The old site had no team page — confirm before publishing /about.
+ * Team, experts and advisory board, from the company deck.
+ *
+ * `photo` is null throughout: the headshots exist in the deck but not as files in this
+ * repo, so each card falls back to an initials tile. Drop the images into
+ * public/images/people/ and set `photo` to light them up.
  */
 export const people: Person[] = [
-  { name: "Jamie Heng", role: "Better Earth Ventures", group: "team", order: 1 },
-  { name: "Linhan Wu", role: "Better Earth Ventures", group: "team", order: 2 },
-  { name: "Gerald Foo", role: "Better Earth Ventures", group: "team", order: 3 },
-  { name: "Arunav Pal", role: "Better Earth Ventures", group: "team", order: 4 },
+  // Singapore
+  { name: "Rebecca Sharpe", role: "Founder & CEO", location: "Singapore", group: "team", order: 1 },
+  { name: "Jamie Heng", role: "Senior Programme Manager", location: "Singapore", group: "team", order: 2 },
+  { name: "Linhan Wu", role: "Programme Manager", location: "Singapore", group: "team", order: 3 },
+  // Europe
+  { name: "Alex Mitchell", role: "Head of Europe", location: "Europe", group: "team", order: 4 },
+  { name: "Cassidy Clark", role: "Researcher", location: "Europe", group: "team", order: 5 },
+  // India
+  { name: "Maud Zeller-Tillai", role: "Head of India", location: "India", group: "team", order: 6 },
+
+  // Experts: the practitioners we bring into programmes, by domain.
+  { name: "Connor Lindh Clark", role: "Product, Tech, Ops, Process", group: "expert", order: 1 },
+  { name: "Megan Willis", role: "Supply chain, Policy", group: "expert", order: 2 },
+  { name: "Panam Parikh", role: "Food systems, Policy", group: "expert", order: 3 },
+  { name: "Steve O’Connor", role: "Commercialisation, Engineering, Sales", group: "expert", order: 4 },
+  { name: "Matthew McGarvey", role: "Impact investment", group: "expert", order: 5 },
+  { name: "Gerald Foo", role: "GTM", group: "expert", order: 6 },
+
+  // Advisory board.
+  { name: "John Friedman", role: "Asia Director", organisation: "AgFunder", group: "advisor", order: 1 },
+  {
+    name: "Su-E Yap",
+    role: "Regenerative Food Facility Lead",
+    organisation: "The Nature Conservancy",
+    group: "advisor",
+    order: 2,
+  },
+  {
+    name: "Anne Lochoff",
+    role: "Programme Director",
+    organisation: "Singapore Agri-Food Innovation Lab",
+    group: "advisor",
+    order: 3,
+  },
+  { name: "Steven Holm", role: "Counsel", organisation: "Cooley", group: "advisor", order: 4 },
 ];
 
 export const programmes: Programme[] = [

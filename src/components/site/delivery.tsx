@@ -40,7 +40,7 @@ export function Delivery({
   if (!pillars.length) return null;
 
   return (
-    <section className="relative isolate overflow-hidden bg-purple py-20 text-white md:py-28">
+    <section className="relative isolate overflow-hidden bg-purple py-16 text-white md:py-20">
       {/* A single wash, so the photography inside the panels stays the brightest thing here. */}
       <div
         aria-hidden

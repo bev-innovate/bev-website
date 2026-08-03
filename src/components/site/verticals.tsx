@@ -26,7 +26,7 @@ export function Verticals({
   if (!lead) return null;
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-16 md:py-20">
       <div className="shell">
         <div className="max-w-3xl">
           <h2 className="font-display text-[clamp(1.75rem,3.8vw,2.75rem)] font-semibold text-ink">

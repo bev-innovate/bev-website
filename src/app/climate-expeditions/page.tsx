@@ -66,7 +66,7 @@ export default function ClimateExpeditionsPage() {
         </div>
       </header>
 
-      <section className="bg-purple py-20 text-white md:py-24">
+      <section className="bg-purple py-16 text-white md:py-20">
         <div className="shell max-w-4xl">
           <h2 className="display text-[clamp(1.6rem,3.4vw,2.25rem)]">{expeditions.why.title}</h2>
           <div className="mt-8 space-y-5 leading-relaxed text-white/85">
@@ -77,7 +77,7 @@ export default function ClimateExpeditionsPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-24">
+      <section className="py-16 md:py-20">
         <div className="shell">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="display text-[clamp(1.75rem,3.6vw,2.5rem)] text-ink">
@@ -113,7 +113,7 @@ export default function ClimateExpeditionsPage() {
         </div>
       </section>
 
-      <section className="bg-teal py-20 text-white md:py-24">
+      <section className="bg-teal py-16 text-white md:py-20">
         <div className="shell">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="display text-[clamp(1.75rem,3.6vw,2.5rem)]">
@@ -128,7 +128,7 @@ export default function ClimateExpeditionsPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-24">
+      <section className="py-16 md:py-20">
         <div className="shell">
           <h2 className="display text-center text-[clamp(1.75rem,3.6vw,2.5rem)] text-ink">
             {expeditions.experience.title}
@@ -139,7 +139,7 @@ export default function ClimateExpeditionsPage() {
         </div>
       </section>
 
-      <section className="bg-teal py-20 text-white md:py-24">
+      <section className="bg-teal py-16 text-white md:py-20">
         <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
             <h2 className="display text-[clamp(1.75rem,3.8vw,2.75rem)]">

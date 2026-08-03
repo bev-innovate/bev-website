@@ -64,7 +64,7 @@ export function TrackRecord({
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-muted/50 py-20 md:py-24">
+    <section className="bg-muted/50 py-16 md:py-20">
       <div className="shell" ref={ref}>
         <h2 className="font-display text-3xl font-semibold text-ink lg:text-4xl">{heading}</h2>
         {intro ? (

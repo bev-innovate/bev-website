@@ -1,10 +1,10 @@
-import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 
 import { CtaBand } from "@/components/site/cta-band";
 import { PageHeader } from "@/components/site/page-header";
 import { PartnerMarquee } from "@/components/site/partner-marquee";
+import { PersonCard } from "@/components/site/person-card";
 import { PillarsAccordion } from "@/components/site/pillars-accordion";
 import { Section, SectionHeading } from "@/components/site/section";
 import { Reveal } from "@/components/ui/reveal";
@@ -25,6 +25,12 @@ export default async function AboutPage() {
   ]);
 
   const team = people.filter((p) => (p.group ?? "team") === "team");
+  const experts = people.filter((p) => p.group === "expert");
+  const advisors = people.filter((p) => p.group === "advisor");
+
+  // Preserve the order the locations first appear in, rather than sorting alphabetically:
+  // Singapore is the head office and should lead.
+  const locations = [...new Set(team.map((p) => p.location ?? "Team"))];
 
   return (
     <>
@@ -94,7 +100,7 @@ export default async function AboutPage() {
         The three business lines. They used to sit on the home page under "What we run",
         which the delivery section now occupies; they belong here, next to the history.
       */}
-      <section className="bg-purple py-20 text-white md:py-24">
+      <section className="bg-purple py-16 text-white md:py-20">
         <div className="shell">
           <h2 className="font-display text-3xl font-semibold lg:text-4xl">What we run</h2>
           <div className="mt-10">
@@ -111,46 +117,57 @@ export default async function AboutPage() {
               title="The people you’ll actually work with"
               intro="Small team, deep network. You will not be handed off to a programme manager you have never met."
             />
-            <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {team.map((person, i) => (
-                <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05}>
-                  <div className="h-full rounded-2xl border border-line bg-canvas-raised p-6">
-                    <div className="relative mb-5 aspect-square overflow-hidden rounded-xl bg-canvas-sunk">
-                      {person.photo ? (
-                        <Image
-                          src={person.photo}
-                          alt={person.name}
-                          fill
-                          sizes="(min-width: 1024px) 22vw, 45vw"
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="grid h-full place-items-center bg-gradient-to-br from-orange/15 to-yellow/20">
-                          <span className="font-display text-3xl font-semibold text-orange">
-                            {person.name
-                              .split(" ")
-                              .map((part) => part[0])
-                              .join("")}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <p className="font-display text-lg font-semibold text-ink">{person.name}</p>
-                    {person.role ? (
-                      <p className="mt-1 text-sm text-ink-muted">{person.role}</p>
-                    ) : null}
-                    {person.linkedin ? (
-                      <a
-                        href={person.linkedin}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="mt-4 inline-flex items-center gap-1.5 text-sm text-orange hover:text-purple"
-                      >
-                        LinkedIn
-                        <ArrowUpRight className="size-3.5" aria-hidden />
-                      </a>
-                    ) : null}
-                  </div>
+
+            {/* Grouped by base, so it is obvious which market a name sits in. */}
+            <div className="mt-12 space-y-12">
+              {locations.map((location) => (
+                <div key={location}>
+                  <h3 className="border-b border-line pb-3 font-display text-xl font-semibold text-ink">
+                    {location}
+                  </h3>
+                  <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {team
+                      .filter((person) => person.location === location)
+                      .map((person, i) => (
+                        <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05} className="h-full">
+                          <PersonCard person={person} />
+                        </Reveal>
+                      ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+      ) : null}
+
+      {experts.length ? (
+        <Section>
+          <div className="shell">
+            <SectionHeading
+              eyebrow="Experts"
+              title="The practitioners we bring into the room"
+              intro="Operators who have taken climate and agrifood businesses through the exact stage a cohort is standing at."
+            />
+            <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {experts.map((person, i) => (
+                <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05} className="h-full">
+                  <PersonCard person={person} variant="row" />
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
+
+      {advisors.length ? (
+        <Section tone="sunk">
+          <div className="shell">
+            <SectionHeading eyebrow="Advisory board" title="Who keeps us honest" />
+            <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {advisors.map((person, i) => (
+                <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05} className="h-full">
+                  <PersonCard person={person} variant="row" />
                 </Reveal>
               ))}
             </ul>

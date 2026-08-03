@@ -2,6 +2,11 @@
 
 import { z } from "zod";
 
+import {
+  mirrorToAirtable,
+  sendEnquiryEmail,
+  sendSubscribeEmail,
+} from "@/lib/notify";
 import { getSupabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
 
 export interface FormState {
@@ -64,10 +69,15 @@ export async function subscribeAction(
     return { status: "error", fieldErrors: flatten(parsed.error) };
   }
 
-  const result = await persist("newsletter_subscribers", {
-    email: parsed.data.email.toLowerCase(),
-    source: "website_footer",
-  });
+  const email = parsed.data.email.toLowerCase();
+  const source = "website_footer";
+  const result = await persist("newsletter_subscribers", { email, source });
+
+  // After the write, and never fatal: a mirror failing must not lose the signup.
+  await Promise.allSettled([
+    mirrorToAirtable("subscribers", { Email: email, Source: source }),
+    sendSubscribeEmail(email, source),
+  ]);
 
   if (!result.ok) {
     return {
@@ -97,13 +107,31 @@ export async function enquiryAction(
   }
 
   // `company` is the honeypot — validated above, never stored.
-  const result = await persist("enquiries", {
+  const enquiry = {
     name: parsed.data.name,
     email: parsed.data.email.toLowerCase(),
     organisation: parsed.data.organisation || null,
     topic: parsed.data.topic,
     message: parsed.data.message,
-  });
+  };
+
+  const result = await persist("enquiries", enquiry);
+
+  /*
+    Notify after the write, and never let a notification failure fail the submission.
+    `allSettled` rather than `all`: one channel being down must not take the other with it.
+    Both log their own errors.
+  */
+  await Promise.allSettled([
+    sendEnquiryEmail(enquiry),
+    mirrorToAirtable("enquiries", {
+      Name: enquiry.name,
+      Email: enquiry.email,
+      Organisation: enquiry.organisation ?? "",
+      Topic: enquiry.topic,
+      Message: enquiry.message,
+    }),
+  ]);
 
   if (!result.ok) {
     return {

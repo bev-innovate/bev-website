@@ -58,7 +58,7 @@ export function Section({
   return (
     <section
       className={cn(
-        "py-20 md:py-28",
+        "py-16 md:py-20",
         tone === "sunk" && "bg-canvas-sunk",
         tone === "purple" && "relative overflow-hidden bg-purple text-canvas",
         className,

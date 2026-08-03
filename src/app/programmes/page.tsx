@@ -34,7 +34,7 @@ export default async function ProgrammesPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-purple-deep via-purple/75 to-orange/30" />
         </div>
 
-        <div className="shell relative py-20 md:py-28">
+        <div className="shell relative py-16 md:py-20">
           <h1 className="display text-[clamp(2.25rem,5.5vw,3.75rem)]">{programmesIntro.title}</h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/85 md:text-xl">
             {programmesIntro.lede}

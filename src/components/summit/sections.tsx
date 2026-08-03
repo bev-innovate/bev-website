@@ -134,7 +134,7 @@ export function SummitPartners({ partners }: { partners: Summit["partners"] }) {
 
 export function SummitAbout({ about }: { about: Summit["about"] }) {
   return (
-    <section className="relative overflow-hidden py-20 md:py-28">
+    <section className="relative overflow-hidden py-16 md:py-20">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
         <div>
           <SectionHead heading={about.heading} />
@@ -194,7 +194,7 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
  */
 export function SummitStrands({ strands }: { strands: Summit["strands"] }) {
   return (
-    <section className="bg-muted/50 py-20 md:py-28">
+    <section className="bg-muted/50 py-16 md:py-20">
       <div className="shell">
         <SectionHead heading={strands.heading} intro={strands.intro} />
 
@@ -222,7 +222,7 @@ export function SummitStrands({ strands }: { strands: Summit["strands"] }) {
 
 export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-16 md:py-20">
       <div className="shell">
         <SectionHead heading={timeline.heading} />
 
@@ -278,7 +278,7 @@ export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
  */
 export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
   return (
-    <section className="relative overflow-hidden bg-muted/50 py-20 md:py-28">
+    <section className="relative overflow-hidden bg-muted/50 py-16 md:py-20">
       <div className="shell relative">
         <SectionHead heading={speakers.heading} />
 
@@ -324,7 +324,7 @@ export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
 
 export function SummitStartups({ startups }: { startups: Summit["startups"] }) {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-16 md:py-20">
       <div className="shell">
         <SectionHead heading={startups.heading} />
 

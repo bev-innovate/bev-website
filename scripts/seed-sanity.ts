@@ -129,6 +129,8 @@ async function run() {
       _type: "person",
       name: item.name,
       role: item.role,
+      location: item.location,
+      organisation: item.organisation,
       group: item.group,
       bio: item.bio,
       linkedin: item.linkedin,

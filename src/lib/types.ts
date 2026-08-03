@@ -99,7 +99,11 @@ export interface Post {
 export interface Person {
   name: string;
   role?: string;
-  group?: "team" | "mentor" | "advisor";
+  /** Where the person is based. Groups the staff list on /about. */
+  location?: string;
+  /** The advisor's own employer, shown under their role. */
+  organisation?: string;
+  group?: "team" | "expert" | "mentor" | "advisor";
   photo?: string | null;
   bio?: string;
   linkedin?: string;

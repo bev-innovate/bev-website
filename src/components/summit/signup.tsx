@@ -37,7 +37,7 @@ export function SummitSignup({
   const [state, formAction] = useActionState(subscribeAction, initial);
 
   return (
-    <section id="signup" className="relative scroll-mt-24 overflow-hidden bg-mangrove py-20 text-white md:py-28">
+    <section id="signup" className="relative scroll-mt-24 overflow-hidden bg-mangrove py-16 text-white md:py-20">
       <div aria-hidden className="contours pointer-events-none absolute inset-0 text-white opacity-20" />
       <div className="shell">
         <div className="mx-auto max-w-2xl text-center">

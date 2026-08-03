@@ -46,7 +46,7 @@ export function Hero({
         <div className="absolute -right-24 -bottom-32 size-[34rem] rounded-full bg-orange/25 blur-[120px]" />
       </div>
 
-      <div className="shell relative py-20 md:py-28 lg:py-36">
+      <div className="shell relative py-16 md:py-20 lg:py-36">
         <div className="max-w-3xl">
           <motion.h1 {...step(0)} className="display text-[clamp(2.25rem,5.6vw,4rem)]">
             {headline[0]}
