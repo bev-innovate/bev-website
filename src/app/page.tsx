@@ -2,13 +2,12 @@ import { Hero } from "@/components/site/hero";
 import { ProgrammeCard } from "@/components/site/programme-card";
 import { Delivery } from "@/components/site/delivery";
 import { PartnerMarquee } from "@/components/site/partner-marquee";
-import { PillarsAccordion } from "@/components/site/pillars-accordion";
 import { TrackRecord } from "@/components/site/track-record";
 import { Verticals } from "@/components/site/verticals";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { getProgrammes, getSiteSettings } from "@/lib/content";
-import { delivery, pillars, trustedBy, verticals, whoWeAre } from "@/lib/seed-content";
+import { delivery, trustedBy, verticals, whoWeAre } from "@/lib/seed-content";
 import { ArrowRight } from "lucide-react";
 
 export default async function HomePage() {
@@ -26,6 +25,20 @@ export default async function HomePage() {
         secondary={{ label: "Connect With Us", href: "/contact" }}
         image="/images/hero-miscellaneous-climaccelerator-2025-cohort-photo.webp"
       />
+
+      {/*
+        Logo cloud from Tailark's `logo-cloud/two` block (MIT, github.com/tailark/blocks):
+        the lead-in sits inline with the marks rather than above them as a section heading.
+        Directly under the fold, so the proof arrives before the pitch does.
+      */}
+      <section className="border-b border-border bg-background py-10">
+        <div className="shell">
+          <p className="text-muted-foreground">Trusted by teams at</p>
+        </div>
+        <div className="mt-6">
+          <PartnerMarquee partners={trustedBy} />
+        </div>
+      </section>
 
       {/*
         Who we are. Two-column split from Tailark's `content/two` block (MIT,
@@ -64,18 +77,9 @@ export default async function HomePage() {
       <Delivery
         eyebrow={delivery.eyebrow}
         heading={delivery.heading}
-        intro={delivery.intro}
+        statement={delivery.statement}
         pillars={delivery.pillars}
       />
-
-      <section className="bg-purple py-20 text-white md:py-24">
-        <div className="shell">
-          <h2 className="font-display text-3xl font-semibold lg:text-4xl">What we run</h2>
-          <div className="mt-10">
-            <PillarsAccordion items={pillars} />
-          </div>
-        </div>
-      </section>
 
       <TrackRecord
         stats={settings.stats}
@@ -112,19 +116,6 @@ export default async function HomePage() {
           </div>
         </section>
       ) : null}
-
-      {/*
-        Logo cloud from Tailark's `logo-cloud/two` block (MIT, github.com/tailark/blocks):
-        the lead-in sits inline with the marks rather than above them as a section heading.
-      */}
-      <section className="border-y border-border bg-background py-10">
-        <div className="shell">
-          <p className="text-muted-foreground">Trusted by teams at</p>
-        </div>
-        <div className="mt-6">
-          <PartnerMarquee partners={trustedBy} />
-        </div>
-      </section>
 
       <Verticals items={verticals} />
     </>

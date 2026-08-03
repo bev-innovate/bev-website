@@ -75,11 +75,16 @@ export const whoWeAre = {
 export const delivery = {
   eyebrow: "How we work",
   heading: "How we deliver climate innovation engagements",
+  statement:
+    "Climate technology does not fail in the lab. It fails at the four points where a venture meets a market.",
   intro:
     "Through extensive research, we have mapped out the four critical failure points for scaling climatetech ventures.",
   pillars: [
     {
       title: "Curated Innovation Programmes",
+      /** Short label for the tab strip, where the full title will not fit. */
+      tab: "Programmes",
+      image: `${IMG}/hero-miscellaneous-iuk-enterprise-singapore-group.webp`,
       points: [
         "Define challenge areas aligned with sector priorities",
         "Engage relevant industry and institutional stakeholders",
@@ -91,6 +96,8 @@ export const delivery = {
     },
     {
       title: "Strategic Showcases & Convenings",
+      tab: "Showcases",
+      image: `${IMG}/hero-miscellaneous-a7400018-medium-edited.webp`,
       points: [
         "Curate investor- and industry-facing demo platforms",
         "Elevate ecosystem visibility within priority sectors",
@@ -100,6 +107,8 @@ export const delivery = {
     },
     {
       title: "Applied Thought Leadership & Sector Dialogues",
+      tab: "Dialogues",
+      image: `${IMG}/hero-miscellaneous-iuk-cleantech.webp`,
       points: [
         "Surface structural challenges in climate sectors",
         "Facilitate informed cross-sector conversations",
@@ -109,6 +118,8 @@ export const delivery = {
     },
     {
       title: "Immersive & Experiential Learning",
+      tab: "Immersions",
+      image: `${IMG}/climate-expedition-seadling-jan-2026-img-3171.webp`,
       points: [
         "Expose stakeholders to real operating environments",
         "Enable meaningful interaction across the value chain",

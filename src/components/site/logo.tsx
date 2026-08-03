@@ -1,35 +1,47 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
 /**
- * Wordmark with a small "earth arc" glyph. Placeholder for the real brand asset —
- * drop the official SVG in here and the rest of the site inherits it.
+ * The official horizontal lockup.
+ *
+ * Rendered at intrinsic size rather than `fill`, so it never needs a sized wrapper and
+ * cannot be stretched. The asset is the supplied lockup with its transparent margin
+ * trimmed off, so the optical height matches what the height class asks for; at 447x88 it
+ * still clears 2x at the sizes used here.
  */
 export function Logo({ className }: { className?: string }) {
   return (
     <Link
       href="/"
-      className={cn("group inline-flex items-center gap-2.5", className)}
+      className={cn("inline-flex shrink-0 items-center", className)}
       aria-label="Better Earth Ventures: home"
     >
-      <svg viewBox="0 0 32 32" className="size-7 shrink-0" aria-hidden>
-        <circle cx="16" cy="16" r="14" className="fill-purple" />
-        <path
-          d="M4 19.5c5-3.5 9-4 12-1.5s6 2 12-1"
-          className="stroke-yellow"
-          strokeWidth="2.2"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <circle cx="16" cy="10" r="2.6" className="fill-yellow" />
-      </svg>
-      <span className="font-display text-[1.0625rem] leading-none font-semibold tracking-tight text-ink">
-        Better Earth
-        <span className="block text-[0.6875rem] font-sans font-medium tracking-[0.18em] text-ink-faint uppercase">
-          Ventures
-        </span>
-      </span>
+      <Image
+        src="/images/logos-bev-lockup.webp"
+        alt="Better Earth Ventures"
+        width={447}
+        height={88}
+        priority
+        className="h-8 w-auto md:h-9"
+      />
     </Link>
+  );
+}
+
+/**
+ * The mark on its own, for surfaces where the lockup is too wide or where the wordmark
+ * would collide with adjacent type.
+ */
+export function LogoMark({ className }: { className?: string }) {
+  return (
+    <Image
+      src="/images/logos-logo-mark.webp"
+      alt=""
+      width={480}
+      height={480}
+      className={cn("size-8", className)}
+    />
   );
 }

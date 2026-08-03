@@ -5,9 +5,11 @@ import Image from "next/image";
 import { CtaBand } from "@/components/site/cta-band";
 import { PageHeader } from "@/components/site/page-header";
 import { PartnerMarquee } from "@/components/site/partner-marquee";
+import { PillarsAccordion } from "@/components/site/pillars-accordion";
 import { Section, SectionHeading } from "@/components/site/section";
 import { Reveal } from "@/components/ui/reveal";
 import { getPartners, getPeople, getSiteSettings } from "@/lib/content";
+import { pillars } from "@/lib/seed-content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -87,6 +89,19 @@ export default async function AboutPage() {
           </Reveal>
         </div>
       </Section>
+
+      {/*
+        The three business lines. They used to sit on the home page under "What we run",
+        which the delivery section now occupies; they belong here, next to the history.
+      */}
+      <section className="bg-purple py-20 text-white md:py-24">
+        <div className="shell">
+          <h2 className="font-display text-3xl font-semibold lg:text-4xl">What we run</h2>
+          <div className="mt-10">
+            <PillarsAccordion items={pillars} />
+          </div>
+        </div>
+      </section>
 
       {team.length ? (
         <Section tone="sunk">
