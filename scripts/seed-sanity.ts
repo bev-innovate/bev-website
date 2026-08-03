@@ -8,7 +8,7 @@
  * pipeline, which is what finally cuts the dependency on the old site.
  */
 
-import { createClient } from "@sanity/client";
+import { createClient } from "next-sanity";
 
 import {
   companies,
@@ -141,7 +141,10 @@ async function run() {
       title: programme.title,
       slug: { _type: "slug", current: programme.slug },
       kicker: programme.kicker,
+      stage: programme.stage,
+      accent: programme.accent,
       summary: programme.summary,
+      body: programme.body,
       status: programme.status,
       applyUrl: programme.applyUrl,
       applicationDeadline: programme.applicationDeadline,
@@ -204,7 +207,7 @@ async function run() {
     console.log(`  ${post.slug}`);
   }
 
-  console.log("\nDone. Open /studio to review and fill in the article bodies.");
+  console.log("\nDone. Run `npm run dev` in studio-bev-site to review.");
 }
 
 run().catch((error) => {

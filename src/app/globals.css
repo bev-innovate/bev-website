@@ -12,16 +12,17 @@
 :root {
   color-scheme: light;
 
-  --bev-canvas: #ffffff;
+  /* Warm paper base — the cream from the reference, not a cool white. */
+  --bev-canvas: #f6f2ea;
   --bev-canvas-raised: #ffffff;
-  --bev-canvas-sunk: #f6f4f8;
+  --bev-canvas-sunk: #ece5d9;
 
-  --bev-ink: #333333;
-  --bev-ink-muted: #5c5c63;
-  --bev-ink-faint: #8b8b94;
+  --bev-ink: #2f2b33;
+  --bev-ink-muted: #5b545f;
+  --bev-ink-faint: #8a828e;
 
-  --bev-line: #e6e2ea;
-  --bev-line-strong: #cfc8d6;
+  --bev-line: #e3dccf;
+  --bev-line-strong: #cdc3b1;
 }
 
 @theme inline {
@@ -52,7 +53,7 @@
     tracking rather than a second font.
   */
   --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
 }
@@ -83,6 +84,13 @@
   ::selection {
     background-color: #ffbf00;
     color: #540178;
+  }
+
+  /* Headings default to the serif; body copy stays in Open Sans. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
   }
 
   :focus-visible {
@@ -121,15 +129,15 @@
     }
   }
 
-  /* Display headings: tight, confident, slightly condensed tracking. */
   /*
-    Open Sans is humanist and runs wider than a geometric sans, so display type needs
-    more weight and tighter tracking to hold the same presence at the same size.
+    Display is Fraunces, a variable serif. It carries weight optically, so it needs less
+    of it than Open Sans did — 600 reads heavier here than 800 did in the sans.
   */
   .display {
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.05;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.03;
     text-wrap: balance;
   }
 

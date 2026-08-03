@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Fraunces, Open_Sans } from "next/font/google";
 
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
@@ -9,11 +9,17 @@ import { siteSettings as fallbackSettings } from "@/lib/seed-content";
 
 import "./globals.css";
 
-/** Open Sans — variable weight, so headings can reach 800 without a second file. */
+/** Open Sans carries body copy; Fraunces carries display. */
 const openSans = Open_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-open-sans",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -43,7 +49,7 @@ export default async function RootLayout({
   const settings = await getSiteSettings();
 
   return (
-    <html lang="en-SG" className={openSans.variable}>
+    <html lang="en-SG" className={`${openSans.variable} ${fraunces.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

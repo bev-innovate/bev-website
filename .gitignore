@@ -46,3 +46,8 @@ yarn-error.log*
 next-env.d.ts
 
 wix-export/
+
+# sanity studio
+studio-bev-site/node_modules/
+studio-bev-site/dist/
+studio-bev-site/.sanity/

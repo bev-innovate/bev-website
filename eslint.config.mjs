@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The Studio is a separate package with its own eslint config.
+    "studio-bev-site/**",
   ]),
 ]);
 

@@ -13,5 +13,8 @@ export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION ?? "2025-01
 
 export const isSanityConfigured = projectId.length > 0;
 
-/** Studio lives at /studio so editors never need a second deployment. */
-export const studioBasePath = "/studio";
+/**
+ * The Studio is a standalone package in `studio-bev-site/`, deployed separately to
+ * Sanity hosting. It is deliberately not mounted inside this app.
+ */
+export const studioUrl = process.env.NEXT_PUBLIC_SANITY_STUDIO_URL ?? "";

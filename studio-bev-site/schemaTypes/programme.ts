@@ -17,7 +17,43 @@ export const programme = defineType({
       type: "string",
       description: 'Short label above the title, e.g. "6-month accelerator".',
     }),
+    defineField({
+      name: "stage",
+      title: "Journey stage",
+      type: "string",
+      description: "Which band the programme appears under on the programmes page.",
+      options: {
+        list: [
+          { title: "Early stage", value: "early" },
+          { title: "Growth stage", value: "growth" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "early",
+    }),
+    defineField({
+      name: "accent",
+      title: "Accent colour",
+      type: "string",
+      options: {
+        list: [
+          { title: "Purple", value: "purple" },
+          { title: "Orange", value: "orange" },
+          { title: "Teal", value: "teal" },
+          { title: "Yellow", value: "yellow" },
+          { title: "Sky", value: "sky" },
+        ],
+      },
+      initialValue: "purple",
+    }),
     defineField({ name: "summary", type: "text", rows: 3, validation: (r) => r.required() }),
+    defineField({
+      name: "body",
+      title: "Description paragraphs",
+      description: "Long-form copy shown beneath the summary on the programmes page.",
+      type: "array",
+      of: [{ type: "text", rows: 4 }],
+    }),
     defineField({ name: "heroImage", type: "image", options: { hotspot: true } }),
     defineField({
       name: "status",
@@ -109,7 +145,7 @@ export const programme = defineType({
       type: "array",
       of: [{ type: "reference", to: [{ type: "company" }] }],
     }),
-    defineField({ name: "body", title: "Full description", type: "blockContent" }),
+    defineField({ name: "richBody", title: "Full description (rich text)", type: "blockContent" }),
     defineField({
       name: "order",
       type: "number",

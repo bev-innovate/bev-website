@@ -43,32 +43,39 @@ function CountUp({ value, play }: { value: string; play: boolean }) {
   );
 }
 
-/** "Our track record" — the teal stat band. */
+/**
+ * "Our track record".
+ *
+ * A hairline-divided strip on the warm canvas rather than a saturated colour band — the
+ * figures carry the section, so the surface stays quiet. Serif numerals, sans labels.
+ */
 export function TrackRecord({ stats }: { stats: Stat[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-teal py-16 text-white md:py-20">
+    <section className="py-16 md:py-20">
       <div className="shell" ref={ref}>
-        <h2 className="eyebrow text-white/90">Our track record</h2>
+        <h2 className="eyebrow text-purple">Our track record</h2>
 
-        <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+        <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3 lg:grid-cols-5">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : undefined}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-canvas-raised px-6 py-7"
             >
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <p className="text-[clamp(2.25rem,5vw,3.25rem)] leading-none font-bold tracking-tight tabular-nums">
+                <p className="display text-[clamp(1.9rem,3.4vw,2.75rem)] text-purple tabular-nums">
                   <CountUp value={stat.value} play={inView} />
                 </p>
-                <p className="mt-3 text-sm leading-snug font-semibold text-white/90">
-                  {stat.label}
-                </p>
+                <p className="mt-3 text-sm leading-snug font-medium text-ink">{stat.label}</p>
+                {stat.detail ? (
+                  <p className="mt-1.5 text-xs leading-relaxed text-ink-faint">{stat.detail}</p>
+                ) : null}
               </dd>
             </motion.div>
           ))}

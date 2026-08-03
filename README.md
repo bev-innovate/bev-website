@@ -13,7 +13,7 @@ change, not a content change. Alternative copy and structural suggestions are pa
 | ---------- | ----------------------------------- | --- |
 | Framework  | Next.js 16 (App Router), React 19   | Static-first rendering, image optimisation, server actions for forms |
 | Styling    | Tailwind CSS v4                     | Design tokens live in `src/app/globals.css`; components never reference raw colours |
-| Content    | Sanity (Studio embedded at `/studio`) | Editors get a live preview-capable CMS deployed with the site — no second hosting bill |
+| Content    | Sanity — **standalone** Studio in `studio-bev-site/` | Project `utlh4le8`, dataset `production`. Deployed to Sanity hosting, not mounted in the app |
 | Submissions| Supabase (Postgres)                 | See [Why Supabase and not Railway](#why-supabase-and-not-railway) |
 | Hosting    | Vercel                              | Zero-config for Next.js; preview deploy per branch |
 | Components | [21st.dev](https://21st.dev) + hand-built | See [Components](#components) |
@@ -37,18 +37,45 @@ npm run lint         # eslint
 npm run seed         # push seed content into Sanity (needs a write token)
 ```
 
-## Wiring up the CMS
+## The CMS
 
-1. `npx sanity@latest init` from the project root — creates the project and dataset.
-2. Copy `.env.example` to `.env.local` and fill in `NEXT_PUBLIC_SANITY_PROJECT_ID`,
-   `NEXT_PUBLIC_SANITY_DATASET` and a `SANITY_API_WRITE_TOKEN`.
-3. `npm run seed` — imports programmes, posts, partners, companies, people and site
-   settings, **and uploads the images from Wix into Sanity's asset pipeline**. It is
-   idempotent (deterministic document ids), so it is safe to re-run.
-4. Visit `/studio`, review the imported documents, and paste in the article bodies.
+The Studio is a **separate package** at `studio-bev-site/` — its own `package.json`, its own
+dependencies, its own deploy. It is deliberately not mounted inside the Next app.
 
-Add `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` to the Vercel project.
-**Do not add the write token** — it is only needed locally for the seed script.
+```bash
+cd studio-bev-site
+npm run dev        # Studio at localhost:3333
+npx sanity deploy  # publish to Sanity hosting
+```
+
+Project `utlh4le8`, dataset `production`. Schema is already deployed
+(`npx sanity schemas deploy`) and the dataset is seeded with 53 documents: 4 programmes,
+11 posts, 11 partners, 9 companies, 4 people and site settings.
+
+### ⚠️ Images are missing from the dataset
+
+`npm run seed` ran from an environment that cannot reach `static.wixstatic.com`, so every
+image upload returned 403. The documents are all there; the pictures are not.
+
+**Re-run the seed from your machine** to fix it — Wix is reachable from there:
+
+```bash
+npm run seed       # needs .env.local, see below
+```
+
+It is idempotent, so re-running only fills in what's missing.
+
+### Environment
+
+`.env.local` (gitignored) needs:
+
+```
+NEXT_PUBLIC_SANITY_PROJECT_ID=utlh4le8
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_WRITE_TOKEN=...   # editor token, local only — do NOT add to Vercel
+```
+
+Vercel needs only the two `NEXT_PUBLIC_` values.
 
 ### Content model
 
