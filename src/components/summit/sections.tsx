@@ -237,9 +237,19 @@ export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
 
 /* ── Speakers ───────────────────────────────────────────────────────────────── */
 
+/**
+ * Speakers.
+ *
+ * Structure adapted from Tailark's `team/two` block (MIT, github.com/tailark/blocks):
+ * a dense grid of compact avatar-and-name rows rather than large portrait cards. That
+ * reads as a roster being filled in, which is what it is, instead of eight empty frames.
+ */
 export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
   return (
-    <section className="relative overflow-hidden bg-bark py-20 text-canvas md:py-28">
+    <section
+      data-theme="fieldnotes"
+      className="relative overflow-hidden bg-bark py-20 text-canvas md:py-28"
+    >
       <div aria-hidden className="contours absolute inset-0 text-clay opacity-25" />
       <div className="shell relative">
         <SectionHead
@@ -249,37 +259,34 @@ export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
           onDark
         />
 
-        <ul className="mt-14 grid grid-cols-2 gap-5 md:grid-cols-4">
+        <ul className="mt-14 grid gap-x-6 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
           {speakers.items.map((speaker, i) => (
-            <Reveal as="li" key={speaker.ref} delay={Math.min(i, 7) * 0.04}>
-              <article className="group">
-                {/* Specimen plate: portrait slot with the reference printed on it. */}
-                <div className="relative aspect-4/5 overflow-hidden rounded-md border border-canvas/20 bg-canvas/8">
+            <Reveal as="li" key={speaker.ref} delay={Math.min(i, 7) * 0.03}>
+              <article className="group grid grid-cols-[auto_1fr] items-center gap-3.5 border-b border-canvas/12 pb-5">
+                <div className="relative size-11 shrink-0 overflow-hidden rounded-full border border-canvas/20 bg-canvas/8">
                   {speaker.image ? (
                     <Image
                       src={speaker.image}
                       alt={speaker.name}
                       fill
-                      sizes="(min-width: 768px) 22vw, 45vw"
+                      sizes="44px"
                       className="object-cover"
                     />
                   ) : (
-                    <div className="grid h-full place-items-center">
-                      <span className="label-mono text-canvas/35">{speaker.ref}</span>
-                    </div>
+                    <span className="label-mono absolute inset-0 grid place-items-center text-[0.5625rem] text-canvas/40">
+                      {speaker.ref.replace("SPK-", "")}
+                    </span>
                   )}
-                  <span className="label-mono absolute top-2 left-2 text-canvas/60">
-                    {speaker.ref}
-                  </span>
                 </div>
 
-                <div className="mt-3">
+                <div className="min-w-0">
                   <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-canvas">
                     {speaker.name}
                     {speaker.tbc ? <Tbc className="text-clay" /> : null}
                   </p>
-                  <p className="mt-1 text-xs leading-snug text-canvas/60">{speaker.role}</p>
-                  <p className="label-mono mt-1.5 text-canvas/45">{speaker.org}</p>
+                  <p className="mt-0.5 truncate text-xs text-canvas/60">
+                    {speaker.role} · {speaker.org}
+                  </p>
                 </div>
               </article>
             </Reveal>

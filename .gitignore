@@ -60,5 +60,6 @@ studio-bev-site/.sanity/
 screenshots of old site/
 
 # Source photography — converted into public/images/ by `npm run images`.
-# Keep originals out of git; the optimised WebP output is what ships.
-images/
+# Keep originals out of git; the optimised WebP output IS committed.
+# Leading slash matters: an unanchored `images/` also matches public/images/.
+/images/

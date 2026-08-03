@@ -25,7 +25,76 @@
   --bev-line-strong: #cdc3b1;
 }
 
+/*
+  shadcn/Tailark token bridge.
+
+  Tailark blocks (and anything else from a shadcn registry) are written against
+  `foreground`, `muted-foreground`, `background`, `border`, `--radius` and friends.
+  Mapping those onto the brand tokens means registry components drop in with no
+  rewriting, while the brand stays defined in exactly one place above.
+*/
+:root {
+  --radius: 0.75rem;
+
+  --background: var(--bev-canvas);
+  --foreground: var(--bev-ink);
+  --card: var(--bev-canvas-raised);
+  --card-foreground: var(--bev-ink);
+  --popover: var(--bev-canvas-raised);
+  --popover-foreground: var(--bev-ink);
+  --primary: #540178;
+  --primary-foreground: #ffffff;
+  --secondary: var(--bev-canvas-sunk);
+  --secondary-foreground: var(--bev-ink);
+  --muted: var(--bev-canvas-sunk);
+  --muted-foreground: var(--bev-ink-muted);
+  --accent: #b4552f;
+  --accent-foreground: #ffffff;
+  --destructive: #b4552f;
+  --border: var(--bev-line);
+  --input: var(--bev-line-strong);
+  --ring: #b4552f;
+}
+
+/* The Summit runs the field-notes earth palette; registry blocks follow it here. */
+[data-theme="fieldnotes"] {
+  --background: #2f2a22;
+  --foreground: #f6f2ea;
+  --card: color-mix(in srgb, #f6f2ea 8%, transparent);
+  --card-foreground: #f6f2ea;
+  --muted: color-mix(in srgb, #f6f2ea 10%, transparent);
+  --muted-foreground: color-mix(in srgb, #f6f2ea 60%, transparent);
+  --primary: #b4552f;
+  --primary-foreground: #f6f2ea;
+  --accent: #d9a689;
+  --border: color-mix(in srgb, #f6f2ea 20%, transparent);
+}
+
 @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
   --color-canvas: var(--bev-canvas);
   --color-canvas-raised: var(--bev-canvas-raised);
   --color-canvas-sunk: var(--bev-canvas-sunk);
