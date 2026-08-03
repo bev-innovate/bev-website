@@ -249,6 +249,26 @@ I'll revert it to the exact brand orange.
 
 ## Deploying
 
-Push the branch, import the repo in Vercel, set the environment variables above. Nothing
-else is required — no `vercel.json`, no build overrides. Point `betterearthventures.com` at
-Vercel only after the content migration in step 4 above is done.
+Vercel builds from GitHub. Import `bev-innovate/bev-website` once at
+<https://vercel.com/new>, set the production branch, and every push deploys — branches get
+preview URLs automatically. Nothing else is needed: no `vercel.json`, no build overrides,
+and the root `package.json` is the Next app.
+
+`.vercelignore` keeps `studio-bev-site/` out of the build context — the Studio deploys to
+Sanity hosting, not Vercel.
+
+### Environment variables
+
+The build **succeeds with none of these set** — the site falls back to the seed content in
+`src/lib/seed-content.ts`, so a first deploy works before anything is configured.
+
+| Variable | Needed for | Notes |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Reading from the CMS | `utlh4le8` |
+| `NEXT_PUBLIC_SANITY_DATASET` | Reading from the CMS | `production` |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URLs, sitemap, OG tags | e.g. `https://www.betterearthventures.com` — no trailing slash |
+| `NEXT_PUBLIC_SUPABASE_URL` | Form submissions | Optional until the forms need to persist |
+| `SUPABASE_SERVICE_ROLE_KEY` | Form submissions | Secret — server-side only |
+
+**Do not add `SANITY_API_WRITE_TOKEN` to Vercel.** It is only needed locally, for
+`npm run seed`.
