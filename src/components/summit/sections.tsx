@@ -117,7 +117,7 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
     <section className="relative overflow-hidden py-20 md:py-28">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
         <div>
-          <SectionHead label={about.label} heading={about.heading} />
+          <SectionHead heading={about.heading} />
           <div className="mt-8 max-w-2xl space-y-5 text-[1.0625rem] leading-relaxed text-ink-muted">
             {about.paragraphs.map((p) => (
               <p key={p}>{p}</p>
@@ -128,8 +128,8 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
           <dl className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {about.specimens.map((item) => (
               <div key={item.ref} className="rounded-lg border border-line bg-canvas-raised px-5 py-5">
-                <dt className="label-mono text-ink-faint">{item.ref}</dt>
-                <dd className="mt-2">
+                <dt className="sr-only">{item.label}</dt>
+                <dd>
                   <span className="display flex items-center gap-2 text-2xl text-terracotta">
                     {item.value}
                     {"tbc" in item && item.tbc ? <Tbc /> : null}
@@ -173,8 +173,7 @@ export function SummitStrands({ strands }: { strands: Summit["strands"] }) {
           {strands.items.map((item, i) => (
             <Reveal as="li" key={item.ref} delay={Math.min(i, 3) * 0.06}>
               <article className="h-full rounded-xl border border-line bg-canvas-raised p-8 md:p-10">
-                <Label refCode={item.ref}>Strand</Label>
-                <h3 className="display mt-4 text-2xl text-ink">{item.title}</h3>
+                <h3 className="display text-2xl text-ink">{item.title}</h3>
                 <p className="mt-3 leading-relaxed text-ink-muted">{item.body}</p>
               </article>
             </Reveal>
@@ -191,14 +190,14 @@ export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
   return (
     <section className="py-20 md:py-28">
       <div className="shell">
-        <SectionHead label={timeline.label} heading={timeline.heading} />
+        <SectionHead heading={timeline.heading} />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-3">
           {timeline.days.map((day, i) => (
             <Reveal key={day.ref} delay={i * 0.08}>
               <article className="h-full">
                 <div className="flex items-baseline justify-between border-b-2 border-terracotta pb-3">
-                  <Label refCode={day.ref}>{day.date}</Label>
+                  <Label>{day.date}</Label>
                 </div>
                 <h3 className="display mt-4 text-2xl text-ink">{day.title}</h3>
 
@@ -244,10 +243,7 @@ export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
     >
       <div aria-hidden className="contours absolute inset-0 text-mangrove opacity-20" />
       <div className="shell relative">
-        <SectionHead
-          label={speakers.label}
-          heading={speakers.heading}
-        />
+        <SectionHead heading={speakers.heading} />
 
         <ul className="mt-14 grid gap-x-6 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
           {speakers.items.map((speaker, i) => (
@@ -293,16 +289,13 @@ export function SummitStartups({ startups }: { startups: Summit["startups"] }) {
   return (
     <section className="py-20 md:py-28">
       <div className="shell">
-        <SectionHead label={startups.label} heading={startups.heading} />
+        <SectionHead heading={startups.heading} />
 
         <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {startups.items.map((company, i) => (
             <Reveal as="li" key={company.ref} delay={Math.min(i, 5) * 0.05}>
               <article className="flex h-full flex-col rounded-xl border border-line bg-canvas-raised p-7">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="display text-xl text-ink">{company.name}</h3>
-                  <span className="label-mono shrink-0 pt-1 text-ink-faint">{company.ref}</span>
-                </div>
+                <h3 className="display text-xl text-ink">{company.name}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
                   {company.blurb}
                 </p>

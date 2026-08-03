@@ -5,7 +5,6 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
 import { subscribeAction, type FormState } from "@/app/actions";
-import { Label } from "@/components/summit/primitives";
 import { Button } from "@/components/ui/button";
 
 const initial: FormState = { status: "idle" };
@@ -27,12 +26,10 @@ function SubmitButton() {
  * possible without a new table.
  */
 export function SummitSignup({
-  label,
   heading,
   body,
   footnote,
 }: {
-  label: string;
   heading: string;
   body: string;
   footnote: string;
@@ -44,8 +41,7 @@ export function SummitSignup({
       <div aria-hidden className="contours pointer-events-none absolute inset-0 text-white opacity-20" />
       <div className="shell">
         <div className="mx-auto max-w-2xl text-center">
-          <Label className="justify-center text-white/70">{label}</Label>
-          <h2 className="display mt-5 text-[clamp(1.75rem,3.6vw,2.6rem)]">{heading}</h2>
+          <h2 className="display text-[clamp(1.75rem,3.6vw,2.6rem)]">{heading}</h2>
           <p className="mt-4 leading-relaxed text-white/80">{body}</p>
 
           {state.status === "success" ? (

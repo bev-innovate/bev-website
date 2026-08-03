@@ -12,10 +12,14 @@
 :root {
   color-scheme: light;
 
-  /* Warm paper base — the cream from the reference, not a cool white. */
-  --bev-canvas: #f6f2ea;
+  /*
+    White-led with warmth mixed in. Canvas is a barely-tinted white so the page reads
+    clean; the fuller cream is demoted to canvas-sunk, where it now marks alternating
+    bands rather than carrying every surface.
+  */
+  --bev-canvas: #fdfbf8;
   --bev-canvas-raised: #ffffff;
-  --bev-canvas-sunk: #ece5d9;
+  --bev-canvas-sunk: #f4efe5;
 
   --bev-ink: #2f2b33;
   --bev-ink-muted: #5b545f;
@@ -58,7 +62,7 @@
 
 /* The Summit runs the field-notes earth palette; registry blocks follow it here. */
 [data-theme="fieldnotes"] {
-  --background: #efe7d8;
+  --background: #faf6ef;
   --foreground: #33302a;
   --card: #ffffff;
   --card-foreground: #33302a;
@@ -131,8 +135,8 @@
   /* Mangrove turquoise carries the accent bands in place of the olive. */
   --color-mangrove: #2f8f86;
   --color-mangrove-deep: #1f6d66;
-  --color-sand: #efe7d8;
-  --color-bark: #f1e9dc;
+  --color-sand: #f7f2e9;
+  --color-bark: #faf6ef;
 
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
 }

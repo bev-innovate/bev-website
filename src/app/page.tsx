@@ -108,7 +108,7 @@ export default async function HomePage() {
         </section>
       ) : null}
 
-      <section className="py-16 md:py-20">
+      <section className="border-y border-line bg-white py-16 md:py-20">
         <div className="shell">
           <h2 className="eyebrow text-purple">Trusted by</h2>
         </div>

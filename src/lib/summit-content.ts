@@ -64,7 +64,6 @@ export const summit = {
   },
 
   about: {
-    label: "What is the summit",
     heading: "Three days built around commercial outcomes",
     paragraphs: [
       "The Climate Innovation Summit Singapore moves climate solutions from proof of concept to proof of value. Founders arrive with something built. They leave with the customers, capital and partnerships that decide whether it scales.",
@@ -109,7 +108,6 @@ export const summit = {
   },
 
   timeline: {
-    label: "Timeline",
     heading: "Three days, one arc",
     days: [
       {
@@ -148,7 +146,6 @@ export const summit = {
   },
 
   speakers: {
-    label: "Speakers",
     heading: "Who you will hear from",
     items: Array.from({ length: 8 }, (_, i) => ({
       name: "To be announced",
@@ -160,7 +157,6 @@ export const summit = {
   },
 
   startups: {
-    label: "Startups featured",
     heading: "Companies on the floor",
     items: [
       {
@@ -209,7 +205,6 @@ export const summit = {
   },
 
   signup: {
-    label: "Register",
     heading: "Be first to know when registration opens",
     body: "We release delegate places and speaker announcements to this list before anywhere else. No other mail.",
     footnote: "Registration opens 2026. Partner and sponsor enquiries welcome any time.",

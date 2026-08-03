@@ -143,7 +143,7 @@ export default async function AboutPage() {
         </Section>
       ) : null}
 
-      <section className="border-y border-line bg-canvas-raised py-14">
+      <section className="border-y border-line bg-white py-14">
         <p className="shell mb-8 text-center text-xs font-semibold tracking-[0.16em] text-ink-faint uppercase">
           Partners and collaborators
         </p>
