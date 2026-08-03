@@ -89,10 +89,7 @@ export function SummitSignup({
             </form>
           )}
 
-          <p
-            className="label-mono mt-8 normal-case text-white/60"
-            style={{ letterSpacing: "0.04em" }}
-          >
+          <p className="mt-8 text-xs text-white/65">
             {footnote}
           </p>
         </div>

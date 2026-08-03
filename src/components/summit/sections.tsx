@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-import { Label, SectionHead, Tbc } from "@/components/summit/primitives";
+import { SectionHead, Tbc } from "@/components/summit/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import type { summit } from "@/lib/summit-content";
@@ -35,7 +35,7 @@ export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string 
         <dl className="mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
           {hero.facts.map((fact) => (
             <div key={fact.label} className="rounded-lg border border-line bg-canvas-raised px-4 py-4">
-              <dt className="label-mono text-ink-faint">{fact.label}</dt>
+              <dt className="text-xs text-ink-faint">{fact.label}</dt>
               <dd className="mt-1.5 flex items-center gap-2 text-sm font-semibold text-ink">
                 {fact.value}
                 {fact.tbc ? <Tbc /> : null}
@@ -74,7 +74,7 @@ function PartnerRow({
 }) {
   return (
     <div>
-      <Label>{title}</Label>
+      <h3 className="text-sm font-semibold text-ink-muted">{title}</h3>
       <ul className="mt-6 flex flex-wrap items-center gap-x-10 gap-y-8">
         {items.map((partner) => (
           <li key={partner.name} className="flex h-14 items-center">
@@ -101,7 +101,7 @@ function PartnerRow({
 
 export function SummitPartners({ partners }: { partners: Summit["partners"] }) {
   return (
-    <section className="border-b border-line py-16 md:py-20">
+    <section className="border-y border-line bg-white py-16 md:py-20">
       <div className="shell grid gap-12 md:grid-cols-[auto_1fr] md:gap-20">
         <PartnerRow title="Organised by" items={partners.organisedBy} />
         <PartnerRow title="Supported by" items={partners.supportedBy} />
@@ -197,7 +197,7 @@ export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
             <Reveal key={day.ref} delay={i * 0.08}>
               <article className="h-full">
                 <div className="flex items-baseline justify-between border-b-2 border-terracotta pb-3">
-                  <Label>{day.date}</Label>
+                  <p className="text-sm font-semibold text-terracotta">{day.date}</p>
                 </div>
                 <h3 className="display mt-4 text-2xl text-ink">{day.title}</h3>
 
@@ -207,7 +207,7 @@ export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
                       key={block.time + block.title}
                       className="flex gap-5 border-b border-line py-4 last:border-0"
                     >
-                      <span className="label-mono w-12 shrink-0 pt-0.5 text-terracotta">
+                      <span className="w-14 shrink-0 pt-0.5 text-xs font-medium text-ink-faint tabular-nums">
                         {block.time}
                       </span>
                       <span className="flex flex-1 flex-wrap items-center gap-2 text-sm text-ink">
@@ -259,7 +259,7 @@ export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
                       className="object-cover"
                     />
                   ) : (
-                    <span className="label-mono absolute inset-0 grid place-items-center text-[0.5625rem] text-ink-faint">
+                    <span className="absolute inset-0 grid place-items-center text-[0.625rem] text-ink-faint">
                       {speaker.ref.replace("SPK-", "")}
                     </span>
                   )}
@@ -301,11 +301,11 @@ export function SummitStartups({ startups }: { startups: Summit["startups"] }) {
                 </p>
                 <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-4">
                   <div>
-                    <dt className="label-mono text-ink-faint">Sector</dt>
+                    <dt className="text-xs text-ink-faint">Sector</dt>
                     <dd className="mt-0.5 text-xs text-ink">{company.sector}</dd>
                   </div>
                   <div>
-                    <dt className="label-mono text-ink-faint">Country</dt>
+                    <dt className="text-xs text-ink-faint">Country</dt>
                     <dd className="mt-0.5 text-xs text-ink">{company.country}</dd>
                   </div>
                 </dl>

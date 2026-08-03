@@ -9,7 +9,7 @@ import type { Partner } from "@/lib/types";
  */
 export function PartnerMarquee({ partners }: { partners: Partner[] }) {
   return (
-    <Marquee duration={55}>
+    <Marquee duration={55} className="bg-white">
       {partners.map((partner) => (
         <div
           key={partner.name}

@@ -42,41 +42,23 @@ export function Tbc({ className }: { className?: string }) {
   );
 }
 
-/** Section heading with the measurement tick-rule beneath it. */
+/** Section heading. Deliberately bare: no eyebrow, no rule, no annotation. */
 export function SectionHead({
-  label,
   heading,
   intro,
-  note,
   align = "left",
   onDark = false,
 }: {
-  label?: string;
   heading: string;
   intro?: string;
-  note?: string;
   align?: "left" | "center";
   onDark?: boolean;
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      {label ? (
-        <>
-          <Label className={onDark ? "text-clay" : undefined}>{label}</Label>
-          <div
-            aria-hidden
-            className={cn(
-              "tick-rule mt-3 h-1.5 w-24",
-              align === "center" && "mx-auto",
-              onDark ? "text-clay/50" : "text-line-strong",
-            )}
-          />
-        </>
-      ) : null}
       <h2
         className={cn(
           "display text-[clamp(1.75rem,3.6vw,2.6rem)]",
-          label && "mt-5",
           onDark ? "text-canvas" : "text-ink",
         )}
       >
@@ -90,17 +72,6 @@ export function SectionHead({
           )}
         >
           {intro}
-        </p>
-      ) : null}
-      {note ? (
-        <p
-          className={cn(
-            "label-mono mt-4 normal-case",
-            onDark ? "text-canvas/55" : "text-ink-faint",
-          )}
-          style={{ letterSpacing: "0.04em" }}
-        >
-          {note}
         </p>
       ) : null}
     </div>

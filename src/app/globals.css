@@ -17,16 +17,17 @@
     clean; the fuller cream is demoted to canvas-sunk, where it now marks alternating
     bands rather than carrying every surface.
   */
-  --bev-canvas: #fdfbf8;
+  --bev-canvas: #ffffff;
   --bev-canvas-raised: #ffffff;
-  --bev-canvas-sunk: #f4efe5;
+  /* The warm tint survives only as an alternating band, and lightly. */
+  --bev-canvas-sunk: #f8f5ef;
 
   --bev-ink: #2f2b33;
   --bev-ink-muted: #5b545f;
   --bev-ink-faint: #8a828e;
 
-  --bev-line: #e3dccf;
-  --bev-line-strong: #cdc3b1;
+  --bev-line: #e9e4da;
+  --bev-line-strong: #d5cec1;
 }
 
 /*
@@ -62,16 +63,16 @@
 
 /* The Summit runs the field-notes earth palette; registry blocks follow it here. */
 [data-theme="fieldnotes"] {
-  --background: #faf6ef;
+  --background: #ffffff;
   --foreground: #33302a;
   --card: #ffffff;
   --card-foreground: #33302a;
-  --muted: #e5dbc8;
+  --muted: #f4f0e8;
   --muted-foreground: #6a6459;
   --primary: #b4552f;
   --primary-foreground: #ffffff;
   --accent: #2f8f86;
-  --border: #d8ccb6;
+  --border: #e8e2d6;
 }
 
 @theme inline {
@@ -135,8 +136,8 @@
   /* Mangrove turquoise carries the accent bands in place of the olive. */
   --color-mangrove: #2f8f86;
   --color-mangrove-deep: #1f6d66;
-  --color-sand: #f7f2e9;
-  --color-bark: #faf6ef;
+  --color-sand: #faf7f1;
+  --color-bark: #ffffff;
 
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
 }
