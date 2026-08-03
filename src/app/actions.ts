@@ -136,7 +136,7 @@ export async function enquiryAction(
   if (!result.ok) {
     return {
       status: "error",
-      message: "We couldn’t send that. Email hello@betterearthventures.com and we’ll pick it up.",
+      message: "We couldn’t send that. Email innovate@betterearthventures.com and we’ll pick it up.",
     };
   }
 

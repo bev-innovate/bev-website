@@ -12,7 +12,8 @@
     "export:wix": "tsx scripts/export-wix-media.ts",
     "import:media": "tsx scripts/import-media-to-sanity.ts",
     "images": "tsx scripts/optimise-images.ts",
-    "sync:people": "tsx scripts/sync-people.ts"
+    "sync:people": "tsx scripts/sync-people.ts",
+    "sanity:status": "tsx scripts/sanity-status.ts"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",

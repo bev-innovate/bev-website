@@ -78,7 +78,7 @@ export async function sendEnquiryEmail(enquiry: Enquiry) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return { ok: true as const, sent: false as const };
 
-  const to = (process.env.ENQUIRY_NOTIFY_TO ?? "hello@betterearthventures.com")
+  const to = (process.env.ENQUIRY_NOTIFY_TO ?? "innovate@betterearthventures.com")
     .split(",")
     .map((address) => address.trim())
     .filter(Boolean);
@@ -124,7 +124,7 @@ export async function sendSubscribeEmail(email: string, source: string) {
 
   const result = await post(RESEND_ENDPOINT, key, {
     from: process.env.ENQUIRY_NOTIFY_FROM ?? "Better Earth Ventures <onboarding@resend.dev>",
-    to: (process.env.ENQUIRY_NOTIFY_TO ?? "hello@betterearthventures.com").split(",").map((a) => a.trim()),
+    to: (process.env.ENQUIRY_NOTIFY_TO ?? "innovate@betterearthventures.com").split(",").map((a) => a.trim()),
     subject: `New subscriber: ${email}`,
     html: `<p style="font-family:ui-sans-serif,system-ui,sans-serif">${escapeHtml(email)} subscribed from <strong>${escapeHtml(source)}</strong>.</p>`,
   });

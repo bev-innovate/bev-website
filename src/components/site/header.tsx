@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,6 +15,7 @@ export function Header({ navigation }: { navigation: NavItem[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -53,10 +55,23 @@ export function Header({ navigation }: { navigation: NavItem[] }) {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                  active ? "bg-canvas-sunk text-ink" : "text-ink-muted hover:text-ink",
+                  "relative isolate rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200",
+                  active ? "text-white" : "text-ink-muted hover:text-ink",
                 )}
               >
+                {/*
+                  One pill, shared across every nav item by `layoutId`: on a route change
+                  framer-motion tweens it from the old item to the new one rather than
+                  cross-fading two separate pills.
+                */}
+                {active ? (
+                  <motion.span
+                    aria-hidden
+                    layoutId={reduceMotion ? undefined : "nav-active-pill"}
+                    className="absolute inset-0 -z-10 rounded-full bg-purple"
+                    transition={{ type: "spring", stiffness: 400, damping: 34, mass: 0.7 }}
+                  />
+                ) : null}
                 {item.label}
               </Link>
             );
@@ -83,16 +98,23 @@ export function Header({ navigation }: { navigation: NavItem[] }) {
       {open ? (
         <div id="mobile-nav" className="border-t border-line bg-canvas md:hidden">
           <nav aria-label="Mobile" className="shell flex flex-col py-4">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="border-b border-line py-4 font-display text-2xl text-ink last:border-0"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "border-b border-line py-4 font-display text-2xl last:border-0",
+                    active ? "text-purple" : "text-ink",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <ButtonLink href="/contact" onClick={() => setOpen(false)} className="mt-5 w-full">
               Work with us
             </ButtonLink>

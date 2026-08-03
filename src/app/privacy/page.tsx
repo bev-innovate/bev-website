@@ -31,7 +31,7 @@ const sections = [
   },
   {
     title: "Your choices",
-    body: "Every newsletter includes an unsubscribe link. To request access to, correction of, or deletion of your data, email hello@betterearthventures.com.",
+    body: "Every newsletter includes an unsubscribe link. To request access to, correction of, or deletion of your data, email innovate@betterearthventures.com.",
   },
 ];
 

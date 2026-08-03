@@ -40,7 +40,7 @@ export const siteSettings: SiteSettings = {
     { value: "15", label: "Markets for cross-border collaborations" },
   ],
   contact: {
-    email: "hello@betterearthventures.com",
+    email: "innovate@betterearthventures.com",
     location: "Singapore",
   },
   social: [
@@ -208,7 +208,7 @@ export const trustedBy: Partner[] = [
 export const verticals = [
   {
     title: "Agriculture and Food",
-    image: `${IMG}/climate-expedition-a-little-wild.webp`,
+    image: `${IMG}/climate-expedition-6.webp`,
     items: [
       "Precision ag",
       "Biological inputs",
