@@ -6,12 +6,16 @@ import { TrackRecord } from "@/components/site/track-record";
 import { Verticals } from "@/components/site/verticals";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
-import { getProgrammes, getSiteSettings } from "@/lib/content";
-import { delivery, trustedBy, verticals, whoWeAre } from "@/lib/seed-content";
+import { getPartners, getProgrammes, getSiteSettings } from "@/lib/content";
+import { delivery, verticals, whoWeAre } from "@/lib/seed-content";
 import { ArrowRight } from "lucide-react";
 
 export default async function HomePage() {
-  const [settings, programmes] = await Promise.all([getSiteSettings(), getProgrammes()]);
+  const [settings, programmes, partners] = await Promise.all([
+    getSiteSettings(),
+    getProgrammes(),
+    getPartners(),
+  ]);
 
   // Lead with whatever is open, falling back to the first programme.
   const preview = programmes.slice(0, 3);
@@ -36,7 +40,7 @@ export default async function HomePage() {
           <p className="text-muted-foreground">Trusted by teams at</p>
         </div>
         <div className="mt-6">
-          <PartnerMarquee partners={trustedBy} />
+          <PartnerMarquee partners={partners} />
         </div>
       </section>
 

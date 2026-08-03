@@ -182,22 +182,6 @@ export const pillars = [
 ];
 
 /** Home: the full logo wall. Every logo file in public/images is represented. */
-export const trustedBy: Partner[] = [
-  { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme" },
-  { name: "EIT Climate-KIC", logo: `${IMG}/logos-climatekic-logo.webp`, tier: "programme" },
-  { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "ecosystem" },
-  { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "ecosystem" },
-  { name: "Sustainable Living Lab", logo: `${IMG}/logos-sl2-logo.webp`, tier: "ecosystem" },
-  { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem" },
-  { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem" },
-  { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "ecosystem" },
-  { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "ecosystem" },
-  { name: "Tenity", logo: `${IMG}/logos-tenity-logo.webp`, tier: "ecosystem" },
-  { name: "JETRO", logo: `${IMG}/logos-jetro-logo.webp`, tier: "ecosystem" },
-  { name: "Deep Tech Canada", logo: `${IMG}/logos-deep-tech-canada-logo.webp`, tier: "ecosystem" },
-  { name: "Rebbeck Consulting", logo: `${IMG}/logos-rebbeck-consulting-logo.webp`, tier: "ecosystem" },
-  { name: "HEX", logo: `${IMG}/logos-hex-logo.webp`, tier: "ecosystem" },
-];
 
 /**
  * Home — "Our sectors of focus".
@@ -266,18 +250,32 @@ export const programmesIntro = {
     "Below are our current programmes, each designed to address a specific stage of the journey and drive tangible outcomes for founders, partners, and the planet.",
 };
 
+/**
+ * The one partner list. Both logo marquees read it, via Sanity.
+ *
+ * `order` sets the marquee sequence: logo-bearing partners first, so the strip opens on
+ * real marks rather than on the two that are still typographic lockups.
+ *
+ * ClimAccelerator and ClimateLaunchpad have no logo file in the repo yet. They render as
+ * a wordmark until one lands in public/images.
+ */
 export const partners: Partner[] = [
-  { name: "EIT Climate-KIC", logo: `${IMG}/logos-climatekic-logo.webp`, tier: "programme", url: "https://www.climate-kic.org" },
-  { name: "ClimAccelerator", tier: "programme", url: "https://climaccelerator.climate-kic.org" },
-  { name: "ClimateLaunchpad", tier: "programme", url: "https://climatelaunchpad.org" },
-  { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/" },
-  { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "ecosystem", url: "https://agfunder.com" },
-  { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "ecosystem" },
-  { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "ecosystem" },
-  { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "ecosystem" },
-  { name: "Sustainable Living Lab", logo: `${IMG}/logos-sl2-logo.webp`, tier: "ecosystem" },
-  { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem" },
-  { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem" },
+  { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme", url: "https://www.ukri.org/councils/innovate-uk/", order: 1 },
+  { name: "EIT Climate-KIC", logo: `${IMG}/logos-climatekic-logo.webp`, tier: "programme", url: "https://www.climate-kic.org", order: 2 },
+  { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "ecosystem", url: "https://agfunder.com", order: 3 },
+  { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "ecosystem", order: 4 },
+  { name: "Sustainable Living Lab", logo: `${IMG}/logos-sl2-logo.webp`, tier: "ecosystem", order: 5 },
+  { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem", order: 6 },
+  { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem", order: 7 },
+  { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "ecosystem", order: 8 },
+  { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "ecosystem", order: 9 },
+  { name: "Tenity", logo: `${IMG}/logos-tenity-logo.webp`, tier: "ecosystem", order: 10 },
+  { name: "JETRO", logo: `${IMG}/logos-jetro-logo.webp`, tier: "ecosystem", order: 11 },
+  { name: "Deep Tech Canada", logo: `${IMG}/logos-deep-tech-canada-logo.webp`, tier: "ecosystem", order: 12 },
+  { name: "Rebbeck Consulting", logo: `${IMG}/logos-rebbeck-consulting-logo.webp`, tier: "ecosystem", order: 13 },
+  { name: "HEX", logo: `${IMG}/logos-hex-logo.webp`, tier: "ecosystem", order: 14 },
+  { name: "ClimateLaunchpad", tier: "programme", url: "https://climatelaunchpad.org", order: 15 },
+  { name: "ClimAccelerator", tier: "programme", url: "https://climaccelerator.climate-kic.org", order: 16 },
 ];
 
 export const companies: Company[] = [

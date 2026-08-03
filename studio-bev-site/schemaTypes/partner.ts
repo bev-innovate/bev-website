@@ -7,7 +7,14 @@ export const partner = defineType({
   fields: [
     defineField({ name: "name", type: "string", validation: (r) => r.required() }),
     defineField({ name: "logo", type: "image" }),
-    defineField({ name: "url", type: "url" }),
+    defineField({
+      name: "logoUrl",
+      title: "Logo URL",
+      type: "string",
+      description:
+        "Fallback used only when no logo image is uploaded above, e.g. /images/logos-agfunder-logo.webp. Uploading an image always wins.",
+    }),
+    defineField({ name: "url", title: "Website", type: "url" }),
     defineField({
       name: "tier",
       type: "string",

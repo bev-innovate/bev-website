@@ -34,6 +34,8 @@ export interface Partner {
   url?: string;
   logo?: string | null;
   tier?: "programme" | "ecosystem" | "supporter";
+  /** Marquee sequence. Lower first. */
+  order?: number;
 }
 
 export interface Company {

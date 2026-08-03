@@ -28,7 +28,7 @@ const programmeFields = `
   timeline,
   faq,
   "heroImage": coalesce(heroImage.asset->url, heroImageUrl),
-  "partners": partners[]->{ name, url, tier, ${imageUrl} },
+  "partners": partners[]->{ name, url, tier, "logo": coalesce(logo.asset->url, logoUrl) },
   "cohort": cohort[]->{ name, "slug": slug.current, country, vertical, blurb, url, womenCofounded, cohortYear, ${imageUrl} }
 `;
 
@@ -68,8 +68,19 @@ export const peopleQuery = groq`
   }
 `;
 
+/*
+  `logo`, not `${imageUrl}`. The shared helper projects `"url": asset->url`, which here
+  collided with the partner's own `url` field and resolved to null on both counts: there is
+  no `asset` at the document root, the image lives at `logo.asset`. That is why partner
+  logos never rendered and every marquee item fell back to a typographic lockup.
+*/
+const partnerFields = `
+  name, url, tier,
+  "logo": coalesce(logo.asset->url, logoUrl)
+`;
+
 export const partnersQuery = groq`
-  *[_type == "partner"] | order(order asc, name asc){ name, url, tier, ${imageUrl} }
+  *[_type == "partner"] | order(order asc, name asc){ ${partnerFields} }
 `;
 
 export const eventsQuery = groq`
