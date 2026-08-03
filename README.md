@@ -42,31 +42,48 @@ npm run seed         # push seed content into Sanity (needs a write token)
 The Studio is a **separate package** at `studio-bev-site/` — its own `package.json`, its own
 dependencies, its own deploy. It is deliberately not mounted inside the Next app.
 
+**Hosted Studio: <https://bev-site.sanity.studio>** — editors need nothing installed.
+
 ```bash
 cd studio-bev-site
-npm run dev        # Studio at localhost:3333
-npx sanity deploy  # publish to Sanity hosting
+npm run dev        # Studio at localhost:3333, for schema work
+npx sanity deploy  # republish after schema changes
 ```
+
+Auto-updates are deliberately off (`deployment.autoUpdates: false` in `sanity.cli.ts`):
+the build fetches the Studio bundle from `sanity-cdn.com`, which the build environment
+cannot reach. The Studio is pinned to the versions in `package.json`, so upgrades need
+`npm update` plus a redeploy rather than arriving on their own.
 
 Project `utlh4le8`, dataset `production`. Schema is already deployed
 (`npx sanity schemas deploy`) and the dataset is seeded with 53 documents: 4 programmes,
 11 posts, 11 partners, 9 companies, 4 people and site settings.
 
-### ⚠️ Images are missing from the dataset
+### ⚠️ Images are still served by Wix
 
-`npm run seed` ran from an environment that cannot reach `static.wixstatic.com`, so every
-image upload returned 403. The documents are all there; the pictures are not.
+Sanity holds all the text but none of the binaries. Every upload attempt returned 403,
+because the environment the seed runs in cannot reach `static.wixstatic.com`.
 
-**Re-run the seed from your machine** to fix it — Wix is reachable from there:
+The site is not broken by this: `post.coverImageUrl` and `programme.heroImageUrl` hold the
+original Wix URLs, and the GROQ queries coalesce Sanity asset → URL, so pictures render
+from Wix. Visitors see a complete site.
+
+**The consequence: the Wix subscription cannot be cancelled yet.** If Wix media goes away,
+the images go with it.
+
+To cut the dependency, run either of these from a machine that can reach Wix:
 
 ```bash
-cp .env.example .env.local     # then paste in your editor token
-npm run seed
+npm run seed        # re-uploads the images referenced by the site
+npm run export:wix  # exports the whole Media Manager, then npm run import:media
 ```
 
-The scripts load `.env.local` themselves via dotenv — `tsx` does not do it for you, so
-without that file you get `Missing NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_API_WRITE_TOKEN`
-even when the project is configured.
+Both are idempotent. Once assets live in Sanity, `heroImage`/`coverImage` win over the URL
+fallbacks automatically and the `*Url` fields can be dropped.
+
+The scripts load `.env.local` via dotenv — `tsx` does not do it for you, so without that
+file you get `Missing NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_API_WRITE_TOKEN` even when
+the project is configured.
 
 It is idempotent, so re-running only fills in what's missing.
 

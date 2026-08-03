@@ -23,7 +23,7 @@ const programmeFields = `
   benefits,
   timeline,
   faq,
-  "heroImage": heroImage.asset->url,
+  "heroImage": coalesce(heroImage.asset->url, heroImageUrl),
   "partners": partners[]->{ name, url, tier, ${imageUrl} },
   "cohort": cohort[]->{ name, "slug": slug.current, country, vertical, blurb, url, womenCofounded, cohortYear, ${imageUrl} }
 `;

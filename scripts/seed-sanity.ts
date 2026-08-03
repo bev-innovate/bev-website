@@ -157,6 +157,7 @@ async function run() {
       applicationDeadline: programme.applicationDeadline,
       order: programme.order,
       heroImage,
+      heroImageUrl: heroImage ? undefined : programme.heroImage,
       keyFacts: keyed(programme.keyFacts),
       verticals: keyed(programme.verticals),
       eligibility: programme.eligibility,

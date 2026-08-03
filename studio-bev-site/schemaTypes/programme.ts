@@ -56,6 +56,13 @@ export const programme = defineType({
     }),
     defineField({ name: "heroImage", type: "image", options: { hotspot: true } }),
     defineField({
+      name: "heroImageUrl",
+      title: "Hero image URL (migration)",
+      type: "url",
+      description:
+        "Temporary fallback for content still served from Wix. Prefer uploading to heroImage.",
+    }),
+    defineField({
       name: "status",
       type: "string",
       options: {
