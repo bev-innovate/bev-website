@@ -2,8 +2,15 @@ import { ArrowRight } from "lucide-react";
 
 import { ButtonLink } from "@/components/ui/button";
 
+/**
+ * Closing call to action.
+ *
+ * Structure from Tailark's `call-to-action/two` block (MIT, github.com/tailark/blocks): a
+ * flex-wrap row of heading and buttons under a hairline rule. The blurred colour blobs on
+ * a rounded purple slab are gone; the rule and the type carry it.
+ */
 export function CtaBand({
-  eyebrow = "Get involved",
+  eyebrow,
   title,
   intro,
   primary = { href: "/programmes", label: "Explore programmes" },
@@ -16,39 +23,26 @@ export function CtaBand({
   secondary?: { href: string; label: string } | null;
 }) {
   return (
-    <section className="shell py-20 md:py-24">
-      <div className="relative overflow-hidden rounded-[2rem] bg-purple px-8 py-16 text-canvas md:px-16 md:py-20">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-24 -right-16 size-96 rounded-full bg-yellow/20 blur-[100px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-32 -left-24 size-96 rounded-full bg-teal/15 blur-[110px]"
-        />
+    <section className="py-16 md:py-20">
+      <div className="shell">
+        <div className="flex flex-wrap items-end justify-between gap-8 border-t border-border pt-12">
+          <div className="max-w-2xl">
+            {eyebrow ? <span className="text-primary">{eyebrow}</span> : null}
+            <h2 className="mt-4 font-display text-3xl font-semibold text-balance text-ink lg:text-4xl">
+              {title}
+            </h2>
+            {intro ? (
+              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{intro}</p>
+            ) : null}
+          </div>
 
-        <div className="relative max-w-3xl">
-          <p className="text-xs font-semibold tracking-[0.16em] text-yellow uppercase">
-            {eyebrow}
-          </p>
-          <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.03] font-semibold tracking-tight text-balance">
-            {title}
-          </h2>
-          {intro ? (
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-canvas/75">{intro}</p>
-          ) : null}
-          <div className="mt-9 flex flex-wrap gap-3">
-            <ButtonLink href={primary.href} variant="primary" size="lg">
+          <div className="flex flex-wrap gap-3">
+            <ButtonLink href={primary.href} variant="purple" size="lg">
               {primary.label}
               <ArrowRight className="size-4" aria-hidden />
             </ButtonLink>
             {secondary ? (
-              <ButtonLink
-                href={secondary.href}
-                size="lg"
-                variant="outline"
-                className="border-canvas/25 text-canvas hover:border-canvas/50 hover:bg-canvas/10"
-              >
+              <ButtonLink href={secondary.href} size="lg" variant="outline">
                 {secondary.label}
               </ButtonLink>
             ) : null}

@@ -28,12 +28,8 @@ export function PostCard({ post, size = "md" }: { post: Post; size?: "md" | "lg"
         </div>
 
         <div className="mt-5">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-faint">
-            {post.category ? (
-              <span className="font-semibold tracking-[0.12em] text-orange uppercase">
-                {post.category}
-              </span>
-            ) : null}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+            {post.category ? <span className="text-primary">{post.category}</span> : null}
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
             {post.readingTime ? <span>{post.readingTime} min read</span> : null}
           </div>

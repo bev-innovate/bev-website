@@ -74,10 +74,8 @@ export default async function ContactPage() {
             </div>
           </dl>
 
-          <div className="mt-12 border-t border-line pt-10">
-            <h2 className="text-xs font-semibold tracking-[0.16em] text-ink-faint uppercase">
-              Who gets in touch
-            </h2>
+          <div className="mt-12 border-t border-border pt-10">
+            <h2 className="text-primary">Who gets in touch</h2>
             <ul className="mt-6 space-y-6">
               {routes.map((route) => (
                 <li key={route.title}>

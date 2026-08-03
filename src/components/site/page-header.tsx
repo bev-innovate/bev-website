@@ -17,15 +17,8 @@ export function PageHeader({
 }) {
   return (
     <header className={cn("relative overflow-hidden pt-14 pb-16 md:pt-20 md:pb-20", className)}>
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 left-1/4 size-[34rem] rounded-full bg-teal/12 blur-[120px]" />
-        <div className="absolute -top-24 right-0 size-[26rem] rounded-full bg-yellow/16 blur-[110px]" />
-      </div>
-
       <div className="shell">
-        {eyebrow ? (
-          <p className="text-xs font-semibold tracking-[0.16em] text-orange uppercase">{eyebrow}</p>
-        ) : null}
+        {eyebrow ? <span className="text-primary">{eyebrow}</span> : null}
         <h1 className="mt-4 max-w-4xl font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-balance text-ink">
           {title}
         </h1>

@@ -32,7 +32,9 @@ export const metadata: Metadata = {
  */
 export default function SummitPage() {
   return (
-    <>
+    // Scoping the field-notes palette to the whole page means every registry component
+    // inside it resolves `primary`, `muted` and `border` to the warm tokens.
+    <div data-theme="fieldnotes">
       <SummitHero hero={summit.hero} name={summit.name} />
       <SummitPartners partners={summit.partners} />
       <SummitAbout about={summit.about} />
@@ -52,6 +54,6 @@ export default function SummitPage() {
 
       <SummitStartups startups={summit.startups} />
       <SummitSignup {...summit.signup} />
-    </>
+    </div>
   );
 }

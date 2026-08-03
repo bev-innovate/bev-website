@@ -26,12 +26,18 @@ export function SectionHeading({
       )}
     >
       <div className={cn("max-w-2xl", align === "center" && "mx-auto")}>
-        {eyebrow ? (
-          <p className="text-xs font-semibold tracking-[0.16em] text-orange uppercase">
-            {eyebrow}
-          </p>
-        ) : null}
-        <h2 className="mt-3 font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.05] font-semibold tracking-[-0.015em] text-balance text-ink">
+        {/*
+          Plain accent-coloured lead-in rather than a letterspaced small-caps eyebrow.
+          Borrowed from Tailark's `content/two` (MIT, github.com/tailark/blocks), where
+          the section label is just `text-primary` set at body size.
+        */}
+        {eyebrow ? <span className="text-primary">{eyebrow}</span> : null}
+        <h2
+          className={cn(
+            "font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.05] font-semibold tracking-[-0.015em] text-balance text-ink",
+            eyebrow && "mt-4",
+          )}
+        >
           {title}
         </h2>
         {intro ? (

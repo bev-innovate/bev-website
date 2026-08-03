@@ -21,8 +21,8 @@ export function Label({
   className?: string;
 }) {
   return (
-    <p className={cn("label-mono flex items-center gap-2 text-terracotta", className)}>
-      {refCode ? <span className="text-ink-faint">{refCode}</span> : null}
+    <p className={cn("flex items-center gap-2 text-primary", className)}>
+      {refCode ? <span className="text-muted-foreground">{refCode}</span> : null}
       {children}
     </p>
   );
@@ -33,7 +33,7 @@ export function Tbc({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "label-mono inline-flex items-center rounded-sm border border-current px-1.5 py-0.5 text-[0.625rem] text-terracotta opacity-80",
+        "inline-flex items-center rounded-full border border-primary/30 px-2 py-0.5 text-xs font-medium text-primary",
         className,
       )}
     >
@@ -58,8 +58,8 @@ export function SectionHead({
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
       <h2
         className={cn(
-          "display text-[clamp(1.75rem,3.6vw,2.6rem)]",
-          onDark ? "text-canvas" : "text-ink",
+          "font-display text-[clamp(1.75rem,3.6vw,2.6rem)] font-semibold text-balance",
+          onDark ? "text-white" : "text-foreground",
         )}
       >
         {heading}
@@ -68,7 +68,7 @@ export function SectionHead({
         <p
           className={cn(
             "mt-4 text-lg leading-relaxed",
-            onDark ? "text-canvas/80" : "text-ink-muted",
+            onDark ? "text-white/80" : "text-muted-foreground",
           )}
         >
           {intro}
@@ -81,8 +81,8 @@ export function SectionHead({
 /** Annotated caption, as printed under a plate in a field guide. */
 export function Caption({ children }: { children: React.ReactNode }) {
   return (
-    <p className="label-mono mt-3 flex gap-2 normal-case text-ink-faint" style={{ letterSpacing: "0.04em" }}>
-      <span aria-hidden className="text-terracotta">
+    <p className="mt-3 flex gap-2 text-sm text-muted-foreground">
+      <span aria-hidden className="text-primary">
         ↳
       </span>
       {children}

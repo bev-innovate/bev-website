@@ -220,12 +220,10 @@ export default async function ProgrammePage({ params }: Params) {
 
       {programme.partners?.length ? (
         <section className="shell pb-20">
-          <p className="text-xs font-semibold tracking-[0.16em] text-ink-faint uppercase">
-            Delivered with
-          </p>
-          <ul className="mt-6 flex flex-wrap gap-x-10 gap-y-4">
+          <p className="text-muted-foreground">Delivered with</p>
+          <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-4">
             {programme.partners.map((partner) => (
-              <li key={partner.name} className="font-display text-xl text-ink-muted">
+              <li key={partner.name} className="font-display text-xl text-foreground">
                 {partner.name}
               </li>
             ))}

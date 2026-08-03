@@ -143,10 +143,9 @@ export default async function AboutPage() {
         </Section>
       ) : null}
 
-      <section className="border-y border-line bg-white py-14">
-        <p className="shell mb-8 text-center text-xs font-semibold tracking-[0.16em] text-ink-faint uppercase">
-          Partners and collaborators
-        </p>
+      {/* Logo cloud lead-in from Tailark's `logo-cloud/two` (MIT, github.com/tailark/blocks). */}
+      <section className="border-y border-border bg-background py-10">
+        <p className="shell mb-6 text-muted-foreground">Partners and collaborators</p>
         <PartnerMarquee partners={partners} />
       </section>
 

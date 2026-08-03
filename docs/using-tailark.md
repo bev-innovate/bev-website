@@ -48,9 +48,27 @@ the `radix` tree.
 
 ## What is already adapted
 
-- `src/components/summit/sections.tsx` — `SummitSpeakers` follows Tailark's `team/two`
-  structure: compact avatar-and-name rows in a dense grid rather than large portrait
-  frames. Attribution is in the component's doc comment.
+The clone lives at `registry/bases/base/mist/` in the Tailark repo. Every component below
+credits its source block in its own file header.
+
+| Ours | Tailark block | What was taken |
+| --- | --- | --- |
+| `src/components/ui/card.tsx` | `ui/card` | Vendored whole. `default` / `soft` / `mixed` / `outlined` variants; the surface primitive everything else is built on. |
+| `src/components/site/track-record.tsx` | `stats/two`, `stats/four` | Heading + intro over an unboxed `grid-cols-2 md:grid-cols-4` of `text-primary` figures. Our `CountUp` is kept. |
+| `src/components/site/delivery.tsx` | `features/eight` | `Card variant="soft"` grid, icon-led, aligned footers. |
+| `src/components/site/verticals.tsx` | `features/eight` | `col-span-full` lead card carrying the photography, smaller cards under it. |
+| `src/components/site/cta-band.tsx` | `call-to-action/two` | Flex-wrap heading-and-buttons row under a hairline rule. |
+| `src/components/site/programme-card.tsx` | `ui/card` | Uses `cardVariants()` on the anchor, since the whole card is a link. |
+| `src/components/site/section.tsx`, `page-header.tsx` | `content/two` | Section lead-in is a plain `text-primary` span, not a letterspaced small-caps eyebrow. |
+| `src/app/page.tsx` (who we are) | `content/two` | `lg:grid-cols-5` split with the prose behind a left rule. |
+| `src/app/page.tsx` (logo strip), `about` | `logo-cloud/two` | Muted lead-in inline above the marks. |
+| `summit/sections.tsx` — `SummitStrands`, `SummitStartups` | `features/eight` | Card grids. |
+| `summit/sections.tsx` — `SummitTimeline` | `content/two` | `sm:grid-cols-5` rows separated by `sm:divide-y`. |
+| `summit/sections.tsx` — `SummitAbout` | `stats/four` | Unboxed figures. |
+| `summit/sections.tsx` — `SummitSpeakers` | `team/two` | Compact avatar-and-name rows in a dense grid. |
+
+The Summit page carries `data-theme="fieldnotes"` on its root element, so every block
+inside it resolves `primary`, `muted` and `border` to the warm palette instead.
 
 ## Conventions when adapting a block
 

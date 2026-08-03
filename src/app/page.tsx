@@ -27,33 +27,35 @@ export default async function HomePage() {
         image="/images/hero-miscellaneous-climaccelerator-2025-cohort-photo.webp"
       />
 
-      {/* Who we are: the positioning statement, set as a two-column editorial block. */}
+      {/*
+        Who we are. Two-column split from Tailark's `content/two` block (MIT,
+        github.com/tailark/blocks): the heading sits in the narrow column, the prose in the
+        wide one behind a left rule.
+      */}
       <section className="py-20 md:py-28">
-        <div className="shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-          <Reveal>
-            <div className="lg:sticky lg:top-28">
-              <p className="eyebrow text-orange">{whoWeAre.eyebrow}</p>
-              <h2 className="display mt-4 text-[clamp(1.6rem,3.2vw,2.4rem)] text-purple">
+        <div className="shell grid gap-10 lg:grid-cols-5 lg:gap-0">
+          <Reveal className="lg:col-span-2">
+            <div className="lg:sticky lg:top-28 lg:pr-12">
+              <span className="text-primary">{whoWeAre.eyebrow}</span>
+              <h2 className="mt-4 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] font-semibold text-ink">
                 {whoWeAre.heading}
               </h2>
             </div>
           </Reveal>
 
-          <Reveal delay={0.08}>
-            <div className="max-w-2xl space-y-5 text-[1.0625rem] leading-relaxed text-ink-muted">
+          <Reveal delay={0.08} className="lg:col-span-3 lg:border-l lg:border-border lg:pl-12">
+            <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground">
               {whoWeAre.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
 
-              <p className="border-l-3 border-orange pl-5 font-semibold text-orange">
-                {whoWeAre.highlight}
-              </p>
+              <p className="font-medium text-foreground">{whoWeAre.highlight}</p>
 
               {whoWeAre.paragraphsAfter.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
 
-              <p className="pt-2 text-lg font-semibold text-orange">{whoWeAre.closing}</p>
+              <p className="font-medium text-primary">{whoWeAre.closing}</p>
             </div>
           </Reveal>
         </div>
@@ -68,25 +70,28 @@ export default async function HomePage() {
 
       <section className="bg-purple py-20 text-white md:py-24">
         <div className="shell">
-          <h2 className="eyebrow text-white/80">What we run</h2>
+          <h2 className="font-display text-3xl font-semibold lg:text-4xl">What we run</h2>
           <div className="mt-10">
             <PillarsAccordion items={pillars} />
           </div>
         </div>
       </section>
 
-      <TrackRecord stats={settings.stats} />
+      <TrackRecord
+        stats={settings.stats}
+        intro="Fifteen years of building climate ventures, and the numbers that came out of it."
+      />
 
       {preview.length ? (
-        <section className="bg-canvas-sunk py-20 md:py-24">
+        <section className="py-20 md:py-24">
           <div className="shell">
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl">
-                <p className="eyebrow text-purple">Programmes</p>
-                <h2 className="display mt-3 text-[clamp(1.9rem,4vw,3rem)] text-ink">
+                <span className="text-primary">Programmes</span>
+                <h2 className="mt-4 font-display text-[clamp(1.9rem,4vw,3rem)] font-semibold text-ink">
                   Meet founders where they are
                 </h2>
-                <p className="mt-4 text-lg leading-relaxed text-ink-muted">
+                <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
                   Each programme addresses a specific stage of the journey, from
                   early-stage inspiration to global scale-up.
                 </p>
@@ -97,9 +102,9 @@ export default async function HomePage() {
               </ButtonLink>
             </div>
 
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {preview.map((programme, i) => (
-                <Reveal key={programme.slug} delay={i * 0.06}>
+                <Reveal key={programme.slug} delay={i * 0.06} className="h-full">
                   <ProgrammeCard programme={programme} compact />
                 </Reveal>
               ))}
@@ -108,11 +113,15 @@ export default async function HomePage() {
         </section>
       ) : null}
 
-      <section className="border-y border-line bg-white py-16 md:py-20">
+      {/*
+        Logo cloud from Tailark's `logo-cloud/two` block (MIT, github.com/tailark/blocks):
+        the lead-in sits inline with the marks rather than above them as a section heading.
+      */}
+      <section className="border-y border-border bg-background py-10">
         <div className="shell">
-          <h2 className="eyebrow text-purple">Trusted by</h2>
+          <p className="text-muted-foreground">Trusted by teams at</p>
         </div>
-        <div className="mt-10">
+        <div className="mt-6">
           <PartnerMarquee partners={trustedBy} />
         </div>
       </section>
