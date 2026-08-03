@@ -60,6 +60,54 @@ cohort references — so a new programme is a CMS entry, not a code change.
 Every read goes through `src/lib/content.ts`, which tries Sanity and falls back to seed
 content. Pages never branch on whether the CMS is up.
 
+## Getting the assets off Wix
+
+Two scripts, run in order. Nothing here touches the live Wix site — both are read-only
+against it.
+
+```bash
+# 1. Export the whole Media Manager to disk (needs a Wix API key)
+WIX_API_KEY=xxx npm run export:wix
+
+# 2. Upload it into Sanity and get a Wix-URL → Sanity-URL mapping
+npm run import:media
+```
+
+**The API key.** Create one at <https://manage.wix.com/account/api-keys> with the
+**Media Manager** permission. The site id is already defaulted in the script
+(`437436eb-9514-4d79-bc04-ee8817d41591`); override with `WIX_SITE_ID` if it changes.
+
+**What you get.**
+
+```
+wix-export/manifest.json        every file descriptor from the Media Manager
+wix-export/files/<folder>/…     the original bytes, in the Media Manager folder structure
+wix-export/sanity-assets.json   { "https://static.wixstatic.com/…": { assetId, url } }
+```
+
+`wix-export/` is gitignored — it's a working directory, not source.
+
+Both scripts are **resumable and idempotent**: the exporter skips files already on disk
+with a matching byte size, and Sanity deduplicates uploads by content hash, so re-running
+returns existing asset ids rather than creating copies. An interrupted run just needs
+re-running.
+
+**How it works, in case it needs debugging.** Listing the library requires an API key and
+is cursor-paginated (`GET /site-media/v1/files`). Downloading does not — every file
+descriptor carries a public `static.wixstatic.com` URL, the same one the live site serves,
+and the bare `…~mv2.jpg` form returns the full-resolution original rather than a resized
+derivative.
+
+**Before you cancel the Wix subscription**, use `sanity-assets.json` to rewrite any
+remaining `static.wixstatic.com` references — the image URLs in `src/lib/seed-content.ts`
+and any article bodies pasted into Sanity. `npm run seed` already migrates the images the
+site currently references; these two scripts exist to catch everything else in the
+library, which is considerably more.
+
+Worth a look first: the Wix Media Manager UI may offer a bulk select-and-download, which
+would save you creating an API key for a one-off. The scripts are the better option if you
+want the folder structure preserved, a manifest, or a repeatable migration.
+
 ## Wiring up form submissions
 
 1. Create a Supabase project.

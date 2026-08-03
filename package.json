@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx scripts/seed-sanity.ts"
+    "seed": "tsx scripts/seed-sanity.ts",
+    "export:wix": "tsx scripts/export-wix-media.ts",
+    "import:media": "tsx scripts/import-media-to-sanity.ts"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",
