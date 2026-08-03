@@ -112,11 +112,12 @@ export default async function AboutPage() {
       {team.length ? (
         <Section tone="sunk">
           <div className="shell">
-            <SectionHeading
-              eyebrow="Team"
-              title="The people you’ll actually work with"
-              intro="Small team, deep network. You will not be handed off to a programme manager you have never met."
-            />
+            {/*
+              Headings match the company deck: "Our team", "Our experts", "Our advisory
+              board". No eyebrow, since it would only repeat the heading, and no standfirst
+              under any of the three: the faces are the content.
+            */}
+            <SectionHeading title="Our team" />
 
             {/* Grouped by base, so it is obvious which market a name sits in. */}
             <div className="mt-12 space-y-12">
@@ -125,7 +126,9 @@ export default async function AboutPage() {
                   <h3 className="border-b border-line pb-3 font-display text-xl font-semibold text-ink">
                     {location}
                   </h3>
-                  <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {/* Three up, so Singapore fills a row exactly and the smaller
+                      offices do not trail a mostly empty one. */}
+                  <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {team
                       .filter((person) => person.location === location)
                       .map((person, i) => (
@@ -144,11 +147,7 @@ export default async function AboutPage() {
       {experts.length ? (
         <Section>
           <div className="shell">
-            <SectionHeading
-              eyebrow="Experts"
-              title="The practitioners we bring into the room"
-              intro="Operators who have taken climate and agrifood businesses through the exact stage a cohort is standing at."
-            />
+            <SectionHeading title="Our experts" />
             <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {experts.map((person, i) => (
                 <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05} className="h-full">
@@ -163,7 +162,7 @@ export default async function AboutPage() {
       {advisors.length ? (
         <Section tone="sunk">
           <div className="shell">
-            <SectionHeading eyebrow="Advisory board" title="Who keeps us honest" />
+            <SectionHeading title="Our advisory board" />
             <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {advisors.map((person, i) => (
                 <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05} className="h-full">

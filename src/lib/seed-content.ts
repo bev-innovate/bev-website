@@ -265,13 +265,13 @@ export const partners: Partner[] = [
   { name: "AgFunder", logo: `${IMG}/logos-agfunder-logo.webp`, tier: "ecosystem", url: "https://agfunder.com", order: 3 },
   { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "ecosystem", order: 4 },
   { name: "Sustainable Living Lab", logo: `${IMG}/logos-sl2-logo.webp`, tier: "ecosystem", order: 5 },
-  { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem", order: 6 },
-  { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem", order: 7 },
-  { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "ecosystem", order: 8 },
+  { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem", url: "https://www.start2.group", order: 6 },
+  { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem", url: "https://agrifutures.com.au", order: 7 },
+  { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "ecosystem", url: "https://www.martechcollective.com", order: 8 },
   { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "ecosystem", order: 9 },
-  { name: "Tenity", logo: `${IMG}/logos-tenity-logo.webp`, tier: "ecosystem", order: 10 },
-  { name: "JETRO", logo: `${IMG}/logos-jetro-logo.webp`, tier: "ecosystem", order: 11 },
-  { name: "Deep Tech Canada", logo: `${IMG}/logos-deep-tech-canada-logo.webp`, tier: "ecosystem", order: 12 },
+  { name: "Tenity", logo: `${IMG}/logos-tenity-logo.webp`, tier: "ecosystem", url: "https://www.tenity.com", order: 10 },
+  { name: "JETRO", logo: `${IMG}/logos-jetro-logo.webp`, tier: "ecosystem", url: "https://www.jetro.go.jp", order: 11 },
+  { name: "Deep Tech Canada", logo: `${IMG}/logos-deep-tech-canada-logo.webp`, tier: "ecosystem", url: "https://www.deeptechcanada.com", order: 12 },
   { name: "Rebbeck Consulting", logo: `${IMG}/logos-rebbeck-consulting-logo.webp`, tier: "ecosystem", order: 13 },
   { name: "HEX", logo: `${IMG}/logos-hex-logo.webp`, tier: "ecosystem", order: 14 },
   { name: "ClimateLaunchpad", tier: "programme", url: "https://climatelaunchpad.org", order: 15 },
@@ -317,40 +317,40 @@ export const companies: Company[] = [
  */
 export const people: Person[] = [
   // Singapore
-  { name: "Rebecca Sharpe", role: "Founder & CEO", location: "Singapore", group: "team", order: 1 },
-  { name: "Jamie Heng", role: "Senior Programme Manager", location: "Singapore", group: "team", order: 2 },
-  { name: "Linhan Wu", role: "Programme Manager", location: "Singapore", group: "team", order: 3 },
+  { name: "Rebecca Sharpe", photo: `${IMG}/people/rebecca-sharpe.webp`, role: "Founder & CEO", location: "Singapore", group: "team", order: 1 },
+  { name: "Jamie Heng", photo: `${IMG}/people/jamie-heng.webp`, role: "Senior Programme Manager", location: "Singapore", group: "team", order: 2 },
+  { name: "Linhan Wu", photo: `${IMG}/people/linhan-wu.webp`, role: "Programme Manager", location: "Singapore", group: "team", order: 3 },
   // Europe
-  { name: "Alex Mitchell", role: "Head of Europe", location: "Europe", group: "team", order: 4 },
-  { name: "Cassidy Clark", role: "Researcher", location: "Europe", group: "team", order: 5 },
+  { name: "Alex Mitchell", photo: `${IMG}/people/alex-mitchell.webp`, role: "Head of Europe", location: "Europe", group: "team", order: 4 },
+  { name: "Cassidy Clark", photo: `${IMG}/people/cassidy-clark.webp`, role: "Researcher", location: "Europe", group: "team", order: 5 },
   // India
-  { name: "Maud Zeller-Tillai", role: "Head of India", location: "India", group: "team", order: 6 },
+  { name: "Maud Zeller-Tillai", photo: `${IMG}/people/maud-zeller-tillai.webp`, role: "Head of India", location: "India", group: "team", order: 6 },
 
   // Experts: the practitioners we bring into programmes, by domain.
-  { name: "Connor Lindh Clark", role: "Product, Tech, Ops, Process", group: "expert", order: 1 },
-  { name: "Megan Willis", role: "Supply chain, Policy", group: "expert", order: 2 },
-  { name: "Panam Parikh", role: "Food systems, Policy", group: "expert", order: 3 },
-  { name: "Steve O’Connor", role: "Commercialisation, Engineering, Sales", group: "expert", order: 4 },
-  { name: "Matthew McGarvey", role: "Impact investment", group: "expert", order: 5 },
-  { name: "Gerald Foo", role: "GTM", group: "expert", order: 6 },
+  { name: "Connor Lindh Clark", photo: `${IMG}/people/connor-lindh-clark.webp`, role: "Product, Tech, Ops, Process", group: "expert", order: 1 },
+  { name: "Megan Willis", photo: `${IMG}/people/megan-willis.webp`, role: "Supply chain, Policy", group: "expert", order: 2 },
+  { name: "Panam Parikh", photo: `${IMG}/people/panam-parikh.webp`, role: "Food systems, Policy", group: "expert", order: 3 },
+  { name: "Steve O’Connor", photo: `${IMG}/people/steve-o-connor.webp`, role: "Commercialisation, Engineering, Sales", group: "expert", order: 4 },
+  { name: "Matthew McGarvey", photo: `${IMG}/people/matthew-mcgarvey.webp`, role: "Impact investment", group: "expert", order: 5 },
+  { name: "Gerald Foo", photo: `${IMG}/people/gerald-foo.webp`, role: "GTM", group: "expert", order: 6 },
 
   // Advisory board.
-  { name: "John Friedman", role: "Asia Director", organisation: "AgFunder", group: "advisor", order: 1 },
+  { name: "John Friedman", photo: `${IMG}/people/john-friedman.webp`, role: "Asia Director", organisation: "AgFunder", group: "advisor", order: 1 },
   {
-    name: "Su-E Yap",
+    name: "Su-E Yap", photo: `${IMG}/people/su-e-yap.webp`,
     role: "Regenerative Food Facility Lead",
     organisation: "The Nature Conservancy",
     group: "advisor",
     order: 2,
   },
   {
-    name: "Anne Lochoff",
+    name: "Anne Lochoff", photo: `${IMG}/people/anne-lochoff.webp`,
     role: "Programme Director",
     organisation: "Singapore Agri-Food Innovation Lab",
     group: "advisor",
     order: 3,
   },
-  { name: "Steven Holm", role: "Counsel", organisation: "Cooley", group: "advisor", order: 4 },
+  { name: "Steven Holm", photo: `${IMG}/people/steven-holm.webp`, role: "Counsel", organisation: "Cooley", group: "advisor", order: 4 },
 ];
 
 export const programmes: Programme[] = [

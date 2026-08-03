@@ -1,7 +1,42 @@
 import Image from "next/image";
+import * as React from "react";
 
 import { Marquee } from "@/components/ui/marquee";
 import type { Partner } from "@/lib/types";
+
+/**
+ * Wraps an item in a link to the partner's site when there is one.
+ *
+ * Not every partner has a `url`, so this cannot just always render an anchor: an `<a>`
+ * with no href is not a link, and would take focus while doing nothing.
+ */
+function PartnerLink({
+  partner,
+  className,
+  children,
+}: {
+  partner: Partner;
+  className: string;
+  children: React.ReactNode;
+}) {
+  if (!partner.url) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <a
+      href={partner.url}
+      target="_blank"
+      rel="noreferrer noopener"
+      // The marquee duplicates its children to loop seamlessly, so half of these links
+      // are decorative copies. `title` gives the real ones a hover affordance.
+      title={partner.name}
+      className={`${className} rounded-lg focus-visible:outline-2`}
+    >
+      {children}
+    </a>
+  );
+}
 
 /**
  * Partner strip.
@@ -18,8 +53,9 @@ export function PartnerMarquee({ partners }: { partners: Partner[] }) {
     <Marquee duration={55} className="bg-white">
       {partners.map((partner) =>
         partner.logo ? (
-          <div
+          <PartnerLink
             key={partner.name}
+            partner={partner}
             className="flex h-14 w-36 shrink-0 items-center justify-center opacity-75 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 md:h-16 md:w-44"
           >
             <Image
@@ -30,16 +66,17 @@ export function PartnerMarquee({ partners }: { partners: Partner[] }) {
               // Fill the box and let object-contain letterbox it.
               className="size-full object-contain p-1"
             />
-          </div>
+          </PartnerLink>
         ) : (
-          <div
+          <PartnerLink
             key={partner.name}
-            className="flex h-14 shrink-0 items-center justify-center px-3 md:h-16"
+            partner={partner}
+            className="flex h-14 shrink-0 items-center justify-center px-3 transition-colors md:h-16"
           >
-            <span className="font-display text-xl font-semibold whitespace-nowrap text-ink-muted">
+            <span className="font-display text-xl font-semibold whitespace-nowrap text-ink-muted hover:text-ink">
               {partner.name}
             </span>
-          </div>
+          </PartnerLink>
         ),
       )}
     </Marquee>

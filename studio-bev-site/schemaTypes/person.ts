@@ -32,6 +32,13 @@ export const person = defineType({
       initialValue: "team",
     }),
     defineField({ name: "photo", type: "image", options: { hotspot: true } }),
+    defineField({
+      name: "photoUrl",
+      title: "Photo URL",
+      type: "string",
+      description:
+        "Fallback used only when no photo is uploaded above, e.g. /images/people/jamie-heng.webp. Uploading an image always wins.",
+    }),
     defineField({ name: "bio", type: "text", rows: 4 }),
     defineField({ name: "linkedin", title: "LinkedIn URL", type: "url" }),
     defineField({ name: "order", type: "number", initialValue: 10 }),

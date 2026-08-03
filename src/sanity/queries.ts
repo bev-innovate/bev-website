@@ -64,7 +64,7 @@ export const postBySlugQuery = groq`
 export const peopleQuery = groq`
   *[_type == "person"] | order(order asc, name asc){
     name, role, location, organisation, group, bio, linkedin, order,
-    "photo": photo.asset->url
+    "photo": coalesce(photo.asset->url, photoUrl)
   }
 `;
 

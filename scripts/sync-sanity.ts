@@ -64,12 +64,15 @@ const targets: Record<string, Target> = {
   people: {
     type: "person",
     items: people,
+    // `photoUrl`, not `photo`: `photo` is a Sanity image asset, which has to be uploaded.
+    // The query coalesces an uploaded asset over this string, so a Studio upload wins.
     toDoc: (person: (typeof people)[number]) => ({
       name: person.name,
       role: person.role,
       location: person.location,
       organisation: person.organisation,
       group: person.group,
+      photoUrl: person.photo ?? undefined,
       bio: person.bio,
       linkedin: person.linkedin,
       order: person.order,
