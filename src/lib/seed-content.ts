@@ -61,12 +61,12 @@ export const whoWeAre = {
   eyebrow: "Who we are",
   heading: "Better Earth Ventures is where ClimateTech founders come to scale.",
   paragraphs: [
-    "At Better Earth Ventures, we are dedicated to accelerating the development and deployment of transformative technologies and initiatives that mitigate climate change and promote sustainable living.",
+    "We started Better Earth Ventures with a simple conviction: the technologies that will steady our climate deserve every chance to reach the markets and communities that need them.",
   ],
   highlight:
-    "Through collaboration, mentorship, and strategic partnerships, we empower visionary entrepreneurs to scale their solutions, driving tangible impact and paving the way for a resilient and thriving planet.",
+    "Through collaboration, mentorship and strategic partnership, we help visionary founders carry their solutions further than they could alone, and we measure ourselves by the impact that follows.",
   paragraphsAfter: [
-    "Our work brings together founders, investors, corporates, governments and research institutions to accelerate deployment in real markets, particularly across Asia-Pacific.",
+    "Our work brings founders, investors, corporates, governments and researchers around the same table, so that good technology finds its way into real markets across Asia-Pacific.",
   ],
   closing: "Join us in building a Better Earth, one solution at a time.",
 };
@@ -137,7 +137,7 @@ export const pillars = [
     title: "Better Earth Ventures",
     slug: "ventures",
     description:
-      "We design bespoke acceleration pathways to strengthen the success of startup and scaleup portfolios, leveraging our global network of mentors, collaborators, and strategic partners.",
+      "We design bespoke acceleration pathways that strengthen startup and scaleup portfolios, drawing on a global network of mentors, collaborators and strategic partners who want founders to succeed as much as we do.",
     outcomesLabel: "Outcomes include:",
     outcomes: [
       {
@@ -220,15 +220,15 @@ export const verticals = [
 /** Programmes page — intro above the programme list. */
 export const programmesIntro = {
   title: "Our Programmes",
-  lede: "We are dedicated to accelerating the development and deployment of transformative technologies and initiatives that mitigate climate change and promote sustainable living.",
+  lede: "Every programme we run exists for the same reason: to help climate solutions grow into the companies this region needs.",
   heroImage: `${IMG}/programmes-climaccelearator-cohort-announcement-1-1920-x-1080.webp`,
   paragraphs: [
-    "At Better Earth Ventures, we are committed to creating meaningful climate impact at every stage of the innovation journey.",
-    "From sparking early-stage inspiration in future changemakers to supporting the growth and global scale-up of climate-positive technologies, our programmes are designed to meet founders where they are, and take them where they need to go.",
-    "With deep sector expertise, a global network, and a track record of delivering high-impact support, we help turn bold ideas into real-world solutions that move the needle on climate action.",
+    "We care about meaningful climate impact at every stage of the innovation journey, and we have built a programme for each of the moments where it is hardest won.",
+    "From the first spark of an idea in a future changemaker to the global scale-up of technologies already proving themselves, our programmes meet founders where they are and walk with them to where they want to go.",
+    "Deep sector expertise, a global network, and years of delivering high-impact support: these are what we bring, so that bold ideas become working solutions that move the needle on climate action.",
   ],
   highlight:
-    "Below are our current programmes, each designed to address a specific stage of the journey and drive tangible outcomes for founders, partners, and the planet.",
+    "Each programme below is built for a particular stage of the journey, and for tangible outcomes for founders, partners and the planet.",
 };
 
 /**
@@ -440,9 +440,9 @@ export const expeditions = {
   why: {
     title: "Why Better Earth's Climate Expeditions Exist",
     paragraphs: [
-      "Working in climate or agrifood tech from an office only tells half the story. The real context - the forces that determine whether solutions succeed or fail live on the ground - in farms, processing facilities, coastal communities, labs, and remote regions where climate challenges are most visible.",
-      "Climate Expeditions are immersive learning journeys designed to give founders, investors, policymakers, and ecosystem builders a sharper intuition for how climate technologies collide with real-world constraints, and what it actually takes to scale climate solutions responsibly.",
-      "By experiencing the real-world interplay between technology, behaviour, economics, and environment first-hand, participants build the intuition and judgement needed to back, design, and support solutions that can truly work at scale.",
+      "Working on climate from an office tells only half the story. The other half lives on the ground: in farms, processing facilities, coastal communities, labs and remote regions, where the forces that decide a solution's fate are easiest to see.",
+      "Climate Expeditions are immersive learning journeys that give founders, investors, policymakers and ecosystem builders a sharper intuition for how climate technology meets real-world constraints, and what it truly takes to scale a solution responsibly.",
+      "Watching technology, behaviour, economics and environment interact first-hand builds something reports rarely can: the judgement to back, design and support solutions that hold up at scale.",
     ],
   },
 
@@ -468,7 +468,7 @@ export const expeditions = {
         location: "The Philippines",
         name: "Polar Cold",
         accent: "sky" as const,
-        body: "We visited Polar Cold in Manila, where they team is rethinking cold storage for food and pharma SMEs through modular, hyperlocal cold rooms that businesses can rent on demand.",
+        body: "We visited Polar Cold in Manila, where the team is rethinking cold storage for food and pharma SMEs through modular, hyperlocal cold rooms that businesses can rent on demand.",
         image: `${IMG}/climate-expedition-polar-cold.webp`,
       },
     ],
@@ -518,10 +518,10 @@ export const expeditions = {
         accent: "yellow" as const,
         image: `${IMG}/climate-expedition-10.webp`,
         paragraphs: [
-          "You won't just tour farms or facilities.",
+          "These journeys go far deeper than a site tour.",
           "You'll sit down with the founders and the people running these systems day to day.",
-          "You'll hear what actually keeps them up at night, what's working, and what still feels unsolved.",
-          "You'll speak directly with farmers who experience climate decisions first-hand.",
+          "You'll hear what keeps them up at night, what's working, and what still feels unsolved.",
+          "You'll speak directly with the farmers who live with climate decisions first-hand.",
         ],
       },
       {
@@ -548,8 +548,8 @@ export const expeditions = {
   next: {
     title: "The next Climate Expedition is coming",
     paragraphs: [
-      "We're curating our April 2026 Climate Expedition and will be launching it soon.",
-      "If you're interested about learning directly from the ground, communities, and operators shaping climate resilience, this one's for you.",
+      "We're curating our April 2026 Climate Expedition now, and we would love you to be part of it.",
+      "If you want to learn directly from the ground, and from the communities and operators shaping climate resilience, this one is for you.",
     ],
     primary: { label: "I'm Interested", href: "/contact" },
     secondary: { label: "Chat with the Team", href: "/contact" },

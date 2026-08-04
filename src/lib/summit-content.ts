@@ -57,13 +57,17 @@ export const summit = {
 
   partners: {
     organisedBy: [
-      { name: "Better Earth Ventures", logo: `${IMG}/logos-better-earth-ventures-logo.webp` },
-      { name: "ClimateLaunchpad", logo: `${IMG}/logos-climatekic-logo.webp`, note: "Powered by Climate-KIC" },
+      { name: "Better Earth Ventures", logo: `${IMG}/logos-bev-lockup.webp` },
+      { name: "ClimateLaunchpad", logo: `${IMG}/summit-climatelaunchpad.webp`, note: "Powered by Climate-KIC" },
     ],
     supportedBy: [
-      { name: "Government of Ireland: International Development Programme", logo: null },
-      { name: "Bank of America", logo: null },
-      { name: "Greenhouse", logo: null },
+      {
+        name: "Government of Ireland: International Development Programme",
+        logo: `${IMG}/summit-irish-aid.webp`,
+      },
+      { name: "Bank of America", logo: `${IMG}/summit-bofa.webp` },
+      { name: "Greenhouse", logo: `${IMG}/summit-greenhouse.webp` },
+      // Still awaiting a logo file; renders as a typographic lockup until one lands.
       { name: "Sustainability Women", logo: null },
     ],
   },

@@ -97,14 +97,16 @@ function PartnerRow({
       <p className="font-medium text-muted-foreground">{title}</p>
       <ul className="mt-4 flex flex-wrap items-center gap-x-10 gap-y-8">
         {items.map((partner) => (
-          <li key={partner.name} className="flex h-12 items-center">
+          <li key={partner.name} className="flex h-14 items-center">
             {partner.logo ? (
               <Image
                 src={partner.logo}
                 alt={partner.name}
                 width={240}
                 height={80}
-                className="max-h-10 w-auto max-w-40 object-contain"
+                // Squarer lockups (the Irish Aid crest-and-text block) need the extra
+                // height to stay legible; wide wordmarks are capped by max-w instead.
+                className="max-h-12 w-auto max-w-44 object-contain"
               />
             ) : (
               // No logo file yet — a typographic lockup reads as intentional, not broken.
