@@ -346,7 +346,7 @@ export const programmes: Programme[] = [
     body: [
       "Applications are now open for agrifoodtech entrepreneurs raising Seed or Series A rounds who are driving meaningful impact – especially those advancing diversity, inclusion or other social equity goals. We are looking for visionary founders whose businesses combine innovation, commercial strength and a deep commitment to sustainability.",
     ],
-    status: "open",
+    status: "closed",
     accent: "teal",
     heroImage: `${IMG}/programmes-women-founders-and-funders-1.webp`,
     order: 1,
@@ -366,7 +366,7 @@ export const programmes: Programme[] = [
     body: [
       "The Singapore edition, led by Better Earth Ventures, is part of a global movement across nearly 100 countries. It empowers aspiring founders and young startups to transform their climate-positive ideas into scalable ventures through a proven program of coaching, validation, and competition.",
     ],
-    status: "open",
+    status: "closed",
     accent: "purple",
     applyUrl: "https://climatelaunchpad.org",
     heroImage: `${IMG}/programmes-climatelaunchpad-2026.webp`,

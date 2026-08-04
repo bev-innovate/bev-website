@@ -81,13 +81,9 @@ export function ProgrammeCard({
             ))}
           </div>
 
-          {programme.kicker ? (
-            <p className="mt-5 text-sm text-primary">{programme.kicker}</p>
-          ) : null}
-
           <h3
             className={cn(
-              "mt-2 font-display font-semibold text-foreground",
+              "mt-5 font-display font-semibold text-foreground",
               featured ? "text-3xl md:text-4xl" : compact ? "text-xl" : "text-2xl",
             )}
           >

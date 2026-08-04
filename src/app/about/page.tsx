@@ -38,9 +38,10 @@ export default async function AboutPage() {
         eyebrow="About"
         title="A Singapore-based platform for climate and agrifood innovation"
         intro="We connect founders to the capital, networks and strategic partners they need to scale solutions for people, place and planet: across the Asia-Pacific region where the stakes for food and climate are highest."
+        image="/images/hero-miscellaneous-iuk-enterprise-singapore-group.webp"
       />
 
-      <Section className="pt-0">
+      <Section>
         <div className="shell grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:items-center">
           <Reveal>
             <div className="relative aspect-4/3 overflow-hidden rounded-[1.75rem] bg-canvas-sunk">
@@ -175,7 +176,7 @@ export default async function AboutPage() {
       ) : null}
 
       {/* Logo cloud lead-in from Tailark's `logo-cloud/two` (MIT, github.com/tailark/blocks). */}
-      <section className="border-y border-border bg-background py-10">
+      <section className="border-t border-border bg-background py-10">
         <p className="shell mb-6 text-muted-foreground">Partners and collaborators</p>
         <PartnerMarquee partners={partners} />
       </section>

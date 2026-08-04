@@ -39,9 +39,10 @@ export default async function ContactPage() {
         eyebrow="Contact"
         title="Tell us what you’re working on"
         intro="One inbox for founders, funders, corporates and collaborators. We read everything and reply to what we can act on."
+        image="/images/hero-miscellaneous-2.webp"
       />
 
-      <div className="shell grid gap-16 pb-24 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
+      <div className="shell grid gap-16 py-16 md:py-20 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
         <div>
           <dl className="space-y-6">
             <div className="flex items-start gap-4">

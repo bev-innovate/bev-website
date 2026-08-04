@@ -22,9 +22,10 @@ export default async function InsightsPage() {
         eyebrow="Insights"
         title="What we’re seeing on the ground"
         intro="Programme news, cohort announcements and honest field notes from the work of moving climate solutions from proof of concept to proof of value."
+        image="/images/hero-miscellaneous-a7400018-medium-edited.webp"
       />
 
-      <div className="shell pb-20 md:pb-28">
+      <div className="shell py-16 md:py-20">
         {lead ? (
           <Reveal className="mb-16 border-b border-line pb-16">
             <PostCard post={lead} size="lg" />
