@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import {
   SummitAbout,
+  SummitAudience,
   SummitCtaStrip,
   SummitHero,
   SummitPartners,
@@ -40,6 +41,7 @@ export default function SummitPage() {
       <SummitHero hero={summit.hero} name={summit.name} />
       <SummitPartners partners={summit.partners} />
       <SummitAbout about={summit.about} />
+      <SummitAudience audience={summit.audience} />
 
       <SummitCtaStrip text="Places are limited and released to our list first." />
 

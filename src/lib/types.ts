@@ -36,6 +36,11 @@ export interface Partner {
   tier?: "programme" | "ecosystem" | "supporter";
   /** Marquee sequence. Lower first. */
   order?: number;
+  /**
+   * Kept out of the logo marquees. The document stays, because programme pages may still
+   * reference it in their "delivered with" lists.
+   */
+  hidden?: boolean;
 }
 
 export interface Company {

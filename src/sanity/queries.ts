@@ -75,7 +75,7 @@ export const peopleQuery = groq`
   logos never rendered and every marquee item fell back to a typographic lockup.
 */
 const partnerFields = `
-  name, url, tier,
+  name, url, tier, hidden,
   "logo": coalesce(logo.asset->url, logoUrl)
 `;
 

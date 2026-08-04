@@ -25,7 +25,7 @@ export default async function HomePage() {
       <Hero
         headline={["Empowering innovators.", "For people, place, and planet."]}
         intro={settings.description}
-        primary={{ label: "Join Our Upcoming Expedition", href: "/climate-expeditions" }}
+        primary={{ label: "Join Our Upcoming Summit", href: "/summit" }}
         secondary={{ label: "Connect With Us", href: "/contact" }}
         image="/images/hero-miscellaneous-climaccelerator-2025-cohort-photo.webp"
       />
@@ -87,7 +87,7 @@ export default async function HomePage() {
 
       <TrackRecord
         stats={settings.stats}
-        intro="Fifteen years of building climate ventures, and the numbers that came out of it."
+        intro="Behind each of these numbers is a founder who trusted us with a stretch of their journey."
       />
 
       {preview.length ? (
@@ -99,11 +99,11 @@ export default async function HomePage() {
                 {/* `text-nowrap` from md up: the line is short enough to hold, and
                     breaking it after "where" reads as a mistake. */}
                 <h2 className="mt-4 font-display text-[clamp(1.9rem,4vw,3rem)] font-semibold text-ink md:text-nowrap">
-                  Meet founders where they are
+                  Meeting founders where they are
                 </h2>
                 <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                  Each programme addresses a specific stage of the journey, from
-                  early-stage inspiration to global scale-up.
+                  From the first spark of an idea to a company ready for the world, each
+                  programme is built for a particular moment in the journey.
                 </p>
               </div>
               <ButtonLink href="/programmes" variant="outline" className="shrink-0">

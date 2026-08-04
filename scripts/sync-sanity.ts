@@ -89,6 +89,7 @@ const targets: Record<string, Target> = {
       url: partner.url,
       tier: partner.tier,
       order: partner.order,
+      hidden: partner.hidden ?? false,
     }),
   },
 };

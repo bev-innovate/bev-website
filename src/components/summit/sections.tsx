@@ -184,6 +184,31 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
   );
 }
 
+/* ── Who the summit is for ──────────────────────────────────────────────────── */
+
+export function SummitAudience({ audience }: { audience: Summit["audience"] }) {
+  return (
+    <section className="py-16 md:py-20">
+      <div className="shell">
+        <SectionHead heading={audience.heading} intro={audience.intro} />
+
+        <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {audience.items.map((item, i) => (
+            <Reveal as="li" key={item.title} delay={Math.min(i, 3) * 0.06} className="h-full">
+              <Card variant="soft" className="h-full p-6">
+                <h3 className="font-display text-lg leading-snug font-semibold text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-muted-foreground">{item.body}</p>
+              </Card>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 /* ── Strands ────────────────────────────────────────────────────────────────── */
 
 /**

@@ -28,6 +28,14 @@ export const partner = defineType({
       initialValue: "ecosystem",
     }),
     defineField({ name: "order", type: "number", initialValue: 10 }),
+    defineField({
+      name: "hidden",
+      title: "Hide from logo marquees",
+      type: "boolean",
+      initialValue: false,
+      description:
+        "Keeps the partner out of the scrolling logo strips. Programme pages that reference this partner still show it.",
+    }),
   ],
   preview: { select: { title: "name", subtitle: "tier", media: "logo" } },
 });

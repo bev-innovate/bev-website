@@ -43,7 +43,7 @@ export const summit = {
     facts: [
       { label: "Dates", value: "13 – 15 October 2026", tbc: false },
       { label: "Location", value: "Singapore", tbc: false },
-      { label: "Venue", value: "To be announced", tbc: true },
+      { label: "Venue", value: "Confirmed upon registration", tbc: false },
       { label: "Countries", value: "50", tbc: false },
     ],
     primary: { label: "Register your interest", href: "#signup" },
@@ -82,6 +82,29 @@ export const summit = {
       { ref: "S-04", value: "TBC", label: "Investors attending", tbc: true },
     ],
     texture: `${IMG}/climate-expedition-a-little-wild.webp`,
+  },
+
+  audience: {
+    heading: "Who the summit is for",
+    intro: "Three days designed for the people who carry climate solutions into the world.",
+    items: [
+      {
+        title: "Founders",
+        body: "You have built something that works, and you are ready for the customers, capital and partners who can take it further.",
+      },
+      {
+        title: "Investors",
+        body: "You are looking for climate ventures with real traction, in the region where deployment is moving fastest.",
+      },
+      {
+        title: "Corporates",
+        body: "You want a clear view of technology ready to deploy, and time with the founders you could pilot it with.",
+      },
+      {
+        title: "Policymakers and ecosystem partners",
+        body: "You are shaping the conditions that help climate innovation take root across Asia-Pacific.",
+      },
+    ],
   },
 
   strands: {

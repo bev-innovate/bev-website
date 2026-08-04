@@ -49,9 +49,13 @@ function PartnerLink({
  * overflowed it and made neighbouring items collide.
  */
 export function PartnerMarquee({ partners }: { partners: Partner[] }) {
+  // `hidden` keeps a partner out of the strip while its document survives for the
+  // programme pages that reference it.
+  const visible = partners.filter((partner) => !partner.hidden);
+
   return (
     <Marquee duration={55} className="bg-white">
-      {partners.map((partner) =>
+      {visible.map((partner) =>
         partner.logo ? (
           <PartnerLink
             key={partner.name}

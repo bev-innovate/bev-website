@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { Fraunces, IBM_Plex_Mono, Open_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Open_Sans } from "next/font/google";
 
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
@@ -9,17 +9,11 @@ import { siteSettings as fallbackSettings } from "@/lib/seed-content";
 
 import "./globals.css";
 
-/** Open Sans carries body copy; Fraunces carries display. */
+/** Open Sans carries everything: body copy and display. One face, two weights. */
 const openSans = Open_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-open-sans",
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -57,7 +51,7 @@ export default async function RootLayout({
   const settings = await getSiteSettings();
 
   return (
-    <html lang="en-SG" className={`${openSans.variable} ${fraunces.variable} ${plexMono.variable}`}>
+    <html lang="en-SG" className={`${openSans.variable} ${plexMono.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

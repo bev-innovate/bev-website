@@ -123,11 +123,11 @@
   --color-sky: #3e9be9;
 
   /*
-    One family, two roles. Display is the same face at heavier weight and tighter
-    tracking rather than a second font.
+    One family throughout. Display is Open Sans at heavier weight and tighter tracking;
+    the serif is gone, so `font-display` and `.display` resolve to the same sans.
   */
   --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Field-notes earth tones, used on the Summit page. */
@@ -184,7 +184,7 @@
     color: #540178;
   }
 
-  /* Headings default to the serif; body copy stays in Open Sans. */
+  /* Headings share the sans; the display var is kept so a future face swap is one line. */
   h1,
   h2,
   h3 {
@@ -227,15 +227,12 @@
     }
   }
 
-  /*
-    Display is Fraunces, a variable serif. It carries weight optically, so it needs less
-    of it than Open Sans did — 600 reads heavier here than 800 did in the sans.
-  */
+  /* Display register: the same sans, set heavier and tighter. */
   .display {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.03;
+    line-height: 1.08;
     text-wrap: balance;
   }
 

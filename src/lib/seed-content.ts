@@ -74,11 +74,12 @@ export const whoWeAre = {
 /** Home — how the engagements are delivered. Four pillars, each with formats. */
 export const delivery = {
   eyebrow: "How we work",
-  heading: "How we deliver climate innovation engagements",
+  heading:
+    "Years of walking alongside founders have taught us where a venture most needs a hand. These four practices are how we offer ours.",
   statement:
-    "Climate technology does not fail in the lab. It fails at the four points where a venture meets a market.",
+    "Helping climate founders turn proven technology into thriving businesses across Asia-Pacific.",
   intro:
-    "Through extensive research, we have mapped out the four critical failure points for scaling climatetech ventures.",
+    "Through extensive research, we have mapped out the four critical points where scaling climatetech ventures need the most support.",
   pillars: [
     {
       title: "Curated Innovation Programmes",
@@ -189,50 +190,30 @@ export const pillars = [
  * TODO: images are placeholders drawn from the existing library. Clean Cities,
  * Circularity and Industrial Decarbonisation have no matching photography yet.
  */
+/**
+ * Four equal cards. Each carries one line about why the sector matters here, in place of
+ * the old keyword pills, which listed the what and said nothing about the why.
+ */
 export const verticals = [
   {
     title: "Agriculture and Food",
+    tagline: "Catalysing food security across the APAC region",
     image: `${IMG}/climate-expedition-6.webp`,
-    items: [
-      "Precision ag",
-      "Biological inputs",
-      "Climate-resilient crops",
-      "Alternative proteins",
-      "Ag supply chain tech",
-    ],
   },
   {
     title: "Clean Cities",
+    tagline: "Shaping cities that are light on carbon and rich in life",
     image: `${IMG}/sectors-clean-cities.webp`,
-    items: [
-      "Energy efficiency",
-      "Urban mobility",
-      "District systems",
-      "Waste-to-value",
-      "Resilient infrastructure",
-    ],
   },
   {
     title: "Circularity and Advanced Materials",
+    tagline: "Giving materials longer, more valuable lives",
     image: `${IMG}/sectors-circularity.webp`,
-    items: [
-      "Waste valorisation",
-      "Bio-based materials",
-      "Sustainable packaging",
-      "Recycling tech",
-      "Carbon-derived materials",
-    ],
   },
   {
-    title: "Industrial Decarbonisation",
-    image: `${IMG}/sectors-industrial-decarbonisation.webp`,
-    items: [
-      "Electrification",
-      "Hydrogen",
-      "CCUS",
-      "Process optimisation",
-      "Low-carbon materials",
-    ],
+    title: "Climate x Health",
+    tagline: "Caring for the communities living closest to a changing climate",
+    image: `${IMG}/sectors-climate-health.webp`,
   },
 ];
 
@@ -268,14 +249,14 @@ export const partners: Partner[] = [
   { name: "Start2 Group", logo: `${IMG}/logos-start2group-logo.webp`, tier: "ecosystem", url: "https://www.start2.group", order: 6 },
   { name: "AgriFutures Australia", logo: `${IMG}/logos-agrifutures-logo.webp`, tier: "ecosystem", url: "https://agrifutures.com.au", order: 7 },
   { name: "MarTech Collective", logo: `${IMG}/logos-martech-collective-logo.webp`, tier: "ecosystem", url: "https://www.martechcollective.com", order: 8 },
-  { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "ecosystem", order: 9 },
-  { name: "Tenity", logo: `${IMG}/logos-tenity-logo.webp`, tier: "ecosystem", url: "https://www.tenity.com", order: 10 },
+  { name: "Tomorrow Studio Ventures", logo: `${IMG}/logos-tomorrow-studio-ventures-logo.webp`, tier: "ecosystem", order: 9, hidden: true },
+  { name: "Tenity", logo: `${IMG}/logos-tenity-logo.webp`, tier: "ecosystem", url: "https://www.tenity.com", order: 10, hidden: true },
   { name: "JETRO", logo: `${IMG}/logos-jetro-logo.webp`, tier: "ecosystem", url: "https://www.jetro.go.jp", order: 11 },
   { name: "Deep Tech Canada", logo: `${IMG}/logos-deep-tech-canada-logo.webp`, tier: "ecosystem", url: "https://www.deeptechcanada.com", order: 12 },
-  { name: "Rebbeck Consulting", logo: `${IMG}/logos-rebbeck-consulting-logo.webp`, tier: "ecosystem", order: 13 },
+  { name: "Rebbeck Consulting", logo: `${IMG}/logos-rebbeck-consulting-logo.webp`, tier: "ecosystem", order: 13, hidden: true },
   { name: "HEX", logo: `${IMG}/logos-hex-logo.webp`, tier: "ecosystem", order: 14 },
-  { name: "ClimateLaunchpad", tier: "programme", url: "https://climatelaunchpad.org", order: 15 },
-  { name: "ClimAccelerator", tier: "programme", url: "https://climaccelerator.climate-kic.org", order: 16 },
+  { name: "ClimateLaunchpad", tier: "programme", url: "https://climatelaunchpad.org", order: 15, hidden: true },
+  { name: "ClimAccelerator", tier: "programme", url: "https://climaccelerator.climate-kic.org", order: 16, hidden: true },
 ];
 
 export const companies: Company[] = [
