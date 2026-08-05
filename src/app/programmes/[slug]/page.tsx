@@ -113,7 +113,7 @@ export default async function ProgrammePage({ params }: Params) {
             />
             <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
               {programme.verticals.map((vertical, i) => (
-                <Reveal as="li" key={vertical.title} delay={Math.min(i, 5) * 0.05}>
+                <Reveal as="li" key={vertical.title} delay={Math.min(i, 5) * 0.11}>
                   <div className="h-full bg-canvas-raised p-8">
                     <p className="font-display text-xl font-semibold text-ink">
                       {vertical.title}

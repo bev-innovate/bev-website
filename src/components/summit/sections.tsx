@@ -196,7 +196,7 @@ export function SummitAudience({ audience }: { audience: Summit["audience"] }) {
 
         <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {audience.items.map((item, i) => (
-            <Reveal as="li" key={item.title} delay={Math.min(i, 3) * 0.06} className="h-full">
+            <Reveal as="li" key={item.title} delay={Math.min(i, 3) * 0.13} className="h-full">
               <Card variant="soft" className="h-full p-6">
                 <h3 className="font-display text-lg leading-snug font-semibold text-foreground">
                   {item.title}
@@ -227,7 +227,7 @@ export function SummitStrands({ strands }: { strands: Summit["strands"] }) {
 
         <ul className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
           {strands.items.map((item, i) => (
-            <Reveal as="li" key={item.ref} delay={Math.min(i, 3) * 0.06} className="h-full">
+            <Reveal as="li" key={item.ref} delay={Math.min(i, 3) * 0.13} className="h-full">
               <Card variant="default" className="h-full p-8 md:p-10">
                 <span className="font-display text-4xl font-bold text-primary tabular-nums">
                   {String(i + 1).padStart(2, "0")}
@@ -260,7 +260,7 @@ export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
         */}
         <div className="mt-12 space-y-10 sm:space-y-0 sm:divide-y sm:divide-border">
           {timeline.days.map((day, i) => (
-            <Reveal key={day.ref} delay={Math.min(i, 2) * 0.08}>
+            <Reveal key={day.ref} delay={Math.min(i, 2) * 0.16}>
               <article className="grid sm:grid-cols-5 sm:py-10 sm:first:pt-0">
                 <div className="sm:col-span-2">
                   <p className="font-medium text-primary">{day.date}</p>
@@ -311,7 +311,7 @@ export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
 
         <ul className="mt-12 grid gap-x-6 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
           {speakers.items.map((speaker, i) => (
-            <Reveal as="li" key={speaker.ref} delay={Math.min(i, 7) * 0.03}>
+            <Reveal as="li" key={speaker.ref} delay={Math.min(i, 7) * 0.07}>
               <article className="grid grid-cols-[auto_1fr] items-center gap-3 border-b border-border pb-5">
                 <div className="relative size-10 shrink-0 overflow-hidden rounded-full border border-transparent bg-background shadow ring-1 ring-foreground/10">
                   {speaker.image ? (
@@ -357,7 +357,7 @@ export function SummitStartups({ startups }: { startups: Summit["startups"] }) {
 
         <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {startups.items.map((company, i) => (
-            <Reveal as="li" key={company.ref} delay={Math.min(i, 5) * 0.05} className="h-full">
+            <Reveal as="li" key={company.ref} delay={Math.min(i, 5) * 0.11} className="h-full">
               <Card variant="soft" className="flex h-full flex-col p-6">
                 <h3 className="font-display text-xl font-semibold text-foreground">
                   {company.name}

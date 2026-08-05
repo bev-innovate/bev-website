@@ -133,7 +133,7 @@ export default async function AboutPage() {
                     {team
                       .filter((person) => person.location === location)
                       .map((person, i) => (
-                        <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05} className="h-full">
+                        <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.11} className="h-full">
                           <PersonCard person={person} />
                         </Reveal>
                       ))}
@@ -151,7 +151,7 @@ export default async function AboutPage() {
             <SectionHeading title="Our experts" />
             <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {experts.map((person, i) => (
-                <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05} className="h-full">
+                <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.11} className="h-full">
                   <PersonCard person={person} variant="row" />
                 </Reveal>
               ))}
@@ -166,7 +166,7 @@ export default async function AboutPage() {
             <SectionHeading title="Our advisory board" />
             <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {advisors.map((person, i) => (
-                <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.05} className="h-full">
+                <Reveal as="li" key={person.name} delay={Math.min(i, 5) * 0.11} className="h-full">
                   <PersonCard person={person} variant="row" />
                 </Reveal>
               ))}

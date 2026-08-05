@@ -67,7 +67,7 @@ export default function ClimateExpeditionsPage() {
 
           <ul className="mt-14 grid gap-6 md:grid-cols-3">
             {expeditions.whereWeveBeen.places.map((place, i) => (
-              <Reveal as="li" key={place.name} delay={i * 0.08}>
+              <Reveal as="li" key={place.name} delay={i * 0.16}>
                 <article className="group flex h-full flex-col overflow-hidden rounded-lg">
                   <div className="relative aspect-4/3 overflow-hidden">
                     <Image

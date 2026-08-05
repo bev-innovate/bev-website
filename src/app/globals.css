@@ -142,13 +142,26 @@
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
   /* Panel swap for the tabbed sections. Radix unmounts the inactive panel, so this
      runs on mount and needs no exit counterpart. */
-  --animate-panel-in: panel-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-panel-in: panel-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* Section headings that are plain markup rather than a Reveal component. */
+  --animate-rise: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes panel-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
   }
   to {
     opacity: 1;

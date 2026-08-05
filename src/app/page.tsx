@@ -114,7 +114,7 @@ export default async function HomePage() {
 
             <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {preview.map((programme, i) => (
-                <Reveal key={programme.slug} delay={i * 0.06} className="h-full">
+                <Reveal key={programme.slug} delay={i * 0.13} className="h-full">
                   <ProgrammeCard programme={programme} compact />
                 </Reveal>
               ))}

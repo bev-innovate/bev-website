@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 
+import { enquirySchema, flattenIssues, interestLabels } from "@/lib/enquiry";
 import {
   mirrorToAirtable,
   sendEnquiryEmail,
@@ -21,19 +22,8 @@ const subscribeSchema = z.object({
   company: z.string().max(0).optional(),
 });
 
-const enquirySchema = z.object({
-  name: z.string().trim().min(2, "Tell us your name."),
-  email: z.string().trim().email("Enter a valid email address."),
-  organisation: z.string().trim().max(160).optional(),
-  topic: z.enum(["programme", "partnership", "media", "other"]),
-  message: z.string().trim().min(20, "A little more detail helps us route this properly."),
-  company: z.string().max(0).optional(),
-});
-
 function flatten(error: z.ZodError): Record<string, string> {
-  return Object.fromEntries(
-    error.issues.map((issue) => [String(issue.path[0] ?? "form"), issue.message]),
-  );
+  return flattenIssues(error);
 }
 
 /**
@@ -94,11 +84,12 @@ export async function enquiryAction(
   formData: FormData,
 ): Promise<FormState> {
   const parsed = enquirySchema.safeParse({
-    name: formData.get("name"),
+    firstName: formData.get("firstName"),
+    lastName: formData.get("lastName"),
     email: formData.get("email"),
-    organisation: formData.get("organisation") ?? "",
-    topic: formData.get("topic"),
-    message: formData.get("message"),
+    interest: formData.get("interest") ?? "",
+    goals: formData.get("goals"),
+    subscribe: formData.get("subscribe") === "on",
     company: formData.get("company") ?? "",
   });
 
@@ -107,15 +98,25 @@ export async function enquiryAction(
   }
 
   // `company` is the honeypot — validated above, never stored.
-  const enquiry = {
-    name: parsed.data.name,
-    email: parsed.data.email.toLowerCase(),
-    organisation: parsed.data.organisation || null,
-    topic: parsed.data.topic,
-    message: parsed.data.message,
-  };
+  const { firstName, lastName, interest, goals, subscribe } = parsed.data;
+  const email = parsed.data.email.toLowerCase();
+  const name = `${firstName} ${lastName}`;
 
-  const result = await persist("enquiries", enquiry);
+  /*
+    `name` is still written alongside first and last. The column predates the split and
+    other things may read it; joining the two here costs nothing and breaks nothing.
+  */
+  const result = await persist("enquiries", {
+    name,
+    first_name: firstName,
+    last_name: lastName,
+    email,
+    interest: interest || null,
+    message: goals,
+    subscribe: Boolean(subscribe),
+  });
+
+  const interestLabel = interest ? (interestLabels[interest] ?? interest) : "Not specified";
 
   /*
     Notify after the write, and never let a notification failure fail the submission.
@@ -123,15 +124,25 @@ export async function enquiryAction(
     Both log their own errors.
   */
   await Promise.allSettled([
-    sendEnquiryEmail(enquiry),
+    sendEnquiryEmail({ name, email, interest: interestLabel, goals, subscribe: Boolean(subscribe) }),
     mirrorToAirtable("enquiries", {
-      Name: enquiry.name,
-      Email: enquiry.email,
-      Organisation: enquiry.organisation ?? "",
-      Topic: enquiry.topic,
-      Message: enquiry.message,
+      Name: name,
+      "First name": firstName,
+      "Last name": lastName,
+      Email: email,
+      Interest: interestLabel,
+      Goals: goals,
+      Subscribe: Boolean(subscribe),
     }),
+    // Ticking the box puts them on the list as well as in the enquiry record.
+    subscribe
+      ? mirrorToAirtable("subscribers", { Email: email, Source: "enquiry_form" })
+      : Promise.resolve(),
   ]);
+
+  if (subscribe) {
+    await persist("newsletter_subscribers", { email, source: "enquiry_form" });
+  }
 
   if (!result.ok) {
     return {

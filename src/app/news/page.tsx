@@ -28,7 +28,7 @@ export default async function InsightsPage() {
       <div className="shell py-16 md:py-20">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post, i) => (
-            <Reveal key={post.slug} delay={Math.min(i, 5) * 0.05} className="h-full">
+            <Reveal key={post.slug} delay={Math.min(i, 5) * 0.11} className="h-full">
               <PostCard post={post} />
             </Reveal>
           ))}

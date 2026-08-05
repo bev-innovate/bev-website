@@ -4,6 +4,7 @@ import { ArrowRight, Compass, Handshake, Rocket, Users } from "lucide-react";
 import Image from "next/image";
 
 import { ButtonLink } from "@/components/ui/button";
+import { RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /**
@@ -48,13 +49,20 @@ export function Delivery({
       />
 
       <div className="shell">
-        <div className="max-w-4xl">
-          <span className="text-white/60">{eyebrow}</span>
-          <h2 className="mt-4 font-display text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.05] font-semibold text-balance">
-            {statement}
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">{heading}</p>
-        </div>
+        {/* The statement arrives a line at a time, so the claim lands before its support. */}
+        <RevealGroup className="max-w-4xl" stagger={0.16}>
+          <RevealItem>
+            <span className="text-white/60">{eyebrow}</span>
+          </RevealItem>
+          <RevealItem>
+            <h2 className="mt-4 font-display text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.05] font-semibold text-balance">
+              {statement}
+            </h2>
+          </RevealItem>
+          <RevealItem>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">{heading}</p>
+          </RevealItem>
+        </RevealGroup>
 
         <Tabs defaultValue={pillars[0].tab} className="mt-12 md:mt-16">
           <TabsList className="flex h-auto w-full flex-wrap justify-start gap-2 rounded-none bg-transparent p-0">

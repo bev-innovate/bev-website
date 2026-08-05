@@ -27,18 +27,18 @@ export function Verticals({
   return (
     <section className="py-16 md:py-20">
       <div className="shell">
-        <div className="max-w-3xl">
+        <Reveal className="max-w-3xl">
           <h2 className="font-display text-[clamp(1.75rem,3.8vw,2.75rem)] font-semibold text-ink">
             {heading}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-balance text-muted-foreground">
             {intro}
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((vertical, i) => (
-            <Reveal key={vertical.title} delay={Math.min(i, 3) * 0.07} className="h-full">
+            <Reveal key={vertical.title} delay={Math.min(i, 3) * 0.14} className="h-full">
               <Card variant="soft" className="flex h-full flex-col overflow-hidden">
                 {/* Portrait crop: four uprights read as a set, and the photography gets
                     room to breathe inside a quarter-width column. */}
@@ -64,7 +64,7 @@ export function Verticals({
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-border pt-10">
+        <Reveal className="mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-border pt-10">
           <p className="max-w-xl text-lg text-balance text-muted-foreground">
             Building in one of these? We would love to put you in front of the customers and
             capital who can take it further.
@@ -73,7 +73,7 @@ export function Verticals({
             Join our ecosystem
             <ArrowRight className="size-4" aria-hidden />
           </ButtonLink>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

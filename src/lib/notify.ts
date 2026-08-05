@@ -51,17 +51,11 @@ function escapeHtml(value: string) {
 export interface Enquiry {
   name: string;
   email: string;
-  organisation?: string | null;
-  topic: string;
-  message: string;
+  /** Already resolved to its display label by the caller. */
+  interest: string;
+  goals: string;
+  subscribe: boolean;
 }
-
-const topicLabels: Record<string, string> = {
-  programme: "Programme enquiry",
-  partnership: "Partnership",
-  media: "Media",
-  other: "Other",
-};
 
 export const isEmailConfigured = Boolean(process.env.RESEND_API_KEY);
 export const isAirtableConfigured = Boolean(
@@ -86,15 +80,15 @@ export async function sendEnquiryEmail(enquiry: Enquiry) {
   const rows: [string, string][] = [
     ["Name", enquiry.name],
     ["Email", enquiry.email],
-    ["Organisation", enquiry.organisation || "Not given"],
-    ["Topic", topicLabels[enquiry.topic] ?? enquiry.topic],
+    ["Interest", enquiry.interest],
+    ["Newsletter", enquiry.subscribe ? "Yes" : "No"],
   ];
 
   const result = await post(RESEND_ENDPOINT, key, {
     from: process.env.ENQUIRY_NOTIFY_FROM ?? "Better Earth Ventures <onboarding@resend.dev>",
     to,
     reply_to: enquiry.email,
-    subject: `${topicLabels[enquiry.topic] ?? "Enquiry"} from ${enquiry.name}`,
+    subject: `Enquiry from ${enquiry.name}`,
     html: `
       <div style="font-family:ui-sans-serif,system-ui,sans-serif;font-size:15px;line-height:1.6;color:#2f2b33">
         <h2 style="margin:0 0 16px;font-size:18px">New website enquiry</h2>
@@ -106,7 +100,8 @@ export async function sendEnquiryEmail(enquiry: Enquiry) {
             )
             .join("")}
         </table>
-        <div style="border-left:3px solid #540178;padding-left:16px;white-space:pre-wrap">${escapeHtml(enquiry.message)}</div>
+        <p style="margin:0 0 6px;color:#5b545f">Their goals</p>
+        <div style="border-left:3px solid #540178;padding-left:16px;white-space:pre-wrap">${escapeHtml(enquiry.goals)}</div>
       </div>
     `,
   });

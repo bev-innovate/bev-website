@@ -88,9 +88,8 @@ export default async function ContactPage() {
           </div>
         </div>
 
-        <div className="rounded-[1.75rem] border border-line bg-canvas-sunk p-7 md:p-10">
-          <EnquiryForm />
-        </div>
+        {/* The form brings its own panel now, so it no longer needs wrapping in one. */}
+        <EnquiryForm />
       </div>
     </>
   );

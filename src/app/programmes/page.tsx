@@ -36,7 +36,7 @@ export default async function ProgrammesPage() {
         {/* Four equal cards. No programme is promoted above the others. */}
         <div className="shell grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {programmes.map((programme, i) => (
-            <Reveal key={programme.slug} delay={Math.min(i, 3) * 0.06} className="h-full">
+            <Reveal key={programme.slug} delay={Math.min(i, 3) * 0.13} className="h-full">
               <ProgrammeCard programme={programme} compact />
             </Reveal>
           ))}

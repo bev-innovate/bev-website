@@ -42,22 +42,37 @@ export function PageHeader({
         <div className="absolute inset-0 bg-gradient-to-r from-purple-deep via-purple/75 to-orange/30" />
       </div>
 
+      {/*
+        The banner is above the fold, so this runs on mount rather than on scroll. CSS
+        keyframes rather than framer-motion: it keeps PageHeader a server component, and
+        the reduced-motion rule in globals.css already collapses the duration to nothing.
+      */}
       <div className="shell relative py-16 md:py-20">
-        {eyebrow ? <span className="text-white/70">{eyebrow}</span> : null}
+        {eyebrow ? (
+          <span className="block animate-rise text-white/70">{eyebrow}</span>
+        ) : null}
         <h1
           className={cn(
-            "max-w-4xl font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-balance",
+            "max-w-4xl animate-rise font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-balance",
             eyebrow && "mt-4",
           )}
+          style={{ animationDelay: "0.1s" }}
         >
           {title}
         </h1>
         {intro ? (
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-pretty text-white/85">
+          <p
+            className="mt-6 max-w-3xl animate-rise text-lg leading-relaxed text-pretty text-white/85"
+            style={{ animationDelay: "0.22s" }}
+          >
             {intro}
           </p>
         ) : null}
-        {children ? <div className="mt-9">{children}</div> : null}
+        {children ? (
+          <div className="mt-9 animate-rise" style={{ animationDelay: "0.34s" }}>
+            {children}
+          </div>
+        ) : null}
       </div>
     </header>
   );

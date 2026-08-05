@@ -10,7 +10,7 @@ export function CohortGrid({ companies }: { companies: Company[] }) {
       {companies.map((company, i) => {
         const Wrapper = company.url ? "a" : "div";
         return (
-          <Reveal as="li" key={company.name} delay={Math.min(i, 6) * 0.04}>
+          <Reveal as="li" key={company.name} delay={Math.min(i, 6) * 0.09}>
             <Wrapper
               {...(company.url
                 ? { href: company.url, target: "_blank", rel: "noreferrer noopener" }

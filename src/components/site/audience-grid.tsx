@@ -31,7 +31,7 @@ export function AudienceGrid({
       {audiences.map((audience, i) => {
         const Icon = icons[i % icons.length];
         return (
-          <Reveal as="li" key={audience.question} delay={Math.min(i, 5) * 0.06}>
+          <Reveal as="li" key={audience.question} delay={Math.min(i, 5) * 0.13}>
             <article className="group relative h-full overflow-hidden rounded-xl border border-white/30 bg-white/8 p-7 backdrop-blur-sm transition-colors duration-300 hover:border-white/60 hover:bg-white/14">
               {/* Oversized index, ghosted into the corner. */}
               <span

@@ -59,14 +59,20 @@ Airtable is case-sensitive here.
 
 | Table | Columns | Type |
 | --- | --- | --- |
-| Enquiries | `Name`, `Email`, `Organisation`, `Message` | Single line text / Email / Long text |
-| Enquiries | `Topic` | Single select, or single line text |
+| Enquiries | `Name`, `First name`, `Last name` | Single line text |
+| Enquiries | `Email` | Email |
+| Enquiries | `Goals` | Long text |
+| Enquiries | `Interest` | Single select, or single line text |
+| Enquiries | `Subscribe` | Checkbox |
 | Subscribers | `Email` | Email |
 | Subscribers | `Source` | Single line text |
 
-`Topic` arrives as one of `programme`, `partnership`, `media`, `other`. The request sets
-`typecast: true`, so Airtable will create a missing single-select option rather than
-rejecting the write.
+`Interest` arrives as the full option label, e.g. "Scale my startup with expert guidance".
+The request sets `typecast: true`, so Airtable will create a missing single-select option
+rather than rejecting the write.
+
+Ticking "Sign up for news and updates" writes the enquiry *and* adds the address to
+Subscribers with source `enquiry_form`.
 
 If your existing base uses different column names, tell me what they are and I will map
 them — do not rename the Airtable columns to match this, since that would break whatever
@@ -96,3 +102,18 @@ Submit the contact form on the deployed site, then:
   delivery result. This is where to look first if the mail never arrives.
 - **Airtable** — the record appears in the table.
 - **Vercel** — any channel that failed logged `[notify] …` in the function logs.
+
+## Database migration
+
+The enquiry form was realigned with the one from the Wix site: first and last name
+separately, an ecosystem-interest list in place of the old fixed topic, goals rather than
+message, and a newsletter opt-in.
+
+`supabase/migrations/0002_enquiry_fields.sql` adds `first_name`, `last_name`, `interest`
+and `subscribe`, drops the CHECK constraint that limited `topic` to four values, and makes
+`topic` nullable. It is additive: existing rows keep everything they had, and `name` is
+still written with the two parts joined.
+
+**Run it before the next deploy.** Until it does, inserts will fail on the unknown columns
+and the form will report an error, even though the email and Airtable mirror still go out.
+Paste it into the Supabase SQL editor, or `supabase db push` if the CLI is linked.
