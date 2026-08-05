@@ -255,6 +255,11 @@ export const partners: Partner[] = [
   { name: "Deep Tech Canada", logo: `${IMG}/logos-deep-tech-canada-logo.webp`, tier: "ecosystem", url: "https://www.deeptechcanada.com", order: 11 },
   { name: "Rebbeck Consulting", logo: `${IMG}/logos-rebbeck-consulting-logo.webp`, tier: "ecosystem", order: 92, hidden: true },
   { name: "HEX", logo: `${IMG}/logos-hex-logo.webp`, tier: "ecosystem", order: 12 },
+  { name: "Jobs That Make Sense Asia", logo: `${IMG}/logos-jobs-that-make-sense.webp`, tier: "ecosystem", url: "https://jobsthatmakesense.asia", order: 13 },
+  { name: "Criffel Futures", logo: `${IMG}/logos-criffel-futures.webp`, tier: "ecosystem", url: "https://criffelfutures.com", order: 14 },
+  { name: "CIC Tokyo", logo: `${IMG}/logos-cic-tokyo.webp`, tier: "ecosystem", url: "https://www.cic.com/tokyo", order: 15 },
+  { name: "EnergyLab", logo: `${IMG}/logos-energylab.webp`, tier: "ecosystem", url: "https://energylab.org.au", order: 16 },
+  { name: "FTW Ventures", logo: `${IMG}/logos-ftw-ventures.webp`, tier: "ecosystem", url: "https://www.ftw.vc", order: 17 },
   {
     name: "ClimateLaunchpad",
     // The official ink lockup, which carries "powered by Climate-KIC" within it. EIT
