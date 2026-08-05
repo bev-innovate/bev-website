@@ -67,6 +67,14 @@ export function PartnerMarquee({ partners }: { partners: Partner[] }) {
               alt={partner.name}
               width={240}
               height={96}
+              /*
+                Eager, not lazy. The track is wider than the viewport, so most logos start
+                outside it, and IntersectionObserver does not re-fire as a CSS transform
+                animation carries them in: they stayed blank until a hover paused the
+                animation and forced a recalculation. These are 17 logos of 8-32KB each,
+                so loading them all up front costs less than the bug did.
+              */
+              loading="eager"
               // Fill the box and let object-contain letterbox it.
               className="size-full object-contain p-1"
             />

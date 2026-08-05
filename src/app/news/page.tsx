@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 
 export default async function InsightsPage() {
   const posts = await getPosts();
-  const [lead, ...rest] = posts;
 
   return (
     <>
@@ -25,16 +24,11 @@ export default async function InsightsPage() {
         image="/images/hero-miscellaneous-a7400018-medium-edited.webp"
       />
 
+      {/* Equal cards throughout. No post is promoted above the others. */}
       <div className="shell py-16 md:py-20">
-        {lead ? (
-          <Reveal className="mb-16 border-b border-line pb-16">
-            <PostCard post={lead} size="lg" />
-          </Reveal>
-        ) : null}
-
-        <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((post, i) => (
-            <Reveal key={post.slug} delay={Math.min(i, 5) * 0.05}>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post, i) => (
+            <Reveal key={post.slug} delay={Math.min(i, 5) * 0.05} className="h-full">
               <PostCard post={post} />
             </Reveal>
           ))}

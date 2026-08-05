@@ -17,6 +17,7 @@ export default async function ProgrammesPage() {
   return (
     <>
       <PageHeader
+        eyebrow={programmesIntro.eyebrow}
         title={programmesIntro.title}
         intro={programmesIntro.lede}
         image={programmesIntro.heroImage}

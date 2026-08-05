@@ -127,7 +127,7 @@ export default async function InsightPage({ params }: Params) {
       {related.length ? (
         <section className="shell mt-24 border-t border-line pt-16">
           <h2 className="font-display text-2xl font-semibold text-ink">Keep reading</h2>
-          <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((item) => (
               <PostCard key={item.slug} post={item} />
             ))}

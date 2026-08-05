@@ -219,7 +219,9 @@ export const verticals = [
 
 /** Programmes page — intro above the programme list. */
 export const programmesIntro = {
-  title: "Our Programmes",
+  /** Page name as the eyebrow, a statement as the heading. Matches the News banner. */
+  eyebrow: "Programmes",
+  title: "Every stage of the journey has its own hard part",
   lede: "Every programme we run exists for the same reason: to help climate solutions grow into the companies this region needs.",
   heroImage: `${IMG}/programmes-climaccelearator-cohort-announcement-1-1920-x-1080.webp`,
   paragraphs: [
@@ -443,7 +445,9 @@ export const programmes: Programme[] = [
 
 /** Climate Expeditions page. */
 export const expeditions = {
-  title: "Climate Expeditions",
+  /** Page name as the eyebrow, a statement as the heading. Matches the News banner. */
+  eyebrow: "Climate Expeditions",
+  title: "Some things you can only understand by standing in front of them",
   lede: "Curated, small-group immersion journeys into real-world climate and agrifood innovation sites across Southeast Asia.",
   intro:
     "We take you out of conference rooms and into farms, facilities, labs, and communities where climate solutions are being built, tested and scaled. These expeditions are designed for people shaping climate decisions who want grounded insight, beyond reports, pitch decks and finance spreadsheets.",

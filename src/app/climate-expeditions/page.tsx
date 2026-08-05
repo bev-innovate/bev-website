@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { AudienceGrid } from "@/components/site/audience-grid";
 import { ExpeditionCarousel } from "@/components/site/expedition-carousel";
+import { PageHeader } from "@/components/site/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { expeditions } from "@/lib/seed-content";
@@ -21,50 +22,26 @@ const placeAccent = {
 export default function ClimateExpeditionsPage() {
   return (
     <>
-      {/* Split hero: type on the left, full-bleed landscape on the right. */}
-      <header className="grid items-stretch lg:grid-cols-2">
-        <div className="order-2 flex items-center py-16 lg:order-1 lg:py-24">
-          <div className="shell lg:mx-0 lg:max-w-xl lg:pr-12">
-            {/*
-              The old site filled this headline with forest imagery. Same effect via
-              background-clip, with a purple fallback for browsers that don't support it
-              and for the text-only rendering assistive tech sees.
-            */}
-            <h1
-              className="display bg-clip-text text-[clamp(2.5rem,7vw,4.5rem)] tracking-[-0.03em] text-purple uppercase supports-[background-clip:text]:text-transparent"
-              style={{
-                // Solid purple sits *under* the photo, so a failed image still paints
-                // the letterforms instead of leaving an invisible heading.
-                backgroundImage: `url(${expeditions.heroImage}), linear-gradient(var(--color-purple), var(--color-purple))`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              Climate
-              <br />
-              Expeditions
-            </h1>
-            <p className="mt-6 text-lg leading-snug font-bold text-ink md:text-xl">
-              {expeditions.lede}
-            </p>
-            <p className="mt-5 leading-relaxed text-ink-muted">{expeditions.intro}</p>
-            <ButtonLink href={expeditions.cta.href} variant="teal" size="lg" className="mt-8">
-              {expeditions.cta.label}
-            </ButtonLink>
-          </div>
-        </div>
+      {/*
+        The same banner every other page uses. The old split hero with its
+        background-clipped headline was the last bespoke header on the site.
+      */}
+      <PageHeader
+        eyebrow={expeditions.eyebrow}
+        title={expeditions.title}
+        intro={expeditions.lede}
+        image={expeditions.heroImage}
+      >
+        <ButtonLink href={expeditions.cta.href} variant="white" size="lg">
+          {expeditions.cta.label}
+        </ButtonLink>
+      </PageHeader>
 
-        <div className="relative order-1 min-h-[18rem] lg:order-2 lg:min-h-[38rem]">
-          <Image
-            src={expeditions.heroImage}
-            alt="Aerial view of dense forest canopy"
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
+      <section className="py-16 md:py-20">
+        <div className="shell max-w-4xl text-lg leading-relaxed text-ink-muted">
+          {expeditions.intro}
         </div>
-      </header>
+      </section>
 
       <section className="bg-purple py-16 text-white md:py-20">
         <div className="shell max-w-4xl">
