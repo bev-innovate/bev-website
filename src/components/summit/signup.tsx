@@ -28,11 +28,9 @@ function SubmitButton() {
 export function SummitSignup({
   heading,
   body,
-  footnote,
 }: {
   heading: string;
   body: string;
-  footnote: string;
 }) {
   const [state, formAction] = useActionState(subscribeAction, initial);
 
@@ -69,6 +67,11 @@ export function SummitSignup({
                   aria-describedby={state.fieldErrors?.email ? "summit-email-error" : undefined}
                   className="h-13 w-full rounded-full border border-white/30 bg-white/10 px-6 text-sm text-white placeholder:text-white/50 focus:border-white focus:outline-none"
                 />
+                {/*
+                  Tags the row so summit interest can be told apart from footer signups
+                  without a second list.
+                */}
+                <input type="hidden" name="source" value="summit_page" />
                 {/* Honeypot */}
                 <input
                   type="text"
@@ -88,10 +91,6 @@ export function SummitSignup({
               ) : null}
             </form>
           )}
-
-          <p className="mt-8 text-xs text-white/65">
-            {footnote}
-          </p>
         </div>
       </div>
     </section>

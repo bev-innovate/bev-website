@@ -4,11 +4,8 @@ import {
   SummitAbout,
   SummitAgenda,
   SummitAudience,
-  SummitCtaStrip,
   SummitHero,
   SummitPartners,
-  SummitSpeakers,
-  SummitStartups,
   SummitZones,
 } from "@/components/summit/sections";
 import { SummitSignup } from "@/components/summit/signup";
@@ -42,21 +39,10 @@ export default function SummitPage() {
       <SummitPartners partners={summit.partners} />
       <SummitAbout about={summit.about} />
       <SummitAudience audience={summit.audience} />
-
-      <SummitCtaStrip text="Places are limited and released to our list first." />
-
       <SummitZones zones={summit.zones} />
+
+      {/* Speakers and Companies on the Floor are held back until the names are confirmed. */}
       <SummitAgenda agenda={summit.agenda} zones={summit.zones} />
-
-      <SummitSpeakers speakers={summit.speakers} />
-
-      <SummitCtaStrip
-        text="Want to speak, sponsor or bring a delegation?"
-        cta={{ label: "Talk to the team", href: "/contact" }}
-        tone="mangrove"
-      />
-
-      <SummitStartups startups={summit.startups} />
       <SummitSignup {...summit.signup} />
     </div>
   );

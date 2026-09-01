@@ -106,18 +106,21 @@ export function TrackRecord({
         };
 
   return (
-    <section className="bg-muted/50 py-16 md:py-20">
+    // A teal band rather than the old warm wash: it sets the numbers against the purple
+    // of the section above without repeating it, and gives the figures somewhere to glow.
+    <section className="relative isolate overflow-hidden bg-mangrove py-16 text-white md:py-20">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-mangrove-deep via-mangrove to-teal"
+      />
       <div className="shell" ref={ref}>
-        <motion.h2
-          {...rise(0)}
-          className="font-display text-3xl font-semibold text-ink lg:text-4xl"
-        >
+        <motion.h2 {...rise(0)} className="font-display text-3xl font-semibold lg:text-4xl">
           {heading}
         </motion.h2>
         {intro ? (
           <motion.p
             {...rise(0.12)}
-            className="mt-4 max-w-2xl text-lg leading-relaxed text-balance text-muted-foreground"
+            className="mt-4 max-w-2xl text-lg leading-relaxed text-balance text-white/75"
           >
             {intro}
           </motion.p>
@@ -131,12 +134,12 @@ export function TrackRecord({
               <motion.div key={stat.label} {...rise(delay)}>
                 <dt className="sr-only">{stat.label}</dt>
                 <dd>
-                  <div className="font-display text-4xl font-bold text-primary tabular-nums">
+                  <div className="font-display text-4xl font-bold text-yellow tabular-nums">
                     <CountUp value={stat.value} play={inView} delay={delay} />
                   </div>
-                  <p className="mt-1 text-muted-foreground">{stat.label}</p>
+                  <p className="mt-1 text-white/85">{stat.label}</p>
                   {stat.detail ? (
-                    <p className="mt-1 text-sm leading-relaxed text-ink-faint">{stat.detail}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/60">{stat.detail}</p>
                   ) : null}
                 </dd>
               </motion.div>

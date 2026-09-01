@@ -16,8 +16,15 @@ export interface FormState {
   fieldErrors?: Record<string, string>;
 }
 
+/**
+ * Where a signup came from. An allowlist rather than free text: the field arrives from
+ * the browser, and it ends up in a database column the team filters on.
+ */
+const subscribeSources = ["website_footer", "summit_page"] as const;
+
 const subscribeSchema = z.object({
   email: z.string().trim().email("Enter a valid email address."),
+  source: z.enum(subscribeSources).catch("website_footer"),
   // Honeypot: bots fill hidden fields, humans do not.
   company: z.string().max(0).optional(),
 });
@@ -52,6 +59,7 @@ export async function subscribeAction(
 ): Promise<FormState> {
   const parsed = subscribeSchema.safeParse({
     email: formData.get("email"),
+    source: formData.get("source") ?? "website_footer",
     company: formData.get("company") ?? "",
   });
 
@@ -60,7 +68,7 @@ export async function subscribeAction(
   }
 
   const email = parsed.data.email.toLowerCase();
-  const source = "website_footer";
+  const source = parsed.data.source;
   const result = await persist("newsletter_subscribers", { email, source });
 
   // After the write, and never fatal: a mirror failing must not lose the signup.

@@ -47,7 +47,7 @@ export const summit = {
       { label: "Guests from", value: "50 countries", tbc: false },
     ],
     primary: { label: "Register your interest", href: "#signup" },
-    secondary: { label: "Partner with us", href: "/contact" },
+    secondary: { label: "Browse agenda", href: "#agenda" },
     /**
      * The official key visual, cropped above its partner strip. It carries the summit
      * name and line already, so nothing is overlaid on it.
@@ -110,6 +110,9 @@ export const summit = {
    * `accent` is the zone's identity colour, and it is deliberately reused as the column
    * heading in the day-two agenda: once a reader has learned that Solve is orange here,
    * the agenda does not have to explain itself again.
+   *
+   * `where` is held here but not currently rendered: the rooms are not confirmed publicly
+   * yet, and the zone names carry the page on their own. It is one line to put back.
    */
   zones: {
     heading: "Three zones, running side by side",
@@ -295,6 +298,5 @@ export const summit = {
   signup: {
     heading: "Be first to know when registration opens",
     body: "We release delegate places and speaker announcements to this list before anywhere else. No other mail.",
-    footnote: "Registration opens 2026. Partner and sponsor enquiries welcome any time.",
   },
 } as const;

@@ -67,6 +67,14 @@ Airtable is case-sensitive here.
 | Subscribers | `Email` | Email |
 | Subscribers | `Source` | Single line text |
 
+`Source` is one of three values, so the list can be segmented without a second table:
+
+| Value | Where it came from |
+| --- | --- |
+| `website_footer` | "Stay close to the work" in the footer, on every page |
+| `summit_page` | "Be first to know when registration opens" on the Summit page |
+| `enquiry_form` | The opt-in checkbox on the Work With Us form |
+
 `Interest` arrives as the full option label, e.g. "Scale my startup with expert guidance".
 The request sets `typecast: true`, so Airtable will create a missing single-select option
 rather than rejecting the write.

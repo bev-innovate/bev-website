@@ -31,7 +31,34 @@ the old Day 3 placement was invented placeholder. Say if that is wrong.
   Impact Edition", everywhere, em dash included
 
 **Still open:** C-02 and R-06 (registration URL), C-03 (how to present a three-day event
-where one day is open), C-05 (partner name), B-03, B-04, and everything in section 4.
+where one day is open), C-05 (partner name), B-03, and everything in section 4.
+
+---
+
+## Progress · second pass
+
+**B-04 done.** The hero is now the standard banner every other page uses: the key visual
+sits behind a mangrove-to-teal wash rather than full bleed, with the four facts moved into
+their own section beneath it. Primary CTA "Register your interest", secondary "Browse
+agenda", which jumps to the agenda.
+
+**Also done:**
+- Icons added to "Who the summit is for", one per group, none of them financial. These are
+  lucide, not Flaticon: Flaticon is unreachable from the build environment, and its free
+  licence requires a visible attribution wherever an icon appears. lucide is already a
+  dependency, ISC licensed, and matches the icons used elsewhere on the site.
+- Zone cards lost the colour rule and the room name. Each zone name now carries its own
+  colour instead, which is what the day-two agenda columns then reuse.
+- Agenda days lead with a solid colour band: date on top, day name beneath in bold white,
+  access level to the right. Day two's three zones are colour-headed panels in the same
+  language.
+- The two mid-page CTA bands are gone; the signup at the foot of the page carries it.
+- Speakers ("Who you will hear from") and Companies on the Floor are hidden until A-05,
+  A-06 and A-07 land. Both components and their content are still in the repo, so putting
+  them back is a two-line change to `src/app/summit/page.tsx`.
+- The signup footnote ("Registration opens 2026…") is removed.
+- Summit signups now write `source: summit_page` rather than being pooled with footer
+  signups. See `docs/form-submissions.md`.
 
 ---
 

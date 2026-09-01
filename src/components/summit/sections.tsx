@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Building2, Landmark, Rocket, Telescope } from "lucide-react";
 import Image from "next/image";
 
 import { SectionHead, Tbc } from "@/components/summit/primitives";
@@ -14,45 +14,63 @@ type Summit = typeof summit;
 
 export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string }) {
   return (
-    <header className="relative isolate overflow-hidden bg-sand text-ink">
+    <>
       {/*
-        The official key visual, full bleed. It already carries the summit name and line,
-        so nothing is set over it: the type below restates them for search and screen
-        readers, which a raster lockup cannot do on its own.
-
-        The asset is 2.24:1. Narrow viewports use a taller frame anchored left, where the
-        title sits, rather than letterboxing the whole thing down to a strip.
+        The same banner every other page uses: the key visual sits behind a wash rather
+        than full bleed above the copy. The mangrove-to-teal gradient marks the summit as
+        its own thing without leaving the palette.
       */}
-      <div className="relative aspect-4/3 w-full sm:aspect-2/1 lg:aspect-[1600/715]">
-        <Image
-          src={hero.image}
-          alt={`${name}: ${hero.headline}`}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-left lg:object-center"
-        />
-      </div>
+      <header className="relative isolate overflow-hidden bg-mangrove text-white">
+        <div aria-hidden className="absolute inset-0 -z-10">
+          <Image
+            src={hero.image}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-left lg:object-center"
+          />
+          <div className="absolute inset-0 bg-mangrove/85" />
+          <div className="absolute inset-0 bg-gradient-to-r from-mangrove-deep via-mangrove/80 to-teal/40" />
+        </div>
 
-      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-2/3">
-        {/* Systems and Signals: isolines as structure under the copy block. */}
-        <div className="contours absolute inset-0 text-mangrove opacity-30" />
-      </div>
+        <div className="shell relative py-16 md:py-20">
+          <h1 className="max-w-4xl animate-rise font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-balance">
+            {name}
+          </h1>
+          <p
+            className="mt-4 max-w-3xl animate-rise font-display text-[clamp(1.25rem,2.4vw,1.75rem)] font-semibold text-white/90"
+            style={{ animationDelay: "0.1s" }}
+          >
+            {hero.headline}
+          </p>
+          <p
+            className="mt-6 max-w-3xl animate-rise text-lg leading-relaxed text-pretty text-white/85"
+            style={{ animationDelay: "0.22s" }}
+          >
+            {hero.standfirst}
+          </p>
 
-      <div className="shell relative py-14 md:py-20">
-        {/*
-          The artwork above already sets the name and the line at full scale, so the
-          heading here is sized as a summary rather than a second hero. It stays an h1
-          because the artwork's title is a raster.
-        */}
-        <h1 className="display max-w-3xl text-[clamp(1.6rem,3vw,2.25rem)] text-ink">{name}</h1>
+          <div
+            className="mt-9 flex animate-rise flex-wrap gap-4"
+            style={{ animationDelay: "0.34s" }}
+          >
+            <ButtonLink href={hero.primary.href} size="lg">
+              {hero.primary.label}
+              <ArrowRight className="size-4" aria-hidden />
+            </ButtonLink>
+            <ButtonLink href={hero.secondary.href} size="lg" variant="white">
+              {hero.secondary.label}
+            </ButtonLink>
+          </div>
+        </div>
+      </header>
 
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{hero.standfirst}</p>
-
-        {/* The standing facts, on the same card primitive as the rest of the page. */}
-        <dl className="mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+      {/* The standing facts, now their own section directly beneath the banner. */}
+      <section className="border-b border-border bg-background py-10 md:py-12">
+        <dl className="shell grid grid-cols-2 gap-3 sm:grid-cols-4">
           {hero.facts.map((fact) => (
-            <Card key={fact.label} variant="mixed" className="px-4 py-4">
+            <Card key={fact.label} variant="soft" className="px-5 py-5">
               <dt className="text-sm text-muted-foreground">{fact.label}</dt>
               <dd className="mt-1.5 flex items-center gap-2 font-medium text-foreground">
                 {fact.value}
@@ -61,23 +79,8 @@ export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string 
             </Card>
           ))}
         </dl>
-
-        <div className="mt-10 flex flex-wrap gap-4">
-          <ButtonLink href={hero.primary.href} size="lg">
-            {hero.primary.label}
-            <ArrowRight className="size-4" aria-hidden />
-          </ButtonLink>
-          <ButtonLink
-            href={hero.secondary.href}
-            size="lg"
-            variant="outline"
-            className="border-ink/25 text-ink hover:bg-ink/5"
-          >
-            {hero.secondary.label}
-          </ButtonLink>
-        </div>
-      </div>
-    </header>
+      </section>
+    </>
   );
 }
 
@@ -167,6 +170,26 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
 
 /* ── Who the summit is for ──────────────────────────────────────────────────── */
 
+/**
+ * One icon per audience, in fixed order.
+ *
+ * lucide-react rather than Flaticon: Flaticon is unreachable from this environment, and
+ * its free licence needs a visible attribution wherever an icon appears, which is a
+ * standing obligation on a marketing page. lucide is already a dependency, is ISC
+ * licensed with no attribution, and matches the icons used elsewhere on the site.
+ *
+ * Nothing financial, as asked: investors get a telescope for looking ahead, not a coin.
+ */
+const audienceIcons = [Rocket, Telescope, Building2, Landmark];
+
+/** Cycles the brand colours so the four cards are not one flat block. */
+const audienceAccents = [
+  { icon: "text-purple", tile: "bg-purple/10" },
+  { icon: "text-teal-deep", tile: "bg-teal/10" },
+  { icon: "text-orange-deep", tile: "bg-orange/10" },
+  { icon: "text-sky", tile: "bg-sky/10" },
+] as const;
+
 export function SummitAudience({ audience }: { audience: Summit["audience"] }) {
   return (
     <section className="py-16 md:py-20">
@@ -174,16 +197,28 @@ export function SummitAudience({ audience }: { audience: Summit["audience"] }) {
         <SectionHead heading={audience.heading} intro={audience.intro} />
 
         <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {audience.items.map((item, i) => (
-            <Reveal as="li" key={item.title} delay={Math.min(i, 3) * 0.13} className="h-full">
-              <Card variant="soft" className="h-full p-6">
-                <h3 className="font-display text-lg leading-snug font-semibold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{item.body}</p>
-              </Card>
-            </Reveal>
-          ))}
+          {audience.items.map((item, i) => {
+            const Icon = audienceIcons[i % audienceIcons.length];
+            const accent = audienceAccents[i % audienceAccents.length];
+            return (
+              <Reveal as="li" key={item.title} delay={Math.min(i, 3) * 0.13} className="h-full">
+                <Card variant="soft" className="h-full p-6">
+                  <span
+                    className={cn(
+                      "grid size-11 place-items-center rounded-full",
+                      accent.tile,
+                    )}
+                  >
+                    <Icon className={cn("size-5", accent.icon)} aria-hidden />
+                  </span>
+                  <h3 className="mt-5 font-display text-lg leading-snug font-semibold text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">{item.body}</p>
+                </Card>
+              </Reveal>
+            );
+          })}
         </ul>
       </div>
     </section>
@@ -197,17 +232,17 @@ export function SummitAudience({ audience }: { audience: Summit["audience"] }) {
  * the day-two agenda, so the agenda does not have to re-explain what Solve is.
  */
 const zoneAccent = {
-  purple: { rule: "bg-purple", text: "text-purple", dot: "bg-purple" },
-  orange: { rule: "bg-orange", text: "text-orange-deep", dot: "bg-orange" },
-  teal: { rule: "bg-teal", text: "text-teal-deep", dot: "bg-teal" },
+  purple: { text: "text-purple", dot: "bg-purple", band: "bg-purple" },
+  orange: { text: "text-orange-deep", dot: "bg-orange", band: "bg-orange" },
+  teal: { text: "text-teal-deep", dot: "bg-teal", band: "bg-teal" },
 } as const;
 
 /**
  * The three zones.
  *
  * Equal columns rather than a numbered sequence: the zones run at the same time, and
- * numbering them would imply an order to work through. Each card leads with a colour
- * rule and the room, so the zone reads as a place you can stand in.
+ * numbering them would imply an order to work through. The zone name carries its own
+ * colour, which is the only label the day-two agenda columns then need.
  */
 export function SummitZones({ zones }: { zones: Summit["zones"] }) {
   return (
@@ -221,12 +256,9 @@ export function SummitZones({ zones }: { zones: Summit["zones"] }) {
             return (
               <Reveal as="li" key={zone.key} delay={Math.min(i, 2) * 0.13} className="h-full">
                 <Card variant="default" className="flex h-full flex-col p-8">
-                  <span className={cn("block h-1 w-12 rounded-full", accent.rule)} aria-hidden />
-
-                  <h3 className="mt-6 font-display text-2xl font-semibold text-foreground">
+                  <h3 className={cn("font-display text-2xl font-semibold", accent.text)}>
                     {zone.name}
                   </h3>
-                  <p className={cn("mt-1 text-sm font-medium", accent.text)}>{zone.where}</p>
 
                   <p className="mt-4 leading-relaxed text-muted-foreground">{zone.purpose}</p>
 
@@ -272,7 +304,8 @@ export function SummitAgenda({
   const zoneByKey = Object.fromEntries(zones.items.map((z) => [z.key, z]));
 
   return (
-    <section className="py-16 md:py-20">
+    // The hero's secondary CTA lands here, so the anchor has to live on the section.
+    <section id="agenda" className="scroll-mt-24 py-16 md:py-20">
       <div className="shell">
         <SectionHead heading={agenda.heading} />
 
@@ -282,13 +315,22 @@ export function SummitAgenda({
             return (
               <Reveal key={day.ref} delay={Math.min(i, 2) * 0.13}>
                 <Card variant="default" className="overflow-hidden">
-                  {/* Day header: date, name, and who can be in the room. */}
-                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-border p-6 md:p-8">
-                    <p className={cn("font-medium", accent.text)}>{day.date}</p>
-                    <h3 className="font-display text-2xl font-semibold text-foreground">
-                      {day.title}
-                    </h3>
-                    <span className="ml-auto rounded-full border border-border px-3 py-1 text-sm text-muted-foreground">
+                  {/*
+                    Day header as a solid colour band: the date sits on top, the day's
+                    name beneath it, and the access level to the right, so who can be in
+                    the room is read at the same moment as the day itself.
+                  */}
+                  <div
+                    className={cn(
+                      "flex flex-wrap items-end justify-between gap-x-6 gap-y-3 p-6 text-white md:p-8",
+                      accent.band,
+                    )}
+                  >
+                    <div>
+                      <p className="text-sm font-medium text-white/80">{day.date}</p>
+                      <h3 className="mt-1 font-display text-2xl font-bold">{day.title}</h3>
+                    </div>
+                    <span className="rounded-full bg-white/20 px-3 py-1 text-sm font-medium">
                       {day.access}
                     </span>
                   </div>
@@ -309,15 +351,21 @@ export function SummitAgenda({
                           if (!zone) return null;
                           const zoneStyle = zoneAccent[zone.accent];
                           return (
-                            <li key={key} className="rounded-(--radius) bg-foreground/5 p-5">
-                              <span
-                                className={cn("block h-1 w-8 rounded-full", zoneStyle.rule)}
-                                aria-hidden
-                              />
-                              <p className="mt-3 font-display font-semibold text-foreground">
+                            <li
+                              key={key}
+                              className="overflow-hidden rounded-(--radius) border border-border"
+                            >
+                              <p
+                                className={cn(
+                                  "px-5 py-3 font-display font-bold text-white",
+                                  zoneStyle.band,
+                                )}
+                              >
                                 {zone.name}
                               </p>
-                              <p className="mt-1 text-sm text-muted-foreground">{zone.where}</p>
+                              <p className="px-5 py-4 text-sm leading-relaxed text-muted-foreground">
+                                {zone.purpose}
+                              </p>
                             </li>
                           );
                         })}
