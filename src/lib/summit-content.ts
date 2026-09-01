@@ -38,13 +38,13 @@ export const summit = {
     /** Matches the line set into the key visual, so the page and the artwork agree. */
     headline: "Where climate founders come to scale",
     standfirst:
-      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase.",
+      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase — Impact Edition.",
     /** Rendered as a monospace data row under the headline. */
     facts: [
       { label: "Dates", value: "13 – 15 October 2026", tbc: false },
       { label: "Location", value: "Singapore", tbc: false },
-      { label: "Venue", value: "Confirmed upon registration", tbc: false },
-      { label: "Countries", value: "50", tbc: false },
+      { label: "Venue", value: "Shared upon confirmation", tbc: false },
+      { label: "Guests from", value: "50 countries", tbc: false },
     ],
     primary: { label: "Register your interest", href: "#signup" },
     secondary: { label: "Partner with us", href: "/contact" },
@@ -73,17 +73,10 @@ export const summit = {
   },
 
   about: {
-    heading: "Three days built around commercial outcomes",
+    heading: "Three days built around tangible outcomes",
     paragraphs: [
-      "The Climate Innovation Summit Singapore moves climate solutions from proof of concept to proof of value. Founders arrive with something built. They leave with the customers, capital and partnerships that decide whether it scales.",
-      "The programme is anchored by two events that already draw the world to Singapore: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase.",
-    ],
-    /** Specimen grid — the measurable claims. */
-    specimens: [
-      { ref: "S-01", value: "50", label: "Countries represented" },
-      { ref: "S-02", value: "3", label: "Days" },
-      { ref: "S-03", value: "TBC", label: "Founders on stage", tbc: true },
-      { ref: "S-04", value: "TBC", label: "Investors attending", tbc: true },
+      "The Climate Innovation Summit Singapore moves climate solutions from proof of concept to proof of value. Founders arrive with something built. They leave with the customers, capital and partnerships that take it further. That is how it scales and creates impact.",
+      "The programme is anchored by two events: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase — Impact Edition.",
     ],
     texture: `${IMG}/climate-expedition-a-little-wild.webp`,
   },
@@ -111,67 +104,130 @@ export const summit = {
     ],
   },
 
-  strands: {
-    heading: "Four strands running across three days",
+  /**
+   * The three zones.
+   *
+   * `accent` is the zone's identity colour, and it is deliberately reused as the column
+   * heading in the day-two agenda: once a reader has learned that Solve is orange here,
+   * the agenda does not have to explain itself again.
+   */
+  zones: {
+    heading: "Three zones, running side by side",
     intro:
-      "Every strand is designed to produce something concrete: a pilot conversation, a term sheet, a policy commitment.",
+      "On the open day all three run at once, so you can move between them as the day suits you.",
     items: [
       {
-        ref: "ST-01",
-        title: "Founder roundtables",
-        body: "Closed-door sessions where early-stage founders put live commercialisation problems to operators who have solved them.",
+        key: "discover",
+        name: "Discover",
+        accent: "purple" as const,
+        where: "Auditorium",
+        purpose: "The main stage, for the sessions worth stopping everything to hear.",
+        activities: [
+          "Synthesis session on the futures we can see coming",
+          "PepsiCo climate impact case study: scaling climate tech inside a global business",
+          "Global Insights: founders on what building looks like in their country",
+          "ClimateLaunchpad Global Grand Final, followed by networking",
+        ],
       },
       {
-        ref: "ST-02",
-        title: "Proof of value showcase",
-        body: "Companies present deployed technology and the evidence behind it: pilots run, yields moved, emissions avoided.",
+        key: "solve",
+        name: "Solve",
+        accent: "orange" as const,
+        where: "Solve-It Zone",
+        purpose: "Bring a live problem and leave with a way through it.",
+        activities: [
+          "Hour-long takeovers hosted by partners and mentors",
+          "Expertise on hand across legal, investment and team building",
+          "Open drop-in for founders with a specific challenge",
+        ],
       },
       {
-        ref: "ST-03",
-        title: "Capital and corporate matching",
-        body: "Structured one-to-one meetings between founders, investors and corporate buyers, matched on sector and stage.",
-      },
-      {
-        ref: "ST-04",
-        title: "ClimateLaunchpad Global Grand Final",
-        body: "The world's largest green business ideas competition crowns its winner, in its thirteenth year.",
+        key: "connect",
+        name: "Connect",
+        accent: "teal" as const,
+        where: "Coworking space",
+        purpose: "Where the introductions happen, all day, without a schedule.",
+        activities: [
+          "Matchmaking Corner",
+          "Collaboration Matrix: pledge what you will follow up on",
+          "Open space for the conversations a session starts",
+        ],
       },
     ],
   },
 
-  timeline: {
-    heading: "Three days, one arc",
+  /**
+   * The three days.
+   *
+   * Each day carries an `access` label because only the middle day is open to everyone:
+   * day one is for startups and mentors, day three is invite only. Someone deciding
+   * whether to register needs that before they read a single session title.
+   *
+   * Day two is the only one with `zones` rather than `blocks`, because its three tracks
+   * run at the same time. A single ordered list would imply a sequence that does not
+   * exist.
+   */
+  agenda: {
+    heading: "Three days, three different rooms to be in",
     days: [
       {
         ref: "D-01",
-        date: "13 October",
-        title: "Proof of concept",
+        date: "Tuesday 13 October",
+        title: "Builders' Day",
+        access: "Startups and mentors only",
+        accent: "purple" as const,
+        note: "Registration from 1:00pm, programme starts 1:30pm.",
         blocks: [
-          { time: "09:00", title: "Opening and framing", tbc: true },
-          { time: "10:30", title: "Founder roundtables: round one", tbc: true },
-          { time: "14:00", title: "Deep-dive clinics by sector", tbc: true },
-          { time: "18:00", title: "Welcome reception", tbc: true },
+          {
+            time: "13:30",
+            title: "Founder talks",
+            body: "Founders who have done it, on their background, their biggest mistake, their biggest win, and the one tip they would pass on.",
+          },
+          {
+            time: "14:30",
+            title: "Founder Circle",
+            body: "Mini roundtables where each founder puts a live challenge to the group, facilitated by the founders who just spoke.",
+          },
+          {
+            time: "15:30",
+            title: "Expert roundtables",
+            body: "Choose your own adventure: three topics drawn from what founders told us they are wrestling with.",
+            tbc: true,
+          },
+          {
+            time: "16:30",
+            title: "One-to-one mentoring",
+            body: "Matched in advance on the question you submit, so the conversation starts already useful.",
+          },
+          { time: "Evening", title: "VIP reception" },
         ],
       },
       {
         ref: "D-02",
-        date: "14 October",
-        title: "Proof of value",
+        date: "Wednesday 14 October",
+        title: "The open day",
+        access: "Open to all registered attendees",
+        accent: "teal" as const,
+        note: "All three zones run at once. Move between them as the day suits you.",
+        zones: ["discover", "solve", "connect"],
         blocks: [
-          { time: "09:00", title: "Keynote", tbc: true },
-          { time: "10:30", title: "Proof of value showcase", tbc: true },
-          { time: "13:30", title: "Capital and corporate matching", tbc: true },
-          { time: "19:00", title: "Summit dinner", tbc: true },
+          { time: "11:30", title: "Solve-It Zone opens", body: "Partner and mentor takeovers, an hour at a time." },
+          { time: "16:00", title: "ClimateLaunchpad Global Grand Final", body: "In the Discover Zone, followed by networking." },
         ],
       },
       {
         ref: "D-03",
-        date: "15 October",
-        title: "Global Grand Final",
+        date: "Thursday 15 October",
+        title: "PepsiCo Greenhouse Program APAC Showcase — Impact Edition",
+        access: "Invite only",
+        accent: "orange" as const,
+        note: "From around 10:30am.",
         blocks: [
-          { time: "09:30", title: "ClimateLaunchpad Global Grand Final", tbc: true },
-          { time: "14:00", title: "PepsiCo Greenhouse APAC Showcase", tbc: true },
-          { time: "16:30", title: "Awards and close", tbc: true },
+          {
+            time: "10:30",
+            title: "Impact Edition showcase",
+            body: "An impact framework applied to five returning startups from the four-year APAC accelerator.",
+          },
         ],
       },
     ],

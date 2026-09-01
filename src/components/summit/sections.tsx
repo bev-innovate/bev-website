@@ -145,27 +145,6 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
               <p key={p}>{p}</p>
             ))}
           </div>
-
-          {/*
-            Stats grid from Tailark's `stats/four` (MIT, github.com/tailark/blocks):
-            unboxed figures in `text-primary`, labels in `text-muted-foreground`.
-          */}
-          <dl className="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
-            {about.specimens.map((item) => (
-              <div key={item.ref}>
-                <dt className="sr-only">{item.label}</dt>
-                <dd>
-                  <span className="flex items-center gap-2 font-display text-4xl font-bold text-primary">
-                    {item.value}
-                    {"tbc" in item && item.tbc ? <Tbc /> : null}
-                  </span>
-                  <span className="mt-1 block leading-snug text-muted-foreground">
-                    {item.label}
-                  </span>
-                </dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         <Reveal delay={0.08}>
@@ -211,83 +190,168 @@ export function SummitAudience({ audience }: { audience: Summit["audience"] }) {
   );
 }
 
-/* ── Strands ────────────────────────────────────────────────────────────────── */
+/* ── Zones ──────────────────────────────────────────────────────────────────── */
 
 /**
- * Strands.
- *
- * Card grid from Tailark's `features/eight` block (MIT, github.com/tailark/blocks), with
- * the numbered lead-in kept so the four strands read as a set rather than four tiles.
+ * Each zone's identity colour. Established here and reused as the column headings in
+ * the day-two agenda, so the agenda does not have to re-explain what Solve is.
  */
-export function SummitStrands({ strands }: { strands: Summit["strands"] }) {
+const zoneAccent = {
+  purple: { rule: "bg-purple", text: "text-purple", dot: "bg-purple" },
+  orange: { rule: "bg-orange", text: "text-orange-deep", dot: "bg-orange" },
+  teal: { rule: "bg-teal", text: "text-teal-deep", dot: "bg-teal" },
+} as const;
+
+/**
+ * The three zones.
+ *
+ * Equal columns rather than a numbered sequence: the zones run at the same time, and
+ * numbering them would imply an order to work through. Each card leads with a colour
+ * rule and the room, so the zone reads as a place you can stand in.
+ */
+export function SummitZones({ zones }: { zones: Summit["zones"] }) {
   return (
     <section className="bg-muted/50 py-16 md:py-20">
       <div className="shell">
-        <SectionHead heading={strands.heading} intro={strands.intro} />
+        <SectionHead heading={zones.heading} intro={zones.intro} />
 
-        <ul className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
-          {strands.items.map((item, i) => (
-            <Reveal as="li" key={item.ref} delay={Math.min(i, 3) * 0.13} className="h-full">
-              <Card variant="default" className="h-full p-8 md:p-10">
-                <span className="font-display text-4xl font-bold text-primary tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-5 font-display text-2xl font-semibold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{item.body}</p>
-              </Card>
-            </Reveal>
-          ))}
+        <ul className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3">
+          {zones.items.map((zone, i) => {
+            const accent = zoneAccent[zone.accent];
+            return (
+              <Reveal as="li" key={zone.key} delay={Math.min(i, 2) * 0.13} className="h-full">
+                <Card variant="default" className="flex h-full flex-col p-8">
+                  <span className={cn("block h-1 w-12 rounded-full", accent.rule)} aria-hidden />
+
+                  <h3 className="mt-6 font-display text-2xl font-semibold text-foreground">
+                    {zone.name}
+                  </h3>
+                  <p className={cn("mt-1 text-sm font-medium", accent.text)}>{zone.where}</p>
+
+                  <p className="mt-4 leading-relaxed text-muted-foreground">{zone.purpose}</p>
+
+                  <ul className="mt-6 space-y-3 border-t border-border pt-6">
+                    {zone.activities.map((activity) => (
+                      <li key={activity} className="flex gap-3 text-muted-foreground">
+                        <span
+                          aria-hidden
+                          className={cn("mt-2 size-1.5 shrink-0 rounded-full", accent.dot)}
+                        />
+                        {activity}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </Reveal>
+            );
+          })}
         </ul>
       </div>
     </section>
   );
 }
 
-/* ── Timeline ───────────────────────────────────────────────────────────────── */
+/* ── Agenda ─────────────────────────────────────────────────────────────────── */
 
-export function SummitTimeline({ timeline }: { timeline: Summit["timeline"] }) {
+/**
+ * The three days.
+ *
+ * Days are stacked rather than tabbed. Tabs would shorten the page, but they hide two
+ * days behind a click, and someone deciding whether to travel wants to see the whole
+ * thing at once. It also prints, and event pages get printed.
+ *
+ * Each day leads with its access level, because only the middle day is open to everyone.
+ */
+export function SummitAgenda({
+  agenda,
+  zones,
+}: {
+  agenda: Summit["agenda"];
+  zones: Summit["zones"];
+}) {
+  const zoneByKey = Object.fromEntries(zones.items.map((z) => [z.key, z]));
+
   return (
     <section className="py-16 md:py-20">
       <div className="shell">
-        <SectionHead heading={timeline.heading} />
+        <SectionHead heading={agenda.heading} />
 
-        {/*
-          Divided rows from Tailark's `content/two` block (MIT, github.com/tailark/blocks):
-          each day is a `sm:grid-cols-5` split with the schedule set off by a left rule,
-          and the days separated by `sm:divide-y` rather than boxed into three columns.
-        */}
-        <div className="mt-12 space-y-10 sm:space-y-0 sm:divide-y sm:divide-border">
-          {timeline.days.map((day, i) => (
-            <Reveal key={day.ref} delay={Math.min(i, 2) * 0.16}>
-              <article className="grid sm:grid-cols-5 sm:py-10 sm:first:pt-0">
-                <div className="sm:col-span-2">
-                  <p className="font-medium text-primary">{day.date}</p>
-                  <h3 className="mt-2 font-display text-2xl font-semibold text-foreground">
-                    {day.title}
-                  </h3>
-                </div>
+        <div className="mt-12 space-y-4">
+          {agenda.days.map((day, i) => {
+            const accent = zoneAccent[day.accent];
+            return (
+              <Reveal key={day.ref} delay={Math.min(i, 2) * 0.13}>
+                <Card variant="default" className="overflow-hidden">
+                  {/* Day header: date, name, and who can be in the room. */}
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-border p-6 md:p-8">
+                    <p className={cn("font-medium", accent.text)}>{day.date}</p>
+                    <h3 className="font-display text-2xl font-semibold text-foreground">
+                      {day.title}
+                    </h3>
+                    <span className="ml-auto rounded-full border border-border px-3 py-1 text-sm text-muted-foreground">
+                      {day.access}
+                    </span>
+                  </div>
 
-                <ol className="mt-6 sm:col-span-3 sm:mt-0 sm:border-l sm:border-border sm:pl-12">
-                  {day.blocks.map((block) => (
-                    <li
-                      key={block.time + block.title}
-                      className="flex gap-5 border-b border-border py-3 first:pt-0 last:border-0 last:pb-0"
-                    >
-                      <span className="w-14 shrink-0 pt-0.5 text-sm text-muted-foreground tabular-nums">
-                        {block.time}
-                      </span>
-                      <span className="flex flex-1 flex-wrap items-center gap-2 text-foreground">
-                        {block.title}
-                        {block.tbc ? <Tbc /> : null}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </article>
-            </Reveal>
-          ))}
+                  <div className="p-6 md:p-8">
+                    {day.note ? (
+                      <p className="mb-6 text-muted-foreground">{day.note}</p>
+                    ) : null}
+
+                    {/*
+                      Day two's three zones run concurrently, so they sit side by side.
+                      An ordered list would imply a sequence that does not exist.
+                    */}
+                    {"zones" in day && day.zones ? (
+                      <ul className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        {day.zones.map((key) => {
+                          const zone = zoneByKey[key];
+                          if (!zone) return null;
+                          const zoneStyle = zoneAccent[zone.accent];
+                          return (
+                            <li key={key} className="rounded-(--radius) bg-foreground/5 p-5">
+                              <span
+                                className={cn("block h-1 w-8 rounded-full", zoneStyle.rule)}
+                                aria-hidden
+                              />
+                              <p className="mt-3 font-display font-semibold text-foreground">
+                                {zone.name}
+                              </p>
+                              <p className="mt-1 text-sm text-muted-foreground">{zone.where}</p>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    ) : null}
+
+                    <ol className="space-y-0">
+                      {day.blocks.map((block) => (
+                        <li
+                          key={block.time + block.title}
+                          className="grid gap-1 border-b border-border py-4 first:pt-0 last:border-0 last:pb-0 sm:grid-cols-[6rem_1fr] sm:gap-6"
+                        >
+                          <span className="text-sm text-muted-foreground tabular-nums">
+                            {block.time}
+                          </span>
+                          <div>
+                            <p className="flex flex-wrap items-center gap-2 font-medium text-foreground">
+                              {block.title}
+                              {"tbc" in block && block.tbc ? <Tbc /> : null}
+                            </p>
+                            {"body" in block && block.body ? (
+                              <p className="mt-1 leading-relaxed text-muted-foreground">
+                                {block.body}
+                              </p>
+                            ) : null}
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </Card>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

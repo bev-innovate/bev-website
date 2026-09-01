@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 
 import {
   SummitAbout,
+  SummitAgenda,
   SummitAudience,
   SummitCtaStrip,
   SummitHero,
   SummitPartners,
   SummitSpeakers,
   SummitStartups,
-  SummitStrands,
-  SummitTimeline,
+  SummitZones,
 } from "@/components/summit/sections";
 import { SummitSignup } from "@/components/summit/signup";
 import { summit } from "@/lib/summit-content";
@@ -45,8 +45,8 @@ export default function SummitPage() {
 
       <SummitCtaStrip text="Places are limited and released to our list first." />
 
-      <SummitStrands strands={summit.strands} />
-      <SummitTimeline timeline={summit.timeline} />
+      <SummitZones zones={summit.zones} />
+      <SummitAgenda agenda={summit.agenda} zones={summit.zones} />
 
       <SummitSpeakers speakers={summit.speakers} />
 

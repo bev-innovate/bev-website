@@ -14,6 +14,27 @@ ID so we can refer to it later.
 
 ---
 
+## Progress · 1 September
+
+**Done:** R-01 to R-05, R-07, R-08, R-09. B-01 (agenda) and B-02 (three zones).
+
+**C-01 resolved in favour of the briefing.** The Global Grand Final is now Day 2 at
+4:00pm, in the Discover Zone. The briefing is newer than the page and states it directly;
+the old Day 3 placement was invented placeholder. Say if that is wrong.
+
+**Assumptions taken, easily reversed:**
+- C-06 — venue reads "Shared upon confirmation"
+- C-07 — removed the About stats block, kept the hero facts row
+- R-02 — label is "Guests from" without the colon, since it sits in a row of other
+  labels that have none. Value is "50 countries"
+- C-04 — used the full approved name, "PepsiCo Greenhouse Program APAC Showcase —
+  Impact Edition", everywhere, em dash included
+
+**Still open:** C-02 and R-06 (registration URL), C-03 (how to present a three-day event
+where one day is open), C-05 (partner name), B-03, B-04, and everything in section 4.
+
+---
+
 ## 1. Conflicts and problems found
 
 These are not in the briefing. They came out of reading it against what the page currently
