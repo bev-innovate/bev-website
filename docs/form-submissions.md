@@ -44,18 +44,35 @@ Replies go to the enquirer, not to the robot: `reply_to` is set to the sender's 
 
 ## Turning the Airtable mirror on
 
+The base is already known: **`appxKGcCrGkqLk1vM`**, taken from the enquiry form's URL, and
+it is set as the default `AIRTABLE_BASE_ID` in `.env.example`. The only thing missing is a
+token, which has to be created by someone signed in to the workspace.
+
 1. Create a token at [airtable.com/create/tokens](https://airtable.com/create/tokens).
-   Scope it to **`data.records:write`** on the one base, nothing wider. This token can
-   create records; it should not be able to read the rest of the workspace.
-2. Find the base ID: it is the `app…` segment of the base's URL.
-3. Set `AIRTABLE_TOKEN` and `AIRTABLE_BASE_ID` in Vercel. Set
-   `AIRTABLE_ENQUIRIES_TABLE` / `AIRTABLE_SUBSCRIBERS_TABLE` if the tables are not named
-   `Enquiries` and `Subscribers`.
+   Scope it to **`data.records:write`** on that one base and nothing wider. It needs to
+   create records; it should not be able to read the rest of the workspace. Add
+   **`schema.bases:read`** as well if you want the check below to compare column names.
+2. Put it in `.env.local` as `AIRTABLE_TOKEN` (that file is gitignored). Do not paste a
+   token into chat, a commit, or a shared document.
+3. Run `npm run airtable:check`. It reports whether the two tables exist and whether every
+   column the mirror writes is present, with the exact names that are missing.
+4. Run `npm run airtable:check -- --send` to write one clearly-labelled test row into each
+   table, so you can watch the whole path work. Delete the rows once you have seen them.
+5. When it is clean, set `AIRTABLE_TOKEN` and `AIRTABLE_BASE_ID` in the Vercel project
+   (Settings → Environment Variables, all three environments), then redeploy. Env vars are
+   read at request time, but the deploy is what picks up the new values. Add
+   `AIRTABLE_ENQUIRIES_TABLE` / `AIRTABLE_SUBSCRIBERS_TABLE` only if the tables are not
+   named `Enquiries` and `Subscribers`.
+
+Step 5 is the one that makes it live. Until then the mirror is inert on the deployed site,
+whatever `.env.local` says.
 
 ### The fields it writes
 
 The mirror sends these column names. They have to match the Airtable columns exactly, and
-Airtable is case-sensitive here.
+Airtable is case-sensitive here. A single unrecognised column name makes Airtable reject
+the whole record, so one mismatch loses every field in the row, not just that one. That is
+what `npm run airtable:check` is for.
 
 | Table | Columns | Type |
 | --- | --- | --- |

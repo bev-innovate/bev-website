@@ -14,6 +14,7 @@
     "images": "tsx scripts/optimise-images.ts",
     "sync:people": "tsx scripts/sync-sanity.ts people",
     "sanity:status": "tsx scripts/sanity-status.ts",
+    "airtable:check": "tsx scripts/check-airtable.ts",
     "sync:partners": "tsx scripts/sync-sanity.ts partners"
   },
   "dependencies": {
