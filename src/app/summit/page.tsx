@@ -9,6 +9,7 @@ import {
   SummitZones,
 } from "@/components/summit/sections";
 import { SummitSignup } from "@/components/summit/signup";
+import { SummitStickyCta } from "@/components/summit/sticky-cta";
 import { summit } from "@/lib/summit-content";
 
 export const metadata: Metadata = {
@@ -44,6 +45,14 @@ export default function SummitPage() {
       {/* Speakers and Companies on the Floor are held back until the names are confirmed. */}
       <SummitAgenda agenda={summit.agenda} zones={summit.zones} />
       <SummitSignup {...summit.signup} />
+
+      {/* Follows the reader between the hero and the signup form, and nowhere else. */}
+      <SummitStickyCta
+        text="Places are released to our list first."
+        cta={summit.hero.primary}
+        hideWhileSelector="#summit-hero"
+        hideNearSelector="#signup"
+      />
     </div>
   );
 }

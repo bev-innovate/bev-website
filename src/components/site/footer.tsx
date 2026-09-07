@@ -96,6 +96,9 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             <Link href="/privacy" className="text-xs text-canvas/50 hover:text-canvas/80">
               Privacy
             </Link>
+            <Link href="/terms" className="text-xs text-canvas/50 hover:text-canvas/80">
+              Terms
+            </Link>
           </div>
         </div>
       </div>

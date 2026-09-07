@@ -24,7 +24,7 @@ export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string 
         are what someone is looking for the moment they land, and below the fold they were
         arriving after the decision had already been made.
       */}
-      <header className="relative isolate overflow-hidden bg-mangrove text-white">
+      <header id="summit-hero" className="relative isolate overflow-hidden bg-mangrove text-white">
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image
             src={hero.image}
