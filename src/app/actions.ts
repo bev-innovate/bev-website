@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { enquirySchema, flattenIssues, interestLabels } from "@/lib/enquiry";
 import {
+  isAirtableConfigured,
   mirrorToAirtable,
   sendEnquiryEmail,
   sendSubscribeEmail,
@@ -33,25 +34,70 @@ function flatten(error: z.ZodError): Record<string, string> {
   return flattenIssues(error);
 }
 
-/**
- * When Supabase is not configured the submission is logged and reported as received.
- * That keeps the first draft demoable; wire the env vars up and it starts persisting.
- */
 async function persist(table: string, row: Record<string, unknown>) {
   const supabase = getSupabaseAdmin();
-
-  if (!supabase) {
-    console.info(`[forms] Supabase not configured: ${table} submission not persisted`, row);
-    return { ok: true as const, persisted: false as const };
-  }
+  if (!supabase) return { ok: false as const };
 
   const { error } = await supabase.from(table).insert(row);
   if (error) {
     console.error(`[forms] failed to insert into ${table}`, error);
-    return { ok: false as const, persisted: false as const };
+    return { ok: false as const };
   }
-  return { ok: true as const, persisted: true as const };
+  return { ok: true as const };
 }
+
+/** Which service is holding the submission, rather than merely copying it. */
+type Store = "supabase" | "airtable" | "none";
+
+/**
+ * Writes a submission somewhere durable and says where it went.
+ *
+ * Supabase is the system of record whenever it is configured, with Airtable alongside as a
+ * mirror that is never allowed to fail the request. When Supabase is not configured,
+ * Airtable is promoted from mirror to system of record: one of the two is enough to go
+ * live, so a submission is never logged and lost while the visitor is told it arrived.
+ *
+ * The mirror is awaited rather than fired off. A promise left running after the response
+ * is returned can be killed with the serverless instance, and a lost signup is exactly
+ * what this is here to prevent.
+ */
+async function capture(
+  supabaseTable: string,
+  row: Record<string, unknown>,
+  airtableTable: "enquiries" | "subscribers",
+  fields: Record<string, unknown>,
+): Promise<{ ok: boolean; store: Store }> {
+  if (isSupabaseConfigured) {
+    const [stored] = await Promise.all([
+      persist(supabaseTable, row),
+      mirrorToAirtable(airtableTable, fields),
+    ]);
+    return { ok: stored.ok, store: "supabase" };
+  }
+
+  if (isAirtableConfigured) {
+    const mirrored = await mirrorToAirtable(airtableTable, fields);
+    return { ok: mirrored.ok, store: "airtable" };
+  }
+
+  console.warn(
+    `[forms] nothing configured: ${supabaseTable} submission was NOT stored anywhere`,
+    row,
+  );
+  return { ok: true, store: "none" };
+}
+
+/**
+ * True on the live site only.
+ *
+ * With nothing configured a submission goes nowhere. On a preview or a local run that is
+ * fine and the form should still demo. In production it is data loss, and the visitor is
+ * better off being told to email us than being thanked for a signup that did not happen.
+ */
+const isLive = process.env.VERCEL_ENV === "production";
+
+const FALLBACK =
+  "We could not save that. Email innovate@betterearthventures.com and we will add you.";
 
 export async function subscribeAction(
   _prev: FormState,
@@ -69,19 +115,26 @@ export async function subscribeAction(
 
   const email = parsed.data.email.toLowerCase();
   const source = parsed.data.source;
-  const result = await persist("newsletter_subscribers", { email, source });
 
-  // After the write, and never fatal: a mirror failing must not lose the signup.
-  await Promise.allSettled([
-    mirrorToAirtable("subscribers", { Email: email, Source: source }),
-    sendSubscribeEmail(email, source),
-  ]);
+  const stored = await capture(
+    "newsletter_subscribers",
+    { email, source },
+    "subscribers",
+    { Email: email, Source: source },
+  );
 
-  if (!result.ok) {
+  // Notification is a courtesy to the team and logs its own failures.
+  await sendSubscribeEmail(email, source);
+
+  if (!stored.ok) {
     return {
       status: "error",
       message: "Something went wrong on our side. Please try again shortly.",
     };
+  }
+
+  if (stored.store === "none" && isLive) {
+    return { status: "error", message: FALLBACK };
   }
 
   return { status: "success", message: "You’re on the list. Look out for the next dispatch." };
@@ -110,30 +163,25 @@ export async function enquiryAction(
   const email = parsed.data.email.toLowerCase();
   const name = `${firstName} ${lastName}`;
 
+  const interestLabel = interest ? (interestLabels[interest] ?? interest) : "Not specified";
+
   /*
     `name` is still written alongside first and last. The column predates the split and
     other things may read it; joining the two here costs nothing and breaks nothing.
   */
-  const result = await persist("enquiries", {
-    name,
-    first_name: firstName,
-    last_name: lastName,
-    email,
-    interest: interest || null,
-    message: goals,
-    subscribe: Boolean(subscribe),
-  });
-
-  const interestLabel = interest ? (interestLabels[interest] ?? interest) : "Not specified";
-
-  /*
-    Notify after the write, and never let a notification failure fail the submission.
-    `allSettled` rather than `all`: one channel being down must not take the other with it.
-    Both log their own errors.
-  */
-  await Promise.allSettled([
-    sendEnquiryEmail({ name, email, interest: interestLabel, goals, subscribe: Boolean(subscribe) }),
-    mirrorToAirtable("enquiries", {
+  const stored = await capture(
+    "enquiries",
+    {
+      name,
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      interest: interest || null,
+      message: goals,
+      subscribe: Boolean(subscribe),
+    },
+    "enquiries",
+    {
       Name: name,
       "First name": firstName,
       "Last name": lastName,
@@ -141,18 +189,27 @@ export async function enquiryAction(
       Interest: interestLabel,
       Goals: goals,
       Subscribe: Boolean(subscribe),
-    }),
-    // Ticking the box puts them on the list as well as in the enquiry record.
+    },
+  );
+
+  /*
+    Ticking the box puts them on the list as well as in the enquiry record. It goes through
+    the same path, so it lands wherever enquiries land. Its failure is not fatal: the
+    enquiry itself is the thing that must not be lost.
+  */
+  await Promise.allSettled([
+    sendEnquiryEmail({ name, email, interest: interestLabel, goals, subscribe: Boolean(subscribe) }),
     subscribe
-      ? mirrorToAirtable("subscribers", { Email: email, Source: "enquiry_form" })
+      ? capture(
+          "newsletter_subscribers",
+          { email, source: "enquiry_form" },
+          "subscribers",
+          { Email: email, Source: "enquiry_form" },
+        )
       : Promise.resolve(),
   ]);
 
-  if (subscribe) {
-    await persist("newsletter_subscribers", { email, source: "enquiry_form" });
-  }
-
-  if (!result.ok) {
+  if (!stored.ok || (stored.store === "none" && isLive)) {
     return {
       status: "error",
       message: "We couldn’t send that. Email innovate@betterearthventures.com and we’ll pick it up.",
@@ -161,8 +218,9 @@ export async function enquiryAction(
 
   return {
     status: "success",
-    message: isSupabaseConfigured
-      ? "Thanks: we’ve got it. Expect a reply within a few working days."
-      : "Thanks: message received.",
+    message:
+      stored.store === "none"
+        ? "Thanks: message received."
+        : "Thanks: we’ve got it. Expect a reply within a few working days.",
   };
 }

@@ -5,23 +5,36 @@ and on the Summit page. Both run through server actions in `src/app/actions.ts`.
 
 ## The shape
 
+Whichever of the two stores is configured holds the submission. **Either one on its own is
+enough to go live.**
+
 ```
 visitor submits
       │
-      ├─► Supabase          ← system of record. Blocking. Failure = visible error.
+      ├─ Supabase configured?
+      │     yes ─► Supabase   ← system of record. Blocking. Failure = visible error.
+      │            Airtable   ← mirror alongside it, never fatal.
       │
-      └─► after the write, in parallel, never fatal:
-            ├─► Resend      ← emails the team
-            └─► Airtable    ← mirrors the row
+      │     no ──► Airtable   ← promoted to system of record. Blocking.
+      │
+      └─ neither ─► logged as a warning, and in production the visitor is told to email us.
+
+  and either way: Resend ← notifies the team, never fatal.
 ```
 
-Supabase is the only thing in the critical path. Resend and Airtable run afterwards under
-`Promise.allSettled`, each with a 6-second timeout, and each logs its own failure. If
-Airtable is rate-limited (5 requests/second per base) or the Resend key has expired, the
-submission is still captured and the visitor still gets a confirmation. Nothing is lost;
-worst case a row needs replaying out of Supabase.
+Supabase is preferred when both are set, because Airtable's API is rate-limited to 5
+requests per second per base and shares an availability budget with everything else in the
+workspace: a submission failing because someone else's automation is mid-run is a bad
+trade. With Supabase holding the record, an Airtable outage costs a backfill rather than a
+lost lead.
 
-Every channel is inert until its env vars are set, so the site deploys with none of them.
+The point of the promotion is that **a submission is never accepted into nothing.** Before
+this, an unconfigured site thanked the visitor for a signup that went no further than a log
+line. Now: if a store is configured and the write fails, the visitor is told so and can try
+again. If nothing is configured, that is fine on a preview or a local run and the form
+still demos, but on the live site it returns the email address instead of a false thank you.
+
+Resend runs alongside and logs its own failures. It can never fail a submission.
 
 ## Turning email on
 
@@ -120,20 +133,23 @@ If your existing base uses different column names, tell me what they are and I w
 them. Do not rename the Airtable columns to match this, since that would break whatever
 views and automations already point at them.
 
-## Why not Airtable alone
+## Airtable alone
 
-It is a fair question, and if the team lives in Airtable it is tempting to drop Supabase.
-Two reasons not to:
+Perfectly workable, and the code now supports it with no change: set `AIRTABLE_TOKEN` and
+`AIRTABLE_BASE_ID`, leave the Supabase variables empty, and Airtable becomes the system of
+record. One service, one token, and leads land where the team already works.
 
-- **Airtable would be in the request path.** Its API is rate-limited to 5 requests/second
-  per base and shares an availability budget with everything else in the workspace. A
-  submission failing because someone else's automation is mid-run is a bad trade.
-- **There is no replay.** With Supabase holding the record, an Airtable outage costs a
-  backfill. Without it, the submission is simply gone.
+What you give up by skipping Supabase:
 
-The current shape costs one extra service and buys durability. If you would rather cut
-Supabase, say so and I will make Airtable the blocking write instead. It is a small
-change, and the tradeoff is yours to make, not mine.
+- **Airtable sits in the request path.** Its API allows 5 requests per second per base and
+  shares an availability budget with everything else in the workspace. If it is busy or
+  down, the visitor sees an error and has to try again.
+- **There is no replay.** With Supabase behind it, an Airtable outage costs a backfill.
+  Without it, a submission that fails is simply not captured.
+
+For the volumes this site will see, neither is likely to bite. Adding Supabase later is
+just setting two more variables: the code picks it up and demotes Airtable to a mirror on
+the next deploy, with no code change and no migration of what Airtable already holds.
 
 ## Checking it works
 
@@ -144,6 +160,10 @@ Submit the contact form on the deployed site, then:
   delivery result. This is where to look first if the mail never arrives.
 - **Airtable**: the record appears in the table.
 - **Vercel**: any channel that failed logged `[notify] …` in the function logs.
+
+The line to search the function logs for is `[forms] nothing configured`. If that appears
+on the live site, submissions are reaching nowhere and the environment variables are
+missing.
 
 ## Database migration
 
