@@ -96,7 +96,10 @@ function quote(value: string) {
  * Formulas address fields by name rather than id, which is an Airtable constraint and the
  * one place in this module where a rename would bite.
  */
-async function findContact(base: string, email: string): Promise<ContactRecord | null> {
+async function findContact(
+  base: string,
+  email: string,
+): Promise<{ ok: boolean; record: ContactRecord | null }> {
   const target = quote(email);
   const formula = `OR(LOWER({Email})=${target},LOWER({Alternative Email})=${target})`;
   const query = new URLSearchParams({
@@ -107,12 +110,24 @@ async function findContact(base: string, email: string): Promise<ContactRecord |
 
   const result = await request(`${base}/${CONTACTS_TABLE}?${query}`, { method: "GET" });
   if (!result.ok) {
-    console.error("[crm] contact lookup failed", result.detail);
-    return null;
+    /*
+      A failed lookup and nobody on file are very different things, and the caller has to
+      tell them apart. Treating a failure as "not found" would add a second row for a
+      contact who is already there, quietly, on every submission.
+
+      The overwhelmingly likely cause is a token scoped to data.records:write only, so the
+      message says so rather than making someone infer it from a bare 403.
+    */
+    console.error(
+      "[crm] contact lookup failed, so this submission cannot be deduplicated. " +
+        "If this repeats, check AIRTABLE_TOKEN has the data.records:read scope.",
+      result.detail,
+    );
+    return { ok: false, record: null };
   }
 
   const records = (result.data as { records?: ContactRecord[] }).records ?? [];
-  return records[0] ?? null;
+  return { ok: true, record: records[0] ?? null };
 }
 
 function asStringArray(value: unknown): string[] {
@@ -160,8 +175,14 @@ export async function upsertContact(input: ContactInput): Promise<CrmResult> {
   if (!process.env.AIRTABLE_TOKEN || !base) return { ok: true, recordId: null, created: false };
 
   const email = input.email.trim().toLowerCase();
-  const existing = await findContact(base, email);
+  const lookup = await findContact(base, email);
+  const existing = lookup.record;
 
+  /*
+    Create even when the lookup failed. A duplicate row is a nuisance the team can merge;
+    a signup that was accepted on screen and then dropped is not recoverable, and the
+    person has no way of knowing it happened.
+  */
   if (!existing) {
     const fields: Record<string, unknown> = {
       [FIELD.email]: email,
