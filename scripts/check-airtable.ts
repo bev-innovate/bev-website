@@ -1,27 +1,38 @@
 /**
- * Checks that the Airtable mirror will actually work before a real submission depends on it.
+ * Sets up and checks the Airtable mirror, so nothing about it has to be taken on trust.
  *
- *   npm run airtable:check           # read the base schema and diff it against what we write
+ *   npm run airtable:setup           # ask for the token, verify it, offer the rest
+ *   npm run airtable:check           # verify what is already configured
  *   npm run airtable:check -- --send # also write one clearly-labelled test row per table
  *
  * The mirror is deliberately non-fatal: if Airtable rejects a write, the visitor still gets
  * a confirmation and the row still lands in Supabase. That is the right behaviour, and it
  * is also why a broken column name would go unnoticed for weeks. This makes it checkable.
  *
- * Reads AIRTABLE_TOKEN and AIRTABLE_BASE_ID from .env.local. Never pass a token on the
- * command line: it ends up in your shell history.
+ * The token is typed at a hidden prompt or read from .env.local. Never pass it as a command
+ * line argument: it would be recorded in your shell history in the clear.
  */
+
+import { execFileSync, execSync } from "node:child_process";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { createInterface } from "node:readline";
 
 import { config } from "dotenv";
 
 config({ path: ".env.local" });
 config({ path: ".env" });
 
-const token = process.env.AIRTABLE_TOKEN;
-const base = process.env.AIRTABLE_BASE_ID;
+/** Filled in by resolveCredentials(), which may prompt in setup mode. */
+let token = process.env.AIRTABLE_TOKEN;
+let base = process.env.AIRTABLE_BASE_ID;
+
+/** The base the enquiry form lives in. Only used as a prompt default. */
+const DEFAULT_BASE = "appxKGcCrGkqLk1vM";
 
 const enquiriesTable = process.env.AIRTABLE_ENQUIRIES_TABLE ?? "Enquiries";
 const subscribersTable = process.env.AIRTABLE_SUBSCRIBERS_TABLE ?? "Subscribers";
+
+const setupMode = process.argv.includes("--setup");
 
 /**
  * The columns src/lib/notify.ts writes, per table.
@@ -55,6 +66,168 @@ interface AirtableTable {
 function bail(message: string): never {
   console.error(`\n  ${message}\n`);
   process.exit(1);
+}
+
+/* ── Prompts ────────────────────────────────────────────────────────────────── */
+
+/*
+  One interface for the whole run, created on first use.
+
+  Deliberately not one per question: closing a readline interface discards whatever it has
+  already buffered from stdin, so a second interface silently never sees the rest of the
+  input. That is invisible on a terminal, where you type one line at a time, and breaks the
+  moment anything is piped in.
+*/
+let rl: ReturnType<typeof createInterface> | null = null;
+let muted = false;
+let currentPrompt = "";
+
+function prompts() {
+  if (rl) return rl;
+
+  rl = createInterface({ input: process.stdin, output: process.stdout, terminal: true });
+
+  /*
+    Mute the echo for secrets, so a token is not left on screen or in a scrollback buffer
+    that gets pasted into a bug report later. readline writes the prompt through the same
+    channel as the typed characters, so the prompt is let through and the rest swallowed.
+  */
+  const target = rl as unknown as { _writeToOutput: (chunk: string) => void };
+  const original = target._writeToOutput.bind(rl);
+  target._writeToOutput = (chunk: string) => {
+    if (!muted || chunk.includes(currentPrompt)) original(chunk);
+  };
+
+  return rl;
+}
+
+function ask(question: string, { secret = false } = {}): Promise<string> {
+  return new Promise((resolve) => {
+    const io = prompts();
+    currentPrompt = question;
+    muted = secret;
+
+    io.question(question, (answer) => {
+      muted = false;
+      if (secret) process.stdout.write("\n");
+      resolve(answer.trim());
+    });
+  });
+}
+
+async function confirm(question: string) {
+  const answer = await ask(`${question} [y/N] `);
+  return /^y(es)?$/i.test(answer);
+}
+
+/* ── Credentials ────────────────────────────────────────────────────────────── */
+
+async function resolveCredentials() {
+  if (token && base) return;
+
+  if (!setupMode) {
+    bail(
+      "AIRTABLE_TOKEN and AIRTABLE_BASE_ID are not both set.\n" +
+        "  Run `npm run airtable:setup` to be walked through it, or fill them into\n" +
+        "  .env.local by hand. Create the token at https://airtable.com/create/tokens.",
+    );
+  }
+
+  if (!base) {
+    base =
+      (await ask(`  Base ID [${DEFAULT_BASE}]: `)) || DEFAULT_BASE;
+  }
+
+  if (!token) {
+    console.log(
+      "\n  Create a token at https://airtable.com/create/tokens, scoped to this base with\n" +
+        "  `data.records:write`, plus `schema.bases:read` if you want the column check.\n" +
+        "  It is not echoed as you type or paste it.\n",
+    );
+    token = await ask("  Airtable token: ", { secret: true });
+    if (!token) bail("No token given, so there is nothing to check.");
+  }
+}
+
+/** Adds or replaces the two keys in .env.local, leaving every other line alone. */
+function saveToEnvLocal() {
+  const path = ".env.local";
+  const existing = existsSync(path) ? readFileSync(path, "utf8") : "";
+  const values: Record<string, string> = {
+    AIRTABLE_TOKEN: token!,
+    AIRTABLE_BASE_ID: base!,
+  };
+
+  let output = existing;
+  for (const [key, value] of Object.entries(values)) {
+    const line = `${key}=${value}`;
+    const pattern = new RegExp(`^${key}=.*$`, "m");
+    output = pattern.test(output)
+      ? output.replace(pattern, line)
+      : `${output.replace(/\n*$/, "")}\n${line}\n`;
+  }
+
+  writeFileSync(path, output.startsWith("\n") ? output.slice(1) : output);
+  console.log(`  Saved to ${path}, which is gitignored.\n`);
+}
+
+/* ── Vercel ─────────────────────────────────────────────────────────────────── */
+
+const VERCEL_ENVIRONMENTS = ["production", "preview", "development"] as const;
+
+function hasVercelCli() {
+  try {
+    execSync("vercel --version", { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Pushes both values to Vercel, which is the step that actually makes the mirror live.
+ *
+ * `vercel env add` refuses to overwrite, by design. Rather than removing a value someone
+ * may have set deliberately, a clash is reported with the command to clear it.
+ */
+function pushToVercel() {
+  if (!existsSync(".vercel/project.json")) {
+    console.log(
+      "  This checkout is not linked to a Vercel project. Run `vercel link` first, then\n" +
+        "  `npm run airtable:setup` again.\n",
+    );
+    return;
+  }
+
+  const values: Record<string, string> = {
+    AIRTABLE_TOKEN: token!,
+    AIRTABLE_BASE_ID: base!,
+  };
+
+  for (const [key, value] of Object.entries(values)) {
+    for (const environment of VERCEL_ENVIRONMENTS) {
+      try {
+        execFileSync("vercel", ["env", "add", key, environment], {
+          input: `${value}\n`,
+          stdio: ["pipe", "ignore", "pipe"],
+        });
+        console.log(`  SET            ${key} → ${environment}`);
+      } catch (error) {
+        const detail = String((error as { stderr?: Buffer }).stderr ?? error).trim();
+        const clash = /already exists/i.test(detail);
+        console.log(
+          clash
+            ? `  EXISTS         ${key} → ${environment}. To replace it: vercel env rm ${key} ${environment}`
+            : `  FAILED         ${key} → ${environment}: ${detail.split("\n")[0]}`,
+        );
+      }
+    }
+  }
+
+  console.log(
+    "\n  Environment variables are picked up by the next deployment, so redeploy before\n" +
+      "  expecting a submission to reach Airtable.\n",
+  );
 }
 
 async function call(path: string, init?: RequestInit) {
@@ -195,24 +368,56 @@ async function sendTestRows() {
 async function main() {
   console.log("");
 
-  if (!token || !base) {
-    bail(
-      "AIRTABLE_TOKEN and AIRTABLE_BASE_ID are not both set.\n" +
-        "  Copy .env.example to .env.local and fill them in. The base ID is the app… segment\n" +
-        "  of the base URL; create the token at https://airtable.com/create/tokens.",
-    );
-  }
+  const cameFromEnv = Boolean(token && base);
+  await resolveCredentials();
 
   const schemaOk = await checkSchema();
 
-  if (process.argv.includes("--send")) {
-    await sendTestRows();
-  } else if (schemaOk) {
-    console.log("  Looks right. Run with --send to write a test row and see it land.\n");
+  // In check mode the flags decide; in setup mode each step is offered in turn, because
+  // the whole point is that nobody has to remember what the next step was.
+  if (!setupMode) {
+    if (process.argv.includes("--send")) {
+      await sendTestRows();
+    } else if (schemaOk) {
+      console.log("  Looks right. Run with --send to write a test row and see it land.\n");
+    }
+    return;
+  }
+
+  if (schemaOk === false && !(await confirm("  Columns are missing. Carry on anyway?"))) {
+    console.log(
+      "\n  Nothing was changed. Fix the columns, or tell me the names your base already\n" +
+        "  uses and the mirror can be mapped onto them instead.\n",
+    );
+    return;
+  }
+
+  if (!cameFromEnv && (await confirm("  Save these to .env.local?"))) saveToEnvLocal();
+
+  if (await confirm("  Write a test row into each table?")) await sendTestRows();
+
+  if (!hasVercelCli()) {
+    console.log(
+      "  The Vercel CLI is not installed, so the last step has to be done in the dashboard:\n" +
+        "  Project → Settings → Environment Variables. Add AIRTABLE_TOKEN and\n" +
+        "  AIRTABLE_BASE_ID to all three environments, then redeploy.\n",
+    );
+    return;
+  }
+
+  if (await confirm("  Set both variables on Vercel now? This is what makes it live.")) {
+    pushToVercel();
+  } else {
+    console.log(
+      "\n  Left alone. Until they are set on Vercel the mirror stays inert on the deployed\n" +
+        "  site, whatever .env.local says.\n",
+    );
   }
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+main()
+  .catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  })
+  .finally(() => rl?.close());

@@ -45,27 +45,44 @@ Replies go to the enquirer, not to the robot: `reply_to` is set to the sender's 
 ## Turning the Airtable mirror on
 
 The base is already known: **`appxKGcCrGkqLk1vM`**, taken from the enquiry form's URL, and
-it is set as the default `AIRTABLE_BASE_ID` in `.env.example`. The only thing missing is a
-token, which has to be created by someone signed in to the workspace.
+it is the default `AIRTABLE_BASE_ID` in `.env.example`. The only thing missing is a token,
+which has to be created by someone signed in to the workspace.
 
-1. Create a token at [airtable.com/create/tokens](https://airtable.com/create/tokens).
-   Scope it to **`data.records:write`** on that one base and nothing wider. It needs to
-   create records; it should not be able to read the rest of the workspace. Add
-   **`schema.bases:read`** as well if you want the check below to compare column names.
-2. Put it in `.env.local` as `AIRTABLE_TOKEN` (that file is gitignored). Do not paste a
-   token into chat, a commit, or a shared document.
-3. Run `npm run airtable:check`. It reports whether the two tables exist and whether every
-   column the mirror writes is present, with the exact names that are missing.
-4. Run `npm run airtable:check -- --send` to write one clearly-labelled test row into each
-   table, so you can watch the whole path work. Delete the rows once you have seen them.
-5. When it is clean, set `AIRTABLE_TOKEN` and `AIRTABLE_BASE_ID` in the Vercel project
-   (Settings → Environment Variables, all three environments), then redeploy. Env vars are
-   read at request time, but the deploy is what picks up the new values. Add
-   `AIRTABLE_ENQUIRIES_TABLE` / `AIRTABLE_SUBSCRIBERS_TABLE` only if the tables are not
-   named `Enquiries` and `Subscribers`.
+**Create the token**, at [airtable.com/create/tokens](https://airtable.com/create/tokens).
+Scope it to **`data.records:write`** on that one base and nothing wider: it needs to create
+records, and it should not be able to read the rest of the workspace. Add
+**`schema.bases:read`** too if you want the column check.
 
-Step 5 is the one that makes it live. Until then the mirror is inert on the deployed site,
-whatever `.env.local` says.
+**Then run one command:**
+
+```bash
+npm run airtable:setup
+```
+
+It asks for the token at a hidden prompt (nothing is echoed, so it does not end up in your
+scrollback), checks it against the base, and then offers each remaining step in turn:
+
+- save it to `.env.local`, which is gitignored
+- write one clearly-labelled test row into each table so you can watch the path work
+- set `AIRTABLE_TOKEN` and `AIRTABLE_BASE_ID` on Vercel, across all three environments
+
+Say no to any of them and nothing is written. Never pass the token as a command line
+argument, and do not paste it into chat, a commit, or a shared document: a hidden prompt is
+there so it stays out of your shell history.
+
+Afterwards, `npm run airtable:check` re-runs the verification on its own, and
+`npm run airtable:check -- --send` writes another test row.
+
+### The last step is the one that matters
+
+Setting the variables **on Vercel** is what makes the mirror live. Until then it is inert on
+the deployed site whatever `.env.local` says, because `.env.local` never leaves your machine.
+Environment variables are picked up by the next deployment, so **redeploy afterwards**.
+
+If the Vercel CLI is not installed the setup script says so and stops there. The dashboard
+does the same job: Project → Settings → Environment Variables, add both keys to Production,
+Preview and Development, then redeploy. Add `AIRTABLE_ENQUIRIES_TABLE` /
+`AIRTABLE_SUBSCRIBERS_TABLE` only if the tables are not named `Enquiries` and `Subscribers`.
 
 ### The fields it writes
 
