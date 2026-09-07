@@ -114,7 +114,7 @@ export function TrackRecord({
         className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-mangrove-deep via-mangrove to-teal"
       />
       <div className="shell" ref={ref}>
-        <motion.h2 {...rise(0)} className="font-display text-3xl font-semibold lg:text-4xl">
+        <motion.h2 {...rise(0)} className="font-display text-3xl font-bold lg:text-4xl">
           {heading}
         </motion.h2>
         {intro ? (

@@ -78,23 +78,28 @@ export const summit = {
 
   audience: {
     heading: "Who the summit is for",
-    intro: "Three days designed for the people who carry climate solutions into the world.",
+    intro:
+      "Everyone in the room needs something only one of the others can give. That is the whole design.",
     items: [
       {
         title: "Founders",
         body: "You have built something that works, and you are ready for the customers, capital and partners who can take it further.",
+        image: `${IMG}/climate-summit-3.webp`,
       },
       {
         title: "Investors",
         body: "You are looking for climate ventures with real traction, in the region where deployment is moving fastest.",
+        image: `${IMG}/climate-summit-2.webp`,
       },
       {
         title: "Corporates",
         body: "You want a clear view of technology ready to deploy, and time with the founders you could pilot it with.",
+        image: `${IMG}/climate-summit-1.webp`,
       },
       {
         title: "Policymakers and ecosystem partners",
         body: "You are shaping the conditions that help climate innovation take root across Asia-Pacific.",
+        image: `${IMG}/climate-summit-10.webp`,
       },
     ],
   },
@@ -112,7 +117,7 @@ export const summit = {
   zones: {
     heading: "Three zones, running side by side",
     intro:
-      "On the open day all three run at once: the main stage in Discover, with Solve and Connect alongside it, so you can move between them as the day suits you.",
+      "You are never stuck in one room. Follow whichever conversation is the useful one, and come back when the next thing starts.",
     items: [
       {
         key: "discover",
@@ -122,10 +127,10 @@ export const summit = {
         image: `${IMG}/climate-summit-7.webp`,
         purpose: "The main stage, for the sessions worth stopping everything to hear.",
         activities: [
-          "Synthesis session on the futures we can see coming",
-          "PepsiCo climate impact case study: scaling climate tech inside a global business",
-          "Global Insights: founders on what building looks like in their country",
-          "ClimateLaunchpad Global Grand Final, followed by networking",
+          "Where the climate economy is heading, from the people moving it",
+          "Case studies from inside global businesses that have already deployed",
+          "Founders from around the world on what building looks like where they are",
+          "The ClimateLaunchpad Global Grand Final, and the celebration after it",
         ],
       },
       {
@@ -136,9 +141,9 @@ export const summit = {
         image: `${IMG}/climate-summit-4.webp`,
         purpose: "Bring a live problem and leave with a way through it.",
         activities: [
-          "Hour-long takeovers hosted by partners and mentors",
-          "Expertise on hand across legal, investment and team building",
-          "Open drop-in for founders with a specific challenge",
+          "Working sessions hosted by partners and mentors, an hour at a time",
+          "Specialists on hand for the questions founders get stuck on",
+          "Open all day, so you can walk in the moment something comes up",
         ],
       },
       {
@@ -149,9 +154,9 @@ export const summit = {
         image: `${IMG}/climate-summit-9.webp`,
         purpose: "Where the introductions happen, all day, without a schedule.",
         activities: [
-          "Matchmaking Corner",
-          "Collaboration Matrix: pledge what you will follow up on",
-          "Open space for the conversations a session starts",
+          "A matchmaking corner for the introductions worth making",
+          "Collaboration Matrix: discuss, brainstorm and pledge collaboration",
+          "Room to carry on the conversation a session started",
         ],
       },
     ],
@@ -173,7 +178,9 @@ export const summit = {
    * programme rather than after it.
    */
   agenda: {
-    heading: "Three days, three different rooms to be in",
+    heading: "The agenda",
+    intro:
+      "This is shaping up to be nothing like a regular summit. Each of the three days has its own focus, its own room and its own reason to be there.",
     days: [
       {
         ref: "D-01",
@@ -235,7 +242,7 @@ export const summit = {
           {
             time: "11:30",
             title: "Collaboration Matrix",
-            body: "Put down what you will follow up on, and find the people to do it with.",
+            body: "Discuss, brainstorm and pledge collaboration, with the people you would actually be doing it with.",
           },
           { time: "13:00", title: "Lunch and startup exhibition" },
           {

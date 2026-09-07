@@ -52,7 +52,7 @@ export default function PrivacyPage() {
 
         {sections.map((section) => (
           <section key={section.title} className="mt-12">
-            <h2 className="font-display text-2xl font-semibold text-ink">{section.title}</h2>
+            <h2 className="font-display text-2xl font-bold text-ink">{section.title}</h2>
             <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink-muted">{section.body}</p>
           </section>
         ))}

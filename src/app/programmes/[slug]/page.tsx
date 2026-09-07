@@ -70,7 +70,7 @@ export default async function ProgrammePage({ params }: Params) {
             ) : null}
           </div>
 
-          <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-balance">
+          <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.02] font-bold tracking-[-0.02em] text-balance">
             {programme.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-canvas/80">
@@ -96,7 +96,7 @@ export default async function ProgrammePage({ params }: Params) {
                   <dt className="text-[0.6875rem] tracking-[0.14em] text-yellow uppercase">
                     {fact.label}
                   </dt>
-                  <dd className="mt-1.5 font-display text-xl font-semibold">{fact.value}</dd>
+                  <dd className="mt-1.5 font-display text-xl font-bold">{fact.value}</dd>
                 </div>
               ))}
             </dl>
@@ -115,7 +115,7 @@ export default async function ProgrammePage({ params }: Params) {
               {programme.verticals.map((vertical, i) => (
                 <Reveal as="li" key={vertical.title} delay={Math.min(i, 5) * 0.11}>
                   <div className="h-full bg-canvas-raised p-8">
-                    <p className="font-display text-xl font-semibold text-ink">
+                    <p className="font-display text-xl font-bold text-ink">
                       {vertical.title}
                     </p>
                     {vertical.description ? (
@@ -136,7 +136,7 @@ export default async function ProgrammePage({ params }: Params) {
           <div className="shell grid gap-14 lg:grid-cols-2">
             {programme.benefits?.length ? (
               <div>
-                <h2 className="font-display text-3xl font-semibold text-ink">
+                <h2 className="font-display text-3xl font-bold text-ink">
                   What you get
                 </h2>
                 <ul className="mt-8 space-y-4">
@@ -154,7 +154,7 @@ export default async function ProgrammePage({ params }: Params) {
 
             {programme.eligibility?.length ? (
               <div className="rounded-[1.75rem] border border-line bg-canvas-raised p-8 md:p-10">
-                <h2 className="font-display text-3xl font-semibold text-ink">Who it&rsquo;s for</h2>
+                <h2 className="font-display text-3xl font-bold text-ink">Who it&rsquo;s for</h2>
                 <ul className="mt-8 space-y-4">
                   {programme.eligibility.map((item) => (
                     <li

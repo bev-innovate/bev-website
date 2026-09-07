@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
+import { SummitAudience } from "@/components/summit/audience";
 import {
   SummitAbout,
   SummitAgenda,
-  SummitAudience,
   SummitHero,
   SummitPartners,
   SummitZones,

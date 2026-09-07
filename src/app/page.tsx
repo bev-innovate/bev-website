@@ -54,7 +54,7 @@ export default async function HomePage() {
           <Reveal className="lg:col-span-2">
             <div className="lg:sticky lg:top-28 lg:pr-12">
               <span className="text-primary">{whoWeAre.eyebrow}</span>
-              <h2 className="mt-4 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] font-semibold text-ink">
+              <h2 className="mt-4 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] font-bold text-ink">
                 {whoWeAre.heading}
               </h2>
             </div>
@@ -98,12 +98,12 @@ export default async function HomePage() {
                 <span className="text-primary">Programmes</span>
                 {/* `text-nowrap` from md up: the line is short enough to hold, and
                     breaking it after "where" reads as a mistake. */}
-                <h2 className="mt-4 font-display text-[clamp(1.9rem,4vw,3rem)] font-semibold text-ink md:text-nowrap">
+                <h2 className="mt-4 font-display text-[clamp(1.9rem,4vw,3rem)] font-bold text-ink md:text-nowrap">
                   Meeting founders where they are
                 </h2>
                 <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                  From the first spark of an idea to a company ready for the world, each
-                  programme is built for a particular moment in the journey.
+                  Some begin at the first version of an idea. Others pick up a company that
+                  already has customers and needs a new market.
                 </p>
               </div>
               <ButtonLink href="/programmes" variant="outline" className="shrink-0">

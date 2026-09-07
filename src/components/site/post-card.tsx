@@ -45,7 +45,7 @@ export function PostCard({ post }: { post: Post }) {
           {post.readingTime ? <span>{post.readingTime} min read</span> : null}
         </div>
 
-        <h3 className="mt-3 font-display text-xl leading-snug font-semibold text-balance text-foreground">
+        <h3 className="mt-3 font-display text-xl leading-snug font-bold text-balance text-foreground">
           {post.title}
         </h3>
 

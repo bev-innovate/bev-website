@@ -204,11 +204,19 @@
     color: #540178;
   }
 
-  /* Headings share the sans; the display var is kept so a future face swap is one line. */
+  /*
+    Headings share the sans; the display var is kept so a future face swap is one line.
+
+    The negative tracking is set here rather than per heading. At display sizes the default
+    spacing reads loose and the words stop holding together as a shape, and setting it once
+    means a heading cannot be added later that quietly misses it. Anything needing different
+    spacing still overrides with a `tracking-*` utility.
+  */
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 
   :focus-visible {
@@ -247,12 +255,18 @@
     }
   }
 
-  /* Display register: the same sans, set heavier and tighter. */
+  /*
+    Display register: the same sans, set as heavy and as tight as it will take.
+
+    800 rather than 700, and tighter again than the heading default. This is the register
+    for the one line on a page that has to carry it, so it wants clear air between itself
+    and the bold section headings underneath.
+  */
   .display {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
     text-wrap: balance;
   }
 

@@ -28,7 +28,7 @@ export function CtaBand({
         <div className="flex flex-wrap items-end justify-between gap-8 border-t border-border pt-12">
           <div className="max-w-2xl">
             {eyebrow ? <span className="text-primary">{eyebrow}</span> : null}
-            <h2 className="mt-4 font-display text-3xl font-semibold text-balance text-ink lg:text-4xl">
+            <h2 className="mt-4 font-display text-3xl font-bold text-balance text-ink lg:text-4xl">
               {title}
             </h2>
             {intro ? (

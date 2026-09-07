@@ -80,7 +80,7 @@ export default async function ContactPage() {
             <ul className="mt-6 space-y-6">
               {routes.map((route) => (
                 <li key={route.title}>
-                  <p className="font-display text-lg font-semibold text-ink">{route.title}</p>
+                  <p className="font-display text-lg font-bold text-ink">{route.title}</p>
                   <p className="mt-1 text-sm leading-relaxed text-ink-muted">{route.body}</p>
                 </li>
               ))}

@@ -50,7 +50,7 @@ export function PersonCard({
         <div className="grid size-full place-items-center bg-gradient-to-br from-orange/15 to-yellow/20">
           <span
             className={cn(
-              "font-display font-semibold text-orange",
+              "font-display font-bold text-orange",
               variant === "full" ? "text-3xl" : "text-sm",
             )}
           >
@@ -63,7 +63,7 @@ export function PersonCard({
 
   const detail = (
     <div className="min-w-0">
-      <p className="font-display text-lg font-semibold text-foreground">{person.name}</p>
+      <p className="font-display text-lg font-bold text-foreground">{person.name}</p>
       {person.role ? <p className="mt-1 text-muted-foreground">{person.role}</p> : null}
       {person.organisation ? (
         <p className="text-muted-foreground italic">{person.organisation}</p>

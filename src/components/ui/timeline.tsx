@@ -66,7 +66,7 @@ export function Timeline({
                 <div className="size-3 rounded-full bg-orange" />
               </div>
               <div className="hidden md:block md:pl-20">
-                <h3 className="font-display text-3xl font-semibold text-ink lg:text-4xl">
+                <h3 className="font-display text-3xl font-bold text-ink lg:text-4xl">
                   {item.title}
                 </h3>
                 {item.subtitle ? (
@@ -77,7 +77,7 @@ export function Timeline({
 
             <div className="relative w-full pr-2 pl-16 md:pl-4">
               <div className="md:hidden">
-                <h3 className="font-display text-2xl font-semibold text-ink">{item.title}</h3>
+                <h3 className="font-display text-2xl font-bold text-ink">{item.title}</h3>
                 {item.subtitle ? (
                   <p className="mt-1 mb-3 text-sm text-ink-faint">{item.subtitle}</p>
                 ) : null}

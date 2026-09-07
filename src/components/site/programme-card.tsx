@@ -83,7 +83,7 @@ export function ProgrammeCard({
 
           <h3
             className={cn(
-              "mt-5 font-display font-semibold text-foreground",
+              "mt-5 font-display font-bold text-foreground",
               featured ? "text-3xl md:text-4xl" : compact ? "text-xl" : "text-2xl",
             )}
           >

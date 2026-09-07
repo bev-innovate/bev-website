@@ -116,6 +116,32 @@ The 41 MB of source JPEGs in `climate-summit/` are now redundant: the WebP versi
 1.7 MB for the whole set. Worth deleting from the repository once you have them backed up
 somewhere else, since git keeps every version of a binary forever.
 
+### Progress · 7 September, second pass
+
+- **The standing facts moved into the banner**, under the buttons. Dates, place and scale
+  are what someone looks for the moment they land, and below the fold they were arriving
+  after the decision had been made. They are glass tiles rather than the page's cards: an
+  opaque panel punches a hole through the photograph behind it.
+- **"Three days, three different rooms to be in" is now "The agenda"**, with a subheader
+  that says what makes the three days unalike.
+- **Zone bullets generalised.** They now describe the kind of thing that happens in each
+  zone rather than naming sessions, so nobody arrives holding us to a specific title.
+- **"Who the summit is for" rebuilt** as a photograph beside four cards that open as you
+  reach them, in the manner of Aceternity UI's Sticky Scroll Reveal. On a phone the
+  photograph sits inside the open card instead: a sticky panel in a single-column grid
+  rides down over the cards, and a still photograph would be captioned by whichever card
+  happened to be open. Four more of the summit photographs are now in use.
+- **"Open day" is gone from the site.** The only remaining mention is in this document,
+  where it is one of the alternative names for Day 2.
+- **Subheaders audited.** The ones that restated their heading are rewritten to add
+  something: who else is in the room and why that matters, and the fact that you can move
+  between zones freely. The unused `intro` on the home Delivery block is deleted rather
+  than left to look meaningful.
+- **Typography set heavier.** Section headings go from semibold to bold across the site,
+  headings pick up negative tracking from one base rule so a new heading cannot miss it,
+  and the display register goes to 800 and tighter again, which keeps clear air between
+  the one line that carries a page and the bold headings under it.
+
 ### Also done
 
 - **A-04 closed by removal.** Sustainability Women is off the partner list, as asked. That

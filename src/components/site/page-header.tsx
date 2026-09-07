@@ -53,7 +53,7 @@ export function PageHeader({
         ) : null}
         <h1
           className={cn(
-            "max-w-4xl animate-rise font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-balance",
+            "max-w-4xl animate-rise font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05] font-bold tracking-[-0.02em] text-balance",
             eyebrow && "mt-4",
           )}
           style={{ animationDelay: "0.1s" }}

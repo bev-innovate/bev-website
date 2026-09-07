@@ -34,7 +34,7 @@ export function SectionHeading({
         {eyebrow ? <span className="text-primary">{eyebrow}</span> : null}
         <h2
           className={cn(
-            "font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.05] font-semibold tracking-[-0.015em] text-balance text-ink",
+            "font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.05] font-bold tracking-[-0.015em] text-balance text-ink",
             eyebrow && "mt-4",
           )}
         >

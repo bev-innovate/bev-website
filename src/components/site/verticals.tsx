@@ -36,7 +36,7 @@ export function Verticals({
     <section className="py-16 md:py-20">
       <div className="shell">
         <Reveal className="max-w-3xl">
-          <h2 className="font-display text-[clamp(1.75rem,3.8vw,2.75rem)] font-semibold text-ink">
+          <h2 className="font-display text-[clamp(1.75rem,3.8vw,2.75rem)] font-bold text-ink">
             {heading}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-balance text-muted-foreground">
@@ -65,7 +65,7 @@ export function Verticals({
                   </div>
                   <div className="flex flex-1 flex-col p-6">
                     <h3
-                      className={`font-display text-xl leading-snug font-semibold ${accent.title}`}
+                      className={`font-display text-xl leading-snug font-bold ${accent.title}`}
                     >
                       {vertical.title}
                     </h3>

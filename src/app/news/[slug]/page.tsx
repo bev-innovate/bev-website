@@ -62,7 +62,7 @@ export default async function InsightPage({ params }: Params) {
           {post.readingTime ? <span>{post.readingTime} min read</span> : null}
         </div>
 
-        <h1 className="mt-5 font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-balance text-ink">
+        <h1 className="mt-5 font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] font-bold tracking-[-0.02em] text-balance text-ink">
           {post.title}
         </h1>
 
@@ -126,7 +126,7 @@ export default async function InsightPage({ params }: Params) {
 
       {related.length ? (
         <section className="shell mt-24 border-t border-line pt-16">
-          <h2 className="font-display text-2xl font-semibold text-ink">Keep reading</h2>
+          <h2 className="font-display text-2xl font-bold text-ink">Keep reading</h2>
           <div className="mt-10 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((item) => (
               <PostCard key={item.slug} post={item} />

@@ -57,7 +57,7 @@ export default async function AboutPage() {
 
           <Reveal delay={0.08}>
             <div className="max-w-xl">
-              <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight font-semibold text-balance text-ink">
+              <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight font-bold text-balance text-ink">
                 Founded in 2024, built on a much longer track record
               </h2>
               <div className="mt-6 space-y-5 text-[1.0625rem] leading-relaxed text-ink-muted">
@@ -84,7 +84,7 @@ export default async function AboutPage() {
                   <div key={stat.label}>
                     <dt className="sr-only">{stat.label}</dt>
                     <dd>
-                      <p className="font-display text-4xl font-semibold text-purple">
+                      <p className="font-display text-4xl font-bold text-purple">
                         {stat.value}
                       </p>
                       <p className="mt-2 text-sm text-ink-muted">{stat.label}</p>
@@ -103,7 +103,7 @@ export default async function AboutPage() {
       */}
       <section className="bg-purple py-16 text-white md:py-20">
         <div className="shell">
-          <h2 className="font-display text-3xl font-semibold lg:text-4xl">What we run</h2>
+          <h2 className="font-display text-3xl font-bold lg:text-4xl">What we run</h2>
           <div className="mt-10">
             <PillarsAccordion items={pillars} />
           </div>
@@ -124,7 +124,7 @@ export default async function AboutPage() {
             <div className="mt-12 space-y-12">
               {locations.map((location) => (
                 <div key={location}>
-                  <h3 className="border-b border-line pb-3 font-display text-xl font-semibold text-ink">
+                  <h3 className="border-b border-line pb-3 font-display text-xl font-bold text-ink">
                     {location}
                   </h3>
                   {/* Three up, so Singapore fills a row exactly and the smaller

@@ -78,8 +78,6 @@ export const delivery = {
     "Years of walking alongside founders have taught us where a venture most needs a hand. These four practices are how we offer ours.",
   statement:
     "Helping climate founders turn proven technology into thriving businesses across Asia-Pacific.",
-  intro:
-    "Through extensive research, we have mapped out the four critical points where scaling climatetech ventures need the most support.",
   pillars: [
     {
       title: "Curated Innovation Programmes",

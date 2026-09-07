@@ -18,7 +18,7 @@ export function CohortGrid({ companies }: { companies: Company[] }) {
               className="group flex h-full flex-col rounded-2xl border border-line bg-canvas-raised p-6 transition-colors hover:border-line-strong"
             >
               <div className="flex items-start justify-between gap-3">
-                <h3 className="font-display text-xl font-semibold text-ink">{company.name}</h3>
+                <h3 className="font-display text-xl font-bold text-ink">{company.name}</h3>
                 {company.url ? (
                   <ArrowUpRight
                     className="size-4 shrink-0 text-ink-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

@@ -55,7 +55,7 @@ export function Delivery({
             <span className="text-white/60">{eyebrow}</span>
           </RevealItem>
           <RevealItem>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.05] font-semibold text-balance">
+            <h2 className="mt-4 font-display text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.05] font-bold text-balance">
               {statement}
             </h2>
           </RevealItem>
@@ -90,7 +90,7 @@ export function Delivery({
             >
               <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                 <div>
-                  <h3 className="font-display text-2xl leading-snug font-semibold md:text-3xl">
+                  <h3 className="font-display text-2xl leading-snug font-bold md:text-3xl">
                     {pillar.title}
                   </h3>
 

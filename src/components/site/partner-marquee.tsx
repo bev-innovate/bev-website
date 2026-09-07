@@ -85,7 +85,7 @@ export function PartnerMarquee({ partners }: { partners: Partner[] }) {
             partner={partner}
             className="flex h-14 shrink-0 items-center justify-center px-3 transition-colors md:h-16"
           >
-            <span className="font-display text-xl font-semibold whitespace-nowrap text-ink-muted hover:text-ink">
+            <span className="font-display text-xl font-bold whitespace-nowrap text-ink-muted hover:text-ink">
               {partner.name}
             </span>
           </PartnerLink>

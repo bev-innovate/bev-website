@@ -130,7 +130,7 @@ export function EnquiryForm({ className }: { className?: string }) {
           >
             <Check className="size-5" aria-hidden />
           </motion.div>
-          <p className="mt-5 font-display text-xl font-semibold text-foreground">
+          <p className="mt-5 font-display text-xl font-bold text-foreground">
             Message received
           </p>
           <p className="mt-2 text-muted-foreground">{state.message}</p>

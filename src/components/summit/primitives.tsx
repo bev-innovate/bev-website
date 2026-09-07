@@ -58,7 +58,7 @@ export function SectionHead({
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
       <h2
         className={cn(
-          "font-display text-[clamp(1.75rem,3.6vw,2.6rem)] font-semibold text-balance",
+          "font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.1] font-bold text-balance",
           onDark ? "text-white" : "text-foreground",
         )}
       >

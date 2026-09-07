@@ -11,12 +11,12 @@ const components: PortableTextComponents = {
       <p className="mt-6 text-[1.0625rem] leading-[1.75] text-ink-muted">{children}</p>
     ),
     h2: ({ children }) => (
-      <h2 className="mt-14 font-display text-3xl leading-tight font-semibold text-ink">
+      <h2 className="mt-14 font-display text-3xl leading-tight font-bold text-ink">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-10 font-display text-2xl leading-tight font-semibold text-ink">
+      <h3 className="mt-10 font-display text-2xl leading-tight font-bold text-ink">
         {children}
       </h3>
     ),
