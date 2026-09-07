@@ -84,7 +84,7 @@ export const summit = {
       {
         title: "Founders",
         body: "You have built something that works, and you are ready for the customers, capital and partners who can take it further.",
-        image: `${IMG}/climate-summit-3.webp`,
+        image: `${IMG}/climate-summit-11.webp`,
       },
       {
         title: "Investors",
