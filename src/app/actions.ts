@@ -2,13 +2,15 @@
 
 import { z } from "zod";
 
-import { enquirySchema, flattenIssues, interestLabels } from "@/lib/enquiry";
 import {
-  isAirtableConfigured,
-  mirrorToAirtable,
-  sendEnquiryEmail,
-  sendSubscribeEmail,
-} from "@/lib/notify";
+  SOURCE_ENQUIRY,
+  SOURCE_NEWSLETTER,
+  createEnquiry,
+  isCrmConfigured,
+  upsertContact,
+} from "@/lib/crm";
+import { enquirySchema, flattenIssues, interestLabels } from "@/lib/enquiry";
+import { sendEnquiryEmail, sendSubscribeEmail } from "@/lib/notify";
 import { getSupabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
 
 export interface FormState {
@@ -64,19 +66,15 @@ type Store = "supabase" | "airtable" | "none";
 async function capture(
   supabaseTable: string,
   row: Record<string, unknown>,
-  airtableTable: "enquiries" | "subscribers",
-  fields: Record<string, unknown>,
+  mirror: () => Promise<{ ok: boolean }>,
 ): Promise<{ ok: boolean; store: Store }> {
   if (isSupabaseConfigured) {
-    const [stored] = await Promise.all([
-      persist(supabaseTable, row),
-      mirrorToAirtable(airtableTable, fields),
-    ]);
+    const [stored] = await Promise.all([persist(supabaseTable, row), mirror()]);
     return { ok: stored.ok, store: "supabase" };
   }
 
-  if (isAirtableConfigured) {
-    const mirrored = await mirrorToAirtable(airtableTable, fields);
+  if (isCrmConfigured) {
+    const mirrored = await mirror();
     return { ok: mirrored.ok, store: "airtable" };
   }
 
@@ -116,11 +114,13 @@ export async function subscribeAction(
   const email = parsed.data.email.toLowerCase();
   const source = parsed.data.source;
 
-  const stored = await capture(
-    "newsletter_subscribers",
-    { email, source },
-    "subscribers",
-    { Email: email, Source: source },
+  /*
+    Which page the signup came from is kept in Supabase, where it is a plain column. The
+    CRM records it as the single Source option the team already filters on, because adding
+    a per-page option to a field with 28 of them would be noise rather than information.
+  */
+  const stored = await capture("newsletter_subscribers", { email, source }, () =>
+    upsertContact({ email, source: SOURCE_NEWSLETTER, subscribed: true }),
   );
 
   // Notification is a courtesy to the team and logs its own failures.
@@ -169,6 +169,11 @@ export async function enquiryAction(
     `name` is still written alongside first and last. The column predates the split and
     other things may read it; joining the two here costs nothing and breaks nothing.
   */
+  /*
+    Two writes, in order and not in parallel: the person goes into Contacts first so the
+    enquiry can be filed against them. A failed upsert is not fatal to the enquiry, which
+    is simply filed unlinked rather than dropped.
+  */
   const stored = await capture(
     "enquiries",
     {
@@ -180,32 +185,40 @@ export async function enquiryAction(
       message: goals,
       subscribe: Boolean(subscribe),
     },
-    "enquiries",
-    {
-      Name: name,
-      "First name": firstName,
-      "Last name": lastName,
-      Email: email,
-      Interest: interestLabel,
-      Goals: goals,
-      Subscribe: Boolean(subscribe),
+    async () => {
+      const contact = await upsertContact({
+        email,
+        firstName,
+        lastName,
+        source: SOURCE_ENQUIRY,
+        subscribed: Boolean(subscribe),
+      });
+
+      return createEnquiry({
+        name,
+        firstName,
+        lastName,
+        email,
+        interest: interestLabel,
+        goals,
+        subscribe: Boolean(subscribe),
+        contactId: contact.ok ? contact.recordId : null,
+      });
     },
   );
 
   /*
-    Ticking the box puts them on the list as well as in the enquiry record. It goes through
-    the same path, so it lands wherever enquiries land. Its failure is not fatal: the
-    enquiry itself is the thing that must not be lost.
+    Ticking the box puts them on the list as well as in the enquiry record. The CRM side is
+    already done, since the upsert above set the subscription flag on the contact; what is
+    left is the Supabase row, which is a separate table there. Its failure is not fatal:
+    the enquiry itself is the thing that must not be lost.
   */
   await Promise.allSettled([
     sendEnquiryEmail({ name, email, interest: interestLabel, goals, subscribe: Boolean(subscribe) }),
     subscribe
-      ? capture(
-          "newsletter_subscribers",
-          { email, source: "enquiry_form" },
-          "subscribers",
-          { Email: email, Source: "enquiry_form" },
-        )
+      ? capture("newsletter_subscribers", { email, source: "enquiry_form" }, async () => ({
+          ok: true,
+        }))
       : Promise.resolve(),
   ]);
 

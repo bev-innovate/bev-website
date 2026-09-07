@@ -12,7 +12,6 @@ import "server-only";
  */
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const AIRTABLE_ENDPOINT = "https://api.airtable.com/v0";
 
 /** Give up rather than hold the visitor's form submission open. */
 const TIMEOUT_MS = 6000;
@@ -58,9 +57,6 @@ export interface Enquiry {
 }
 
 export const isEmailConfigured = Boolean(process.env.RESEND_API_KEY);
-export const isAirtableConfigured = Boolean(
-  process.env.AIRTABLE_TOKEN && process.env.AIRTABLE_BASE_ID,
-);
 
 /**
  * Emails the team a copy of the enquiry.
@@ -128,34 +124,4 @@ export async function sendSubscribeEmail(email: string, source: string) {
   return { ok: result.ok, sent: result.ok };
 }
 
-/**
- * Mirrors a submission into Airtable.
- *
- * `typecast: true` lets Airtable coerce a string into a single-select option, so the topic
- * field works without the option having to pre-exist with an exact-match name.
- *
- * Field names are read from env rather than hardcoded, because renaming a column in the
- * Airtable UI silently breaks a hardcoded key and nobody would connect the two.
- */
-export async function mirrorToAirtable(
-  table: "enquiries" | "subscribers",
-  fields: Record<string, unknown>,
-) {
-  const token = process.env.AIRTABLE_TOKEN;
-  const base = process.env.AIRTABLE_BASE_ID;
-  if (!token || !base) return { ok: true as const, mirrored: false as const };
-
-  const tableName =
-    table === "enquiries"
-      ? (process.env.AIRTABLE_ENQUIRIES_TABLE ?? "Enquiries")
-      : (process.env.AIRTABLE_SUBSCRIBERS_TABLE ?? "Subscribers");
-
-  const result = await post(
-    `${AIRTABLE_ENDPOINT}/${base}/${encodeURIComponent(tableName)}`,
-    token,
-    { records: [{ fields }], typecast: true },
-  );
-
-  if (!result.ok) console.error(`[notify] Airtable mirror to ${tableName} failed`, result.detail);
-  return { ok: result.ok, mirrored: result.ok };
-}
+/* Airtable writes moved to src/lib/crm.ts, which writes into the CRM rather than mirroring. */

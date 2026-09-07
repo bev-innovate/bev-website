@@ -29,28 +29,45 @@ let base = process.env.AIRTABLE_BASE_ID;
 /** The base the enquiry form lives in. Only used as a prompt default. */
 const DEFAULT_BASE = "appxKGcCrGkqLk1vM";
 
-const enquiriesTable = process.env.AIRTABLE_ENQUIRIES_TABLE ?? "Enquiries";
-const subscribersTable = process.env.AIRTABLE_SUBSCRIBERS_TABLE ?? "Subscribers";
+/*
+  Table ids rather than names, matching src/lib/crm.ts: the CRM is a table the team renames
+  and reorganises freely, and an id survives that where a name does not.
+*/
+const contactsTable = process.env.AIRTABLE_CONTACTS_TABLE ?? "tbl0XppJlG1f4QPXz";
+const enquiriesTable = process.env.AIRTABLE_ENQUIRIES_TABLE ?? "tblgqznGLPaQqXFaW";
 
 const setupMode = process.argv.includes("--setup");
 
 /**
- * The columns src/lib/notify.ts writes, per table.
+ * The columns src/lib/crm.ts writes, per table.
  *
- * Kept in step by hand: if the shape of a submission changes, both this and the mirror
+ * Kept in step by hand: if the shape of a submission changes, both this and the CRM module
  * need the same edit, and the check is what catches it if only one of them gets it.
+ *
+ * `Alternative Email` is here because the contact lookup reads it, not because anything
+ * writes to it: the dedupe would quietly stop matching half the CRM if it disappeared.
  */
 const expected: Record<string, string[]> = {
+  [contactsTable]: [
+    "First Name",
+    "Last Name",
+    "Email",
+    "Alternative Email",
+    "Newsletter Subscription",
+    "Source",
+    "BEV Engagement Type",
+  ],
   [enquiriesTable]: [
     "Name",
-    "First name",
-    "Last name",
+    "First Name",
+    "Last Name",
     "Email",
     "Interest",
     "Goals",
     "Subscribe",
+    "Status",
+    "Contact",
   ],
-  [subscribersTable]: ["Email", "Source"],
 };
 
 interface AirtableField {
@@ -284,14 +301,15 @@ async function checkSchema() {
   let allGood = true;
 
   for (const [name, columns] of Object.entries(expected)) {
-    const table = tables.find((t) => t.name === name);
+    // Configured by id, so match on id first and fall back to name for a hand-set override.
+    const table = tables.find((t) => t.id === name || t.name === name);
 
     if (!table) {
       allGood = false;
       console.log(`  MISSING TABLE  ${name}`);
       console.log(
         `                 Create it, or point the env var at the table you already have\n` +
-          `                 (AIRTABLE_${name === enquiriesTable ? "ENQUIRIES" : "SUBSCRIBERS"}_TABLE).\n`,
+          `                 (AIRTABLE_${name === enquiriesTable ? "ENQUIRIES" : "CONTACTS"}_TABLE).\n`,
       );
       continue;
     }
@@ -300,10 +318,10 @@ async function checkSchema() {
     const missing = columns.filter((c) => !present.has(c));
 
     if (missing.length === 0) {
-      console.log(`  OK             ${name} — all ${columns.length} columns present`);
+      console.log(`  OK             ${table.name} — all ${columns.length} columns present`);
     } else {
       allGood = false;
-      console.log(`  INCOMPLETE     ${name} — missing: ${missing.join(", ")}`);
+      console.log(`  INCOMPLETE     ${table.name} — missing: ${missing.join(", ")}`);
       console.log(`                 Has: ${table.fields.map((f) => f.name).join(", ")}`);
     }
   }
@@ -321,7 +339,13 @@ async function checkSchema() {
   return allGood;
 }
 
-/** Writes one obvious test row per table so the whole path can be seen working. */
+/**
+ * Writes one obvious test row so the whole path can be seen working.
+ *
+ * Enquiries only. The other half of a submission lands in Contacts, which is a live CRM
+ * the team works in every day, and a check that leaves test people scattered through it
+ * is worse than no check. Proving the token can write to the base proves it for both.
+ */
 async function sendTestRows() {
   const stamp = new Date().toISOString();
   const rows: [string, Record<string, unknown>][] = [
@@ -329,20 +353,16 @@ async function sendTestRows() {
       enquiriesTable,
       {
         Name: "Test Row",
-        "First name": "Test",
-        "Last name": "Row",
+        "First Name": "Test",
+        "Last Name": "Row",
         Email: "test@betterearthventures.com",
-        // A real option label from src/lib/enquiry.ts. `typecast` would happily invent a
-        // new single-select option from anything else, which is not a mess a check should
-        // leave behind.
+        // A real option label from src/lib/enquiry.ts. Anything else would be rejected,
+        // since the write goes out with typecast off.
         Interest: "Scale my startup with expert guidance",
         Goals: `Written by npm run airtable:check at ${stamp}. Safe to delete.`,
         Subscribe: false,
+        Status: "New",
       },
-    ],
-    [
-      subscribersTable,
-      { Email: "test@betterearthventures.com", Source: "airtable_check" },
     ],
   ];
 

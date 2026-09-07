@@ -55,15 +55,16 @@ Newsletter signups are **not** emailed by default: they would be noise. Set
 
 Replies go to the enquirer, not to the robot: `reply_to` is set to the sender's address.
 
-## Turning the Airtable mirror on
+## Turning the Airtable write on
 
-The base is already known: **`appxKGcCrGkqLk1vM`**, taken from the enquiry form's URL, and
-it is the default `AIRTABLE_BASE_ID` in `.env.example`. The only thing missing is a token,
-which has to be created by someone signed in to the workspace.
+Submissions go into **BEV CRM**, base **`appYLZb0d4rzdPBbN`**, which is the default
+`AIRTABLE_BASE_ID` in `.env.example`. The only thing missing is a token, which has to be
+created by someone signed in to the workspace.
 
 **Create the token**, at [airtable.com/create/tokens](https://airtable.com/create/tokens).
-Scope it to **`data.records:write`** on that one base and nothing wider: it needs to create
-records, and it should not be able to read the rest of the workspace. Add
+Scope it to **`data.records:read`** and **`data.records:write`** on that one base and
+nothing wider. Read as well as write, because a signup is deduplicated by looking the
+person up on email before deciding whether to add them or update what is already there. Add
 **`schema.bases:read`** too if you want the column check.
 
 **Then run one command:**
@@ -94,44 +95,53 @@ Environment variables are picked up by the next deployment, so **redeploy afterw
 
 If the Vercel CLI is not installed the setup script says so and stops there. The dashboard
 does the same job: Project → Settings → Environment Variables, add both keys to Production,
-Preview and Development, then redeploy. Add `AIRTABLE_ENQUIRIES_TABLE` /
-`AIRTABLE_SUBSCRIBERS_TABLE` only if the tables are not named `Enquiries` and `Subscribers`.
+Preview and Development, then redeploy. `AIRTABLE_CONTACTS_TABLE` and
+`AIRTABLE_ENQUIRIES_TABLE` default to the right table ids and only need setting if the
+tables are replaced outright.
 
-### The fields it writes
+### Where a submission lands
 
-The mirror sends these column names. They have to match the Airtable columns exactly, and
-Airtable is case-sensitive here. A single unrecognised column name makes Airtable reject
-the whole record, so one mismatch loses every field in the row, not just that one. That is
-what `npm run airtable:check` is for.
+Writes are addressed by **field id**, not by column name, so renaming a column in the
+Airtable UI does not break the forms. Renaming or deleting a *select option* still does,
+deliberately: `typecast` is off, so a missing option fails loudly rather than quietly
+creating a near duplicate in a field that already has 28 of them.
 
-| Table | Columns | Type |
-| --- | --- | --- |
-| Enquiries | `Name`, `First name`, `Last name` | Single line text |
-| Enquiries | `Email` | Email |
-| Enquiries | `Goals` | Long text |
-| Enquiries | `Interest` | Single select, or single line text |
-| Enquiries | `Subscribe` | Checkbox |
-| Subscribers | `Email` | Email |
-| Subscribers | `Source` | Single line text |
+**Newsletter signup** upserts one row in **Contacts**, matched on email:
 
-`Source` is one of three values, so the list can be segmented without a second table:
-
-| Value | Where it came from |
+| Column | Written |
 | --- | --- |
-| `website_footer` | "Stay close to the work" in the footer, on every page |
-| `summit_page` | "Be first to know when registration opens" on the Summit page |
-| `enquiry_form` | The opt-in checkbox on the Work With Us form |
+| `Email` | The address, lowercased |
+| `Newsletter Subscription` | `Yes` |
+| `Source` | `Newsletter Form`, merged into whatever is already there |
 
-`Interest` arrives as the full option label, e.g. "Scale my startup with expert guidance".
-The request sets `typecast: true`, so Airtable will create a missing single-select option
-rather than rejecting the write.
+**Enquiry** does two things. The person is upserted into **Contacts** exactly as above but
+with Source `Contacted Us`, and the message itself is filed as one row in **Enquiries**
+(`Name`, `First Name`, `Last Name`, `Email`, `Interest`, `Goals`, `Subscribe`), opened at
+status `New` and linked back to the contact.
 
-Ticking "Sign up for news and updates" writes the enquiry *and* adds the address to
-Subscribers with source `enquiry_form`.
+The message lives in its own table rather than in the contact's notes because a person can
+write in more than once, and squashing several enquiries together would lose all but the
+last. Ticking "Sign up for news and updates" additionally sets `Newsletter Subscription`
+on the contact.
 
-If your existing base uses different column names, tell me what they are and I will map
-them. Do not rename the Airtable columns to match this, since that would break whatever
-views and automations already point at them.
+### What it will not overwrite
+
+The CRM is a table the team edits by hand, so the update path is deliberately narrow:
+
+- **Source is merged, never replaced.** An existing `Zapier` or `Event registration` tag
+  survives a later web signup.
+- **A name is only filled in when the CRM has none.** A form can never overwrite a name
+  someone corrected by hand.
+- **"Do Not Engage" wins.** If any `Do Not Engage` engagement type is set, the signup is
+  still recorded against Source but the subscription flag is left alone. That decision was
+  the team's and is not the visitor's to reverse.
+- **A previous `Unsubscribe` is reversed by an explicit new signup**, because the person
+  has just asked again in their own words. This is the one case where the form overrides
+  what the CRM already said, so it is worth knowing about.
+
+Which page a signup came from (`website_footer`, `summit_page`, `enquiry_form`) is kept in
+Supabase, where it is a plain column. The CRM gets the single Source option the team
+already filters on.
 
 ## Airtable alone
 
