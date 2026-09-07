@@ -15,6 +15,7 @@
     "sync:people": "tsx scripts/sync-sanity.ts people",
     "sanity:status": "tsx scripts/sanity-status.ts",
     "airtable:check": "tsx scripts/check-airtable.ts",
+    "airtable:setup": "tsx scripts/check-airtable.ts --setup",
     "sync:partners": "tsx scripts/sync-sanity.ts partners"
   },
   "dependencies": {
