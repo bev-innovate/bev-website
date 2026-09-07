@@ -30,8 +30,13 @@ export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string 
             sizes="100vw"
             className="object-cover object-left lg:object-center"
           />
-          <div className="absolute inset-0 bg-mangrove/85" />
-          <div className="absolute inset-0 bg-gradient-to-r from-mangrove-deep via-mangrove/80 to-teal/40" />
+          {/*
+            Weighted to the left, where the copy sits, and thinning out to nothing on the
+            right so the mangroves are actually visible. An even wash at the old strength
+            covered the photograph completely, which made it decoration nobody could see.
+          */}
+          <div className="absolute inset-0 bg-mangrove/60 md:bg-mangrove/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-mangrove-deep/95 via-mangrove/70 to-mangrove/45 md:to-transparent" />
         </div>
 
         <div className="shell relative py-16 md:py-20">
@@ -70,7 +75,9 @@ export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string 
       <section className="border-b border-border bg-background py-10 md:py-12">
         <dl className="shell grid grid-cols-2 gap-3 sm:grid-cols-4">
           {hero.facts.map((fact) => (
-            <Card key={fact.label} variant="soft" className="px-5 py-5">
+            // `bg-muted` rather than the `soft` variant's ink-at-5%: mixing a tint from
+            // the ink gives a grey, and these want to be the same purple as the page.
+            <Card key={fact.label} variant="soft" className="bg-muted px-5 py-5">
               <dt className="text-sm text-muted-foreground">{fact.label}</dt>
               <dd className="mt-1.5 flex items-center gap-2 font-medium text-foreground">
                 {fact.value}
@@ -150,9 +157,15 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
           </div>
         </div>
 
-        <Reveal delay={0.08}>
-          <figure className="relative">
-            <div className="relative aspect-4/5 overflow-hidden rounded-lg bg-canvas-sunk">
+        {/*
+          The photograph fills the height of the prose beside it rather than holding a
+          fixed ratio: at this column width a 16:9 crop leaves a band of empty page under
+          it, and the two columns stop reading as one row. 16:9 on narrow screens, where
+          it sits above the text and has nothing to line up with.
+        */}
+        <Reveal delay={0.08} className="lg:h-full">
+          <figure className="relative lg:h-full">
+            <div className="relative aspect-video overflow-hidden rounded-lg bg-canvas-sunk lg:aspect-auto lg:h-full lg:min-h-80">
               <Image
                 src={about.texture}
                 alt=""
@@ -202,7 +215,7 @@ export function SummitAudience({ audience }: { audience: Summit["audience"] }) {
             const accent = audienceAccents[i % audienceAccents.length];
             return (
               <Reveal as="li" key={item.title} delay={Math.min(i, 3) * 0.13} className="h-full">
-                <Card variant="soft" className="h-full p-6">
+                <Card variant="soft" className="h-full bg-muted p-6">
                   <span
                     className={cn(
                       "grid size-11 place-items-center rounded-full",
@@ -246,7 +259,9 @@ const zoneAccent = {
  */
 export function SummitZones({ zones }: { zones: Summit["zones"] }) {
   return (
-    <section className="bg-muted/50 py-16 md:py-20">
+    // Full-strength `muted` rather than a half wash: at 50% the purple reads as a
+    // printing error rather than a colour, and the band stops separating the sections.
+    <section className="bg-muted py-16 md:py-20">
       <div className="shell">
         <SectionHead heading={zones.heading} intro={zones.intro} />
 
@@ -255,24 +270,41 @@ export function SummitZones({ zones }: { zones: Summit["zones"] }) {
             const accent = zoneAccent[zone.accent];
             return (
               <Reveal as="li" key={zone.key} delay={Math.min(i, 2) * 0.13} className="h-full">
-                <Card variant="default" className="flex h-full flex-col p-8">
-                  <h3 className={cn("font-display text-2xl font-semibold", accent.text)}>
-                    {zone.name}
-                  </h3>
+                <Card variant="default" className="flex h-full flex-col overflow-hidden">
+                  {/*
+                    A photograph of that zone at the last summit, so "Solve" is a room
+                    someone has been in rather than a word. Purely decorative: the name
+                    and purpose underneath carry the meaning.
+                  */}
+                  <div className="relative aspect-video w-full shrink-0">
+                    <Image
+                      src={zone.image}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
 
-                  <p className="mt-4 leading-relaxed text-muted-foreground">{zone.purpose}</p>
+                  <div className="flex flex-1 flex-col p-8">
+                    <h3 className={cn("font-display text-2xl font-semibold", accent.text)}>
+                      {zone.name}
+                    </h3>
 
-                  <ul className="mt-6 space-y-3 border-t border-border pt-6">
-                    {zone.activities.map((activity) => (
-                      <li key={activity} className="flex gap-3 text-muted-foreground">
-                        <span
-                          aria-hidden
-                          className={cn("mt-2 size-1.5 shrink-0 rounded-full", accent.dot)}
-                        />
-                        {activity}
-                      </li>
-                    ))}
-                  </ul>
+                    <p className="mt-4 leading-relaxed text-muted-foreground">{zone.purpose}</p>
+
+                    <ul className="mt-6 space-y-3 border-t border-border pt-6">
+                      {zone.activities.map((activity) => (
+                        <li key={activity} className="flex gap-3 text-muted-foreground">
+                          <span
+                            aria-hidden
+                            className={cn("mt-2 size-1.5 shrink-0 rounded-full", accent.dot)}
+                          />
+                          {activity}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </Card>
               </Reveal>
             );

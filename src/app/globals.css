@@ -61,18 +61,25 @@
   --ring: #b4552f;
 }
 
-/* The Summit runs the field-notes earth palette; registry blocks follow it here. */
+/*
+  The Summit's own scope; registry blocks resolve their tokens here.
+
+  Every off-white on this page is a tint of brand purple rather than the warm sand it
+  used to be. That includes the inks: `soft` cards and rules are mixed from `--foreground`
+  at low opacity, so a warm ink is enough on its own to pull a whole surface back towards
+  beige. Tinting the ink is what makes the tint hold everywhere.
+*/
 [data-theme="fieldnotes"] {
   --background: #ffffff;
-  --foreground: #33302a;
+  --foreground: #2e2833;
   --card: #ffffff;
-  --card-foreground: #33302a;
-  --muted: #f4f0e8;
-  --muted-foreground: #6a6459;
-  --primary: #b4552f;
+  --card-foreground: #2e2833;
+  --muted: #f4eff8;
+  --muted-foreground: #615a69;
+  --primary: #540178;
   --primary-foreground: #ffffff;
   --accent: #2f8f86;
-  --border: #e8e2d6;
+  --border: #e7dff0;
 }
 
 @theme inline {

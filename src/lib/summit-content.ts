@@ -48,11 +48,8 @@ export const summit = {
     ],
     primary: { label: "Register your interest", href: "#signup" },
     secondary: { label: "Browse agenda", href: "#agenda" },
-    /**
-     * The official key visual, cropped above its partner strip. It carries the summit
-     * name and line already, so nothing is overlaid on it.
-     */
-    image: `${IMG}/summit-key-visual.webp`,
+    /** Mangroves from the air: the wash over it is drawn from the same greens and teals. */
+    image: `${IMG}/climate-summit-background.webp`,
   },
 
   partners: {
@@ -67,8 +64,6 @@ export const summit = {
       },
       { name: "Bank of America", logo: `${IMG}/summit-bofa.webp` },
       { name: "Greenhouse", logo: `${IMG}/summit-greenhouse.webp` },
-      // Still awaiting a logo file; renders as a typographic lockup until one lands.
-      { name: "Sustainability Women", logo: null },
     ],
   },
 
@@ -78,7 +73,7 @@ export const summit = {
       "The Climate Innovation Summit Singapore moves climate solutions from proof of concept to proof of value. Founders arrive with something built. They leave with the customers, capital and partnerships that take it further. That is how it scales and creates impact.",
       "The programme is anchored by two events: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase — Impact Edition.",
     ],
-    texture: `${IMG}/climate-expedition-a-little-wild.webp`,
+    texture: `${IMG}/climate-summit-8.webp`,
   },
 
   audience: {
@@ -117,13 +112,14 @@ export const summit = {
   zones: {
     heading: "Three zones, running side by side",
     intro:
-      "On the open day all three run at once, so you can move between them as the day suits you.",
+      "On the open day all three run at once: the main stage in Discover, with Solve and Connect alongside it, so you can move between them as the day suits you.",
     items: [
       {
         key: "discover",
         name: "Discover",
         accent: "purple" as const,
         where: "Auditorium",
+        image: `${IMG}/climate-summit-7.webp`,
         purpose: "The main stage, for the sessions worth stopping everything to hear.",
         activities: [
           "Synthesis session on the futures we can see coming",
@@ -137,6 +133,7 @@ export const summit = {
         name: "Solve",
         accent: "orange" as const,
         where: "Solve-It Zone",
+        image: `${IMG}/climate-summit-4.webp`,
         purpose: "Bring a live problem and leave with a way through it.",
         activities: [
           "Hour-long takeovers hosted by partners and mentors",
@@ -149,6 +146,7 @@ export const summit = {
         name: "Connect",
         accent: "teal" as const,
         where: "Coworking space",
+        image: `${IMG}/climate-summit-9.webp`,
         purpose: "Where the introductions happen, all day, without a schedule.",
         activities: [
           "Matchmaking Corner",
@@ -162,13 +160,17 @@ export const summit = {
   /**
    * The three days.
    *
+   * Times and sessions come from the run sheets of 7 September. Everything internal to
+   * running the event stays off the page: crew call times, venue readiness, the dress
+   * rehearsal, who is flying in and when. So does anything still carrying a question mark
+   * in the run sheet, and the names of roundtable hosts that are not yet confirmed.
+   *
    * Each day carries an `access` label because only the middle day is open to everyone:
    * day one is for startups and mentors, day three is invite only. Someone deciding
    * whether to register needs that before they read a single session title.
    *
-   * Day two is the only one with `zones` rather than `blocks`, because its three tracks
-   * run at the same time. A single ordered list would imply a sequence that does not
-   * exist.
+   * Day two also carries `zones`, because Solve and Connect run alongside its main-stage
+   * programme rather than after it.
    */
   agenda: {
     heading: "Three days, three different rooms to be in",
@@ -179,56 +181,91 @@ export const summit = {
         title: "Builders' Day",
         access: "Startups and mentors only",
         accent: "purple" as const,
-        note: "Registration from 1:00pm, programme starts 1:30pm.",
+        note: "Registration opens at 1:00pm. An afternoon and evening, not a full day.",
         blocks: [
           {
             time: "13:30",
+            title: "Welcome address",
+            body: "The conference opens.",
+          },
+          {
+            time: "13:45",
             title: "Founder talks",
             body: "Founders who have done it, on their background, their biggest mistake, their biggest win, and the one tip they would pass on.",
           },
           {
-            time: "14:30",
+            time: "14:45",
             title: "Founder Circle",
             body: "Mini roundtables where each founder puts a live challenge to the group, facilitated by the founders who just spoke.",
           },
           {
             time: "15:30",
             title: "Expert roundtables",
-            body: "Choose your own adventure: three topics drawn from what founders told us they are wrestling with.",
-            tbc: true,
+            body: "An hour across three tables: working with a corporate, raising and using investment, and building a team and a culture. Facilitated, so the conversation goes somewhere.",
           },
+          { time: "16:30", title: "Tea" },
           {
-            time: "16:30",
+            time: "16:45",
             title: "One-to-one mentoring",
-            body: "Matched in advance on the question you submit, so the conversation starts already useful.",
+            body: "An hour of it, matched in advance on the question you submit, so the conversation starts already useful.",
           },
-          { time: "Evening", title: "VIP reception" },
+          { time: "17:45", title: "Day one closes" },
+          {
+            time: "18:00",
+            title: "VIP reception",
+            body: "For ClimateLaunchpad finalists, PepsiCo executives, BEV alumni and invited guests. Until 8:30pm.",
+          },
         ],
       },
       {
         ref: "D-02",
         date: "Wednesday 14 October",
-        title: "The open day",
+        title: "Global Day",
         access: "Open to all registered attendees",
         accent: "teal" as const,
-        note: "All three zones run at once. Move between them as the day suits you.",
+        note: "Solve and Connect run alongside the main programme, so you can step out and come back.",
         zones: ["discover", "solve", "connect"],
         blocks: [
-          { time: "11:30", title: "Solve-It Zone opens", body: "Partner and mentor takeovers, an hour at a time." },
-          { time: "16:00", title: "ClimateLaunchpad Global Grand Final", body: "In the Discover Zone, followed by networking." },
+          { time: "10:30", title: "Registration and arrival" },
+          {
+            time: "11:00",
+            title: "Inspiration power hour",
+            body: "An interactive data session on nutrition, run with the ClimateLaunchpad trainers.",
+          },
+          {
+            time: "11:30",
+            title: "Collaboration Matrix",
+            body: "Put down what you will follow up on, and find the people to do it with.",
+          },
+          { time: "13:00", title: "Lunch and startup exhibition" },
+          {
+            time: "14:30",
+            title: "PepsiCo panel",
+            body: "One case study from four sides: PepsiCo's C-suite, the startup that ran the pilot, the team inside PepsiCo that ran it with them, and an investor.",
+          },
+          {
+            time: "15:00",
+            title: "Founder stories from across the globe",
+            body: "Six founders, eight minutes each, interviewed on what building looks like where they are.",
+          },
+          {
+            time: "16:00",
+            title: "ClimateLaunchpad Global Grand Final",
+            body: "In the Discover Zone until around 8:00pm, followed by networking.",
+          },
         ],
       },
       {
         ref: "D-03",
         date: "Thursday 15 October",
-        title: "PepsiCo Greenhouse Program APAC Showcase — Impact Edition",
+        title: "Impact Day",
         access: "Invite only",
         accent: "orange" as const,
         note: "From around 10:30am.",
         blocks: [
           {
             time: "10:30",
-            title: "Impact Edition showcase",
+            title: "PepsiCo Greenhouse Program APAC Showcase — Impact Edition",
             body: "An impact framework applied to five returning startups from the four-year APAC accelerator.",
           },
         ],

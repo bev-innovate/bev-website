@@ -62,6 +62,71 @@ agenda", which jumps to the agenda.
 
 ---
 
+## Progress · 7 September, from the run sheets
+
+The Day 1 and Day 2 run sheets are now on the page, with real times.
+
+**Day names.** Day 1 stays **Builders' Day**, Day 3 becomes **Impact Day**. Day 2 needed a
+name and I have used **Global Day**: it is the day that carries the Global Grand Final and
+the founder stories from across the globe, and it sits alongside the other two without
+borrowing a zone name, which "Discover Day" would have. **Summit Day** and **Open Day** are
+the alternatives if you would rather. One word in `summit-content.ts` either way.
+
+Day 3's full approved name, "PepsiCo Greenhouse Program APAC Showcase — Impact Edition",
+now sits on the session inside the day rather than as the day's title, so it is still there
+in full and the three days read as a set.
+
+**Kept off the page.** Everything about running the event rather than attending it: crew
+call times, venue readiness, the GGF dress rehearsal, who is flying in, the note about a
+slower morning for jet lag, and the banquet-with-table-activities idea while it still has a
+question mark against it.
+
+**Roundtable topics are now published**, which closes most of A-09: working with a
+corporate, raising and using investment, and building a team and a culture. The host
+organisations are **not** named. PepsiCo is a public partner and could be, but the investor
+is still "TPC maybe, back up Mana Impact" and Google is not confirmed publicly, so naming
+one and not the others would read oddly. Say the word once they are settled.
+
+**The VIP reception guest list is published** as "ClimateLaunchpad finalists, PepsiCo
+executives, BEV alumni and invited guests". That came from an internal run sheet rather
+than anything approved for the site, so check you are happy for it to be public.
+
+### Worth a decision: Day 2 is now a single track
+
+The run sheet lays Day 2 out as one main-stage programme from 11:00am to the Grand Final,
+with lunch and the startup exhibition in the middle. It says nothing about the Solve-It
+Zone hours the September briefing gave (11:30am to 2:30 or 3:30pm), and nothing about
+Connect.
+
+I have kept the three zones and worded Day 2 as "Solve and Connect run alongside the main
+programme", which is true under both documents. But if the zones have quietly become one
+room and a programme, the zones section is now overselling and should be cut back. Tell me
+which it is.
+
+### Photography
+
+Ten photographs came with the run sheets. Four are in use: the mangrove aerial behind the
+hero, a networking shot beside "Three days built around tangible outcomes", and one per
+zone — the auditorium for Discover, a table mid-conversation for Solve, a full networking
+room for Connect. The other six are converted and sitting in `public/images` as
+`climate-summit-1`, `-2`, `-3`, `-5`, `-6` and `-10`, so swapping any of them in is a
+one-line change.
+
+The 41 MB of source JPEGs in `climate-summit/` are now redundant: the WebP versions are
+1.7 MB for the whole set. Worth deleting from the repository once you have them backed up
+somewhere else, since git keeps every version of a binary forever.
+
+### Also done
+
+- **A-04 closed by removal.** Sustainability Women is off the partner list, as asked. That
+  also empties part of B-03, which was going to move it to a Community Partners group.
+- **Irish Aid logo replaced** with the transparent version. The old file had the logo
+  baked onto an off-white rectangle, which showed as a pale box against the page.
+- **The warm palette is gone.** Every off-white on the Summit is now a tint of brand
+  purple, including the inks the soft surfaces are mixed from.
+
+---
+
 ## 1. Conflicts and problems found
 
 These are not in the briefing. They came out of reading it against what the page currently
