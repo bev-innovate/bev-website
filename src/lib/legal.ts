@@ -1,11 +1,11 @@
 /**
  * Privacy Policy and Terms of Use.
  *
- * Client-supplied and reproduced verbatim, including the em dashes the rest of the site
- * avoids: this is a dated legal document rather than marketing copy, and house punctuation
- * is not worth a silent edit to it. The only thing changed is the contact line, where the
- * envelope emoji is replaced by a real `mailto:` link, since an emoji read aloud as
- * "envelope with arrow" tells a screen reader user nothing.
+ * Client-supplied and reproduced with the wording intact. Two changes were asked for and
+ * neither touches the meaning: the em dashes are gone, in line with the rule the rest of
+ * the site follows, replaced by a comma in one place and brackets in the other; and the
+ * contact line uses a real `mailto:` link in place of the envelope emoji, since an emoji
+ * read aloud as "envelope with arrow" tells a screen reader user nothing.
  *
  * Both documents name **Earthtech Ventures Pte Ltd** as the operating company. The footer
  * credits Better Earth Ventures, which is the brand. Worth confirming those are the same
@@ -44,7 +44,7 @@ export const privacyPolicy: LegalDocument = {
     {
       title: "What We Collect",
       paragraphs: [
-        "We collect limited personal information, such as your name and email address, only when you voluntarily provide it—typically when subscribing to our updates, downloading resources, or joining our initiatives.",
+        "We collect limited personal information, such as your name and email address, only when you voluntarily provide it, typically when subscribing to our updates, downloading resources, or joining our initiatives.",
         "We may also collect non-identifying information automatically through cookies and similar technologies. This may include your IP address, browser type, device information, pages visited, time spent, and referring links.",
       ],
     },
@@ -115,7 +115,7 @@ export const termsOfUse: LegalDocument = {
     {
       title: "Intellectual Property",
       paragraphs: [
-        "All content on this Site—including but not limited to text, visuals, graphics, videos, brand elements, and layout—is owned by Earthtech Ventures or its content partners and is protected by copyright, trademark, and other applicable laws. You may not reproduce, redistribute, modify, or publicly display any content without prior written consent.",
+        "All content on this Site, including but not limited to text, visuals, graphics, videos, brand elements and layout, is owned by Earthtech Ventures or its content partners and is protected by copyright, trademark, and other applicable laws. You may not reproduce, redistribute, modify, or publicly display any content without prior written consent.",
       ],
     },
     {

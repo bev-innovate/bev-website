@@ -10,7 +10,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
  * Home hero. Keeps the old site's purple field and orange CTAs, but replaces the flat
- * colour block with a layered treatment — photography under a duotone wash — and gives
+ * colour block with a layered treatment, photography under a duotone wash, and gives
  * the copy a staggered entrance.
  */
 export function Hero({

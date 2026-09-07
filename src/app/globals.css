@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 /*
-  Better Earth Ventures — design tokens.
+  Better Earth Ventures design tokens.
 
   Colours are sampled directly from the previous Wix site so the rebuild is on-brand:
   purple #540178, orange #ee792f, teal #12a19d, yellow #ffbf00, sky #3e9be9, ink #333.
-  Components reference the semantic tokens below, never a raw hex — so a future brand
+  Components reference the semantic tokens below, never a raw hex, so a future brand
   refresh is a change to this file alone.
 */
 
@@ -270,7 +270,7 @@
     text-wrap: balance;
   }
 
-  /* Section eyebrow — the old site's small caps label. */
+  /* Section eyebrow: the old site's small caps label. */
   .eyebrow {
     font-size: 0.8125rem;
     font-weight: 600;
@@ -299,7 +299,7 @@
     );
   }
 
-  /* Measurement rule — the hairline tick strip under section headings. */
+  /* Measurement rule: the hairline tick strip under section headings. */
   .tick-rule {
     background-image: repeating-linear-gradient(
       to right,

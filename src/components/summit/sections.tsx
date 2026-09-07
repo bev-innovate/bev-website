@@ -129,7 +129,7 @@ function PartnerRow({
                 className="max-h-12 w-auto max-w-44 object-contain"
               />
             ) : (
-              // No logo file yet — a typographic lockup reads as intentional, not broken.
+              // No logo file yet, so a typographic lockup reads as intentional, not broken.
               <span className="max-w-56 leading-tight font-medium text-foreground">
                 {partner.name}
               </span>

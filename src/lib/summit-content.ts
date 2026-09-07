@@ -1,5 +1,5 @@
 /**
- * Climate Innovation Summit Singapore — page content.
+ * Climate Innovation Summit Singapore: page content.
  *
  * Partners are real. Everything else is deliberate placeholder: the shape is correct so
  * the templates can be reviewed, but the words, dates, speakers and startups all need
@@ -38,7 +38,7 @@ export const summit = {
     /** Matches the line set into the key visual, so the page and the artwork agree. */
     headline: "Where climate founders come to scale",
     standfirst:
-      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase — Impact Edition.",
+      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase: Impact Edition.",
     /** Rendered as a monospace data row under the headline. */
     facts: [
       { label: "Dates", value: "13 – 15 October 2026", tbc: false },
@@ -71,7 +71,7 @@ export const summit = {
     heading: "Three days built around tangible outcomes",
     paragraphs: [
       "The Climate Innovation Summit Singapore moves climate solutions from proof of concept to proof of value. Founders arrive with something built. They leave with the customers, capital and partnerships that take it further. That is how it scales and creates impact.",
-      "The programme is anchored by two events: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase — Impact Edition.",
+      "The programme is anchored by two events: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase: Impact Edition.",
     ],
     texture: `${IMG}/climate-summit-8.webp`,
   },
@@ -272,7 +272,7 @@ export const summit = {
         blocks: [
           {
             time: "10:30",
-            title: "PepsiCo Greenhouse Program APAC Showcase — Impact Edition",
+            title: "PepsiCo Greenhouse Program APAC Showcase: Impact Edition",
             body: "An impact framework applied to five returning startups from the four-year APAC accelerator.",
           },
         ],

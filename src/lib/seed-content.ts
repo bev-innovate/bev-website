@@ -1,5 +1,5 @@
 /**
- * Seed content — transcribed from the previous Wix site.
+ * Seed content, transcribed from the previous Wix site.
  *
  * Copy is carried over as-is so this rebuild is a design change, not a content change.
  * Blog metadata came from the Wix Blog API; page copy was transcribed from full-page
@@ -56,7 +56,7 @@ export const siteSettings: SiteSettings = {
   ],
 };
 
-/** Home — "Who we are" intro block. */
+/** Home: the "Who we are" intro block. */
 export const whoWeAre = {
   eyebrow: "Who we are",
   heading: "Better Earth Ventures is where ClimateTech founders come to scale.",
@@ -71,7 +71,7 @@ export const whoWeAre = {
   closing: "Join us in building a Better Earth, one solution at a time.",
 };
 
-/** Home — how the engagements are delivered. Four pillars, each with formats. */
+/** Home: how the engagements are delivered. Four pillars, each with formats. */
 export const delivery = {
   eyebrow: "How we work",
   heading:
@@ -129,7 +129,7 @@ export const delivery = {
   ],
 };
 
-/** Home — the three pillars, shown as an accordion on the old site. */
+/** Home: the three pillars, shown as an accordion on the old site. */
 export const pillars = [
   {
     title: "Better Earth Ventures",
@@ -183,7 +183,7 @@ export const pillars = [
 /** Home: the full logo wall. Every logo file in public/images is represented. */
 
 /**
- * Home — "Our sectors of focus".
+ * Home: "Our sectors of focus".
  *
  * TODO: images are placeholders drawn from the existing library. Clean Cities,
  * Circularity and Industrial Decarbonisation have no matching photography yet.
@@ -215,7 +215,7 @@ export const verticals = [
   },
 ];
 
-/** Programmes page — intro above the programme list. */
+/** Programmes page: the intro above the programme list. */
 export const programmesIntro = {
   /** Page name as the eyebrow, a statement as the heading. Matches the News banner. */
   eyebrow: "Programmes",

@@ -2,7 +2,7 @@
  * Single data-access layer for the site.
  *
  * Every helper tries Sanity first and falls back to seed content. Pages therefore never
- * branch on "is the CMS up yet?" — they just await a function and render.
+ * branch on "is the CMS up yet?": they just await a function and render.
  */
 
 import { sanityFetch } from "@/sanity/client";

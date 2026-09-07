@@ -31,8 +31,8 @@ Every channel is inert until its env vars are set, so the site deploys with none
    This is a DNS step: Resend gives you the records to add.
 3. In Vercel, set:
    - `RESEND_API_KEY`
-   - `ENQUIRY_NOTIFY_FROM` — an address on the verified domain
-   - `ENQUIRY_NOTIFY_TO` — comma-separated if more than one person should get it
+   - `ENQUIRY_NOTIFY_FROM`: an address on the verified domain
+   - `ENQUIRY_NOTIFY_TO`: comma-separated if more than one person should get it
 
 Until the domain is verified, the default `onboarding@resend.dev` sender only delivers to
 the Resend account owner's own address. Useful for testing, not for production.
@@ -117,7 +117,7 @@ Ticking "Sign up for news and updates" writes the enquiry *and* adds the address
 Subscribers with source `enquiry_form`.
 
 If your existing base uses different column names, tell me what they are and I will map
-them — do not rename the Airtable columns to match this, since that would break whatever
+them. Do not rename the Airtable columns to match this, since that would break whatever
 views and automations already point at them.
 
 ## Why not Airtable alone
@@ -132,18 +132,18 @@ Two reasons not to:
   backfill. Without it, the submission is simply gone.
 
 The current shape costs one extra service and buys durability. If you would rather cut
-Supabase, say so and I will make Airtable the blocking write instead — it is a small
+Supabase, say so and I will make Airtable the blocking write instead. It is a small
 change, and the tradeoff is yours to make, not mine.
 
 ## Checking it works
 
 Submit the contact form on the deployed site, then:
 
-- **Supabase** — the row appears in the `enquiries` table.
-- **Resend** — the send shows in [resend.com/emails](https://resend.com/emails), with the
+- **Supabase**: the row appears in the `enquiries` table.
+- **Resend**: the send shows in [resend.com/emails](https://resend.com/emails), with the
   delivery result. This is where to look first if the mail never arrives.
-- **Airtable** — the record appears in the table.
-- **Vercel** — any channel that failed logged `[notify] …` in the function logs.
+- **Airtable**: the record appears in the table.
+- **Vercel**: any channel that failed logged `[notify] …` in the function logs.
 
 ## Database migration
 

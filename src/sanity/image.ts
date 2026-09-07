@@ -6,7 +6,7 @@ const builder = isSanityConfigured
   ? createImageUrlBuilder({ projectId, dataset })
   : null;
 
-/** Minimal shape of a Sanity image reference — avoids depending on the Studio package. */
+/** Minimal shape of a Sanity image reference, which avoids depending on the Studio package. */
 export type ImageSource = { asset?: { _ref?: string; _type?: string } } | null | undefined;
 
 /**

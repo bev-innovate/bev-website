@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Timeline — sticky heading with a scroll-following beam.
+ * Timeline: sticky heading with a scroll-following beam.
  *
  * Source: 21st.dev @manuarora700 / Aceternity UI ("Timeline", component id 857).
  * Adapted: brand tokens instead of neutral/purple, heading and copy lifted out into

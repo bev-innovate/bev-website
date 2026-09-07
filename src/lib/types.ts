@@ -55,7 +55,7 @@ export interface Company {
   cohortYear?: number;
 }
 
-/** Colour a programme or card is themed with — mirrors the old site's block colours. */
+/** Colour a programme or card is themed with, mirroring the old site's block colours. */
 export type Accent = "purple" | "orange" | "teal" | "yellow" | "sky";
 
 export interface Programme {

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 /**
  * Card.
  *
- * Vendored from Tailark (MIT, github.com/tailark/blocks — `bases/base/mist/ui/card`),
+ * Vendored from Tailark (MIT, github.com/tailark/blocks, `bases/base/mist/ui/card`),
  * which is what their feature, stats and content blocks are built on. Unmodified apart
  * from the import path and a typo in the `mixed` variant's border class.
  *

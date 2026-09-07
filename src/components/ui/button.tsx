@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Brand buttons. The old site used a solid orange pill as its primary action on both
- * light and dark backgrounds — that carries over as `primary`.
+ * light and dark backgrounds, and that carries over as `primary`.
  */
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 active:translate-y-px whitespace-nowrap",

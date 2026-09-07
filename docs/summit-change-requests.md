@@ -7,10 +7,10 @@ Items are grouped by what is stopping them, not by where they sit on the page. E
 ID so we can refer to it later.
 
 **Legend**
-- **READY** — unambiguous, I can do it now
-- **DECIDE** — needs a call from you first
-- **BLOCKED** — waiting on content, assets or approvals
-- **BUILD** — structural work, larger than a copy edit
+- **READY**: unambiguous, I can do it now
+- **DECIDE**: needs a call from you first
+- **BLOCKED**: waiting on content, assets or approvals
+- **BUILD**: structural work, larger than a copy edit
 
 ---
 
@@ -23,12 +23,12 @@ ID so we can refer to it later.
 the old Day 3 placement was invented placeholder. Say if that is wrong.
 
 **Assumptions taken, easily reversed:**
-- C-06 — venue reads "Shared upon confirmation"
-- C-07 — removed the About stats block, kept the hero facts row
-- R-02 — label is "Guests from" without the colon, since it sits in a row of other
+- C-06: venue reads "Shared upon confirmation"
+- C-07: removed the About stats block, kept the hero facts row
+- R-02: label is "Guests from" without the colon, since it sits in a row of other
   labels that have none. Value is "50 countries"
-- C-04 — used the full approved name, "PepsiCo Greenhouse Program APAC Showcase —
-  Impact Edition", everywhere, em dash included
+- C-04: used the full approved name, "PepsiCo Greenhouse Program APAC Showcase:
+  Impact Edition" everywhere
 
 **Still open:** C-02 and R-06 (registration URL), C-03 (how to present a three-day event
 where one day is open), C-05 (partner name), B-03, and everything in section 4.
@@ -72,7 +72,7 @@ the founder stories from across the globe, and it sits alongside the other two w
 borrowing a zone name, which "Discover Day" would have. **Summit Day** and **Open Day** are
 the alternatives if you would rather. One word in `summit-content.ts` either way.
 
-Day 3's full approved name, "PepsiCo Greenhouse Program APAC Showcase — Impact Edition",
+Day 3's full approved name, "PepsiCo Greenhouse Program APAC Showcase: Impact Edition",
 now sits on the session inside the day rather than as the day's title, so it is still there
 in full and the three days read as a set.
 
@@ -107,7 +107,7 @@ which it is.
 
 Ten photographs came with the run sheets. Four are in use: the mangrove aerial behind the
 hero, a networking shot beside "Three days built around tangible outcomes", and one per
-zone — the auditorium for Discover, a table mid-conversation for Solve, a full networking
+zone: the auditorium for Discover, a table mid-conversation for Solve, a full networking
 room for Connect. The other six are converted and sitting in `public/images` as
 `climate-summit-1`, `-2`, `-3`, `-5`, `-6` and `-10`, so swapping any of them in is a
 one-line change.
@@ -158,14 +158,14 @@ somewhere else, since git keeps every version of a binary forever.
 These are not in the briefing. They came out of reading it against what the page currently
 says, and each needs resolving before the surrounding work is safe.
 
-### C-01 · The Global Grand Final is on two different days — DECIDE
+### C-01 · The Global Grand Final is on two different days: DECIDE
 
 The briefing puts the **Global Grand Final at ~4:00pm on Day 2**, in the Discover Zone. The
 page currently has it opening **Day 3 at 09:30**, and Day 3 is now the PepsiCo Greenhouse
 showcase, invite only. One of these is wrong. Everything in the timeline rebuild (B-01)
 depends on the answer.
 
-### C-02 · "Register to Attend Now" points at an email capture form — DECIDE
+### C-02 · "Register to Attend Now" points at an email capture form: DECIDE
 
 The CTA change is easy; the destination is the problem. `#signup` is a *notify me* form,
 and the section it lands on reads:
@@ -178,30 +178,30 @@ need either **the real registration URL** (Brevo? Eventbrite? Luma?) or a decisi
 capturing interest under honest wording. Changing the button alone would be worse than
 leaving it.
 
-### C-03 · Only Day 2 is open to the public — DECIDE
+### C-03 · Only Day 2 is open to the public: DECIDE
 
 Day 1 is startups and mentors only; Day 3 is invite only. So a general registrant is
 buying into one day of three. The page currently sells "three days" throughout. We should
 either label access per day on the agenda, or reword the top-line pitch. Otherwise the
 registration promise does not match what most people can attend.
 
-### C-04 · The approved PepsiCo name contains an em dash — DECIDE
+### C-04 · The approved PepsiCo name contains an em dash: DECIDE
 
 Standing house rule is no em dashes anywhere on the site. The approved wording is
-"PepsiCo Greenhouse Program APAC Showcase — Impact Edition". I will treat the partner's
+"PepsiCo Greenhouse Program APAC Showcase: Impact Edition". I will treat the partner's
 approved name as an exception and leave the dash in, unless you say otherwise.
 
-The briefing also uses two forms: **"PepsiCo Greenhouse Program APAC Showcase — Impact
+The briefing also uses two forms: **"PepsiCo Greenhouse Program APAC Showcase: Impact
 Edition"** for the approved wording, and **"PepsiCo Greenhouse APAC Showcase"** (no
 "Program") for the Day 3 label. Tell me which to use where, or I will use the full
 approved form everywhere.
 
-### C-05 · Partner name mismatch — DECIDE
+### C-05 · Partner name mismatch: DECIDE
 
 The page says **Sustainability Women**. The briefing says **Sustainability for Women**.
 Which is right?
 
-### C-06 · "Share upon confirmation" reads oddly — DECIDE
+### C-06 · "Share upon confirmation" reads oddly: DECIDE
 
 Requested venue wording is "Share upon confirmation". As a value in a Venue field it
 scans as an instruction to the reader. **"Shared upon confirmation"** or **"Shared once
@@ -210,14 +210,14 @@ confirmed"** reads better. Say which you want; I will use your exact words if yo
 Note the field currently reads "Confirmed upon registration", from your last round of
 edits, not "To be announced" as the briefing assumes.
 
-### C-07 · Which stats row is being removed? — DECIDE
+### C-07 · Which stats row is being removed?: DECIDE
 
 The briefing says remove "the second row of stats (countries represented, number of days,
 investors, etc.)". There are two stat rows on the page, and neither is literally a second
 row:
 
-1. **Hero facts** — Dates, Location, Venue, Countries
-2. **About specimens** — Countries represented, Days, Founders on stage, Investors attending
+1. **Hero facts**: Dates, Location, Venue, Countries
+2. **About specimens**: Countries represented, Days, Founders on stage, Investors attending
 
 The named fields match **the About specimens**, so that is what I will remove. But the
 briefing separately asks to keep and relabel a Countries field (R-02), which lives in the
@@ -225,7 +225,7 @@ hero. Confirming: remove the About block entirely, keep the hero row.
 
 ---
 
-## 2. Copy changes — READY
+## 2. Copy changes: READY
 
 Straight swaps. I can do all of these today.
 
@@ -238,12 +238,12 @@ Straight swaps. I can do all of these today.
 | R-05 | About para 2 | "…two events that already draw the world to Singapore:" | Remove the clause; keep the two events named |
 | R-06 | Hero CTA | "Register your interest" | "Register to Attend Now" (blocked by C-02) |
 | R-07 | Strands heading | "Four strands running across three days" | Rewrite for three zones (see B-02) |
-| R-08 | Everywhere | "PepsiCo Greenhouse Program APAC Showcase" | Approved wording with "— Impact Edition" (pending C-04) |
+| R-08 | Everywhere | "PepsiCo Greenhouse Program APAC Showcase" | Approved wording with ": Impact Edition" (pending C-04) |
 | R-09 | About specimens | Four-stat grid | Remove entirely (pending C-07) |
 
 ---
 
-## 3. Structural rebuilds — BUILD
+## 3. Structural rebuilds: BUILD
 
 ### B-01 · Rebuild the three-day agenda
 
@@ -288,11 +288,11 @@ than full bleed. The summit key visual is currently edge-to-edge.
 
 Worth noting the rest of the site standardised on a **purple** gradient banner last week.
 A teal summit banner will read as deliberately different, which may be exactly right for a
-sub-brand — I just want to flag it rather than assume. **Confirm: brand teal `#12a19d`?**
+sub-brand, and I just want to flag it rather than assume. **Confirm: brand teal `#12a19d`?**
 
 ---
 
-## 4. Waiting on you — BLOCKED
+## 4. Waiting on you: BLOCKED
 
 | ID | Item | Notes |
 | --- | --- | --- |
@@ -309,13 +309,13 @@ sub-brand — I just want to flag it rather than assume. **Confirm: brand teal `
 
 ### Scheduled follow-up
 
-**18 September** — national winners can be added to Companies on the Floor. That is 17
+**18 September**: national winners can be added to Companies on the Floor. That is 17
 days away. Worth a calendar reminder; I can also set one.
 
 ### On speaker imagery
 
 The briefing asks for good gender diversity in speaker photos. There are currently **no
-speaker photos at all** — eight placeholders. This becomes a requirement on the list you
+speaker photos at all**: eight placeholders. This becomes a requirement on the list you
 send me (A-07) rather than something I can fix in the code. Flagging it so it is checked
 before the photos are chosen, not after.
 
@@ -328,7 +328,7 @@ Solve-It gets takeovers and expertise areas; Connect gets the Matchmaking Corner
 Collaboration Matrix prompts.
 
 This is print, not web. It is out of scope for the site, but I can produce print-ready
-artwork in the summit's visual language if you want — say the word and it becomes its own
+artwork in the summit's visual language if you want. Say the word and it becomes its own
 piece of work.
 
 ---
@@ -337,7 +337,7 @@ piece of work.
 
 1. Answer the DECIDE items in section 1. Several of them gate everything else.
 2. I do all of section 2 (copy), except R-06 which waits on the registration URL.
-3. B-02 and B-03 (zones, partner groups) — self-contained and low risk.
+3. B-02 and B-03 (zones, partner groups): self-contained and low risk.
 4. B-01 (agenda) once C-01 settles the Global Grand Final day.
 5. B-04 (hero treatment) once the teal is confirmed.
 6. Content lands from section 4 as it becomes available.

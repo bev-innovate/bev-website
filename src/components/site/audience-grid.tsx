@@ -14,7 +14,7 @@ import { Reveal } from "@/components/ui/reveal";
  * "Who Climate Expeditions Are For".
  *
  * The old site hid six audiences behind accordion rows, so a visitor had to click six
- * times to find out whether the trip was for them — the one question that section exists
+ * times to find out whether the trip was for them, which is the one question that section exists
  * to answer. These are cards with the answer already visible: numbered, iconed and
  * scannable in a single pass.
  */

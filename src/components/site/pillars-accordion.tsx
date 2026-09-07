@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 type Pillar = (typeof pillars)[number];
 
 /**
- * "Who we are" — the three pillars, as an accordion on a purple field.
+ * "Who we are": the three pillars, as an accordion on a purple field.
  *
  * Same interaction as the old site, rebuilt with real disclosure semantics: one open at a
  * time, proper button/region wiring, height animation that reduced-motion users skip.

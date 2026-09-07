@@ -33,7 +33,7 @@ First add the namespace to `components.json`:
 { "registries": { "@tailark": "https://tailark.com/r/radix/{name}.json" } }
 ```
 
-**This will not work from the agent build environment** — `tailark.com` is 403 at the
+**This will not work from the agent build environment**: `tailark.com` is 403 at the
 egress proxy, as is `ui.shadcn.com`. Run it locally, or clone the repo and copy the block
 source:
 
@@ -62,17 +62,17 @@ credits its source block in its own file header.
 | `src/components/site/section.tsx`, `page-header.tsx` | `content/two` | Section lead-in is a plain `text-primary` span, not a letterspaced small-caps eyebrow. |
 | `src/app/page.tsx` (who we are) | `content/two` | `lg:grid-cols-5` split with the prose behind a left rule. |
 | `src/app/page.tsx` (logo strip), `about` | `logo-cloud/two` | Muted lead-in inline above the marks. |
-| `summit/sections.tsx` — `SummitStrands`, `SummitStartups` | `features/eight` | Card grids. |
-| `summit/sections.tsx` — `SummitTimeline` | `content/two` | `sm:grid-cols-5` rows separated by `sm:divide-y`. |
-| `summit/sections.tsx` — `SummitAbout` | `stats/four` | Unboxed figures. |
-| `summit/sections.tsx` — `SummitSpeakers` | `team/two` | Compact avatar-and-name rows in a dense grid. |
+| `summit/sections.tsx`: `SummitStrands`, `SummitStartups` | `features/eight` | Card grids. |
+| `summit/sections.tsx`: `SummitTimeline` | `content/two` | `sm:grid-cols-5` rows separated by `sm:divide-y`. |
+| `summit/sections.tsx`: `SummitAbout` | `stats/four` | Unboxed figures. |
+| `summit/sections.tsx`: `SummitSpeakers` | `team/two` | Compact avatar-and-name rows in a dense grid. |
 
 The Summit page carries `data-theme="fieldnotes"` on its root element, so every block
 inside it resolves `primary`, `muted` and `border` to the warm palette instead.
 
 ## Conventions when adapting a block
 
-1. Keep the shadcn token classes (`text-muted-foreground`, not `text-ink-muted`) — that is
+1. Keep the shadcn token classes (`text-muted-foreground`, not `text-ink-muted`), because that is
    what makes the next block drop in cleanly too.
 2. Replace hardcoded demo content with props.
 3. Credit the source in the file header, as the existing vendored components do.

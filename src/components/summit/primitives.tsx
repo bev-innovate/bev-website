@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  * Shared Field Notes primitives for the Summit page.
  *
  * The register: monospace specimen labels, hairline rules, annotation captions, and
- * numbered references. Everything reads as recorded evidence rather than marketing —
+ * numbered references. Everything reads as recorded evidence rather than marketing,
  * which is the right tone when most of the content is still unconfirmed.
  */
 

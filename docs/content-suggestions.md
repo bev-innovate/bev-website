@@ -15,13 +15,13 @@ Current: *"Empowering innovators. For people, place, and planet."*
 It's warm, but it describes what you feel rather than what you do, and every accelerator
 site in the region opens with something similar. Options that lead with the differentiator:
 
-- **"Climate solutions don't scale on conviction alone."** — Sets up the problem you
+- **"Climate solutions don't scale on conviction alone."**: Sets up the problem you
   actually solve. The current sub-copy ("Climate solutions don't fail for lack of ideas.
   They fail because scaling is hard.") is already doing this work further down the page;
   it's arguably the strongest line on the site and it's buried.
-- **"From validated prototype to deployed in Asia-Pacific."** — Concrete, filters the
+- **"From validated prototype to deployed in Asia-Pacific."**: Concrete, filters the
   audience, and states the geography that is your actual moat.
-- **"We take climate technology out of the pitch deck and into the field."** — Leans on
+- **"We take climate technology out of the pitch deck and into the field."**: Leans on
   Climate Expeditions, which is the most distinctive thing you run.
 
 ## 2. Lead with proof, not promise
@@ -33,7 +33,7 @@ in the hero.
 
 ## 3. "Who we are" appears twice
 
-The home page uses the eyebrow **"Who we are"** for two different sections — the
+The home page uses the eyebrow **"Who we are"** for two different sections: the
 positioning statement and the three-pillar accordion. Suggested relabelling:
 
 | Section | Current | Suggested |
@@ -53,13 +53,13 @@ pillar, leaving Better Earth Ventures as the parent brand.
 The site says a lot about *what* the programmes are and little about *what happens* inside
 one. A four-stage arc, drafted from the ClimAccelerator structure:
 
-1. **Find** — open, equity-free calls across Singapore, Australia, Thailand, Vietnam,
+1. **Find**: open, equity-free calls across Singapore, Australia, Thailand, Vietnam,
    Indonesia and New Zealand. Screening on validated technology and committed teams.
-2. **Sharpen** — mentorship from operators and investors who have built in this region;
+2. **Sharpen**: mentorship from operators and investors who have built in this region;
    business model, unit economics, route to first paying customer.
-3. **Immerse** — market immersion in front of the buyers, regulators and farm operators
+3. **Immerse**: market immersion in front of the buyers, regulators and farm operators
    who decide whether a technology gets deployed.
-4. **Scale** — investor and grant introductions, then Demo Day in Singapore.
+4. **Scale**: investor and grant introductions, then Demo Day in Singapore.
 
 A scroll-following timeline component for this already exists at
 `src/components/ui/timeline.tsx` (currently used only on programme detail pages).
@@ -68,17 +68,17 @@ A scroll-following timeline component for this already exists at
 
 Six drafted commitments, useful for an About page or a "why us" block:
 
-- **Deployment beats demo** — progress measured in pilots signed and technology in the
+- **Deployment beats demo**: progress measured in pilots signed and technology in the
   ground, not decks polished.
-- **Equity-free, on purpose** — no equity, no participation fee; alignment comes from
+- **Equity-free, on purpose**: no equity, no participation fee; alignment comes from
   doing the work well.
-- **Regional, not imported** — playbooks written for California don't survive contact
+- **Regional, not imported**: playbooks written for California don't survive contact
   with a Johor smallholding.
-- **Systems, not silver bullets** — soil, water, energy, logistics and finance move
+- **Systems, not silver bullets**: soil, water, energy, logistics and finance move
   together.
-- **Impact you can evidence** — climate impact measurement using EIT Climate-KIC
+- **Impact you can evidence**: climate impact measurement using EIT Climate-KIC
   methodology, so claims hold up with investors and customers.
-- **Relationships compound** — the introductions that matter rarely happen on a stage.
+- **Relationships compound**: the introductions that matter rarely happen on a stage.
 
 ## 7. Cohort companies are underused
 
@@ -86,13 +86,13 @@ The nine 2025 ClimAccelerator companies (Algenie, DayaTani, KiwiLeather Innovati
 LambdAI Space, Living Roots, N&E Innovations, Polar Cold, Rainstick, plus one in stealth
 on enhanced rock weathering) appear nowhere on the old site outside a blog post. Nearly
 half are women co-founded. A cohort grid exists at `src/components/site/cohort-grid.tsx`
-and renders on the ClimAccelerator detail page — worth surfacing more prominently.
+and renders on the ClimAccelerator detail page, worth surfacing more prominently.
 
 ## 8. Programme pages need a next action
 
 Every programme block ends at "Learn More". For open programmes the next action should be
 "Apply" with a visible deadline; for closed ones, "Get notified when the next cohort
-opens" — which also builds the mailing list. The `applyUrl` and `applicationDeadline`
+opens", which also builds the mailing list. The `applyUrl` and `applicationDeadline`
 fields are already in the Sanity schema and unused.
 
 ## 9. Small copy corrections spotted in the current text
@@ -109,5 +109,5 @@ fixing whether or not any of the above is adopted:
 ## 10. Missing pages
 
 The old site's "More" menu wasn't captured in the screenshots. The rebuild currently has
-placeholder `/about`, `/contact` and `/privacy` pages. Confirm what "More" contained —
+placeholder `/about`, `/contact` and `/privacy` pages. Confirm what "More" contained:
 likely About, Contact, Terms of Use and Privacy Policy, based on the footer links.

@@ -105,7 +105,7 @@ export async function enquiryAction(
     return { status: "error", fieldErrors: flatten(parsed.error) };
   }
 
-  // `company` is the honeypot — validated above, never stored.
+  // `company` is the honeypot, validated above, never stored.
   const { firstName, lastName, interest, goals, subscribe } = parsed.data;
   const email = parsed.data.email.toLowerCase();
   const name = `${firstName} ${lastName}`;

@@ -21,7 +21,7 @@ function SubmitButton() {
 /**
  * Summit registration-interest form.
  *
- * Reuses the existing newsletter server action rather than adding a second list — the
+ * Reuses the existing newsletter server action rather than adding a second list: the
  * source field already distinguishes where a signup came from, so segmentation stays
  * possible without a new table.
  */
