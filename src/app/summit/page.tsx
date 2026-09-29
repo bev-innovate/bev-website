@@ -43,7 +43,7 @@ export default function SummitPage() {
       <SummitZones zones={summit.zones} />
 
       {/* Speakers and Companies on the Floor are held back until the names are confirmed. */}
-      <SummitAgenda agenda={summit.agenda} zones={summit.zones} />
+      <SummitAgenda agenda={summit.agenda} />
       <SummitSignup {...summit.signup} />
 
       {/* Follows the reader between the hero and the signup form, and nowhere else. */}

@@ -30,6 +30,42 @@ export interface SummitStartup {
   tbc?: boolean;
 }
 
+type Accent = "purple" | "orange" | "teal";
+
+/** One line in the agenda. */
+export interface AgendaSession {
+  time: string;
+  title: string;
+  /** Who is leading it, connecting word included ("by", "with"). Set lighter than the title. */
+  by?: string;
+  /** Arrivals and breaks: a single quiet line. */
+  quiet?: boolean;
+  tbc?: boolean;
+}
+
+/** A stretch of the day where two things run at once, shown as side-by-side columns. */
+export interface AgendaWindow {
+  time: string;
+  heading: string;
+  aside: string;
+  lanes: { name: string; accent: Accent; hint?: string; sessions: AgendaSession[] }[];
+}
+
+export interface AgendaDay {
+  ref: string;
+  date: string;
+  title: string;
+  access: string;
+  accent: Accent;
+  note?: string;
+  sessions: AgendaSession[];
+  window?: AgendaWindow;
+  /** Sessions after the window closes. */
+  after?: AgendaSession[];
+  /** The day's headline moment, set as a filled row. */
+  feature?: { time: string; title: string; sub: string };
+}
+
 export const summit = {
   slug: "summit",
   name: "Climate Innovation Summit Singapore",
@@ -108,7 +144,7 @@ export const summit = {
    * The three zones.
    *
    * `accent` is the zone's identity colour, and it is deliberately reused as the column
-   * heading in the day-two agenda: once a reader has learned that Solve is orange here,
+   * heading in the day-two agenda: once a reader has learned that Solve It is orange here,
    * the agenda does not have to explain itself again.
    *
    * `where` is held here but not currently rendered: the rooms are not confirmed publicly
@@ -135,7 +171,7 @@ export const summit = {
       },
       {
         key: "solve",
-        name: "Solve",
+        name: "Solve It",
         accent: "orange" as const,
         where: "Solve-It Zone",
         image: `${IMG}/climate-summit-4.webp`,
@@ -143,7 +179,7 @@ export const summit = {
         activities: [
           "Working sessions hosted by partners and mentors, an hour at a time",
           "Specialists on hand for the questions founders get stuck on",
-          "Open all day, so you can walk in the moment something comes up",
+          "Drop in without booking, the moment a question comes up",
         ],
       },
       {
@@ -163,19 +199,20 @@ export const summit = {
   },
 
   /**
-   * The three days.
+   * The three days, from the agenda of 29 September.
    *
-   * Times and sessions come from the run sheets of 7 September. Everything internal to
-   * running the event stays off the page: crew call times, venue readiness, the dress
-   * rehearsal, who is flying in and when. So does anything still carrying a question mark
-   * in the run sheet, and the names of roundtable hosts that are not yet confirmed.
+   * Sessions are one line each: a title, and who is leading it where the agenda names
+   * them. Descriptions are left to the day, so the page reads as a timetable and does not
+   * promise a detail that might change.
    *
-   * Each day carries an `access` label because only the middle day is open to everyone:
-   * day one is for startups and mentors, day three is invite only. Someone deciding
-   * whether to register needs that before they read a single session title.
+   * Left off deliberately: the finalists' pitch rehearsal (closed), seating calls, the
+   * official photograph, and the closing film and break before the Grand Final.
    *
-   * Day two also carries `zones`, because Solve and Connect run alongside its main-stage
-   * programme rather than after it.
+   * Each day carries an `access` label because only the middle day is open to everyone.
+   * Someone deciding whether to register needs that before they read a session title.
+   *
+   * Day two has a `window`: three hours where the main stage and the Solve It clinics run
+   * at the same time. It renders as two side-by-side columns, then the list closes back up.
    */
   agenda: {
     heading: "The agenda",
@@ -185,99 +222,113 @@ export const summit = {
       {
         ref: "D-01",
         date: "Tuesday 13 October",
-        title: "Builders' Day",
-        access: "Startups and mentors only",
-        accent: "purple" as const,
-        note: "Registration opens at 1:00pm. An afternoon and evening, not a full day.",
-        blocks: [
+        title: "Builders’ Day",
+        access: "Founders and mentors only",
+        accent: "purple",
+        note: "A closed-door afternoon for founders. Mentors join from 4:15pm.",
+        sessions: [
+          { time: "1:00–1:15pm", title: "Arrival and founder welcome", quiet: true },
+          { time: "1:15–1:25pm", title: "Opening", by: "by Better Earth Ventures and Climate KIC" },
           {
-            time: "13:30",
-            title: "Welcome address",
-            body: "The conference opens.",
+            time: "1:25–2:05pm",
+            title: "Founder stories: the things we learn by building",
+            by: "with Richard Savoie (Adiona), Bolong Chew (GetSolar), Aggie Blanco (WeBeings) and more",
           },
+          { time: "2:05–3:00pm", title: "Founder exchange roundtables" },
+          { time: "3:00–3:15pm", title: "Founder reflections" },
+          { time: "3:15–3:30pm", title: "Break", quiet: true },
           {
-            time: "13:45",
-            title: "Founder talks",
-            body: "Founders who have done it, on their background, their biggest mistake, their biggest win, and the one tip they would pass on.",
-          },
-          {
-            time: "14:45",
-            title: "Founder Circle",
-            body: "Mini roundtables where each founder puts a live challenge to the group, facilitated by the founders who just spoke.",
-          },
-          {
-            time: "15:30",
+            time: "3:30–4:15pm",
             title: "Expert roundtables",
-            body: "An hour across three tables: working with a corporate, raising and using investment, and building a team and a culture. Facilitated, so the conversation goes somewhere.",
+            by: "on corporate pilots, investment and capital, and team and culture, with PepsiCo and Ana Torralba Barallat",
           },
-          { time: "16:30", title: "Tea" },
-          {
-            time: "16:45",
-            title: "One-to-one mentoring",
-            body: "An hour of it, matched in advance on the question you submit, so the conversation starts already useful.",
-          },
-          { time: "17:45", title: "Day one closes" },
-          {
-            time: "18:00",
-            title: "VIP reception",
-            body: "For ClimateLaunchpad finalists, PepsiCo executives, BEV alumni and invited guests. Until 8:30pm.",
-          },
+          { time: "4:15–4:30pm", title: "Break and mentor welcome", quiet: true },
+          { time: "4:30–6:00pm", title: "1:1 founder mentoring" },
+          { time: "6:00–8:00pm", title: "Founder and mentor reception" },
         ],
       },
       {
         ref: "D-02",
         date: "Wednesday 14 October",
-        title: "Global Day",
+        title: "Ecosystem Day",
         access: "Open to all registered attendees",
-        accent: "teal" as const,
-        note: "Solve and Connect run alongside the main programme, so you can step out and come back.",
-        zones: ["discover", "solve", "connect"],
-        blocks: [
-          { time: "10:30", title: "Registration and arrival" },
+        accent: "teal",
+        sessions: [
+          { time: "10:30–11:00am", title: "Registration and arrival", quiet: true },
           {
-            time: "11:00",
-            title: "Inspiration power hour",
-            body: "An interactive data session on nutrition, run with the ClimateLaunchpad trainers.",
-          },
-          {
-            time: "11:30",
-            title: "Collaboration Matrix",
-            body: "Discuss, brainstorm and pledge collaboration, with the people you would actually be doing it with.",
-          },
-          { time: "13:00", title: "Lunch and startup exhibition" },
-          {
-            time: "14:30",
-            title: "PepsiCo panel",
-            body: "One case study from four sides: PepsiCo's C-suite, the startup that ran the pilot, the team inside PepsiCo that ran it with them, and an investor.",
-          },
-          {
-            time: "15:00",
-            title: "Founder stories from across the globe",
-            body: "Six founders, eight minutes each, interviewed on what building looks like where they are.",
-          },
-          {
-            time: "16:00",
-            title: "ClimateLaunchpad Global Grand Final",
-            body: "In the Discover Zone until around 8:00pm, followed by networking.",
+            time: "11:00–11:20am",
+            title: "Official welcome",
+            by: "by Better Earth Ventures, Climate KIC and our Guest of Honour",
           },
         ],
+        window: {
+          time: "11:30am–2:30pm",
+          heading: "Running side by side",
+          aside: "Move between them as you like",
+          lanes: [
+            {
+              name: "Main stage",
+              accent: "purple",
+              sessions: [
+                {
+                  time: "11:30am–12:00pm",
+                  title: "100,000 futures: building for a world we can’t predict",
+                  by: "by Synthesis",
+                },
+                { time: "12:00–12:30pm", title: "Futures in practice", by: "with Synthesis" },
+                {
+                  time: "12:30–12:50pm",
+                  title: "Don’t lose yourself while saving the world",
+                  by: "by Mónica Avila Forero (A.L.M.A.R.A.)",
+                },
+                {
+                  time: "12:50–1:10pm",
+                  title: "Purpose and profit: building a climate company for impact and scale",
+                  tbc: true,
+                },
+                { time: "1:10–2:30pm", title: "Lunch, exhibition and networking" },
+              ],
+            },
+            {
+              name: "Solve It",
+              accent: "orange",
+              hint: "Drop-in clinics. No booking.",
+              sessions: [
+                { time: "11:30am–12:30pm", title: "Investment and finance" },
+                { time: "12:30–1:30pm", title: "Impact and business models" },
+                { time: "1:30–2:30pm", title: "Sustainability Women takeover" },
+              ],
+            },
+          ],
+        },
+        after: [
+          {
+            time: "2:30–3:25pm",
+            title: "Panel: innovation to impact through partnership",
+            by: "moderated by Climate KIC",
+          },
+          { time: "3:25–3:40pm", title: "Climate ecosystem spotlight" },
+        ],
+        feature: {
+          time: "4:00–6:40pm",
+          title: "ClimateLaunchpad 2026 Global Grand Final",
+          sub: "Eight finalists pitch live, then the winners are announced",
+        },
       },
       {
         ref: "D-03",
         date: "Thursday 15 October",
         title: "Impact Day",
         access: "Invite only",
-        accent: "orange" as const,
-        note: "From around 10:30am.",
-        blocks: [
+        accent: "orange",
+        sessions: [
           {
-            time: "10:30",
+            time: "From 10:30am",
             title: "PepsiCo Greenhouse Program APAC Showcase: Impact Edition",
-            body: "An impact framework applied to five returning startups from the four-year APAC accelerator.",
           },
         ],
       },
-    ],
+    ] satisfies AgendaDay[] as AgendaDay[],
   },
 
   speakers: {

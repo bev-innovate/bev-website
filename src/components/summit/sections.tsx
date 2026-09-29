@@ -5,7 +5,7 @@ import { SectionHead, Tbc } from "@/components/summit/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
-import type { summit } from "@/lib/summit-content";
+import type { AgendaSession, AgendaWindow, summit } from "@/lib/summit-content";
 import { cn } from "@/lib/utils";
 
 type Summit = typeof summit;
@@ -195,7 +195,7 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
 
 /**
  * Each zone's identity colour. Established here and reused as the column headings in
- * the day-two agenda, so the agenda does not have to re-explain what Solve is.
+ * the day-two agenda, so the agenda does not have to re-explain what Solve It is.
  */
 const zoneAccent = {
   purple: { text: "text-purple", dot: "bg-purple", band: "bg-purple" },
@@ -270,6 +270,91 @@ export function SummitZones({ zones }: { zones: Summit["zones"] }) {
 
 /* ── Agenda ─────────────────────────────────────────────────────────────────── */
 
+/** Title, then who is leading it in a lighter weight on the same line. */
+function SessionLine({ session, className }: { session: AgendaSession; className?: string }) {
+  return (
+    <p
+      className={cn(
+        session.quiet ? "text-muted-foreground italic" : "font-semibold text-foreground",
+        className,
+      )}
+    >
+      {session.title}
+      {session.by ? (
+        <span className="font-normal text-muted-foreground not-italic"> {session.by}</span>
+      ) : null}
+      {session.tbc ? <Tbc className="ml-2 align-middle" /> : null}
+    </p>
+  );
+}
+
+/** One row of the day: time on the left, the session beside it. */
+function SessionRow({ session }: { session: AgendaSession }) {
+  return (
+    <li className="grid gap-1 border-b border-border py-3.5 last:border-0 sm:grid-cols-[9.5rem_1fr] sm:gap-6">
+      <span className="text-sm text-muted-foreground tabular-nums sm:pt-0.5">{session.time}</span>
+      <SessionLine session={session} />
+    </li>
+  );
+}
+
+/**
+ * The stretch of a day where two things run at once.
+ *
+ * Only this window splits into columns; the rest of the day stays a single list. The overlap
+ * is then visible exactly where it happens, and nowhere else. On a phone the columns stack
+ * inside the same box, so the grouping still reads as concurrent.
+ */
+function AgendaSplit({ split }: { split: AgendaWindow }) {
+  return (
+    <div className="my-4 overflow-hidden rounded-(--radius) border border-border">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 bg-muted px-5 py-3">
+        <p className="font-semibold text-foreground">
+          <span className="tabular-nums">{split.time}</span> · {split.heading}
+        </p>
+        <p className="text-sm text-muted-foreground">{split.aside}</p>
+      </div>
+
+      <div className="grid md:grid-cols-[1.35fr_1fr]">
+        {split.lanes.map((lane, i) => {
+          const accent = zoneAccent[lane.accent];
+          return (
+            <div
+              key={lane.name}
+              className={cn(
+                "px-5 pt-4 pb-3",
+                // The second lane is the one running alongside: a faint wash of its own
+                // colour, and a rule where it meets the first.
+                i > 0 && "border-t border-border bg-orange/[0.04] md:border-t-0 md:border-l",
+              )}
+            >
+              <p className={cn("text-sm font-bold tracking-[0.08em] uppercase", accent.text)}>
+                {lane.name}
+              </p>
+              {lane.hint ? (
+                <p className="mt-0.5 text-sm text-muted-foreground">{lane.hint}</p>
+              ) : null}
+              <ol className="mt-2">
+                {lane.sessions.map((session) => (
+                  <li
+                    key={session.time + session.title}
+                    className="border-b border-border py-2.5 last:border-0"
+                  >
+                    <span className="block text-sm text-muted-foreground tabular-nums">
+                      {session.time}
+                    </span>
+                    <SessionLine session={session} className="mt-0.5" />
+                  </li>
+                ))}
+              </ol>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 /**
  * The three days.
  *
@@ -279,15 +364,7 @@ export function SummitZones({ zones }: { zones: Summit["zones"] }) {
  *
  * Each day leads with its access level, because only the middle day is open to everyone.
  */
-export function SummitAgenda({
-  agenda,
-  zones,
-}: {
-  agenda: Summit["agenda"];
-  zones: Summit["zones"];
-}) {
-  const zoneByKey = Object.fromEntries(zones.items.map((z) => [z.key, z]));
-
+export function SummitAgenda({ agenda }: { agenda: Summit["agenda"] }) {
   return (
     // The hero's secondary CTA lands here, so the anchor has to live on the section.
     <section id="agenda" className="scroll-mt-24 py-16 md:py-20">
@@ -320,66 +397,43 @@ export function SummitAgenda({
                     </span>
                   </div>
 
-                  <div className="p-6 md:p-8">
-                    {day.note ? (
-                      <p className="mb-6 text-muted-foreground">{day.note}</p>
+                  <div className="px-6 pt-4 pb-6 md:px-8 md:pb-8">
+                    {day.note ? <p className="pt-2 pb-2 text-muted-foreground">{day.note}</p> : null}
+
+                    <ol>
+                      {day.sessions.map((session) => (
+                        <SessionRow key={session.time + session.title} session={session} />
+                      ))}
+                    </ol>
+
+                    {day.window ? <AgendaSplit split={day.window} /> : null}
+
+                    {day.after ? (
+                      <ol>
+                        {day.after.map((session) => (
+                          <SessionRow key={session.time + session.title} session={session} />
+                        ))}
+                      </ol>
                     ) : null}
 
                     {/*
-                      Day two's three zones run concurrently, so they sit side by side.
-                      An ordered list would imply a sequence that does not exist.
+                      The day's headline moment, set as a filled row so it cannot be missed.
+                      The time column is narrower by the row's own padding, so the title
+                      lines up with every other session title above it.
                     */}
-                    {"zones" in day && day.zones ? (
-                      <ul className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-                        {day.zones.map((key) => {
-                          const zone = zoneByKey[key];
-                          if (!zone) return null;
-                          const zoneStyle = zoneAccent[zone.accent];
-                          return (
-                            <li
-                              key={key}
-                              className="overflow-hidden rounded-(--radius) border border-border"
-                            >
-                              <p
-                                className={cn(
-                                  "px-5 py-3 font-display font-bold text-white",
-                                  zoneStyle.band,
-                                )}
-                              >
-                                {zone.name}
-                              </p>
-                              <p className="px-5 py-4 text-sm leading-relaxed text-muted-foreground">
-                                {zone.purpose}
-                              </p>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                    {day.feature ? (
+                      <div className="mt-4 grid gap-1 rounded-(--radius) bg-purple px-5 py-5 text-white sm:grid-cols-[calc(9.5rem-1.25rem)_1fr] sm:gap-6">
+                        <span className="text-sm text-white/75 tabular-nums sm:pt-1">
+                          {day.feature.time}
+                        </span>
+                        <div>
+                          <p className="font-display text-xl font-bold md:text-2xl">
+                            {day.feature.title}
+                          </p>
+                          <p className="mt-1 text-white/85">{day.feature.sub}</p>
+                        </div>
+                      </div>
                     ) : null}
-
-                    <ol className="space-y-0">
-                      {day.blocks.map((block) => (
-                        <li
-                          key={block.time + block.title}
-                          className="grid gap-1 border-b border-border py-4 first:pt-0 last:border-0 last:pb-0 sm:grid-cols-[6rem_1fr] sm:gap-6"
-                        >
-                          <span className="text-sm text-muted-foreground tabular-nums">
-                            {block.time}
-                          </span>
-                          <div>
-                            <p className="flex flex-wrap items-center gap-2 font-medium text-foreground">
-                              {block.title}
-                              {"tbc" in block && block.tbc ? <Tbc /> : null}
-                            </p>
-                            {"body" in block && block.body ? (
-                              <p className="mt-1 leading-relaxed text-muted-foreground">
-                                {block.body}
-                              </p>
-                            ) : null}
-                          </div>
-                        </li>
-                      ))}
-                    </ol>
                   </div>
                 </Card>
               </Reveal>
