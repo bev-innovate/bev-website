@@ -48,7 +48,7 @@ export default function SummitPage() {
 
       {/* Follows the reader between the hero and the closing registration band, and nowhere else. */}
       <SummitStickyCta
-        text="Registration is open for 13–15 October."
+        text="Join us in Singapore, 13–15 October."
         cta={summit.hero.primary}
         hideWhileSelector="#summit-hero"
         hideNearSelector="#register"
