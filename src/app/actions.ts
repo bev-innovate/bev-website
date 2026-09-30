@@ -21,7 +21,7 @@ export interface FormState {
  * Where a signup came from. An allowlist rather than free text: the field arrives from
  * the browser, and it ends up in a database column the team filters on.
  */
-const subscribeSources = ["website_footer", "summit_page"] as const;
+const subscribeSources = ["website_footer"] as const;
 
 const subscribeSchema = z.object({
   email: z.string().trim().email("Enter a valid email address."),

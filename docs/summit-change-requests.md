@@ -62,6 +62,20 @@ agenda", which jumps to the agenda.
 
 ---
 
+## Progress · 30 September: registration is open
+
+**C-02 and R-06 are closed.** Registration runs on an Airtable form
+(`REGISTRATION_URL` at the top of `src/lib/summit-content.ts`), and every registration
+button on the page now points there: the hero, the bar that follows the reader down the
+page, and a closing "Registration is open" band that replaces the old "Be first to know"
+email list. The buttons open the form in a new tab, with an outward arrow so nobody is
+surprised to leave.
+
+The summit's own email list is gone, since there is nothing left to notify people about.
+The footer newsletter is unaffected.
+
+---
+
 ## Progress · 7 September, from the run sheets
 
 The Day 1 and Day 2 run sheets are now on the page, with real times.

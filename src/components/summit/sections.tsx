@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
 import { SectionHead, Tbc } from "@/components/summit/primitives";
@@ -9,6 +9,19 @@ import type { AgendaSession, AgendaWindow, summit } from "@/lib/summit-content";
 import { cn } from "@/lib/utils";
 
 type Summit = typeof summit;
+
+/**
+ * Registration lives on an external form, so its buttons open in a new tab with the
+ * outward arrow. Someone halfway down the agenda keeps their place on the page, and the
+ * arrow tells them before they click that they are leaving it.
+ */
+function linkProps(href: string) {
+  const external = /^https?:\/\//.test(href);
+  return {
+    external,
+    props: external ? { target: "_blank", rel: "noopener noreferrer" } : {},
+  };
+}
 
 /* ── Hero ───────────────────────────────────────────────────────────────────── */
 
@@ -64,9 +77,13 @@ export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string 
             className="mt-9 flex animate-rise flex-wrap gap-4"
             style={{ animationDelay: "0.34s" }}
           >
-            <ButtonLink href={hero.primary.href} size="lg">
+            <ButtonLink href={hero.primary.href} size="lg" {...linkProps(hero.primary.href).props}>
               {hero.primary.label}
-              <ArrowRight className="size-4" aria-hidden />
+              {linkProps(hero.primary.href).external ? (
+                <ArrowUpRight className="size-4" aria-hidden />
+              ) : (
+                <ArrowRight className="size-4" aria-hidden />
+              )}
             </ButtonLink>
             <ButtonLink href={hero.secondary.href} size="lg" variant="white">
               {hero.secondary.label}
@@ -195,7 +212,7 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
 
 /**
  * Each zone's identity colour. Established here and reused as the column headings in
- * the day-two agenda, so the agenda does not have to re-explain what Solve It is.
+ * the day-two agenda, so the agenda does not have to re-explain what Solve-It Zone is.
  */
 const zoneAccent = {
   purple: { text: "text-purple", dot: "bg-purple", band: "bg-purple" },
@@ -225,7 +242,7 @@ export function SummitZones({ zones }: { zones: Summit["zones"] }) {
               <Reveal as="li" key={zone.key} delay={Math.min(i, 2) * 0.13} className="h-full">
                 <Card variant="default" className="flex h-full flex-col overflow-hidden">
                   {/*
-                    A photograph of that zone at the last summit, so "Solve" is a room
+                    A photograph of that zone at the last summit, so the Solve-It Zone is a room
                     someone has been in rather than a word. Purely decorative: the name
                     and purpose underneath carry the meaning.
                   */}
@@ -533,26 +550,33 @@ export function SummitStartups({ startups }: { startups: Summit["startups"] }) {
   );
 }
 
-/* ── Inline CTA ─────────────────────────────────────────────────────────────── */
+/* ── Register ──────────────────────────────────────────────────────────────── */
 
-/** Dropped between sections so the signup is never more than a screen away. */
-export function SummitCtaStrip({
-  text,
-  cta = { label: "Register your interest", href: "#signup" },
-  tone = "terracotta",
-}: {
-  text: string;
-  cta?: { label: string; href: string };
-  tone?: "terracotta" | "mangrove";
-}) {
+/**
+ * The closing call to action. Registration is on an external form, so this is a band
+ * with one button rather than a form of its own.
+ */
+export function SummitRegister({ register }: { register: Summit["register"] }) {
+  const link = linkProps(register.cta.href);
   return (
-    <section className={cn("py-10", tone === "terracotta" ? "bg-terracotta" : "bg-mangrove")}>
-      <div className="shell flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="display max-w-2xl text-xl text-canvas md:text-2xl">{text}</p>
-        <ButtonLink href={cta.href} variant="white" className="shrink-0">
-          {cta.label}
-          <ArrowRight className="size-4" aria-hidden />
-        </ButtonLink>
+    <section
+      id="register"
+      className="relative scroll-mt-24 overflow-hidden bg-mangrove py-16 text-white md:py-20"
+    >
+      <div aria-hidden className="contours pointer-events-none absolute inset-0 text-white opacity-20" />
+      <div className="shell relative">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="display text-[clamp(1.75rem,3.6vw,2.6rem)]">{register.heading}</h2>
+          <p className="mt-4 text-lg leading-relaxed text-white/85">{register.body}</p>
+          <ButtonLink href={register.cta.href} size="lg" className="mt-9" {...link.props}>
+            {register.cta.label}
+            {link.external ? (
+              <ArrowUpRight className="size-4" aria-hidden />
+            ) : (
+              <ArrowRight className="size-4" aria-hidden />
+            )}
+          </ButtonLink>
+        </div>
       </div>
     </section>
   );

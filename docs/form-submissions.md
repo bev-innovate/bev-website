@@ -1,7 +1,8 @@
 # Where form submissions go
 
-Two forms feed this: the contact form (`/contact`) and the newsletter signup in the footer
-and on the Summit page. Both run through server actions in `src/app/actions.ts`.
+Two forms feed this: the contact form (`/contact`) and the newsletter signup in the footer.
+Summit registration is not one of them: it runs on its own Airtable form, linked from the
+Summit page. Both run through server actions in `src/app/actions.ts`.
 
 ## The shape
 
@@ -114,12 +115,11 @@ what `npm run airtable:check` is for.
 | Subscribers | `Email` | Email |
 | Subscribers | `Source` | Single line text |
 
-`Source` is one of three values, so the list can be segmented without a second table:
+`Source` is one of two values, so the list can be segmented without a second table:
 
 | Value | Where it came from |
 | --- | --- |
 | `website_footer` | "Stay close to the work" in the footer, on every page |
-| `summit_page` | "Be first to know when registration opens" on the Summit page |
 | `enquiry_form` | The opt-in checkbox on the Work With Us form |
 
 `Interest` arrives as the full option label, e.g. "Scale my startup with expert guidance".

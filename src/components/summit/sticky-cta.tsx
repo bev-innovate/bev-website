@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { ButtonLink } from "@/components/ui/button";
@@ -13,9 +13,8 @@ import { cn } from "@/lib/utils";
  *
  * 1. It stays out of the way until the hero has gone. While the hero is on screen its own
  *    buttons are right there, and a second copy of them is just clutter.
- * 2. It gets out of the way again at the signup form. Offering someone a shortcut to the
- *    form they are already filling in, over the top of the field they are typing into, is
- *    worse than not being there.
+ * 2. It gets out of the way again at the registration band at the foot of the page, where
+ *    the same button is already in front of them.
  * 3. It can be dismissed, and stays dismissed for the rest of the visit.
  *
  * Both triggers are elements the page already has, watched with one IntersectionObserver
@@ -26,7 +25,7 @@ export function SummitStickyCta({
   cta,
   /** While this is on screen the bar stays hidden. The hero. */
   hideWhileSelector,
-  /** And while this is on screen it hides again. The signup form. */
+  /** And while this is on screen it hides again. The closing registration band. */
   hideNearSelector,
 }: {
   text: string;
@@ -35,18 +34,18 @@ export function SummitStickyCta({
   hideNearSelector: string;
 }) {
   const [heroVisible, setHeroVisible] = useState(true);
-  const [signupVisible, setSignupVisible] = useState(false);
+  const [endVisible, setEndVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
     const hero = document.querySelector(hideWhileSelector);
-    const signup = document.querySelector(hideNearSelector);
+    const end = document.querySelector(hideNearSelector);
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.target === hero) setHeroVisible(entry.isIntersecting);
-          if (entry.target === signup) setSignupVisible(entry.isIntersecting);
+          if (entry.target === end) setEndVisible(entry.isIntersecting);
         }
       },
       // A sliver of either element counts as on screen, so the bar never overlaps them.
@@ -54,11 +53,12 @@ export function SummitStickyCta({
     );
 
     if (hero) observer.observe(hero);
-    if (signup) observer.observe(signup);
+    if (end) observer.observe(end);
     return () => observer.disconnect();
   }, [hideWhileSelector, hideNearSelector]);
 
-  const shown = !dismissed && !heroVisible && !signupVisible;
+  const external = /^https?:\/\//.test(cta.href);
+  const shown = !dismissed && !heroVisible && !endVisible;
 
   return (
     <div
@@ -78,9 +78,15 @@ export function SummitStickyCta({
             href={cta.href}
             tabIndex={shown ? undefined : -1}
             className="max-sm:flex-1 max-sm:justify-center"
+            // Registration is an external form: open it alongside the page.
+            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
             {cta.label}
-            <ArrowRight className="size-4" aria-hidden />
+            {external ? (
+              <ArrowUpRight className="size-4" aria-hidden />
+            ) : (
+              <ArrowRight className="size-4" aria-hidden />
+            )}
           </ButtonLink>
 
           <button

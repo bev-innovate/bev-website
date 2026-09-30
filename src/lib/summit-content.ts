@@ -11,6 +11,12 @@
 
 const IMG = "/images";
 
+/**
+ * Registration runs on an Airtable form. Every "Register" button on the page points here,
+ * so when the form moves this is the only line to change.
+ */
+export const REGISTRATION_URL = "https://airtable.com/appVwyAexJiS2hcEv/pagKMLUZed9WoSwXQ/form";
+
 export interface SummitSpeaker {
   name: string;
   role: string;
@@ -82,7 +88,7 @@ export const summit = {
       { label: "Venue", value: "Shared upon confirmation", tbc: false },
       { label: "Guests from", value: "50 countries", tbc: false },
     ],
-    primary: { label: "Register your interest", href: "#signup" },
+    primary: { label: "Register now", href: REGISTRATION_URL },
     secondary: { label: "Browse agenda", href: "#agenda" },
     /** Mangroves from the air: the wash over it is drawn from the same greens and teals. */
     image: `${IMG}/climate-summit-background.webp`,
@@ -144,7 +150,7 @@ export const summit = {
    * The three zones.
    *
    * `accent` is the zone's identity colour, and it is deliberately reused as the column
-   * heading in the day-two agenda: once a reader has learned that Solve It is orange here,
+   * heading in the day-two agenda: once a reader has learned that Solve-It Zone is orange here,
    * the agenda does not have to explain itself again.
    *
    * `where` is held here but not currently rendered: the rooms are not confirmed publicly
@@ -171,7 +177,7 @@ export const summit = {
       },
       {
         key: "solve",
-        name: "Solve It",
+        name: "Solve-It Zone",
         accent: "orange" as const,
         where: "Solve-It Zone",
         image: `${IMG}/climate-summit-4.webp`,
@@ -211,7 +217,7 @@ export const summit = {
    * Each day carries an `access` label because only the middle day is open to everyone.
    * Someone deciding whether to register needs that before they read a session title.
    *
-   * Day two has a `window`: three hours where the main stage and the Solve It clinics run
+   * Day two has a `window`: three hours where the main stage and the Solve-It Zone clinics run
    * at the same time. It renders as two side-by-side columns, then the list closes back up.
    */
   agenda: {
@@ -290,7 +296,7 @@ export const summit = {
               ],
             },
             {
-              name: "Solve It",
+              name: "Solve-It Zone",
               accent: "orange",
               hint: "Drop-in clinics. No booking.",
               sessions: [
@@ -390,8 +396,10 @@ export const summit = {
     ] as SummitStartup[],
   },
 
-  signup: {
-    heading: "Be first to know when registration opens",
-    body: "We release delegate places and speaker announcements to this list before anywhere else. No other mail.",
+  /** The closing call to action, at the foot of the page. */
+  register: {
+    heading: "Registration is open",
+    body: "Save your place for three days in Singapore, 13–15 October.",
+    cta: { label: "Register now", href: REGISTRATION_URL },
   },
 } as const;
