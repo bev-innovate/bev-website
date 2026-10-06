@@ -126,6 +126,7 @@ export const summit = {
         logo: `${IMG}/summit-irish-aid.webp`,
       },
       { name: "Bank of America", logo: `${IMG}/summit-bofa.webp` },
+      { name: "PepsiCo", logo: `${IMG}/summit-pepsico.webp` },
       { name: "Greenhouse", logo: `${IMG}/summit-greenhouse.webp` },
       { name: "Singapore Global Network", logo: `${IMG}/summit-singapore-global-network.webp` },
     ],
