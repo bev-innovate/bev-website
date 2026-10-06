@@ -279,7 +279,7 @@ export const summit = {
                 role: "APAC & India Sustainability, Strategy & Partnerships Manager",
                 org: "PepsiCo",
               },
-              { name: "Michael Hammer", org: "PepsiCo" },
+              { name: "Michael Hammer", role: "Program Management, Atomic Brand Lab USA", org: "PepsiCo" },
               { name: "Axel Tan", role: "Director", org: "Octave Capital" },
               {
                 name: "Ana Torralba Barallat",
