@@ -135,9 +135,14 @@ function PartnerRow({
     // muted lead-in with the marks set in a single flex row underneath.
     <div>
       <p className="font-medium text-muted-foreground">{title}</p>
-      <ul className="mt-4 flex flex-wrap items-center gap-x-10 gap-y-8">
+      {/*
+        One line from 1280px up: the logos are allowed to scale down a little to fit, rather
+        than one dropping onto a row of its own. Below that they wrap, since a single line
+        would shrink them past legibility.
+      */}
+      <ul className="mt-4 flex flex-wrap items-center gap-x-10 gap-y-8 xl:flex-nowrap xl:gap-x-7">
         {items.map((partner) => (
-          <li key={partner.name} className="flex h-14 items-center">
+          <li key={partner.name} className="flex h-14 max-w-44 min-w-0 items-center">
             {partner.logo ? (
               <Image
                 src={partner.logo}
@@ -146,7 +151,7 @@ function PartnerRow({
                 height={80}
                 // Squarer lockups (the Irish Aid crest-and-text block) need the extra
                 // height to stay legible; wide wordmarks are capped by max-w instead.
-                className="max-h-12 w-auto max-w-44 object-contain"
+                className="max-h-12 w-auto max-w-full object-contain"
               />
             ) : (
               // No logo file yet, so a typographic lockup reads as intentional, not broken.
@@ -164,7 +169,7 @@ function PartnerRow({
 export function SummitPartners({ partners }: { partners: Summit["partners"] }) {
   return (
     <section className="border-y border-border bg-background py-14 md:py-16">
-      <div className="shell grid gap-12 md:grid-cols-[auto_1fr] md:gap-20">
+      <div className="shell grid gap-12 md:grid-cols-[auto_1fr] md:gap-20 xl:gap-12">
         <PartnerRow title="Organised by" items={partners.organisedBy} />
         <PartnerRow title="Supported by" items={partners.supportedBy} />
       </div>
@@ -418,6 +423,20 @@ function SessionLine({
             <SpeakerCard key={speaker.name} speaker={speaker} />
           ))}
         </ul>
+      ) : null}
+      {/*
+        Shown whole at its own proportions, never cropped: these graphics carry names and
+        logos in the artwork itself, and a crop would cut them off.
+      */}
+      {session.image ? (
+        <Image
+          src={session.image.src}
+          alt={session.image.alt}
+          width={session.image.width}
+          height={session.image.height}
+          sizes="(min-width: 1024px) 48rem, 100vw"
+          className="mt-4 h-auto w-full max-w-3xl rounded-lg border border-border"
+        />
       ) : null}
     </div>
   );
