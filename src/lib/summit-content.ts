@@ -500,12 +500,14 @@ export const summit = {
             },
             {
               name: "Alexandros Nikopoulos",
-              role: "Entrepreneurship Programmes Orchestrator",
+              role: "Entrepreneurship Programmes Manager & ESV Cluster Ops Co-Lead",
               org: "Climate KIC",
               linkedin: "https://www.linkedin.com/in/a-nikopoulos/",
             },
             {
               name: "Sofia Abid",
+              role: "Program Director, ClimateLaunchpad",
+              org: "Climate KIC",
               linkedin: "https://www.linkedin.com/in/sofia-abid-255571143/",
             },
           ],
