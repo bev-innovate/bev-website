@@ -13,8 +13,8 @@ import { cn } from "@/lib/utils";
  *
  * 1. It stays out of the way until the hero has gone. While the hero is on screen its own
  *    buttons are right there, and a second copy of them is just clutter.
- * 2. It gets out of the way again at the registration band at the foot of the page, where
- *    the same button is already in front of them.
+ * 2. It gets out of the way again at the registration band near the foot of the page,
+ *    where the same button is already in front of them, and stays away below it.
  * 3. It can be dismissed, and stays dismissed for the rest of the visit.
  *
  * Both triggers are elements the page already has, watched with one IntersectionObserver
@@ -25,7 +25,7 @@ export function SummitStickyCta({
   cta,
   /** While this is on screen the bar stays hidden. The hero. */
   hideWhileSelector,
-  /** And while this is on screen it hides again. The closing registration band. */
+  /** Once this is on screen it hides again, and stays hidden below it. The registration band. */
   hideNearSelector,
 }: {
   text: string;
@@ -45,7 +45,10 @@ export function SummitStickyCta({
       (entries) => {
         for (const entry of entries) {
           if (entry.target === hero) setHeroVisible(entry.isIntersecting);
-          if (entry.target === end) setEndVisible(entry.isIntersecting);
+          // On screen or already scrolled past: the bar stays away for the rest of the page.
+          if (entry.target === end) {
+            setEndVisible(entry.isIntersecting || entry.boundingClientRect.top < 0);
+          }
         }
       },
       // A sliver of either element counts as on screen, so the bar never overlaps them.

@@ -43,10 +43,11 @@ export default function SummitPage() {
       <SummitAudience audience={summit.audience} />
       <SummitZones zones={summit.zones} />
 
-      <SummitSpeakers speakers={summit.speakers} days={summit.agenda.days} />
       {/* Companies on the Floor is held back until the names are confirmed. */}
       <SummitAgenda agenda={summit.agenda} />
       <SummitRegister register={summit.register} />
+      {/* After the closing CTA: for people who have decided and want to see who else is coming. */}
+      <SummitSpeakers speakers={summit.speakers} days={summit.agenda.days} />
 
       {/* Follows the reader between the hero and the closing registration band, and nowhere else. */}
       <SummitStickyCta
