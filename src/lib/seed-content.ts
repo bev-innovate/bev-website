@@ -30,8 +30,8 @@ export const siteSettings: SiteSettings = {
   description:
     "We help international climate and innovation companies scale in Singapore and Southeast Asia by creating tangible commercial outcomes through trusted local market access, strategic partnerships, and growth-focused ecosystem support.",
   stats: [
-    { value: "70", label: "Startups accelerated" },
-    { value: "100+", label: "Further start-ups mentored" },
+    { value: "80", label: "Startups accelerated" },
+    { value: "50+", label: "Further start-ups mentored" },
     { value: "48%", label: "Women-led startups" },
     { value: "$120m", label: "USD in funding" },
     { value: "2200+", label: "Event attendees, ~82% decision makers" },
