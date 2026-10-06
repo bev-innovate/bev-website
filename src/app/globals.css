@@ -222,6 +222,27 @@
     letter-spacing: -0.02em;
   }
 
+  /*
+    No lone words on a line of their own. Headings are balanced, so a two-line heading
+    splits evenly; running text uses `pretty`, which only adjusts the last few lines of a
+    paragraph to keep at least two words on the final one. Browsers without support fall
+    back to normal wrapping, so this is safe to set everywhere.
+  */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd,
+  blockquote,
+  figcaption {
+    text-wrap: pretty;
+  }
+
   :focus-visible {
     outline: 2px solid #ee792f;
     outline-offset: 3px;

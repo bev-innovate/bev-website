@@ -489,7 +489,7 @@ export const summit = {
         feature: {
           time: "4:00–6:40pm",
           title: "ClimateLaunchpad 2026 Global Grand Final",
-          sub: "Eight finalists from four continents pitch live, and the winners are announced on the night.",
+          sub: "Eight finalists pitch live and one winner will emerge, with climate entrepreneurs from nearly 50 countries gathered for collective action and learning.",
           logo: `${IMG}/Climate_Launchpad_Logo_Ink_RGB.webp`,
           moderators: [
             {
