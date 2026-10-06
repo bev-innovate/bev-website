@@ -72,10 +72,8 @@ and converted to WebP. To add or replace one, drop the photo there named after t
 in lower case with hyphens (e.g. `kia-hallaji.webp`) and redeploy. No code change is
 needed; the card picks it up at build time and shows initials until it does.
 
-**Designations still to confirm.** Left blank rather than guessed: Kia Hallaji
-(Synthesis), Quentin Vaquette (100x100), Aggie Blanco (WeBeings) and Mónica Avila Forero
-(A.L.M.A.R.A.). Axel Tan is shown as Director, Octave Capital, from
-public company records; confirm it matches what he would want used.
+**Designations.** All confirmed by the team on 6 October. Michael Hammer is listed under
+Atomic Brand Lab USA, a separate company from PepsiCo, and Axel Tan under Asia Ocean Fund.
 
 **Guest of Honour.** Ms Goh Hanyan, Senior Parliamentary Secretary, Ministry of
 Sustainability and the Environment, and Ministry of Culture, Community and Youth, per the

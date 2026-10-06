@@ -263,7 +263,7 @@ export const summit = {
             speakers: [
               { name: "Richard Savoie", role: "Founder & CEO", org: "Adiona" },
               { name: "Bolong Chew", role: "Co-founder & CEO", org: "GetSolar" },
-              { name: "Aggie Blanco", org: "WeBeings" },
+              { name: "Aggie Blanco", role: "Founder", org: "WeBeings" },
             ],
           },
           { time: "2:05–3:00pm", title: "Founder exchange roundtables" },
@@ -279,8 +279,8 @@ export const summit = {
                 role: "APAC & India Sustainability, Strategy & Partnerships Manager",
                 org: "PepsiCo",
               },
-              { name: "Michael Hammer", role: "Program Management, Atomic Brand Lab USA", org: "PepsiCo" },
-              { name: "Axel Tan", role: "Director", org: "Octave Capital" },
+              { name: "Michael Hammer", role: "Program Management", org: "Atomic Brand Lab USA" },
+              { name: "Axel Tan", role: "Investment Director", org: "Asia Ocean Fund" },
               {
                 name: "Ana Torralba Barallat",
                 role: "Trainer and Leadership Expert",
@@ -332,18 +332,18 @@ export const summit = {
                 {
                   time: "11:30am–12:00pm",
                   title: "100,000 futures: building for a world we can’t predict",
-                  speakers: [{ name: "Kia Hallaji", org: "Synthesis" }],
+                  speakers: [{ name: "Kia Hallaji", role: "Head of Futures", org: "Synthesis" }],
                 },
                 { time: "12:00–12:30pm", title: "Futures in practice", by: "with Synthesis" },
                 {
                   time: "12:30–12:50pm",
                   title: "Don’t lose yourself while saving the world",
-                  speakers: [{ name: "Mónica Avila Forero", org: "A.L.M.A.R.A." }],
+                  speakers: [{ name: "Mónica Avila Forero", role: "Founder", org: "A.L.M.A.R.A." }],
                 },
                 {
                   time: "12:50–1:10pm",
                   title: "Purpose and profit: building a climate company for impact and scale",
-                  speakers: [{ name: "Quentin Vaquette", org: "100x100" }],
+                  speakers: [{ name: "Quentin Vaquette", role: "Founding Partner", org: "100x100" }],
                 },
                 { time: "1:10–2:30pm", title: "Lunch, exhibition and networking" },
               ],
