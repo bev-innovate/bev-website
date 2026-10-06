@@ -6,6 +6,7 @@ import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { getSiteSettings } from "@/lib/content";
 import { siteSettings as fallbackSettings } from "@/lib/seed-content";
+import { SITE_URL } from "@/lib/site-url";
 
 import "./globals.css";
 
@@ -26,9 +27,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.betterearthventures.com",
-  ),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${fallbackSettings.title}: ${fallbackSettings.tagline}`,
     template: `%s: ${fallbackSettings.title}`,
