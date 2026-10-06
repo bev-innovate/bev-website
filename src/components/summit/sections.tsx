@@ -352,7 +352,24 @@ function SpeakerCard({ speaker }: { speaker: AgendaSpeaker }) {
             {speaker.label}
           </p>
         ) : null}
-        <p className="font-semibold text-foreground">{speaker.name}</p>
+        <p className="font-semibold text-foreground">
+          {speaker.linkedin ? (
+            // Opens alongside the page, like every other outbound link on it. The small
+            // arrow is the cue that the name is a link, without dressing the card in blue.
+            <a
+              href={speaker.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${speaker.name} on LinkedIn`}
+              className="inline-flex items-center gap-1 underline-offset-4 transition-colors hover:text-purple hover:underline"
+            >
+              {speaker.name}
+              <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+            </a>
+          ) : (
+            speaker.name
+          )}
+        </p>
         {speaker.role ? <p className="text-muted-foreground">{speaker.role}</p> : null}
         {speaker.org ? <p className="text-muted-foreground">{speaker.org}</p> : null}
       </div>

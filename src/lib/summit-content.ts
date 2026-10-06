@@ -52,6 +52,8 @@ export interface AgendaSpeaker {
   org?: string;
   /** A small label above the name, e.g. "Guest of Honour" or "Moderator". */
   label?: string;
+  /** Their LinkedIn profile. The name links to it when present. */
+  linkedin?: string;
 }
 
 /** One line in the agenda. */
@@ -261,8 +263,18 @@ export const summit = {
             title: "Founder stories: the things we learn by building",
             by: "with more founders to be announced",
             speakers: [
-              { name: "Richard Savoie", role: "Founder & CEO", org: "Adiona" },
-              { name: "Bolong Chew", role: "Co-founder & CEO", org: "GetSolar" },
+              {
+                name: "Richard Savoie",
+                role: "Founder & CEO",
+                org: "Adiona",
+                linkedin: "https://www.linkedin.com/in/richsavoie/",
+              },
+              {
+                name: "Bolong Chew",
+                role: "Co-founder & CEO",
+                org: "GetSolar",
+                linkedin: "https://www.linkedin.com/in/bolong/",
+              },
               { name: "Aggie Blanco", role: "Founder", org: "WeBeings" },
             ],
           },
@@ -276,13 +288,25 @@ export const summit = {
             speakers: [
               {
                 name: "Milly Pearson",
+                linkedin: "https://www.linkedin.com/in/milly-pearson-bb904211a/",
                 role: "APAC & India Sustainability, Strategy & Partnerships Manager",
                 org: "PepsiCo",
               },
-              { name: "Michael Hammer", role: "Program Management", org: "Atomic Brand Lab USA" },
-              { name: "Axel Tan", role: "Investment Director", org: "Asia Ocean Fund" },
+              {
+                name: "Michael Hammer",
+                role: "Program Management",
+                org: "Atomic Brand Lab USA",
+                linkedin: "https://www.linkedin.com/in/michaelhammer1/",
+              },
+              {
+                name: "Axel Tan",
+                role: "Investment Director",
+                org: "Asia Ocean Fund",
+                linkedin: "https://www.linkedin.com/in/tanaxel/",
+              },
               {
                 name: "Ana Torralba Barallat",
+                linkedin: "https://www.linkedin.com/in/ana-torralba-barallat/",
                 role: "Trainer and Leadership Expert",
                 org: "ClimateLaunchpad",
               },
@@ -313,6 +337,7 @@ export const summit = {
             speakers: [
               {
                 name: "Ms Goh Hanyan",
+                linkedin: "https://www.linkedin.com/in/hanyan-goh-bb22635b/",
                 label: "Guest of Honour",
                 role: "Senior Parliamentary Secretary",
                 org: "Ministry of Sustainability and the Environment, and Ministry of Culture, Community and Youth",
@@ -332,18 +357,39 @@ export const summit = {
                 {
                   time: "11:30am–12:00pm",
                   title: "100,000 futures: building for a world we can’t predict",
-                  speakers: [{ name: "Kia Hallaji", role: "Head of Futures", org: "Synthesis" }],
+                  speakers: [
+                    {
+                      name: "Kia Hallaji",
+                      role: "Head of Futures",
+                      org: "Synthesis",
+                      linkedin: "https://www.linkedin.com/in/kia-hallaji/",
+                    },
+                  ],
                 },
                 { time: "12:00–12:30pm", title: "Futures in practice", by: "with Synthesis" },
                 {
                   time: "12:30–12:50pm",
                   title: "Don’t lose yourself while saving the world",
-                  speakers: [{ name: "Mónica Avila Forero", role: "Founder", org: "A.L.M.A.R.A." }],
+                  speakers: [
+                    {
+                      name: "Mónica Avila Forero",
+                      role: "Founder",
+                      org: "A.L.M.A.R.A.",
+                      linkedin: "https://www.linkedin.com/in/monica-avila-forero/",
+                    },
+                  ],
                 },
                 {
                   time: "12:50–1:10pm",
                   title: "Purpose and profit: building a climate company for impact and scale",
-                  speakers: [{ name: "Quentin Vaquette", role: "Founding Partner", org: "100x100" }],
+                  speakers: [
+                    {
+                      name: "Quentin Vaquette",
+                      role: "Founding Partner",
+                      org: "100x100",
+                      linkedin: "https://www.linkedin.com/in/quentin-vaquette-1870ba12/",
+                    },
+                  ],
                 },
                 { time: "1:10–2:30pm", title: "Lunch, exhibition and networking" },
               ],
@@ -368,11 +414,32 @@ export const summit = {
             blurb:
               "Four perspectives on what it takes for an innovation to move beyond a successful pilot: what earns investment and leadership support inside a global business, what makes farmers adopt new practices, what a startup learns working with a corporate and its growers, and what investors look for in a venture ready to scale.",
             speakers: [
-              { name: "Briana van Strijp", label: "Moderator", role: "COO", org: "Climate KIC" },
+              {
+                name: "Briana van Strijp",
+                label: "Moderator",
+                role: "COO",
+                org: "Climate KIC",
+                linkedin: "https://www.linkedin.com/in/brianavanstrijp/",
+              },
               { name: "Lisa Deng", role: "Chief Financial Officer, APAC Foods", org: "PepsiCo" },
-              { name: "Colin Matthews", role: "APAC Agronomy Lead", org: "PepsiCo" },
-              { name: "Roozbeh Ravansari", role: "Founder and CEO", org: "X-Centric Sciences" },
-              { name: "Tim Heasley", role: "Partner, VCaaS Asia and MENA", org: "Artesian" },
+              {
+                name: "Colin Matthews",
+                role: "APAC Agronomy Lead",
+                org: "PepsiCo",
+                linkedin: "https://www.linkedin.com/in/colin-matthews-34146114/",
+              },
+              {
+                name: "Roozbeh Ravansari",
+                role: "Founder and CEO",
+                org: "X-Centric Sciences",
+                linkedin: "https://www.linkedin.com/in/roozbeh-ravansari/",
+              },
+              {
+                name: "Tim Heasley",
+                role: "Partner, VCaaS Asia and MENA",
+                org: "Artesian",
+                linkedin: "https://www.linkedin.com/in/timheasley/",
+              },
             ],
           },
           { time: "3:25–3:40pm", title: "Climate ecosystem spotlight" },
