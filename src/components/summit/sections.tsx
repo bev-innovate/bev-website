@@ -332,8 +332,8 @@ function initials(name: string) {
 function SpeakerCard({ speaker }: { speaker: AgendaSpeaker }) {
   const photo = speakerPhoto(speaker.name);
   return (
-    <li className="flex items-center gap-3 rounded-(--radius) border border-border bg-background p-2.5 pr-4">
-      <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-muted">
+    <li className="flex items-start gap-3 rounded-lg border border-border bg-background p-2.5 pr-4">
+      <div className="relative size-14 shrink-0 overflow-hidden rounded-md bg-muted">
         {photo ? (
           <Image src={photo} alt="" fill sizes="56px" className="object-cover" />
         ) : (
