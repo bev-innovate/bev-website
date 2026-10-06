@@ -275,7 +275,12 @@ export const summit = {
                 org: "GetSolar",
                 linkedin: "https://www.linkedin.com/in/bolong/",
               },
-              { name: "Aggie Blanco", role: "Founder", org: "WeBeings" },
+              {
+                name: "Aggie Blanco",
+                role: "Founder",
+                org: "WeBeings",
+                linkedin: "https://www.linkedin.com/in/aggie-blanco-ugalde-093526276/",
+              },
             ],
           },
           { time: "2:05–3:00pm", title: "Founder exchange roundtables" },
@@ -421,7 +426,12 @@ export const summit = {
                 org: "Climate KIC",
                 linkedin: "https://www.linkedin.com/in/brianavanstrijp/",
               },
-              { name: "Lisa Deng", role: "Chief Financial Officer, APAC Foods", org: "PepsiCo" },
+              {
+                name: "Lisa Deng",
+                role: "Chief Financial Officer, APAC Foods",
+                org: "PepsiCo",
+                linkedin: "https://www.linkedin.com/in/lisa-deng-b325a933/",
+              },
               {
                 name: "Colin Matthews",
                 role: "APAC Agronomy Lead",
