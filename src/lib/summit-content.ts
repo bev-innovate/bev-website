@@ -65,6 +65,8 @@ export interface AgendaSession {
   /** One or two sentences under the title, for sessions that need explaining. */
   blurb?: string;
   speakers?: AgendaSpeaker[];
+  /** A graphic shown whole under the session, for artwork with its own text in it. */
+  image?: { src: string; alt: string; width: number; height: number };
   /** Arrivals and breaks: a single quiet line. */
   quiet?: boolean;
   tbc?: boolean;
@@ -101,7 +103,7 @@ export const summit = {
     /** Matches the line set into the key visual, so the page and the artwork agree. */
     headline: "Where climate founders come to scale",
     standfirst:
-      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase: IMPACT Edition.",
+      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC 2026: The IMPACT Edition.",
     /** Rendered as a monospace data row under the headline. */
     facts: [
       { label: "Dates", value: "13 – 15 October 2026", tbc: false },
@@ -136,7 +138,7 @@ export const summit = {
     heading: "Three days built around tangible outcomes",
     paragraphs: [
       "The Climate Innovation Summit Singapore moves climate solutions from proof of concept to proof of value. Founders arrive with something built. They leave with the customers, capital and partnerships that take it further. That is how it scales and creates impact.",
-      "The programme is anchored by two events: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase: IMPACT Edition.",
+      "The programme is anchored by two events: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC 2026: The IMPACT Edition.",
     ],
     texture: `${IMG}/climate-summit-8.webp`,
   },
@@ -470,7 +472,13 @@ export const summit = {
         sessions: [
           {
             time: "From 10:30am",
-            title: "PepsiCo Greenhouse Program APAC Showcase: IMPACT Edition",
+            title: "PepsiCo Greenhouse Program APAC 2026: The IMPACT Edition",
+            image: {
+              src: `${IMG}/summit-greenhouse-impact-edition.webp`,
+              alt: "The five startups in the PepsiCo Greenhouse Program APAC 2026: Adiona (Richard Savoie, Australia), Bali Waste Cycle (Olivia Padang, Indonesia), Beijing AI ForceTech (Weihua Li, China), Takachar (Vidyut Mohan and Kevin Kung, Thailand) and X-Centric (Roozbeh Ravansari, Australia).",
+              width: 1600,
+              height: 900,
+            },
           },
         ],
       },

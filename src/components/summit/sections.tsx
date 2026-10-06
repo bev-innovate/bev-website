@@ -419,6 +419,20 @@ function SessionLine({
           ))}
         </ul>
       ) : null}
+      {/*
+        Shown whole at its own proportions, never cropped: these graphics carry names and
+        logos in the artwork itself, and a crop would cut them off.
+      */}
+      {session.image ? (
+        <Image
+          src={session.image.src}
+          alt={session.image.alt}
+          width={session.image.width}
+          height={session.image.height}
+          sizes="(min-width: 1024px) 48rem, 100vw"
+          className="mt-4 h-auto w-full max-w-3xl rounded-lg border border-border"
+        />
+      ) : null}
     </div>
   );
 }

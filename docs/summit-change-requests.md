@@ -75,6 +75,10 @@ needed; the card picks it up at build time and shows initials until it does.
 **Designations.** All confirmed by the team on 6 October. Michael Hammer is listed under
 Atomic Brand Lab USA, a separate company from PepsiCo, and Axel Tan under Asia Ocean Fund.
 
+**Showcase name.** The full name is now "PepsiCo Greenhouse Program APAC 2026: The IMPACT
+Edition", which supersedes the earlier wording quoted further down this file. Impact Day
+shows the programme's graphic of its five startups under the session.
+
 **Guest of Honour.** Ms Goh Hanyan, Senior Parliamentary Secretary, Ministry of
 Sustainability and the Environment, and Ministry of Culture, Community and Youth, per the
 Cabinet appointments of 27 July 2026.
