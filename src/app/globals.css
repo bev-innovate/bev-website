@@ -143,6 +143,9 @@
   /* Mangrove turquoise carries the accent bands in place of the olive. */
   --color-mangrove: #2f8f86;
   --color-mangrove-deep: #1f6d66;
+  /* ClimateLaunchpad's own lime and forest green, for the Grand Final card. */
+  --color-launchpad: #e0e56e;
+  --color-launchpad-ink: #1d4938;
   --color-sand: #faf7f1;
   --color-bark: #ffffff;
 

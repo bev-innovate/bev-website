@@ -8,7 +8,13 @@ import { SectionHead, Tbc } from "@/components/summit/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
-import type { AgendaSession, AgendaSpeaker, AgendaWindow, summit } from "@/lib/summit-content";
+import type {
+  AgendaDay,
+  AgendaSession,
+  AgendaSpeaker,
+  AgendaWindow,
+  summit,
+} from "@/lib/summit-content";
 import { cn } from "@/lib/utils";
 
 type Summit = typeof summit;
@@ -172,6 +178,15 @@ export function SummitPartners({ partners }: { partners: Summit["partners"] }) {
       <div className="shell grid gap-12 md:grid-cols-[auto_1fr] md:gap-20 xl:gap-12">
         <PartnerRow title="Organised by" items={partners.organisedBy} />
         <PartnerRow title="Supported by" items={partners.supportedBy} />
+      </div>
+      {/*
+        Community partners on a line of their own, under a rule: a thank-you for the
+        networks that bring people into the room, set apart from the funding partners.
+      */}
+      <div className="shell mt-10">
+        <div className="border-t border-border pt-8">
+          <PartnerRow title="With thanks to our community partners" items={partners.community} />
+        </div>
       </div>
     </section>
   );
@@ -424,6 +439,34 @@ function SessionLine({
           ))}
         </ul>
       ) : null}
+      {session.list ? (
+        <div className="mt-4 max-w-3xl">
+          <p className="text-sm font-bold tracking-[0.08em] text-primary uppercase">
+            {session.list.heading}
+          </p>
+          <ul className="mt-2 space-y-2.5">
+            {session.list.items.map((item) => (
+              <li key={item.name} className="flex gap-3 leading-relaxed text-muted-foreground">
+                <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-orange" />
+                <span>
+                  <strong className="font-semibold text-foreground">{item.name}</strong> {item.body}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+      {session.note || session.cta ? (
+        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+          {session.cta ? (
+            <ButtonLink href={session.cta.href} {...linkProps(session.cta.href).props}>
+              {session.cta.label}
+              <ArrowUpRight className="size-4" aria-hidden />
+            </ButtonLink>
+          ) : null}
+          {session.note ? <p className="text-sm text-muted-foreground">{session.note}</p> : null}
+        </div>
+      ) : null}
       {/*
         Shown whole at its own proportions, never cropped: these graphics carry names and
         logos in the artwork itself, and a crop would cut them off.
@@ -510,6 +553,116 @@ function AgendaSplit({ split }: { split: AgendaWindow }) {
 }
 
 /**
+ * A person on the Grand Final card: headshot, name linked to LinkedIn, designation.
+ * Lighter than SpeakerCard, since it sits on ClimateLaunchpad's lime rather than the page.
+ */
+function LaunchpadPerson({ person, size = "md" }: { person: AgendaSpeaker; size?: "sm" | "md" }) {
+  const photo = speakerPhoto(person.name);
+  return (
+    <li className="flex items-center gap-3">
+      <div
+        className={cn(
+          "relative shrink-0 overflow-hidden rounded-md bg-white/60",
+          size === "md" ? "size-12" : "size-10",
+        )}
+      >
+        {photo ? (
+          <Image src={photo} alt="" fill sizes="48px" className="object-cover" />
+        ) : (
+          <span
+            aria-hidden
+            className="absolute inset-0 grid place-items-center font-display text-sm font-bold"
+          >
+            {initials(person.name)}
+          </span>
+        )}
+      </div>
+      <div className="min-w-0 text-sm leading-snug">
+        <p className="font-semibold">
+          {person.linkedin ? (
+            <a
+              href={person.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${person.name} on LinkedIn`}
+              className="inline-flex items-center gap-1 underline-offset-4 hover:underline"
+            >
+              {person.name}
+              <ArrowUpRight className="size-3.5 shrink-0 opacity-60" aria-hidden />
+            </a>
+          ) : (
+            person.name
+          )}
+        </p>
+        {person.role || person.org ? (
+          <p className="opacity-75">{[person.role, person.org].filter(Boolean).join(", ")}</p>
+        ) : null}
+      </div>
+    </li>
+  );
+}
+
+/**
+ * The Grand Final, as a shout-out in ClimateLaunchpad's own colours.
+ *
+ * It is the one session on the page that belongs to a partner's brand, so it wears theirs:
+ * lime with forest-green text and their logo. The finalists get the most room, each with
+ * their flag, team and LinkedIn, in the order of the regions they represent.
+ */
+function GrandFinal({ feature }: { feature: NonNullable<AgendaDay["feature"]> }) {
+  return (
+    <div className="mt-4 rounded-(--radius) bg-launchpad p-5 text-launchpad-ink md:p-8">
+      <div className="flex flex-col-reverse gap-5 md:flex-row md:items-start md:justify-between md:gap-10">
+        <div>
+          <p className="text-sm font-semibold tabular-nums">{feature.time}</p>
+          <p className="mt-1 font-display text-2xl font-bold md:text-3xl">{feature.title}</p>
+          <p className="mt-2 max-w-2xl leading-relaxed opacity-85">{feature.sub}</p>
+        </div>
+        <Image
+          src={feature.logo}
+          alt="ClimateLaunchpad"
+          width={450}
+          height={200}
+          className="h-14 w-auto shrink-0 self-start md:h-20"
+        />
+      </div>
+
+      <p className="mt-8 text-sm font-bold tracking-[0.08em] uppercase">Moderated by</p>
+      <ul className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {feature.moderators.map((person) => (
+          <LaunchpadPerson key={person.name} person={person} />
+        ))}
+      </ul>
+
+      <p className="mt-8 text-sm font-bold tracking-[0.08em] uppercase">The finalists</p>
+      <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {feature.finalists.map((team) => (
+          <li key={team.venture} className="rounded-lg bg-white/55 p-4">
+            <div className="flex items-center gap-2 text-sm">
+              <Image
+                src={`/images/flags/${team.flag}.svg`}
+                alt=""
+                width={24}
+                height={16}
+                className="h-4 w-6 shrink-0 rounded-[2px] shadow-[0_0_0_1px_rgb(29_73_56/0.15)]"
+              />
+              <span className="font-semibold">{team.country}</span>
+              <span className="opacity-60">· {team.region}</span>
+            </div>
+            <p className="mt-2.5 font-display text-lg font-bold">{team.venture}</p>
+            <ul className="mt-3 space-y-2.5">
+              {team.people.map((person) => (
+                <LaunchpadPerson key={person.name} person={person} size="sm" />
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/**
  * The three days.
  *
  * Days are stacked rather than tabbed. Tabs would shorten the page, but they hide two
@@ -570,24 +723,7 @@ export function SummitAgenda({ agenda }: { agenda: Summit["agenda"] }) {
                       </ol>
                     ) : null}
 
-                    {/*
-                      The day's headline moment, set as a filled row so it cannot be missed.
-                      The time column is narrower by the row's own padding, so the title
-                      lines up with every other session title above it.
-                    */}
-                    {day.feature ? (
-                      <div className="mt-4 grid gap-1 rounded-(--radius) bg-purple px-5 py-5 text-white sm:grid-cols-[calc(9.5rem-1.25rem)_1fr] sm:gap-6">
-                        <span className="text-sm text-white/75 tabular-nums sm:pt-1">
-                          {day.feature.time}
-                        </span>
-                        <div>
-                          <p className="font-display text-xl font-bold md:text-2xl">
-                            {day.feature.title}
-                          </p>
-                          <p className="mt-1 text-white/85">{day.feature.sub}</p>
-                        </div>
-                      </div>
-                    ) : null}
+                    {day.feature ? <GrandFinal feature={day.feature} /> : null}
                   </div>
                 </Card>
               </Reveal>

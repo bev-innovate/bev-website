@@ -67,6 +67,15 @@ export interface AgendaSession {
   speakers?: AgendaSpeaker[];
   /** A graphic shown whole under the session, for artwork with its own text in it. */
   image?: { src: string; alt: string; width: number; height: number };
+  /**
+   * A short list under the blurb, e.g. the companies in a programme's cohort. Each body
+   * carries on from the name in bold, so it starts mid-sentence ("are using…").
+   */
+  list?: { heading: string; items: { name: string; body: string }[] };
+  /** A line of small print after the list, e.g. who can attend. */
+  note?: string;
+  /** A button for sessions with their own registration. Opens in a new tab. */
+  cta?: { label: string; href: string };
   /** Arrivals and breaks: a single quiet line. */
   quiet?: boolean;
   tbc?: boolean;
@@ -80,6 +89,16 @@ export interface AgendaWindow {
   lanes: { name: string; accent: Accent; hint?: string; sessions: AgendaSession[] }[];
 }
 
+/** A Grand Final team: where they are from, and who is pitching. */
+export interface Finalist {
+  venture: string;
+  country: string;
+  /** Flag file in public/images/flags, by ISO country code. */
+  flag: string;
+  region: string;
+  people: AgendaSpeaker[];
+}
+
 export interface AgendaDay {
   ref: string;
   date: string;
@@ -91,8 +110,15 @@ export interface AgendaDay {
   window?: AgendaWindow;
   /** Sessions after the window closes. */
   after?: AgendaSession[];
-  /** The day's headline moment, set as a filled row. */
-  feature?: { time: string; title: string; sub: string };
+  /** The day's headline moment, set as its own card with the people in it. */
+  feature?: {
+    time: string;
+    title: string;
+    sub: string;
+    logo: string;
+    moderators: AgendaSpeaker[];
+    finalists: Finalist[];
+  };
 }
 
 export const summit = {
@@ -131,6 +157,10 @@ export const summit = {
       { name: "PepsiCo", logo: `${IMG}/summit-pepsico.webp` },
       { name: "Greenhouse", logo: `${IMG}/summit-greenhouse.webp` },
       { name: "Singapore Global Network", logo: `${IMG}/summit-singapore-global-network.webp` },
+    ],
+    community: [
+      { name: "Sustainability Women", logo: `${IMG}/summit-sustainability-women.webp` },
+      { name: "Epic Angels", logo: `${IMG}/summit-epic-angels.webp` },
     ],
   },
 
@@ -308,8 +338,8 @@ export const summit = {
               },
               {
                 name: "Axel Tan",
-                role: "Investment Director",
-                org: "Asia Ocean Fund",
+                role: "Director",
+                org: "Octave Capital",
                 linkedin: "https://www.linkedin.com/in/tanaxel/",
               },
               {
@@ -363,7 +393,7 @@ export const summit = {
               accent: "purple",
               sessions: [
                 {
-                  time: "11:30am–12:00pm",
+                  time: "11:30am–12:30pm",
                   title: "100,000 futures: building for a world we can’t predict",
                   speakers: [
                     {
@@ -374,7 +404,6 @@ export const summit = {
                     },
                   ],
                 },
-                { time: "12:00–12:30pm", title: "Futures in practice", by: "with Synthesis" },
                 {
                   time: "12:30–12:50pm",
                   title: "Don’t lose yourself while saving the world",
@@ -460,7 +489,115 @@ export const summit = {
         feature: {
           time: "4:00–6:40pm",
           title: "ClimateLaunchpad 2026 Global Grand Final",
-          sub: "Eight finalists pitch live, then the winners are announced",
+          sub: "Eight finalists from four continents pitch live, and the winners are announced on the night.",
+          logo: `${IMG}/Climate_Launchpad_Logo_Ink_RGB.webp`,
+          moderators: [
+            {
+              name: "Briana van Strijp",
+              role: "COO",
+              org: "Climate KIC",
+              linkedin: "https://www.linkedin.com/in/brianavanstrijp/",
+            },
+            {
+              name: "Alexandros Nikopoulos",
+              role: "Entrepreneurship Programmes Orchestrator",
+              org: "Climate KIC",
+              linkedin: "https://www.linkedin.com/in/a-nikopoulos/",
+            },
+            {
+              name: "Sofia Abid",
+              linkedin: "https://www.linkedin.com/in/sofia-abid-255571143/",
+            },
+          ],
+          finalists: [
+            {
+              venture: "Biospark Energy Solutions",
+              country: "Nigeria",
+              flag: "ng",
+              region: "Africa",
+              people: [
+                {
+                  name: "Afiniki Myha Bitrus",
+                  linkedin: "https://www.linkedin.com/in/afiniki-bitrus-895380159/",
+                },
+              ],
+            },
+            {
+              venture: "ReSursify",
+              country: "South Africa",
+              flag: "za",
+              region: "Africa",
+              people: [
+                {
+                  name: "Jody Reid Harvey",
+                  linkedin: "https://www.linkedin.com/in/jody-reid-harvey-761bb931a/",
+                },
+              ],
+            },
+            {
+              venture: "REQUECHO",
+              country: "Argentina",
+              flag: "ar",
+              region: "Americas",
+              people: [
+                {
+                  name: "Luciana Sabsay",
+                  linkedin: "https://www.linkedin.com/in/luciana-sabsay-738aa013/",
+                },
+                {
+                  name: "Veronica Litvinoff",
+                  linkedin: "https://www.linkedin.com/in/veronica-litvinoff-87007512a/",
+                },
+              ],
+            },
+            {
+              venture: "Yakusmart",
+              country: "Peru",
+              flag: "pe",
+              region: "Americas",
+              people: [
+                { name: "Omar Gonzales", linkedin: "https://www.linkedin.com/in/gonzalesomar/" },
+              ],
+            },
+            {
+              venture: "Neusla",
+              country: "Singapore",
+              flag: "sg",
+              region: "Asia-Pacific",
+              people: [
+                {
+                  name: "Dilsha Kawindi",
+                  linkedin: "https://www.linkedin.com/in/dilsha-kawindi-978235200/",
+                },
+              ],
+            },
+            {
+              venture: "Saty",
+              country: "Vietnam",
+              flag: "vn",
+              region: "Asia-Pacific",
+              people: [{ name: "Huy Nguyen" }],
+            },
+            {
+              venture: "Polium Scientific",
+              country: "Turkey",
+              flag: "tr",
+              region: "Europe",
+              people: [{ name: "Mehmet Coşan", linkedin: "https://www.linkedin.com/in/mcosan/" }],
+            },
+            {
+              venture: "Carboslag",
+              country: "Germany",
+              flag: "de",
+              region: "Europe",
+              people: [
+                {
+                  name: "Tunca Beril Basaran",
+                  linkedin: "https://www.linkedin.com/in/tunca-beril-basaran-a3580a147/",
+                },
+              ],
+            },
+          ],
         },
       },
       {
@@ -473,6 +610,35 @@ export const summit = {
           {
             time: "From 10:30am",
             title: "PepsiCo Greenhouse Program APAC 2026: The IMPACT Edition",
+            blurb:
+              "Join the agrifoodtech and climate ecosystem for the PepsiCo Greenhouse APAC 2026: IMPACT Edition Showcase with insights, connections, and discussions around the innovations driving the next generation of impact.",
+            list: {
+              heading: "2026 cohort",
+              items: [
+                {
+                  name: "Adiona",
+                  body: "are using AI-optimised logistics with the aim of improving route planning and fleet efficiency. They are studying how these tools could reduce fleet distances travelled across bottler networks, and build supply chain resilience.",
+                },
+                {
+                  name: "Bali Waste Cycle",
+                  body: "is employing a decentralised model to recover low-value plastics. They are assessing how their tech can support Extended Producer Responsibility readiness, and fit into PepsiCo’s broader packaging and waste management approaches.",
+                },
+                {
+                  name: "Beijing AIForce Tech",
+                  body: "are developing electric agricultural machinery designed to automate key farming processes and reduce emissions and labour dependency, while improving grower productivity. They are examining the operational feasibility and consequent impacts of utilising this tech.",
+                },
+                {
+                  name: "Takachar",
+                  body: "are creating mobile technology that converts crop residue into biochar-based soil amendments, reducing open burning, improving soil health and potentially supporting carbon-storage benefits. They are exploring how this tech could help reduce agricultural dependence on imported soil inputs, and improve soil health, within specific regional contexts.",
+                },
+                {
+                  name: "X-Centric",
+                  body: "are leveraging advanced digital soil health measurements to optimise farming inputs. They are evaluating how this soil data can be utilised to drive smarter, lower-impact agricultural decisions.",
+                },
+              ],
+            },
+            note: "Attendance is subject to approval.",
+            cta: { label: "Register for the showcase", href: "https://luma.com/vclk4zy4" },
             image: {
               src: `${IMG}/summit-greenhouse-impact-edition.webp`,
               alt: "The five startups in the PepsiCo Greenhouse Program APAC 2026: Adiona (Richard Savoie, Australia), Bali Waste Cycle (Olivia Padang, Indonesia), Beijing AI ForceTech (Weihua Li, China), Takachar (Vidyut Mohan and Kevin Kung, Thailand) and X-Centric (Roozbeh Ravansari, Australia).",
