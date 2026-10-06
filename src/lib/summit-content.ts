@@ -17,16 +17,6 @@ const IMG = "/images";
  */
 export const REGISTRATION_URL = "https://airtable.com/appVwyAexJiS2hcEv/pagKMLUZed9WoSwXQ/form";
 
-export interface SummitSpeaker {
-  name: string;
-  role: string;
-  org: string;
-  /** Specimen index shown in the annotation, e.g. "SPK-04". */
-  ref: string;
-  image?: string;
-  tbc?: boolean;
-}
-
 export interface SummitStartup {
   name: string;
   sector: string;
@@ -137,6 +127,9 @@ export const summit = {
       { label: "Venue", value: "Shared upon confirmation", tbc: false },
       { label: "Guests from", value: "50 countries", tbc: false },
     ],
+    /** Midnight on day one in Singapore, for the countdown above the title. */
+    startsAt: "2026-10-13T00:00:00+08:00",
+    days: 3,
     primary: { label: "Register now", href: REGISTRATION_URL },
     secondary: { label: "Browse agenda", href: "#agenda" },
     /** Mangroves from the air: the wash over it is drawn from the same greens and teals. */
@@ -653,15 +646,14 @@ export const summit = {
     ] satisfies AgendaDay[] as AgendaDay[],
   },
 
+  /**
+   * The speaker wall. Only the words live here: the people are gathered from the agenda,
+   * so adding someone to a session is the one change needed for them to appear.
+   */
   speakers: {
-    heading: "Who you will hear from",
-    items: Array.from({ length: 8 }, (_, i) => ({
-      name: "To be announced",
-      role: "Role to be confirmed",
-      org: "Organisation",
-      ref: `SPK-${String(i + 1).padStart(2, "0")}`,
-      tbc: true,
-    })) as SummitSpeaker[],
+    heading: "Who you’ll meet",
+    intro:
+      "Founders a few years further down the road, alongside the investors, corporates and policymakers shaping what gets built next across Asia-Pacific.",
   },
 
   startups: {

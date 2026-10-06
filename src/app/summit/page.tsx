@@ -7,6 +7,7 @@ import {
   SummitHero,
   SummitPartners,
   SummitRegister,
+  SummitSpeakers,
   SummitZones,
 } from "@/components/summit/sections";
 import { SummitStickyCta } from "@/components/summit/sticky-cta";
@@ -42,7 +43,8 @@ export default function SummitPage() {
       <SummitAudience audience={summit.audience} />
       <SummitZones zones={summit.zones} />
 
-      {/* Speakers and Companies on the Floor are held back until the names are confirmed. */}
+      <SummitSpeakers speakers={summit.speakers} days={summit.agenda.days} />
+      {/* Companies on the Floor is held back until the names are confirmed. */}
       <SummitAgenda agenda={summit.agenda} />
       <SummitRegister register={summit.register} />
 

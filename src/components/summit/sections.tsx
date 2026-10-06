@@ -4,6 +4,8 @@ import path from "node:path";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
+import { SummitCountdown } from "@/components/summit/countdown";
+import { AgendaDayNav } from "@/components/summit/day-nav";
 import { SectionHead, Tbc } from "@/components/summit/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -66,6 +68,11 @@ export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string 
         </div>
 
         <div className="shell relative py-16 md:py-20">
+          <SummitCountdown
+            startsAt={hero.startsAt}
+            days={hero.days}
+            className="mb-6 animate-rise"
+          />
           <h1 className="display max-w-4xl animate-rise text-[clamp(2.25rem,5.5vw,3.75rem)]">
             {name}
           </h1>
@@ -662,6 +669,11 @@ function GrandFinal({ feature }: { feature: NonNullable<AgendaDay["feature"]> })
   );
 }
 
+/** Anchor for a day card, shared by the day bar and the speaker wall. */
+function dayId(i: number) {
+  return `day-${i + 1}`;
+}
+
 /**
  * The three days.
  *
@@ -678,55 +690,72 @@ export function SummitAgenda({ agenda }: { agenda: Summit["agenda"] }) {
       <div className="shell">
         <SectionHead heading={agenda.heading} intro={agenda.intro} />
 
-        <div className="mt-12 space-y-4">
+        {/*
+          A direct child of the shell, so it stays stuck for the whole height of the agenda
+          rather than only the height of a wrapper.
+        */}
+        <AgendaDayNav
+          className="mt-10"
+          days={agenda.days.map((day, i) => ({
+            id: dayId(i),
+            title: day.title,
+            date: day.date.replace(/^\w+\s/, ""),
+            accent: day.accent,
+          }))}
+        />
+
+        <div className="mt-6 space-y-4">
           {agenda.days.map((day, i) => {
             const accent = zoneAccent[day.accent];
             return (
-              <Reveal key={day.ref} delay={Math.min(i, 2) * 0.13}>
-                <Card variant="default" className="overflow-hidden">
-                  {/*
-                    Day header as a solid colour band: the date sits on top, the day's
-                    name beneath it, and the access level to the right, so who can be in
-                    the room is read at the same moment as the day itself.
-                  */}
-                  <div
-                    className={cn(
-                      "flex flex-wrap items-end justify-between gap-x-6 gap-y-3 p-6 text-white md:p-8",
-                      accent.band,
-                    )}
-                  >
-                    <div>
-                      <p className="text-sm font-medium text-white/80">{day.date}</p>
-                      <h3 className="mt-1 font-display text-2xl font-bold">{day.title}</h3>
+              // Lands below the site header and the day bar when jumped to.
+              <div key={day.ref} id={dayId(i)} className="scroll-mt-40">
+                <Reveal delay={Math.min(i, 2) * 0.13}>
+                  <Card variant="default" className="overflow-hidden">
+                    {/*
+                      Day header as a solid colour band: the date sits on top, the day's
+                      name beneath it, and the access level to the right, so who can be in
+                      the room is read at the same moment as the day itself.
+                    */}
+                    <div
+                      className={cn(
+                        "flex flex-wrap items-end justify-between gap-x-6 gap-y-3 p-6 text-white md:p-8",
+                        accent.band,
+                      )}
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-white/80">{day.date}</p>
+                        <h3 className="mt-1 font-display text-2xl font-bold">{day.title}</h3>
+                      </div>
+                      <span className="rounded-full bg-white/20 px-3 py-1 text-sm font-medium">
+                        {day.access}
+                      </span>
                     </div>
-                    <span className="rounded-full bg-white/20 px-3 py-1 text-sm font-medium">
-                      {day.access}
-                    </span>
-                  </div>
 
-                  <div className="px-6 pt-4 pb-6 md:px-8 md:pb-8">
-                    {day.note ? <p className="pt-2 pb-2 text-muted-foreground">{day.note}</p> : null}
+                    <div className="px-6 pt-4 pb-6 md:px-8 md:pb-8">
+                      {day.note ? <p className="pt-2 pb-2 text-muted-foreground">{day.note}</p> : null}
 
-                    <ol>
-                      {day.sessions.map((session) => (
-                        <SessionRow key={session.time + session.title} session={session} />
-                      ))}
-                    </ol>
-
-                    {day.window ? <AgendaSplit split={day.window} /> : null}
-
-                    {day.after ? (
                       <ol>
-                        {day.after.map((session) => (
+                        {day.sessions.map((session) => (
                           <SessionRow key={session.time + session.title} session={session} />
                         ))}
                       </ol>
-                    ) : null}
 
-                    {day.feature ? <GrandFinal feature={day.feature} /> : null}
-                  </div>
-                </Card>
-              </Reveal>
+                      {day.window ? <AgendaSplit split={day.window} /> : null}
+
+                      {day.after ? (
+                        <ol>
+                          {day.after.map((session) => (
+                            <SessionRow key={session.time + session.title} session={session} />
+                          ))}
+                        </ol>
+                      ) : null}
+
+                      {day.feature ? <GrandFinal feature={day.feature} /> : null}
+                    </div>
+                  </Card>
+                </Reveal>
+              </div>
             );
           })}
         </div>
@@ -737,51 +766,132 @@ export function SummitAgenda({ agenda }: { agenda: Summit["agenda"] }) {
 
 /* ── Speakers ───────────────────────────────────────────────────────────────── */
 
-/**
- * Speakers.
- *
- * Structure adapted from Tailark's `team/two` block (MIT, github.com/tailark/blocks):
- * a dense grid of compact avatar-and-name rows rather than large portrait cards. That
- * reads as a roster being filled in, which is what it is, instead of eight empty frames.
- */
-export function SummitSpeakers({ speakers }: { speakers: Summit["speakers"] }) {
-  return (
-    <section className="relative overflow-hidden bg-muted/50 py-16 md:py-20">
-      <div className="shell relative">
-        <SectionHead heading={speakers.heading} />
+type WallSpeaker = AgendaSpeaker & { day: string; dayIndex: number; accent: AgendaDay["accent"] };
 
-        <ul className="mt-12 grid gap-x-6 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
-          {speakers.items.map((speaker, i) => (
-            <Reveal as="li" key={speaker.ref} delay={Math.min(i, 7) * 0.07}>
-              <article className="grid grid-cols-[auto_1fr] items-center gap-3 border-b border-border pb-5">
-                <div className="relative size-10 shrink-0 overflow-hidden rounded-full border border-transparent bg-background shadow ring-1 ring-foreground/10">
-                  {speaker.image ? (
+/**
+ * Everyone named in the agenda, once each, in the order they appear across the three days.
+ * The Guest of Honour leads. Moderators of the Grand Final are included; the finalists are
+ * not, since they have the Grand Final card to themselves.
+ *
+ * Built from the agenda rather than kept as a second list, so a speaker added to a session
+ * shows up here too and the two can never disagree.
+ */
+function collectSpeakers(days: readonly AgendaDay[]) {
+  const seen = new Map<string, WallSpeaker>();
+  days.forEach((day, dayIndex) => {
+    const sessions = [
+      ...day.sessions,
+      ...(day.window?.lanes.flatMap((lane) => lane.sessions) ?? []),
+      ...(day.after ?? []),
+    ];
+    const people = [
+      ...sessions.flatMap((session) => session.speakers ?? []),
+      ...(day.feature?.moderators ?? []),
+    ];
+    for (const person of people) {
+      // Labels like "Moderator" belong to a session, not the person.
+      const { label, ...rest } = person;
+      if (!seen.has(person.name)) {
+        seen.set(person.name, {
+          ...rest,
+          ...(label === "Guest of Honour" ? { label } : {}),
+          day: day.title,
+          dayIndex,
+          accent: day.accent,
+        });
+      }
+    }
+  });
+  const all = [...seen.values()];
+  return [...all.filter((p) => p.label), ...all.filter((p) => !p.label)];
+}
+
+const dayText = {
+  purple: "text-purple",
+  teal: "text-teal-deep",
+  orange: "text-orange-deep",
+} as const;
+
+/**
+ * Who you'll meet: every named speaker as a face, ahead of the agenda.
+ *
+ * In the agenda each person sits inside their session, which is right for planning a day
+ * but hides how many people are coming. Here they are all in one place, each tagged with
+ * the day they speak and linked to it.
+ */
+export function SummitSpeakers({
+  speakers,
+  days,
+}: {
+  speakers: Summit["speakers"];
+  days: readonly AgendaDay[];
+}) {
+  const people = collectSpeakers(days);
+  return (
+    <section id="speakers" className="scroll-mt-24 py-16 md:py-20">
+      <div className="shell">
+        <SectionHead heading={speakers.heading} intro={speakers.intro} />
+
+        <ul className="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+          {people.map((person, i) => {
+            const photo = speakerPhoto(person.name);
+            return (
+              <Reveal as="li" key={person.name} delay={Math.min(i % 6, 5) * 0.06} distance={16}>
+                <div className="relative aspect-square overflow-hidden rounded-lg bg-muted">
+                  {photo ? (
                     <Image
-                      src={speaker.image}
-                      alt={speaker.name}
+                      src={photo}
+                      alt=""
                       fill
-                      sizes="40px"
+                      sizes="(min-width: 1024px) 12rem, (min-width: 640px) 30vw, 45vw"
                       className="object-cover"
                     />
                   ) : (
-                    <span className="absolute inset-0 grid place-items-center text-xs text-muted-foreground">
-                      {speaker.ref.replace("SPK-", "")}
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 grid place-items-center font-display text-3xl font-bold text-purple"
+                    >
+                      {initials(person.name)}
                     </span>
                   )}
                 </div>
-
-                <div className="min-w-0">
-                  <p className="flex flex-wrap items-center gap-2 font-medium text-foreground">
-                    {speaker.name}
-                    {speaker.tbc ? <Tbc /> : null}
+                <div className="mt-3 text-sm leading-snug">
+                  {person.label ? (
+                    <p className="text-xs font-semibold tracking-[0.06em] text-primary uppercase">
+                      {person.label}
+                    </p>
+                  ) : null}
+                  <p className="font-semibold text-foreground">
+                    {person.linkedin ? (
+                      <a
+                        href={person.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${person.name} on LinkedIn`}
+                        className="inline-flex items-center gap-1 underline-offset-4 transition-colors hover:text-purple hover:underline"
+                      >
+                        {person.name}
+                        <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                      </a>
+                    ) : (
+                      person.name
+                    )}
                   </p>
-                  <p className="mt-0.5 truncate text-sm text-muted-foreground">
-                    {speaker.role} · {speaker.org}
-                  </p>
+                  {person.role ? <p className="mt-0.5 text-muted-foreground">{person.role}</p> : null}
+                  {person.org ? <p className="text-muted-foreground">{person.org}</p> : null}
+                  <a
+                    href={`#${dayId(person.dayIndex)}`}
+                    className={cn(
+                      "mt-1.5 inline-block text-xs font-semibold underline-offset-4 hover:underline",
+                      dayText[person.accent],
+                    )}
+                  >
+                    {person.day}
+                  </a>
                 </div>
-              </article>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </ul>
       </div>
     </section>
