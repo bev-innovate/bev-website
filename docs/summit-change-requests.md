@@ -62,6 +62,32 @@ agenda", which jumps to the agenda.
 
 ---
 
+## Progress · 6 October: speakers named
+
+Every named speaker in the agenda now has a card: a rounded-square headshot, then name,
+designation and organisation.
+
+**Adding headshots.** Drop each photo into `public/images/speakers/`, named after the
+speaker in lower case with hyphens, and redeploy. No code change is needed; the card picks
+it up at build time and shows initials until it does. Square crops of at least 200px work
+best. The file names the page will look for:
+
+`richard-savoie`, `bolong-chew`, `aggie-blanco`, `milly-pearson`, `michael-hammer`,
+`axel-tan`, `ana-torralba-barallat`, `goh-hanyan`, `kia-hallaji`, `monica-avila-forero`,
+`quentin-vaquette`, `briana-van-strijp`, `lisa-deng`, `colin-matthews`,
+`roozbeh-ravansari`, `tim-heasley` (each `.webp`, `.jpg` or `.png`).
+
+**Designations still to confirm.** Left blank rather than guessed: Michael Hammer
+(PepsiCo), Kia Hallaji (Synthesis), Quentin Vaquette (100x100), Aggie Blanco (WeBeings)
+and Mónica Avila Forero (A.L.M.A.R.A.). Axel Tan is shown as Director, Octave Capital, from
+public company records; confirm it matches what he would want used.
+
+**Guest of Honour.** Ms Goh Hanyan, Senior Parliamentary Secretary, Ministry of
+Sustainability and the Environment, and Ministry of Culture, Community and Youth, per the
+Cabinet appointments of 27 July 2026.
+
+---
+
 ## Progress · 30 September: registration is open
 
 **C-02 and R-06 are closed.** Registration runs on an Airtable form

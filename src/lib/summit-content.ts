@@ -38,12 +38,31 @@ export interface SummitStartup {
 
 type Accent = "purple" | "orange" | "teal";
 
+/**
+ * A named speaker in the agenda, shown as a small card with their headshot.
+ *
+ * Headshots are picked up by name: drop `public/images/speakers/<slug>.webp` (or .jpg or
+ * .png), where the slug is the name in lower case with hyphens, e.g. `kia-hallaji.webp`.
+ * Until a file exists the card shows the speaker's initials in the same square.
+ */
+export interface AgendaSpeaker {
+  name: string;
+  /** Designation. Left out where we have not confirmed it, rather than guessed. */
+  role?: string;
+  org?: string;
+  /** A small label above the name, e.g. "Guest of Honour" or "Moderator". */
+  label?: string;
+}
+
 /** One line in the agenda. */
 export interface AgendaSession {
   time: string;
   title: string;
   /** Who is leading it, connecting word included ("by", "with"). Set lighter than the title. */
   by?: string;
+  /** One or two sentences under the title, for sessions that need explaining. */
+  blurb?: string;
+  speakers?: AgendaSpeaker[];
   /** Arrivals and breaks: a single quiet line. */
   quiet?: boolean;
   tbc?: boolean;
@@ -80,7 +99,7 @@ export const summit = {
     /** Matches the line set into the key visual, so the page and the artwork agree. */
     headline: "Where climate founders come to scale",
     standfirst:
-      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase: Impact Edition.",
+      "Three days bringing together climate entrepreneurs, investors, corporates and policymakers from around the world: anchored by the ClimateLaunchpad Global Grand Final and the PepsiCo Greenhouse Program APAC Showcase: IMPACT Edition.",
     /** Rendered as a monospace data row under the headline. */
     facts: [
       { label: "Dates", value: "13 – 15 October 2026", tbc: false },
@@ -106,6 +125,7 @@ export const summit = {
       },
       { name: "Bank of America", logo: `${IMG}/summit-bofa.webp` },
       { name: "Greenhouse", logo: `${IMG}/summit-greenhouse.webp` },
+      { name: "Singapore Global Network", logo: `${IMG}/summit-singapore-global-network.webp` },
     ],
   },
 
@@ -113,7 +133,7 @@ export const summit = {
     heading: "Three days built around tangible outcomes",
     paragraphs: [
       "The Climate Innovation Summit Singapore moves climate solutions from proof of concept to proof of value. Founders arrive with something built. They leave with the customers, capital and partnerships that take it further. That is how it scales and creates impact.",
-      "The programme is anchored by two events: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase: Impact Edition.",
+      "The programme is anchored by two events: the ClimateLaunchpad Global Grand Final, the largest green business ideas competition, and the PepsiCo Greenhouse Program APAC Showcase: IMPACT Edition.",
     ],
     texture: `${IMG}/climate-summit-8.webp`,
   },
@@ -159,7 +179,7 @@ export const summit = {
   zones: {
     heading: "Three zones, running side by side",
     intro:
-      "You are never stuck in one room. Follow whichever conversation is the useful one, and come back when the next thing starts.",
+      "Each zone has a different purpose, so there is something useful for you whether you have come to learn, to work through a problem or to meet the right people.",
     items: [
       {
         key: "discover",
@@ -167,12 +187,13 @@ export const summit = {
         accent: "purple" as const,
         where: "Auditorium",
         image: `${IMG}/climate-summit-7.webp`,
-        purpose: "The main stage, for the sessions worth stopping everything to hear.",
+        purpose:
+          "The main stage, where we bring together different perspectives on climate innovation and practical ideas you can take away and build on.",
         activities: [
-          "Where the climate economy is heading, from the people moving it",
-          "Case studies from inside global businesses that have already deployed",
-          "Founders from around the world on what building looks like where they are",
-          "The ClimateLaunchpad Global Grand Final, and the celebration after it",
+          "Talks and panels from founders, corporates, investors and policymakers",
+          "Real case studies of climate solutions moving from pilot to scale",
+          "Interactive sessions that leave you with something to act on",
+          "The ClimateLaunchpad Global Grand Final, with some of the world’s best early-stage green ventures",
         ],
       },
       {
@@ -223,7 +244,7 @@ export const summit = {
   agenda: {
     heading: "The agenda",
     intro:
-      "This is shaping up to be nothing like a regular summit. Each of the three days has its own focus, its own room and its own reason to be there.",
+      "Each day has its own theme, so people from across the climate ecosystem meet in different settings, with more chances to learn from one another, collaborate and act together.",
     days: [
       {
         ref: "D-01",
@@ -234,11 +255,16 @@ export const summit = {
         note: "A closed-door afternoon for founders. Mentors join from 4:15pm.",
         sessions: [
           { time: "1:00–1:15pm", title: "Arrival and founder welcome", quiet: true },
-          { time: "1:15–1:25pm", title: "Opening", by: "by Better Earth Ventures and Climate KIC" },
+          { time: "1:15–1:30pm", title: "Opening", by: "by Better Earth Ventures and Climate KIC" },
           {
-            time: "1:25–2:05pm",
+            time: "1:30–2:05pm",
             title: "Founder stories: the things we learn by building",
-            by: "with Richard Savoie (Adiona), Bolong Chew (GetSolar), Aggie Blanco (WeBeings) and more",
+            by: "with more founders to be announced",
+            speakers: [
+              { name: "Richard Savoie", role: "Founder & CEO", org: "Adiona" },
+              { name: "Bolong Chew", role: "Co-founder & CEO", org: "GetSolar" },
+              { name: "Aggie Blanco", org: "WeBeings" },
+            ],
           },
           { time: "2:05–3:00pm", title: "Founder exchange roundtables" },
           { time: "3:00–3:15pm", title: "Founder reflections" },
@@ -246,10 +272,29 @@ export const summit = {
           {
             time: "3:30–4:15pm",
             title: "Expert roundtables",
-            by: "on corporate pilots, investment and capital, and team and culture, with PepsiCo and Ana Torralba Barallat",
+            by: "on corporate pilots, investment and capital, and team and culture",
+            speakers: [
+              {
+                name: "Milly Pearson",
+                role: "APAC & India Sustainability, Strategy & Partnerships Manager",
+                org: "PepsiCo",
+              },
+              { name: "Michael Hammer", org: "PepsiCo" },
+              { name: "Axel Tan", role: "Director", org: "Octave Capital" },
+              {
+                name: "Ana Torralba Barallat",
+                role: "Trainer and Leadership Expert",
+                org: "ClimateLaunchpad",
+              },
+            ],
           },
           { time: "4:15–4:30pm", title: "Break and mentor welcome", quiet: true },
-          { time: "4:30–6:00pm", title: "1:1 founder mentoring" },
+          {
+            time: "4:30–6:00pm",
+            title: "1:1 founder mentoring",
+            blurb:
+              "Startups meet the Better Earth expert community for a series of one-to-one conversations, designed to unlock the advice that moves their businesses forward.",
+          },
           { time: "6:00–8:00pm", title: "Founder and mentor reception" },
         ],
       },
@@ -264,7 +309,15 @@ export const summit = {
           {
             time: "11:00–11:20am",
             title: "Official welcome",
-            by: "by Better Earth Ventures, Climate KIC and our Guest of Honour",
+            by: "by Better Earth Ventures and Climate KIC, with an address by our Guest of Honour",
+            speakers: [
+              {
+                name: "Ms Goh Hanyan",
+                label: "Guest of Honour",
+                role: "Senior Parliamentary Secretary",
+                org: "Ministry of Sustainability and the Environment, and Ministry of Culture, Community and Youth",
+              },
+            ],
           },
         ],
         window: {
@@ -279,18 +332,18 @@ export const summit = {
                 {
                   time: "11:30am–12:00pm",
                   title: "100,000 futures: building for a world we can’t predict",
-                  by: "by Synthesis",
+                  speakers: [{ name: "Kia Hallaji", org: "Synthesis" }],
                 },
                 { time: "12:00–12:30pm", title: "Futures in practice", by: "with Synthesis" },
                 {
                   time: "12:30–12:50pm",
                   title: "Don’t lose yourself while saving the world",
-                  by: "by Mónica Avila Forero (A.L.M.A.R.A.)",
+                  speakers: [{ name: "Mónica Avila Forero", org: "A.L.M.A.R.A." }],
                 },
                 {
                   time: "12:50–1:10pm",
                   title: "Purpose and profit: building a climate company for impact and scale",
-                  tbc: true,
+                  speakers: [{ name: "Quentin Vaquette", org: "100x100" }],
                 },
                 { time: "1:10–2:30pm", title: "Lunch, exhibition and networking" },
               ],
@@ -310,8 +363,17 @@ export const summit = {
         after: [
           {
             time: "2:30–3:25pm",
-            title: "Panel: innovation to impact through partnership",
-            by: "moderated by Climate KIC",
+            title: "Innovation to impact: scaling sustainable solutions through partnership",
+            by: "a PepsiCo panel",
+            blurb:
+              "Four perspectives on what it takes for an innovation to move beyond a successful pilot: what earns investment and leadership support inside a global business, what makes farmers adopt new practices, what a startup learns working with a corporate and its growers, and what investors look for in a venture ready to scale.",
+            speakers: [
+              { name: "Briana van Strijp", label: "Moderator", role: "COO", org: "Climate KIC" },
+              { name: "Lisa Deng", role: "Chief Financial Officer, APAC Foods", org: "PepsiCo" },
+              { name: "Colin Matthews", role: "APAC Agronomy Lead", org: "PepsiCo" },
+              { name: "Roozbeh Ravansari", role: "Founder and CEO", org: "X-Centric Sciences" },
+              { name: "Tim Heasley", role: "Partner, VCaaS Asia and MENA", org: "Artesian" },
+            ],
           },
           { time: "3:25–3:40pm", title: "Climate ecosystem spotlight" },
         ],
@@ -330,7 +392,7 @@ export const summit = {
         sessions: [
           {
             time: "From 10:30am",
-            title: "PepsiCo Greenhouse Program APAC Showcase: Impact Edition",
+            title: "PepsiCo Greenhouse Program APAC Showcase: IMPACT Edition",
           },
         ],
       },

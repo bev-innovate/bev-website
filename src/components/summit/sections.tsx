@@ -1,3 +1,6 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
+
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
@@ -5,7 +8,7 @@ import { SectionHead, Tbc } from "@/components/summit/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
-import type { AgendaSession, AgendaWindow, summit } from "@/lib/summit-content";
+import type { AgendaSession, AgendaSpeaker, AgendaWindow, summit } from "@/lib/summit-content";
 import { cn } from "@/lib/utils";
 
 type Summit = typeof summit;
@@ -288,20 +291,118 @@ export function SummitZones({ zones }: { zones: Summit["zones"] }) {
 /* ── Agenda ─────────────────────────────────────────────────────────────────── */
 
 /** Title, then who is leading it in a lighter weight on the same line. */
-function SessionLine({ session, className }: { session: AgendaSession; className?: string }) {
+/** "Ms Goh Hanyan" -> "goh-hanyan". Honorifics are dropped so the file name is just the name. */
+function speakerSlug(name: string) {
+  return name
+    .replace(/^(Ms|Mr|Mrs|Dr|Prof)\.?\s+/i, "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/**
+ * A speaker's headshot, if one has been added.
+ *
+ * Looked up on disk at build time, so adding a photo is a matter of dropping the file into
+ * public/images/speakers/ under the speaker's name and redeploying. No content change.
+ */
+function speakerPhoto(name: string) {
+  const slug = speakerSlug(name);
+  for (const ext of ["webp", "jpg", "jpeg", "png"]) {
+    const rel = `/images/speakers/${slug}.${ext}`;
+    if (existsSync(path.join(process.cwd(), "public", rel))) return rel;
+  }
+  return null;
+}
+
+function initials(name: string) {
+  return name
+    .replace(/^(Ms|Mr|Mrs|Dr|Prof)\.?\s+/i, "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+/** Headshot in a rounded square, then name, designation and organisation. */
+function SpeakerCard({ speaker }: { speaker: AgendaSpeaker }) {
+  const photo = speakerPhoto(speaker.name);
   return (
-    <p
-      className={cn(
-        session.quiet ? "text-muted-foreground italic" : "font-semibold text-foreground",
-        className,
-      )}
-    >
-      {session.title}
-      {session.by ? (
-        <span className="font-normal text-muted-foreground not-italic"> {session.by}</span>
+    <li className="flex items-center gap-3 rounded-(--radius) border border-border bg-background p-2.5 pr-4">
+      <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-muted">
+        {photo ? (
+          <Image src={photo} alt="" fill sizes="56px" className="object-cover" />
+        ) : (
+          // No headshot yet: initials in the same square, so the row holds its shape.
+          <span
+            aria-hidden
+            className="absolute inset-0 grid place-items-center font-display text-base font-bold text-purple"
+          >
+            {initials(speaker.name)}
+          </span>
+        )}
+      </div>
+      <div className="min-w-0 text-sm leading-snug">
+        {speaker.label ? (
+          <p className="text-xs font-semibold tracking-[0.06em] text-primary uppercase">
+            {speaker.label}
+          </p>
+        ) : null}
+        <p className="font-semibold text-foreground">{speaker.name}</p>
+        {speaker.role ? <p className="text-muted-foreground">{speaker.role}</p> : null}
+        {speaker.org ? <p className="text-muted-foreground">{speaker.org}</p> : null}
+      </div>
+    </li>
+  );
+}
+
+/**
+ * Title, then who is leading it in a lighter weight on the same line, then an optional
+ * short description and the speakers as cards.
+ *
+ * `narrow` is for the side-by-side columns, where the cards stack one per line.
+ */
+function SessionLine({
+  session,
+  className,
+  narrow = false,
+}: {
+  session: AgendaSession;
+  className?: string;
+  narrow?: boolean;
+}) {
+  return (
+    <div className={className}>
+      <p className={session.quiet ? "text-muted-foreground italic" : "font-semibold text-foreground"}>
+        {session.title}
+        {session.by ? (
+          <span className="font-normal text-muted-foreground not-italic"> {session.by}</span>
+        ) : null}
+        {session.tbc ? <Tbc className="ml-2 align-middle" /> : null}
+      </p>
+      {session.blurb ? (
+        <p className="mt-1.5 max-w-3xl leading-relaxed text-muted-foreground">{session.blurb}</p>
       ) : null}
-      {session.tbc ? <Tbc className="ml-2 align-middle" /> : null}
-    </p>
+      {session.speakers?.length ? (
+        <ul
+          className={cn(
+            "mt-3 grid gap-2.5",
+            // A lone speaker gets one wide card, so a long designation is not squeezed
+            // into a third of the row.
+            !narrow && session.speakers.length > 1 && "sm:grid-cols-2 xl:grid-cols-3",
+            !narrow && session.speakers.length === 1 && "max-w-xl",
+          )}
+        >
+          {session.speakers.map((speaker) => (
+            <SpeakerCard key={speaker.name} speaker={speaker} />
+          ))}
+        </ul>
+      ) : null}
+    </div>
   );
 }
 
@@ -360,7 +461,7 @@ function AgendaSplit({ split }: { split: AgendaWindow }) {
                     <span className="block text-sm text-muted-foreground tabular-nums">
                       {session.time}
                     </span>
-                    <SessionLine session={session} className="mt-0.5" />
+                    <SessionLine session={session} className="mt-0.5" narrow />
                   </li>
                 ))}
               </ol>
