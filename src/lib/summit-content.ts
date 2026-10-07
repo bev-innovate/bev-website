@@ -507,8 +507,18 @@ export const summit = {
             },
           ],
           team: [
-            { name: "Jessica Muñoz", role: "Operations Manager", org: "ClimateLaunchpad" },
-            { name: "Maria Jose Arjona Peris", role: "Project Manager", org: "ClimateLaunchpad" },
+            {
+              name: "Jessica Muñoz",
+              role: "Operations Manager",
+              org: "ClimateLaunchpad",
+              linkedin: "https://www.linkedin.com/in/jessmu%C3%B1oz/",
+            },
+            {
+              name: "Maria Jose Arjona Peris",
+              role: "Project Manager",
+              org: "ClimateLaunchpad",
+              linkedin: "https://www.linkedin.com/in/maria-jose-arjona-peris-02483a150/",
+            },
           ],
           finalists: [
             {
