@@ -107,6 +107,8 @@ export interface AgendaDay {
     sub: string;
     logo: string;
     moderators: AgendaSpeaker[];
+    /** The ClimateLaunchpad people running the final behind the scenes. */
+    team?: AgendaSpeaker[];
     finalists: Finalist[];
   };
 }
@@ -503,6 +505,10 @@ export const summit = {
               org: "Climate KIC",
               linkedin: "https://www.linkedin.com/in/sofia-abid-255571143/",
             },
+          ],
+          team: [
+            { name: "Jessica Muñoz", role: "Operations Manager", org: "ClimateLaunchpad" },
+            { name: "Maria Jose Arjona Peris", role: "Project Manager", org: "ClimateLaunchpad" },
           ],
           finalists: [
             {

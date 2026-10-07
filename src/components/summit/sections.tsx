@@ -641,6 +641,19 @@ function GrandFinal({ feature }: { feature: NonNullable<AgendaDay["feature"]> })
         ))}
       </ul>
 
+      {feature.team?.length ? (
+        <>
+          <p className="mt-8 text-sm font-bold tracking-[0.08em] uppercase">
+            With the ClimateLaunchpad team
+          </p>
+          <ul className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {feature.team.map((person) => (
+              <LaunchpadPerson key={person.name} person={person} />
+            ))}
+          </ul>
+        </>
+      ) : null}
+
       <p className="mt-8 text-sm font-bold tracking-[0.08em] uppercase">The finalists</p>
       <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {feature.finalists.map((team) => (
@@ -770,8 +783,8 @@ type WallSpeaker = AgendaSpeaker & { day: string; dayIndex: number; accent: Agen
 
 /**
  * Everyone named in the agenda, once each, in the order they appear across the three days.
- * The Guest of Honour leads. Moderators of the Grand Final are included; the finalists are
- * not, since they have the Grand Final card to themselves.
+ * The Guest of Honour leads. The Grand Final's moderators and ClimateLaunchpad team are
+ * included; the finalists are not, since they have the Grand Final card to themselves.
  *
  * Built from the agenda rather than kept as a second list, so a speaker added to a session
  * shows up here too and the two can never disagree.
@@ -787,6 +800,7 @@ function collectSpeakers(days: readonly AgendaDay[]) {
     const people = [
       ...sessions.flatMap((session) => session.speakers ?? []),
       ...(day.feature?.moderators ?? []),
+      ...(day.feature?.team ?? []),
     ];
     for (const person of people) {
       // Labels like "Moderator" belong to a session, not the person.
