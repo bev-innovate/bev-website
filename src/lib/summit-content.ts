@@ -345,8 +345,8 @@ export const summit = {
               {
                 name: "Ana Torralba Barallat",
                 linkedin: "https://www.linkedin.com/in/ana-torralba-barallat/",
-                role: "Trainer and Leadership Expert",
-                org: "ClimateLaunchpad",
+                role: "Systems innovation & sustainable growth",
+                org: "Founder, mentor & leadership coach",
               },
             ],
           },
