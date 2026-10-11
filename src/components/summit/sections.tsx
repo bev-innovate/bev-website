@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Lock } from "lucide-react";
 import Image from "next/image";
 
 import { SummitCountdown } from "@/components/summit/countdown";
@@ -10,6 +10,7 @@ import { SectionHead, Tbc } from "@/components/summit/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
+import { REGISTRATION_OPEN } from "@/lib/summit-content";
 import type {
   AgendaDay,
   AgendaSession,
@@ -34,9 +35,36 @@ function linkProps(href: string) {
   };
 }
 
+/**
+ * Stands in for a Register button once registration has closed: the same size and shape,
+ * so the layout does not jump, but plainly a label. It is not a link and cannot be
+ * focused, so there is nothing to click through to.
+ */
+function RegistrationClosed({ label, className }: { label: string; className?: string }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex h-13 items-center gap-2 rounded-full border border-white/40 bg-white/10 px-8 font-semibold text-white/85",
+        className,
+      )}
+    >
+      <Lock className="size-4" aria-hidden />
+      {label}
+    </span>
+  );
+}
+
 /* ── Hero ───────────────────────────────────────────────────────────────────── */
 
-export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string }) {
+export function SummitHero({
+  hero,
+  name,
+  closedLabel,
+}: {
+  hero: Summit["hero"];
+  name: string;
+  closedLabel: string;
+}) {
   return (
     <>
       {/*
@@ -93,14 +121,22 @@ export function SummitHero({ hero, name }: { hero: Summit["hero"]; name: string 
             className="mt-9 flex animate-rise flex-wrap gap-4"
             style={{ animationDelay: "0.34s" }}
           >
-            <ButtonLink href={hero.primary.href} size="lg" {...linkProps(hero.primary.href).props}>
-              {hero.primary.label}
-              {linkProps(hero.primary.href).external ? (
-                <ArrowUpRight className="size-4" aria-hidden />
-              ) : (
-                <ArrowRight className="size-4" aria-hidden />
-              )}
-            </ButtonLink>
+            {REGISTRATION_OPEN ? (
+              <ButtonLink
+                href={hero.primary.href}
+                size="lg"
+                {...linkProps(hero.primary.href).props}
+              >
+                {hero.primary.label}
+                {linkProps(hero.primary.href).external ? (
+                  <ArrowUpRight className="size-4" aria-hidden />
+                ) : (
+                  <ArrowRight className="size-4" aria-hidden />
+                )}
+              </ButtonLink>
+            ) : (
+              <RegistrationClosed label={closedLabel} />
+            )}
             <ButtonLink href={hero.secondary.href} size="lg" variant="white">
               {hero.secondary.label}
             </ButtonLink>
@@ -937,7 +973,8 @@ export function SummitStartups({ startups }: { startups: Summit["startups"] }) {
 
 /**
  * The closing call to action. Registration is on an external form, so this is a band
- * with one button rather than a form of its own.
+ * with one button rather than a form of its own. Once registration closes it becomes a
+ * thank-you with no button: the heading already says it is closed.
  */
 export function SummitRegister({ register }: { register: Summit["register"] }) {
   const link = linkProps(register.cta.href);
@@ -949,16 +986,22 @@ export function SummitRegister({ register }: { register: Summit["register"] }) {
       <div aria-hidden className="contours pointer-events-none absolute inset-0 text-white opacity-20" />
       <div className="shell relative">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="display text-[clamp(1.75rem,3.6vw,2.6rem)]">{register.heading}</h2>
-          <p className="mt-4 text-lg leading-relaxed text-white/85">{register.body}</p>
-          <ButtonLink href={register.cta.href} size="lg" className="mt-9" {...link.props}>
-            {register.cta.label}
-            {link.external ? (
-              <ArrowUpRight className="size-4" aria-hidden />
-            ) : (
-              <ArrowRight className="size-4" aria-hidden />
-            )}
-          </ButtonLink>
+          <h2 className="display text-[clamp(1.75rem,3.6vw,2.6rem)]">
+            {REGISTRATION_OPEN ? register.heading : register.closed.heading}
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-white/85">
+            {REGISTRATION_OPEN ? register.body : register.closed.body}
+          </p>
+          {REGISTRATION_OPEN ? (
+            <ButtonLink href={register.cta.href} size="lg" className="mt-9" {...link.props}>
+              {register.cta.label}
+              {link.external ? (
+                <ArrowUpRight className="size-4" aria-hidden />
+              ) : (
+                <ArrowRight className="size-4" aria-hidden />
+              )}
+            </ButtonLink>
+          ) : null}
         </div>
       </div>
     </section>

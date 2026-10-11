@@ -17,6 +17,13 @@ const IMG = "/images";
  */
 export const REGISTRATION_URL = "https://airtable.com/appVwyAexJiS2hcEv/pagKMLUZed9WoSwXQ/form";
 
+/**
+ * Whether registration is taking place. While false, every Register button on the page
+ * becomes a "Registration closed" label with no link, the sticky bar is not shown, and the
+ * closing band thanks people instead. Set back to true to reopen.
+ */
+export const REGISTRATION_OPEN = false;
+
 export interface SummitStartup {
   name: string;
   sector: string;
@@ -721,5 +728,11 @@ export const summit = {
     heading: "Registration is open",
     body: "Save your place for three days in Singapore, 13–15 October.",
     cta: { label: "Register now", href: REGISTRATION_URL },
+    /** Shown instead, with no button, once REGISTRATION_OPEN is false. */
+    closed: {
+      label: "Registration closed",
+      heading: "Registration is closed",
+      body: "Thank you to everyone who registered. We look forward to welcoming you in Singapore, 13–15 October.",
+    },
   },
 } as const;

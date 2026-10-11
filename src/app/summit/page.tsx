@@ -11,7 +11,7 @@ import {
   SummitZones,
 } from "@/components/summit/sections";
 import { SummitStickyCta } from "@/components/summit/sticky-cta";
-import { summit } from "@/lib/summit-content";
+import { REGISTRATION_OPEN, summit } from "@/lib/summit-content";
 
 export const metadata: Metadata = {
   title: summit.name,
@@ -37,7 +37,11 @@ export default function SummitPage() {
     // Scoping the field-notes palette to the whole page means every registry component
     // inside it resolves `primary`, `muted` and `border` to the warm tokens.
     <div data-theme="fieldnotes">
-      <SummitHero hero={summit.hero} name={summit.name} />
+      <SummitHero
+        hero={summit.hero}
+        name={summit.name}
+        closedLabel={summit.register.closed.label}
+      />
       <SummitPartners partners={summit.partners} />
       <SummitAbout about={summit.about} />
       <SummitAudience audience={summit.audience} />
@@ -49,13 +53,18 @@ export default function SummitPage() {
       {/* After the closing CTA: for people who have decided and want to see who else is coming. */}
       <SummitSpeakers speakers={summit.speakers} days={summit.agenda.days} />
 
-      {/* Follows the reader between the hero and the closing registration band, and nowhere else. */}
-      <SummitStickyCta
-        text="Join us in Singapore, 13–15 October."
-        cta={summit.hero.primary}
-        hideWhileSelector="#summit-hero"
-        hideNearSelector="#register"
-      />
+      {/*
+        Follows the reader between the hero and the closing registration band, and nowhere
+        else. Left out entirely once registration closes: it has nothing left to offer.
+      */}
+      {REGISTRATION_OPEN ? (
+        <SummitStickyCta
+          text="Join us in Singapore, 13–15 October."
+          cta={summit.hero.primary}
+          hideWhileSelector="#summit-hero"
+          hideNearSelector="#register"
+        />
+      ) : null}
     </div>
   );
 }
