@@ -221,10 +221,24 @@ export default async function ProgrammePage({ params }: Params) {
       {programme.partners?.length ? (
         <section className="shell pb-20">
           <p className="text-muted-foreground">Delivered with</p>
-          <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-4">
+          {/*
+            Logos where the partner has one, the name set in type where it does not, so a
+            partner added before its logo arrives still reads as intended.
+          */}
+          <ul className="mt-4 flex flex-wrap items-center gap-x-12 gap-y-6">
             {programme.partners.map((partner) => (
-              <li key={partner.name} className="font-display text-xl text-foreground">
-                {partner.name}
+              <li key={partner.name} className="flex h-14 items-center">
+                {partner.logo ? (
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    width={240}
+                    height={80}
+                    className="max-h-12 w-auto max-w-48 object-contain"
+                  />
+                ) : (
+                  <span className="font-display text-xl text-foreground">{partner.name}</span>
+                )}
               </li>
             ))}
           </ul>

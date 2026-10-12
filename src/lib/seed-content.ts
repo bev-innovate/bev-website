@@ -385,7 +385,7 @@ export const programmes: Programme[] = [
     heroImage: `${IMG}/programmes-climatelaunchpad-2026.webp`,
     order: 2,
     partners: [
-      { name: "ClimateLaunchpad", tier: "programme" },
+      { name: "ClimateLaunchpad", logo: `${IMG}/logos-climatelaunchpad-logo.webp`, tier: "programme" },
       { name: "EIT Climate-KIC", logo: `${IMG}/logos-climatekic-logo.webp`, tier: "programme" },
     ],
   },
@@ -425,7 +425,7 @@ export const programmes: Programme[] = [
     stage: "growth",
     kicker: "Market immersion · powered by Innovate UK",
     summary:
-      "The Global Incubator Programme, delivered by Better Earth Ventures in partnership with the Singapore Deep-Tech Alliance (SDTA) and powered by Innovate UK, supports a curated cohort of pioneering UK startups working at the forefront of cleantech and environmental sustainability.",
+      "The Global Incubator Programme, delivered by Better Earth Ventures in partnership with ATUM Ventures and powered by Innovate UK, supports a curated cohort of pioneering UK startups working at the forefront of cleantech and environmental sustainability.",
     body: [
       "Designed to accelerate international growth, the programme combines immersive in-market exposure with strategic mentoring, ecosystem engagement, and access to regional capital networks. Anchored in Singapore, it includes 2 tailored market immersion weeks, six months of virtual programming, and a high-profile final showcase during Singapore's SWITCH conference.",
       "The Global Incubator Programme builds cross-border collaboration and equips climate innovators with the tools, knowledge, and connections to scale solutions that make a measurable impact.",
@@ -436,7 +436,8 @@ export const programmes: Programme[] = [
     order: 4,
     partners: [
       { name: "Innovate UK", logo: `${IMG}/logos-innovate-uk-logo.webp`, tier: "programme" },
-      { name: "Singapore Deep-Tech Alliance", logo: `${IMG}/logos-sdta-logo.webp`, tier: "programme" },
+      // Logo to follow: shown by name until public/images/logos-atum-ventures.webp is added.
+      { name: "ATUM Ventures", tier: "programme" },
     ],
   },
 ];
