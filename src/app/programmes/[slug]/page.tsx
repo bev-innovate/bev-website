@@ -44,6 +44,16 @@ export default async function ProgrammePage({ params }: Params) {
 
   const ctaLabel = programme.status === "open" ? "Apply now" : "Register interest";
   const ctaHref = programme.applyUrl ?? "/contact";
+  // A completed programme can have nothing between the partner strip and the closing band,
+  // which brings its own rule: the strip then drops its border so the two do not double up.
+  const hasBody = Boolean(
+    programme.verticals?.length ||
+      programme.benefits?.length ||
+      programme.eligibility?.length ||
+      programme.timeline?.length ||
+      programme.cohort?.length ||
+      programme.faq?.length,
+  );
 
   return (
     <>
@@ -103,6 +113,37 @@ export default async function ProgrammePage({ params }: Params) {
           ) : null}
         </div>
       </header>
+
+      {/*
+        Partners straight under the header, as a strip of their own: who a programme is run
+        with is part of deciding whether to apply, and at the foot of the page it sat
+        unanchored between the content and the call to action. The logo files are trimmed
+        to their artwork, so the first one lines up with the text edge.
+      */}
+      {programme.partners?.length ? (
+        <section className={hasBody ? "border-b border-line bg-canvas" : "bg-canvas"}>
+          <div className="shell flex flex-col gap-5 py-10 md:flex-row md:items-center md:gap-12">
+            <p className="shrink-0 text-muted-foreground">Delivered with</p>
+            <ul className="flex flex-wrap items-center gap-x-12 gap-y-6">
+              {programme.partners.map((partner) => (
+                <li key={partner.name} className="flex h-12 items-center">
+                  {partner.logo ? (
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name}
+                      width={240}
+                      height={80}
+                      className="max-h-11 w-auto max-w-44 object-contain"
+                    />
+                  ) : (
+                    <span className="font-display text-xl text-foreground">{partner.name}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
 
       {programme.verticals?.length ? (
         <Section>
@@ -218,32 +259,6 @@ export default async function ProgrammePage({ params }: Params) {
         </Section>
       ) : null}
 
-      {programme.partners?.length ? (
-        <section className="shell pb-20">
-          <p className="text-muted-foreground">Delivered with</p>
-          {/*
-            Logos where the partner has one, the name set in type where it does not, so a
-            partner added before its logo arrives still reads as intended.
-          */}
-          <ul className="mt-4 flex flex-wrap items-center gap-x-12 gap-y-6">
-            {programme.partners.map((partner) => (
-              <li key={partner.name} className="flex h-14 items-center">
-                {partner.logo ? (
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    width={240}
-                    height={80}
-                    className="max-h-12 w-auto max-w-48 object-contain"
-                  />
-                ) : (
-                  <span className="font-display text-xl text-foreground">{partner.name}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
 
       <CtaBand
         eyebrow={programme.status === "open" ? "Applications open" : "Stay in the loop"}
