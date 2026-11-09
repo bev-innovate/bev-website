@@ -146,6 +146,16 @@
   /* ClimateLaunchpad's own lime and forest green, for the Grand Final card. */
   --color-launchpad: #e0e56e;
   --color-launchpad-ink: #1d4938;
+  /*
+    The Exchange's sunrise: yellow-green into the brand orange, after the LinkedIn page.
+    Placeholder values until Rebecca's exact ones arrive; every use reads these tokens, so
+    swapping them is the whole change. Text on the gradient is always the dark ink, which
+    holds contrast from the pale end to the orange.
+  */
+  --color-sunrise-dawn: #e4eb92;
+  --color-sunrise-gold: #f7c45d;
+  --color-sunrise-sun: #ee792f;
+  --color-sunrise-ink: #2b1d12;
   --color-sand: #faf7f1;
   --color-bark: #ffffff;
 
