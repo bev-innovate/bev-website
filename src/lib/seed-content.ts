@@ -163,9 +163,9 @@ export const pillars = [
   {
     title: "The Exchange",
     slug: "exchange",
-    description: "An invitation-only circle where climate founders meet as peers.",
+    description: "A small, friendly circle where climate founders share honestly and look out for one another.",
     body: [
-      "Small, founder-led gatherings for the climate founders we have worked with, to talk honestly about cash flow, teams, leadership and partnerships. Each one is hosted by Better Earth Ventures with a guest expert at the table.",
+      "A handful of founders we have come to know gather around a table with one of our team and a guest who has walked the road before them, to talk about cash flow, teams, leadership and partnerships. By founders, for founders: we simply bring everyone together and put the kettle on.",
     ],
     // The link appears once the Exchange page launches.
     ...(EXCHANGE_LIVE ? { link: { label: "About the Exchange", href: "/exchange" } } : {}),

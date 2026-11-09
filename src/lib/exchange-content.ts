@@ -1,21 +1,26 @@
 /**
  * The Exchange: page content.
  *
- * Copy as drafted in "The Exchange page: PRD and UX flow" (November 2026), focused on
- * climate founders. Alex's amended brief takes precedence wherever it differs.
+ * Warm, plain British English: the voice of someone who has sat in the founder's chair and
+ * wants others to feel looked after. Alex's amended brief takes precedence wherever it
+ * differs.
  *
- * Three switches hold back what is not ready:
  * - `EXCHANGE_LIVE`: while false the page is left out of search engines and the sitemap,
- *   and nothing on the site links to it. It can still be opened by its address, so it can
- *   be reviewed on the live site before launch.
- * - `quote.approved`: Rebecca's quote is a starting draft for her to rewrite. It stays off
- *   the page until she has approved her own words.
+ *   and nothing on the site links to it. It can still be opened by its address for review.
+ * - Media marked `placeholder` render as labelled boxes until the real file is added, so
+ *   it is obvious at a glance what is still to come.
  * - `groundRules.show`: whether the room's rules appear publicly is still an open question.
  */
 
-const IMG = "/images";
-
 export const EXCHANGE_LIVE = false;
+
+/** A photo or film still to come: a path once it exists, and a note on what it should be. */
+export interface ExchangeMedia {
+  src: string;
+  alt: string;
+  /** Shown in the placeholder box until `src` is filled in. */
+  placeholder: string;
+}
 
 export const exchange = {
   slug: "exchange",
@@ -23,7 +28,7 @@ export const exchange = {
   meta: {
     title: "The Exchange: by founders, for founders",
     description:
-      "An invitation-only circle where climate founders meet as peers, powered by Better Earth Ventures.",
+      "A small, friendly circle where climate founders share honestly and look out for one another, powered by Better Earth Ventures.",
   },
 
   hero: {
@@ -31,42 +36,53 @@ export const exchange = {
     lockup: "powered by Better Earth Ventures",
     strapline: "By founders, for founders.",
     intro:
-      "A small, invitation-only circle where climate founders meet as peers, talk honestly about what it takes to build a company for the planet, and leave a little steadier than they arrived.",
-    /**
-     * The "voices of the exchange" film. Until it is edited, `src` stays empty and the
-     * poster photograph shows on its own, with no play button.
-     */
+      "Building a climate company can be lonely work. The Exchange is a small, friendly circle where climate founders pull up a chair, share what is really going on, and leave feeling a little less alone with it all.",
     video: {
       src: "",
       captions: "",
-      poster: `${IMG}/climate-summit-6.webp`,
-      posterAlt: "Two founders smiling together at a Better Earth Ventures gathering",
+      poster: "",
+      label: "Video: voices of the Exchange",
+      placeholder: "About 30 seconds of founders from our July meetups, in their own words.",
       caption: "Voices of the Exchange: founders at our July meetups.",
       playLabel: "Play · 30 seconds",
     },
   },
 
   what: {
-    heading: "What happens around the table",
-    body: "Each Exchange brings a handful of climate founders together, hosted by Better Earth Ventures with a guest who has built, backed or led climate ventures. The conversation belongs to the founders: what is keeping you up at night, what has worked, what you would do differently.",
+    heading: "A few founders, one good conversation",
+    body: "We keep things small and unhurried. A handful of climate founders gather around a table, usually with a cup of tea in hand, alongside one of our team and a guest who has built, backed or led climate ventures. Everyone has a chance to speak, and everyone leaves with something useful, whether that is a fresh idea, a kind word or a new friend.",
     facts: [
-      { title: "3 to 7 founders", line: "Small enough that everyone speaks" },
-      { title: "A host and a guest expert", line: "To guide the conversation and add perspective" },
       {
-        title: "Founder-level topics",
-        line: "The questions every climate founder meets: cash flow, team, leadership, partnerships",
+        icon: "users",
+        title: "3 to 7 founders",
+        line: "Small enough that every voice is heard",
+      },
+      {
+        icon: "conversation",
+        title: "A host and a guest",
+        line: "Someone to keep the conversation flowing, and someone who has walked the road before you",
+      },
+      {
+        icon: "compass",
+        title: "The things that matter",
+        line: "Cash flow, teams, leadership and partnerships: the questions every climate founder wrestles with",
       },
     ],
     closing:
-      "We keep the topics broad on purpose, so a founder in ocean tech and a founder in agrifood can learn from each other's answers.",
+      "We keep the topics broad on purpose, so a founder working on ocean health and one working on food can learn just as much from each other.",
   },
 
   who: {
-    heading: "Invitation only, so people can speak openly",
+    heading: "A room where you can be honest",
     paragraphs: [
-      "Founders share more when they trust the room. Every seat at the Exchange is by invitation, extended to climate founders we have come to know through our summits, programmes, mentoring and visits.",
-      "Most are a year or more into building a climate solution, with a product in market or a pilot under way. What matters most is coming ready to listen as generously as you share.",
+      "The best conversations happen when people feel safe to say how things really are. That is why we keep each gathering small, and why we invite founders we have come to know and trust through our summits, programmes, mentoring and visits.",
+      "Most are a year or so into building a climate solution, perhaps with a product out in the world or a pilot under way. More than anything, we look for people who listen as kindly as they share.",
     ],
+    photo: {
+      src: "",
+      alt: "",
+      placeholder: "Photo: founders around the table at one of our meetups.",
+    } satisfies ExchangeMedia,
   },
 
   groundRules: {
@@ -81,20 +97,25 @@ export const exchange = {
 
   why: {
     heading: "Why we started the Exchange",
-    lead: "We have spent years bringing climate founders together through our programmes, from Singapore to London. The Exchange is our way of giving something back.",
+    lead: "For years we have had the joy of bringing climate founders together through our programmes, from Singapore to London. The Exchange is our way of saying thank you, and of giving something back to the founders who have taught us so much.",
+    /** Rebecca's own words. Until she has written them, the card shows what belongs there. */
     quote: {
-      approved: false,
-      text: "Building a climate company takes years, and the founder's seat can be a lonely one. Some of the most useful conversations I had were with people a few steps ahead of me, or right beside me, with nothing to sell. The Exchange is our way of making room for more of them.",
+      text: "",
+      placeholder: "Quote: Rebecca, in her own words, on why the Exchange matters to her.",
       name: "Rebecca",
       title: "",
-      photo: "",
+      photo: {
+        src: "",
+        alt: "Rebecca",
+        placeholder: "Photo: Rebecca",
+      } satisfies ExchangeMedia,
     },
   },
 
   closing: {
     lines: [
-      "Invitations come directly from Rebecca and Alex. If one has reached you, simply reply to them; we would love to have you at the table.",
-      "Better Earth Ventures brings the Exchange together and looks after it. The conversations belong to the founders.",
+      "If you have met us along the way, at a summit, on a programme or over a coffee, we would love to see you at the table.",
+      "Better Earth Ventures simply brings everyone together and puts the kettle on. The conversations belong to the founders.",
     ],
   },
 } as const;

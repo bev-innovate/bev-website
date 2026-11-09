@@ -15,7 +15,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: exchange.meta.title,
     description: exchange.meta.description,
-    images: [exchange.hero.video.poster],
+    // The film's poster, once there is one; the site's default sharing image until then.
+    ...(exchange.hero.video.poster ? { images: [exchange.hero.video.poster] } : {}),
   },
   // Kept out of search results until launch; reachable by its address for review.
   robots: EXCHANGE_LIVE ? undefined : { index: false, follow: false },

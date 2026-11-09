@@ -147,15 +147,14 @@
   --color-launchpad: #e0e56e;
   --color-launchpad-ink: #1d4938;
   /*
-    The Exchange's sunrise: yellow-green into the brand orange, after the LinkedIn page.
-    Placeholder values until Rebecca's exact ones arrive; every use reads these tokens, so
-    swapping them is the whole change. Text on the gradient is always the dark ink, which
-    holds contrast from the pale end to the orange.
+    The Exchange: the teal of its LinkedIn page, with the logo's yellow as a small accent.
+    Solid colours only. Text on the teal is the deep ink, which holds AA contrast (4.7:1)
+    where white would not.
   */
-  --color-sunrise-dawn: #e4eb92;
-  --color-sunrise-gold: #f7c45d;
-  --color-sunrise-sun: #ee792f;
-  --color-sunrise-ink: #2b1d12;
+  --color-exchange: #0ca19d;
+  --color-exchange-sun: #f2b92b;
+  --color-exchange-ink: #062d2b;
+  --color-exchange-mist: #e6f5f4;
   --color-sand: #faf7f1;
   --color-bark: #ffffff;
 
