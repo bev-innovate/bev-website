@@ -161,11 +161,12 @@ export const pillars = [
       "Venture capital firms, corporate innovation teams, and government agencies seeking to drive impact through high-potential ventures.",
   },
   {
-    title: "The Exchange",
+    title: "Better Earth Exchange",
     slug: "exchange",
-    description: "A small, friendly circle where climate founders share honestly and look out for one another.",
+    description:
+      "A curated, founder-only community for climate and agrifoodtech entrepreneurs who are actively scaling their solutions across Asia-Pacific and beyond.",
     body: [
-      "A handful of founders we have come to know gather around a table with one of our team and a guest who has walked the road before them, to talk about cash flow, teams, leadership and partnerships. By founders, for founders: we simply bring everyone together and put the kettle on.",
+      "We bring together founders who have moved past the early-stage scramble and are now navigating the steepest part of the journey: securing major customers, entering new markets, fundraising internationally, and turning real deployments into lasting climate impact.",
     ],
     // The link appears once the Exchange page launches.
     ...(EXCHANGE_LIVE ? { link: { label: "About the Exchange", href: "/exchange" } } : {}),

@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import {
   ExchangeClosing,
   ExchangeHero,
-  ExchangeWhat,
-  ExchangeWho,
+  ExchangeHow,
+  ExchangeJourney,
   ExchangeWhy,
 } from "@/components/exchange/sections";
 import { EXCHANGE_LIVE, exchange } from "@/lib/exchange-content";
@@ -23,16 +23,17 @@ export const metadata: Metadata = {
 };
 
 /**
- * The Exchange: one scrolling page in three zones (what it is, who it is for, why we are
- * doing it), between an opening band and a closing line. Content lives in
+ * Better Earth Exchange: one scrolling page. What it is (the opening band), who it is for
+ * (the stage of the journey), how it works (the space and its formats), why we are doing
+ * it, then a closing line. Content lives in
  * src/lib/exchange-content.ts.
  */
 export default function ExchangePage() {
   return (
     <>
       <ExchangeHero hero={exchange.hero} />
-      <ExchangeWhat what={exchange.what} />
-      <ExchangeWho who={exchange.who} groundRules={exchange.groundRules} />
+      <ExchangeJourney journey={exchange.journey} />
+      <ExchangeHow how={exchange.how} groundRules={exchange.groundRules} />
       <ExchangeWhy why={exchange.why} />
       <ExchangeClosing closing={exchange.closing} />
     </>

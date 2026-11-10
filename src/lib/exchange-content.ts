@@ -1,14 +1,13 @@
 /**
- * The Exchange: page content.
+ * Better Earth Exchange: page content.
  *
- * Warm, plain British English: the voice of someone who has sat in the founder's chair and
- * wants others to feel looked after. Alex's amended brief takes precedence wherever it
- * differs.
+ * The three paragraphs in `hero.intro`, `journey.body` and `how.body` are the company's own
+ * wording and are kept exactly as given. Everything around them is written to match: warm,
+ * plain British English.
  *
  * - `EXCHANGE_LIVE`: while false the page is left out of search engines and the sitemap,
  *   and nothing on the site links to it. It can still be opened by its address for review.
- * - Media marked `placeholder` render as labelled boxes until the real file is added, so
- *   it is obvious at a glance what is still to come.
+ * - Media with an empty `src` render as labelled placeholders until the real file is added.
  * - `groundRules.show`: whether the room's rules appear publicly is still an open question.
  */
 
@@ -26,17 +25,17 @@ export const exchange = {
   slug: "exchange",
 
   meta: {
-    title: "The Exchange: by founders, for founders",
+    title: "Better Earth Exchange: by founders, for founders",
     description:
-      "A small, friendly circle where climate founders share honestly and look out for one another, powered by Better Earth Ventures.",
+      "A curated, founder-only community for climate and agrifoodtech entrepreneurs scaling their solutions across Asia-Pacific and beyond.",
   },
 
   hero: {
-    name: "The Exchange",
-    lockup: "powered by Better Earth Ventures",
+    name: "Better Earth Exchange",
+    lockup: "Climate and agrifoodtech founders · Asia-Pacific and beyond",
     strapline: "By founders, for founders.",
     intro:
-      "Building a climate company can be lonely work. The Exchange is a small, friendly circle where climate founders pull up a chair, share what is really going on, and leave feeling a little less alone with it all.",
+      "Better Earth Exchange is a curated, founder-only community for climate and agrifoodtech entrepreneurs who are actively scaling their solutions across Asia-Pacific and beyond.",
     video: {
       src: "",
       captions: "",
@@ -48,40 +47,41 @@ export const exchange = {
     },
   },
 
-  what: {
-    heading: "A few founders, one good conversation",
-    body: "We keep things small and unhurried. A handful of climate founders gather around a table, usually with a cup of tea in hand, alongside one of our team and a guest who has built, backed or led climate ventures. Everyone has a chance to speak, and everyone leaves with something useful, whether that is a fresh idea, a kind word or a new friend.",
-    facts: [
-      {
-        icon: "users",
-        title: "3 to 7 founders",
-        line: "Small enough that every voice is heard",
-      },
-      {
-        icon: "conversation",
-        title: "A host and a guest",
-        line: "Someone to keep the conversation flowing, and someone who has walked the road before you",
-      },
-      {
-        icon: "compass",
-        title: "The things that matter",
-        line: "Cash flow, teams, leadership and partnerships: the questions every climate founder wrestles with",
-      },
+  journey: {
+    heading: "For the steepest part of the journey",
+    body: "We bring together founders who have moved past the early-stage scramble and are now navigating the steepest part of the journey: securing major customers, entering new markets, fundraising internationally, and turning real deployments into lasting climate impact.",
+    challenges: [
+      { icon: "customers", title: "Securing major customers" },
+      { icon: "markets", title: "Entering new markets" },
+      { icon: "fundraising", title: "Fundraising internationally" },
+      { icon: "impact", title: "Turning deployments into lasting impact" },
     ],
-    closing:
-      "We keep the topics broad on purpose, so a founder working on ocean health and one working on food can learn just as much from each other.",
   },
 
-  who: {
-    heading: "A room where you can be honest",
-    paragraphs: [
-      "The best conversations happen when people feel safe to say how things really are. That is why we keep each gathering small, and why we invite founders we have come to know and trust through our summits, programmes, mentoring and visits.",
-      "Most are a year or so into building a climate solution, perhaps with a product out in the world or a pilot under way. More than anything, we look for people who listen as kindly as they share.",
+  how: {
+    heading: "A trusted space to talk it through",
+    body: "The Exchange provides a trusted space for candid conversations, practical insights, and peer support that you cannot find in open communities. Members share hard-won experience, access warm pathways into global ecosystems, and learn from one another through structured roundtables, scaling sprints, and VIP networking events.",
+    formats: [
+      {
+        icon: "roundtables",
+        title: "Structured roundtables",
+        line: "Small, candid conversations with founders who know exactly what you are facing",
+      },
+      {
+        icon: "sprints",
+        title: "Scaling sprints",
+        line: "Focused time with peers on the hurdle in front of you right now",
+      },
+      {
+        icon: "networking",
+        title: "VIP networking events",
+        line: "Warm introductions into the ecosystems you are looking to grow into",
+      },
     ],
     photo: {
       src: "",
       alt: "",
-      placeholder: "Photo: founders around the table at one of our meetups.",
+      placeholder: "Photo: founders around the table at one of our roundtables.",
     } satisfies ExchangeMedia,
   },
 

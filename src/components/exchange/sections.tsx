@@ -1,4 +1,13 @@
-import { Compass, MessagesSquare, Quote, Users } from "lucide-react";
+import {
+  Globe2,
+  Handshake,
+  Landmark,
+  MessagesSquare,
+  Quote,
+  Rocket,
+  Sparkles,
+  Sprout,
+} from "lucide-react";
 import Image from "next/image";
 
 import { MediaPlaceholder } from "@/components/exchange/media-placeholder";
@@ -9,7 +18,25 @@ import type { ExchangeMedia, exchange } from "@/lib/exchange-content";
 
 type Exchange = typeof exchange;
 
-const factIcons = { users: Users, conversation: MessagesSquare, compass: Compass } as const;
+const icons = {
+  customers: Handshake,
+  markets: Globe2,
+  fundraising: Landmark,
+  impact: Sprout,
+  roundtables: MessagesSquare,
+  sprints: Rocket,
+  networking: Sparkles,
+} as const;
+
+/** An icon in a soft teal tile, the same on every card. */
+function IconTile({ name }: { name: keyof typeof icons }) {
+  const Icon = icons[name];
+  return (
+    <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-exchange-mist text-exchange">
+      <Icon className="size-6" aria-hidden />
+    </span>
+  );
+}
 
 /** A photo if it has arrived, otherwise a labelled placeholder in the same frame. */
 function Photo({ media, sizes, className }: { media: ExchangeMedia; sizes: string; className: string }) {
@@ -71,57 +98,63 @@ export function ExchangeHero({ hero }: { hero: Exchange["hero"] }) {
   );
 }
 
-/* ── What it is ─────────────────────────────────────────────────────────────── */
+/* ── Who it is for: the stage of the journey ─────────────────────────────── */
 
-export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
+export function ExchangeJourney({ journey }: { journey: Exchange["journey"] }) {
   return (
     <section className="py-16 md:py-20">
       <div className="shell">
-        <SectionHead heading={what.heading} />
-        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">{what.body}</p>
+        <SectionHead heading={journey.heading} />
+        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+          {journey.body}
+        </p>
 
-        <ul className="mt-10 grid gap-4 md:grid-cols-3">
-          {what.facts.map((fact, i) => {
-            const Icon = factIcons[fact.icon];
-            return (
-              <Reveal as="li" key={fact.title} delay={i * 0.1} className="h-full">
-                <div className="h-full rounded-2xl border border-border bg-background p-6">
-                  <span className="grid size-12 place-items-center rounded-xl bg-exchange-mist text-exchange">
-                    <Icon className="size-6" aria-hidden />
-                  </span>
-                  <p className="mt-5 font-display text-xl font-bold text-foreground">{fact.title}</p>
-                  <p className="mt-2 leading-relaxed text-muted-foreground">{fact.line}</p>
-                </div>
-              </Reveal>
-            );
-          })}
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {journey.challenges.map((challenge, i) => (
+            <Reveal as="li" key={challenge.title} delay={i * 0.08} className="h-full">
+              <div className="flex h-full flex-col gap-5 rounded-2xl border border-border bg-background p-6">
+                <IconTile name={challenge.icon} />
+                <p className="font-display text-lg leading-snug font-bold text-foreground">
+                  {challenge.title}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </ul>
-
-        <p className="mt-8 max-w-3xl leading-relaxed text-muted-foreground">{what.closing}</p>
       </div>
     </section>
   );
 }
 
-/* ── Who it is for ──────────────────────────────────────────────────────────── */
+/* ── How it works: the space and its formats ────────────────────────────────── */
 
-export function ExchangeWho({
-  who,
+export function ExchangeHow({
+  how,
   groundRules,
 }: {
-  who: Exchange["who"];
+  how: Exchange["how"];
   groundRules: Exchange["groundRules"];
 }) {
   return (
     <section className="border-t border-border py-16 md:py-20">
-      <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="shell grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
-          <SectionHead heading={who.heading} />
-          <div className="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-muted-foreground">
-            {who.paragraphs.map((p) => (
-              <p key={p}>{p}</p>
+          <SectionHead heading={how.heading} />
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">{how.body}</p>
+
+          <ul className="mt-8 space-y-4">
+            {how.formats.map((format, i) => (
+              <Reveal as="li" key={format.title} delay={i * 0.08}>
+                <div className="flex gap-4 rounded-2xl border border-border bg-background p-5">
+                  <IconTile name={format.icon} />
+                  <div>
+                    <p className="font-display text-lg font-bold text-foreground">{format.title}</p>
+                    <p className="mt-1 leading-relaxed text-muted-foreground">{format.line}</p>
+                  </div>
+                </div>
+              </Reveal>
             ))}
-          </div>
+          </ul>
 
           {/* Shown only once it is agreed the room's rules belong in public. */}
           {groundRules.show ? (
@@ -139,8 +172,8 @@ export function ExchangeWho({
           ) : null}
         </div>
 
-        <Reveal>
-          <Photo media={who.photo} sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/3] w-full" />
+        <Reveal className="lg:sticky lg:top-28">
+          <Photo media={how.photo} sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/5] w-full" />
         </Reveal>
       </div>
     </section>
