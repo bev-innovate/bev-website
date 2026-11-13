@@ -1,9 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useId, useState } from "react";
 
 import { pillars } from "@/lib/seed-content";
@@ -66,16 +65,6 @@ export function PillarsAccordion({ items }: { items: Pillar[] }) {
                       {"body" in pillar && pillar.body
                         ? pillar.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
                         : null}
-
-                      {"link" in pillar && pillar.link ? (
-                        <Link
-                          href={pillar.link.href}
-                          className="inline-flex items-center gap-2 pt-1 font-semibold text-white underline-offset-4 hover:underline"
-                        >
-                          {pillar.link.label}
-                          <ArrowRight className="size-4" aria-hidden />
-                        </Link>
-                      ) : null}
 
                       {"outcomes" in pillar && pillar.outcomes ? (
                         <>

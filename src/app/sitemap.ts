@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 
 import { getPosts, getProgrammes } from "@/lib/content";
-import { EXCHANGE_LIVE } from "@/lib/exchange-content";
 import { SITE_URL as base } from "@/lib/site-url";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -18,8 +17,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/news",
     "/about",
     "/contact",
-    // Listed once it launches; until then the page is reachable but unannounced.
-    ...(EXCHANGE_LIVE ? ["/exchange"] : []),
     ...legalRoutes,
   ].map((path) => ({
     url: `${base}${path}`,

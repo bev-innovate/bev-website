@@ -9,7 +9,6 @@
  * the site reads from the CMS instead.
  */
 
-import { EXCHANGE_LIVE } from "@/lib/exchange-content";
 import type {
   Company,
   Partner,
@@ -163,13 +162,11 @@ export const pillars = [
   {
     title: "Better Earth Exchange",
     slug: "exchange",
-    description:
-      "A curated, founder-only community for climate and agrifoodtech entrepreneurs who are actively scaling their solutions across Asia-Pacific and beyond.",
+    description: "Where the sustainability community comes to connect, collaborate, and grow.",
     body: [
-      "We bring together founders who have moved past the early-stage scramble and are now navigating the steepest part of the journey: securing major customers, entering new markets, fundraising internationally, and turning real deployments into lasting climate impact.",
+      "Through founder roundtables, curated events, and ecosystem gatherings, Better Earth Exchange fosters the trusted relationships that fuel innovation. We bring together entrepreneurs, investors, researchers, corporates, and change-makers to exchange insights, spark partnerships, and accelerate collective action.",
+      "Whether you're looking for inspiration, collaboration, or a community that understands your mission, this is your home base.",
     ],
-    // The link appears once the Exchange page launches.
-    ...(EXCHANGE_LIVE ? { link: { label: "About the Exchange", href: "/exchange" } } : {}),
   },
   {
     title: "Better Earth Institute",
