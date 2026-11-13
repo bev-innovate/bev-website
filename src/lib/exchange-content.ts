@@ -98,9 +98,9 @@ export const exchange = {
   why: {
     heading: "Why we started the Exchange",
     lead: "For years we have had the joy of bringing climate founders together through our programmes, from Singapore to London. The Exchange is our way of saying thank you, and of giving something back to the founders who have taught us so much.",
-    /** Rebecca's own words. Until she has written them, the card shows what belongs there. */
+    /** Rebecca's own words, as she wrote them. Her photo is still to come. */
     quote: {
-      text: "",
+      text: "Being a founder can feel lonely, even when you’re surrounded by people who want you to succeed. There’s a real relief in telling another founder what’s been keeping you up at night and hearing them say, ‘I’ve been there too.’ We created the Better Earth Exchange to bring founders together for those conversations, so they can learn from what others have tried and leave with a clearer sense of what to do next.",
       placeholder: "Quote: Rebecca, in her own words, on why the Exchange matters to her.",
       name: "Rebecca",
       title: "",

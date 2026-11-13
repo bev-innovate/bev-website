@@ -200,7 +200,7 @@ export function ExchangeWhy({ why }: { why: Exchange["why"] }) {
             <div>
               <Quote className="size-8 text-exchange-sun" aria-hidden />
               {quote.text ? (
-                <blockquote className="mt-3 font-display text-[clamp(1.25rem,2.4vw,1.75rem)] leading-snug font-semibold text-foreground">
+                <blockquote className="mt-3 font-display text-[clamp(1.125rem,1.9vw,1.4rem)] leading-relaxed font-semibold text-pretty text-foreground">
                   {quote.text}
                 </blockquote>
               ) : (
