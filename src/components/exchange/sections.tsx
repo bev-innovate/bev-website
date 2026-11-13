@@ -191,16 +191,22 @@ export function ExchangeWhy({ why }: { why: Exchange["why"] }) {
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">{why.lead}</p>
 
         {/*
-          Rebecca's words and photo. Until she has written them, each half of the card says
-          what belongs there, so a draft never reads as her voice.
+          Rebecca's words, with her photo beside them once `showPhoto` is on. Without the
+          photo the quote takes the card's full width.
         */}
         <Reveal>
-          <figure className="mt-12 grid gap-8 rounded-3xl border border-border p-8 md:grid-cols-[auto_1fr] md:items-center md:p-12">
-            <Photo media={quote.photo} sizes="176px" className="size-36 md:size-44" />
+          <figure
+            className={`mt-12 grid gap-8 rounded-3xl border border-border p-8 md:p-12 ${
+              quote.showPhoto ? "md:grid-cols-[auto_1fr] md:items-center" : ""
+            }`}
+          >
+            {quote.showPhoto ? (
+              <Photo media={quote.photo} sizes="176px" className="size-36 md:size-44" />
+            ) : null}
             <div>
               <Quote className="size-8 text-exchange-sun" aria-hidden />
               {quote.text ? (
-                <blockquote className="mt-3 font-display text-[clamp(1.125rem,1.9vw,1.4rem)] leading-relaxed font-semibold text-pretty text-foreground">
+                <blockquote className="mt-3 max-w-4xl font-display text-[clamp(1.125rem,1.9vw,1.4rem)] leading-relaxed font-semibold text-pretty text-foreground">
                   {quote.text}
                 </blockquote>
               ) : (
