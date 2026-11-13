@@ -146,6 +146,15 @@
   /* ClimateLaunchpad's own lime and forest green, for the Grand Final card. */
   --color-launchpad: #e0e56e;
   --color-launchpad-ink: #1d4938;
+  /*
+    The Exchange: the teal of its LinkedIn page, with the logo's yellow as a small accent.
+    Solid colours only. Text on the teal is the deep ink, which holds AA contrast (4.7:1)
+    where white would not.
+  */
+  --color-exchange: #0ca19d;
+  --color-exchange-sun: #f2b92b;
+  --color-exchange-ink: #062d2b;
+  --color-exchange-mist: #e6f5f4;
   --color-sand: #faf7f1;
   --color-bark: #ffffff;
 
