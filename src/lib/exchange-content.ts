@@ -58,21 +58,21 @@ export const exchange = {
     number: "01",
     label: "What is it?",
     body: "Building a business can be exciting, difficult and, at times, lonely. Better Earth Exchange brings small groups of founders and business leaders together to talk candidly about the challenges of growing a company. It is a trusted space to share what is working, what is not, and what others have learned along the way. No pitches, no presentations and no pressure to impress anyone. Just useful conversations with people who understand.",
-    /** Real gatherings. Swap for photos from the London pilot when they are ready. */
+    /** Small-group conversations at Better Earth Ventures gatherings. */
     photos: [
       {
-        src: `${IMG}/climate-summit-4.webp`,
-        alt: "Founders deep in conversation around a table",
+        src: `${IMG}/exchange-laughing-together.webp`,
+        alt: "Four founders laughing together over coffee",
         placeholder: "",
       },
       {
-        src: `${IMG}/climate-summit-6.webp`,
-        alt: "Two founders smiling together",
+        src: `${IMG}/exchange-sofa-conversation.webp`,
+        alt: "Three founders in conversation on sofas by a window",
         placeholder: "",
       },
       {
-        src: `${IMG}/climate-summit-2.webp`,
-        alt: "A founder listening closely during a session",
+        src: `${IMG}/exchange-circle-discussion.webp`,
+        alt: "A founder sharing his experience in a circle of peers",
         placeholder: "",
       },
     ] satisfies ExchangeMedia[],
@@ -89,8 +89,8 @@ export const exchange = {
     intro:
       "Better Earth Ventures works with founders through programmes, summits, mentoring and visits. The Exchange is a way of giving back to the people we have met along the way, by creating room for the conversations that do not always happen at a conference or in a boardroom.",
     photo: {
-      src: `${IMG}/hero-miscellaneous-climaccelerator-2025-cohort-photo.webp`,
-      alt: "Founders from a Better Earth Ventures cohort celebrating together on stage",
+      src: `${IMG}/exchange-listening.webp`,
+      alt: "A founder smiling as she listens during a roundtable",
       placeholder: "",
     } satisfies ExchangeMedia,
   },
@@ -110,13 +110,13 @@ export const exchange = {
     },
     photos: [
       {
-        src: `${IMG}/climate-summit-10.webp`,
-        alt: "Founders and partners smiling together at the Climate Innovation Summit",
+        src: `${IMG}/exchange-roundtable.webp`,
+        alt: "A small group of founders working through ideas around a table",
         placeholder: "",
       },
       {
-        src: `${IMG}/hero-miscellaneous-iuk-enterprise-singapore-group.webp`,
-        alt: "A visiting founder delegation in Singapore",
+        src: `${IMG}/climate-summit-10.webp`,
+        alt: "Founders and partners smiling together at the Climate Innovation Summit",
         placeholder: "",
       },
     ] satisfies ExchangeMedia[],
