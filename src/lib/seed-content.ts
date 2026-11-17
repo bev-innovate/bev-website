@@ -163,10 +163,9 @@ export const pillars = [
   {
     title: "Better Earth Exchange",
     slug: "exchange",
-    description:
-      "A curated, founder-only community for climate and agrifoodtech entrepreneurs who are actively scaling their solutions across Asia-Pacific and beyond.",
+    description: "A place for founders to talk openly.",
     body: [
-      "We bring together founders who have moved past the early-stage scramble and are now navigating the steepest part of the journey: securing major customers, entering new markets, fundraising internationally, and turning real deployments into lasting climate impact.",
+      "Better Earth Exchange brings small groups of founders and business leaders together to talk candidly about the challenges of growing a company. No pitches, no presentations and no pressure to impress anyone. Just useful conversations with people who understand.",
     ],
     // The link appears once the Exchange page launches.
     ...(EXCHANGE_LIVE ? { link: { label: "About the Exchange", href: "/exchange" } } : {}),

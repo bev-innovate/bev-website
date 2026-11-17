@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { EnquiryForm } from "@/components/site/enquiry-form";
 import { PageHeader } from "@/components/site/page-header";
 import { getSiteSettings } from "@/lib/content";
+import { interestFromQuery } from "@/lib/enquiry";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -30,8 +31,14 @@ const routes = [
   },
 ];
 
-export default async function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const settings = await getSiteSettings();
+  // Links can arrive with the interest already chosen, e.g. /contact?interest=exchange.
+  const defaultInterest = interestFromQuery((await searchParams).interest);
 
   return (
     <>
@@ -89,7 +96,9 @@ export default async function ContactPage() {
         </div>
 
         {/* The form brings its own panel now, so it no longer needs wrapping in one. */}
-        <EnquiryForm />
+        <div id="enquiry" className="scroll-mt-28">
+          <EnquiryForm defaultInterest={defaultInterest} />
+        </div>
       </div>
     </>
   );

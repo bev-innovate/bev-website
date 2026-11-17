@@ -1,17 +1,17 @@
 "use client";
 
-import { Play } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
+import { useReducedMotion } from "framer-motion";
+import { Volume2, VolumeX } from "lucide-react";
+import { useRef, useState } from "react";
 
 import { MediaPlaceholder } from "@/components/exchange/media-placeholder";
 
 /**
- * The "voices of the exchange" film, in place.
+ * The voices loop: 20 to 30 seconds of founders from the London pilot, one soundbite each.
  *
- * Nothing loads or plays until it is pressed: the poster stands in, so the page is light
- * and nobody is surprised by sound. Once pressed it becomes an ordinary player with
- * controls and captions on. Until the film exists, a labelled placeholder holds its spot.
+ * Plays muted on a loop with captions, the way a browser allows a video to start on its
+ * own; one button turns the sound on. With reduced motion it waits to be played, with
+ * normal controls. Until the film exists, a labelled placeholder holds its place.
  */
 export function VoicesVideo({
   src,
@@ -19,55 +19,52 @@ export function VoicesVideo({
   poster,
   label,
   placeholder,
-  playLabel,
 }: {
   src: string;
   captions: string;
   poster: string;
   label: string;
   placeholder: string;
-  playLabel: string;
 }) {
-  const [playing, setPlaying] = useState(false);
+  const ref = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+  const reduce = useReducedMotion();
 
   if (!src) {
-    return (
-      <MediaPlaceholder kind="video" label={label} note={placeholder} onColour className="aspect-video" />
-    );
+    return <MediaPlaceholder kind="video" label={label} note={placeholder} className="aspect-video" />;
   }
 
-  if (playing) {
-    return (
+  return (
+    <div className="relative overflow-hidden rounded-3xl bg-exchange-ink">
       <video
-        className="aspect-video w-full rounded-2xl bg-black object-cover"
+        ref={ref}
+        className="aspect-video w-full object-cover"
         src={src}
         poster={poster || undefined}
-        controls
-        autoPlay
+        muted={muted}
+        loop
         playsInline
+        autoPlay={!reduce}
+        controls={Boolean(reduce)}
       >
         {captions ? (
           <track kind="captions" src={captions} srcLang="en" label="English" default />
         ) : null}
       </video>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={() => setPlaying(true)}
-      className="group relative block aspect-video w-full overflow-hidden rounded-2xl bg-exchange-ink"
-    >
-      {poster ? (
-        <Image src={poster} alt="" fill priority sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
-      ) : null}
-      <span className="absolute inset-0 grid place-items-center bg-black/15 transition-colors group-hover:bg-black/25">
-        <span className="inline-flex items-center gap-2.5 rounded-full bg-white px-5 py-3 text-sm font-semibold text-exchange-ink shadow-lg">
-          <Play className="size-4 fill-current" aria-hidden />
-          {playLabel}
-        </span>
-      </span>
-    </button>
+      {reduce ? null : (
+        <button
+          type="button"
+          onClick={() => {
+            const next = !muted;
+            setMuted(next);
+            if (ref.current) ref.current.muted = next;
+          }}
+          className="absolute right-4 bottom-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2.5 text-sm font-semibold text-exchange-ink shadow-lg"
+        >
+          {muted ? <Volume2 className="size-4" aria-hidden /> : <VolumeX className="size-4" aria-hidden />}
+          {muted ? "Hear their voices" : "Mute"}
+        </button>
+      )}
+    </div>
   );
 }

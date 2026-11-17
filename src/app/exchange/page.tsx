@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 
 import {
-  ExchangeClosing,
   ExchangeHero,
-  ExchangeHow,
-  ExchangeJourney,
+  ExchangeWhat,
+  ExchangeWho,
   ExchangeWhy,
 } from "@/components/exchange/sections";
 import { EXCHANGE_LIVE, exchange } from "@/lib/exchange-content";
@@ -15,27 +14,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: exchange.meta.title,
     description: exchange.meta.description,
-    // The film's poster, once there is one; the site's default sharing image until then.
-    ...(exchange.hero.video.poster ? { images: [exchange.hero.video.poster] } : {}),
+    images: [exchange.what.photos[0].src],
   },
   // Kept out of search results until launch; reachable by its address for review.
   robots: EXCHANGE_LIVE ? undefined : { index: false, follow: false },
 };
 
 /**
- * Better Earth Exchange: one scrolling page. What it is (the opening band), who it is for
- * (the stage of the journey), how it works (the space and its formats), why we are doing
- * it, then a closing line. Content lives in
- * src/lib/exchange-content.ts.
+ * Better Earth Exchange: a three-part scroll (what it is, why we are doing it, who it is
+ * for) beneath an opening with the voices film. Modelled on the Climate Expeditions page,
+ * bolder and more image-led. Content lives in src/lib/exchange-content.ts.
  */
 export default function ExchangePage() {
   return (
     <>
-      <ExchangeHero hero={exchange.hero} />
-      <ExchangeJourney journey={exchange.journey} />
-      <ExchangeHow how={exchange.how} groundRules={exchange.groundRules} />
+      <ExchangeHero hero={exchange.hero} mark={exchange.mark} />
+      <ExchangeWhat what={exchange.what} />
       <ExchangeWhy why={exchange.why} />
-      <ExchangeClosing closing={exchange.closing} />
+      <ExchangeWho who={exchange.who} founderQuotes={exchange.founderQuotes} />
     </>
   );
 }

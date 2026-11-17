@@ -1,247 +1,271 @@
-import {
-  Globe2,
-  Handshake,
-  Landmark,
-  MessagesSquare,
-  Quote,
-  Rocket,
-  Sparkles,
-  Sprout,
-} from "lucide-react";
+import { ArrowRight, Quote } from "lucide-react";
 import Image from "next/image";
 
 import { MediaPlaceholder } from "@/components/exchange/media-placeholder";
 import { VoicesVideo } from "@/components/exchange/voices-video";
-import { SectionHead } from "@/components/summit/primitives";
+import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import type { ExchangeMedia, exchange } from "@/lib/exchange-content";
+import { cn } from "@/lib/utils";
 
 type Exchange = typeof exchange;
 
-const icons = {
-  customers: Handshake,
-  markets: Globe2,
-  fundraising: Landmark,
-  impact: Sprout,
-  roundtables: MessagesSquare,
-  sprints: Rocket,
-  networking: Sparkles,
-} as const;
-
-/** An icon in a soft teal tile, the same on every card. */
-function IconTile({ name }: { name: keyof typeof icons }) {
-  const Icon = icons[name];
-  return (
-    <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-exchange-mist text-exchange">
-      <Icon className="size-6" aria-hidden />
-    </span>
-  );
-}
-
-/** A photo if it has arrived, otherwise a labelled placeholder in the same frame. */
-function Photo({ media, sizes, className }: { media: ExchangeMedia; sizes: string; className: string }) {
+/** A photograph in a rounded frame, or a labelled placeholder in the same frame. */
+function Photo({
+  media,
+  sizes,
+  className,
+  priority = false,
+}: {
+  media: ExchangeMedia;
+  sizes: string;
+  className: string;
+  priority?: boolean;
+}) {
   if (!media.src) {
     return <MediaPlaceholder kind="photo" label={media.placeholder} className={className} />;
   }
   return (
-    <div className={`relative overflow-hidden rounded-2xl ${className}`}>
-      <Image src={media.src} alt={media.alt} fill sizes={sizes} className="object-cover" />
+    <div className={cn("relative overflow-hidden rounded-3xl bg-exchange-mist", className)}>
+      <Image
+        src={media.src}
+        alt={media.alt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+      />
     </div>
   );
 }
 
-/* ── Opening band ───────────────────────────────────────────────────────────── */
+/**
+ * The section marker: a large numeral and the question it answers. The same three
+ * questions run down the page, so a reader always knows which one they are in.
+ */
+function Marker({
+  number,
+  label,
+  onTeal = false,
+}: {
+  number: string;
+  label: string;
+  onTeal?: boolean;
+}) {
+  return (
+    <div className="flex items-baseline gap-4">
+      <span
+        className={cn(
+          "font-display text-[clamp(3rem,7vw,5.5rem)] leading-none font-extrabold tracking-[-0.04em]",
+          onTeal ? "text-exchange-sun" : "text-exchange",
+        )}
+      >
+        {number}
+      </span>
+      <span
+        className={cn(
+          "text-sm font-bold tracking-[0.14em] uppercase",
+          onTeal ? "text-exchange-ink" : "text-foreground",
+        )}
+      >
+        {label}
+      </span>
+    </div>
+  );
+}
 
-/** Solid Exchange teal, deep ink text. */
-export function ExchangeHero({ hero }: { hero: Exchange["hero"] }) {
+/* ── Opening ────────────────────────────────────────────────────────────────── */
+
+/**
+ * White, with the Exchange mark, a large statement and the voices film beneath it. The
+ * film is contained in the page's column rather than full bleed.
+ */
+export function ExchangeHero({ hero, mark }: { hero: Exchange["hero"]; mark: Exchange["mark"] }) {
   const { video } = hero;
   return (
-    <header className="bg-exchange text-exchange-ink">
-      <div className="shell grid items-center gap-12 py-16 md:py-20 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <h1 className="display animate-rise text-[clamp(2.5rem,6vw,4.25rem)]">{hero.name}</h1>
-          <p
-            className="mt-2 animate-rise text-sm font-semibold tracking-[0.08em] uppercase opacity-80"
-            style={{ animationDelay: "0.08s" }}
-          >
-            {hero.lockup}
-          </p>
-          <p
-            className="mt-8 animate-rise font-display text-[clamp(1.5rem,3vw,2.1rem)] leading-tight font-bold"
-            style={{ animationDelay: "0.16s" }}
-          >
-            {hero.strapline}
-          </p>
-          <p
-            className="mt-4 max-w-xl animate-rise text-lg leading-relaxed"
-            style={{ animationDelay: "0.24s" }}
-          >
-            {hero.intro}
-          </p>
+    <header className="pt-14 pb-16 md:pt-20 md:pb-24">
+      <div className="shell">
+        <div className="flex animate-rise items-center gap-3">
+          <Image src={mark.src} alt="" width={56} height={56} priority className="size-12 md:size-14" />
+          <span className="text-sm font-bold tracking-[0.14em] text-exchange uppercase">
+            {hero.name}
+          </span>
         </div>
 
-        <figure className="animate-rise" style={{ animationDelay: "0.32s" }}>
+        <h1
+          className="display mt-8 max-w-5xl animate-rise text-[clamp(2.75rem,7.5vw,6rem)] text-foreground"
+          style={{ animationDelay: "0.08s" }}
+        >
+          {hero.headline}
+        </h1>
+        <p
+          className="mt-6 max-w-2xl animate-rise text-xl leading-relaxed text-muted-foreground"
+          style={{ animationDelay: "0.16s" }}
+        >
+          {hero.lede}
+        </p>
+
+        <div className="mt-12 animate-rise md:mt-16" style={{ animationDelay: "0.24s" }}>
           <VoicesVideo
             src={video.src}
             captions={video.captions}
             poster={video.poster}
             label={video.label}
             placeholder={video.placeholder}
-            playLabel={video.playLabel}
           />
-          {video.src ? (
-            <figcaption className="mt-3 text-sm opacity-85">{video.caption}</figcaption>
-          ) : null}
-        </figure>
+        </div>
       </div>
     </header>
   );
 }
 
-/* ── Who it is for: the stage of the journey ─────────────────────────────── */
+/* ── 01 What is it? ─────────────────────────────────────────────────────────── */
 
-export function ExchangeJourney({ journey }: { journey: Exchange["journey"] }) {
+export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
+  const [lead, ...rest] = what.photos;
   return (
-    <section className="py-16 md:py-20">
+    <section className="border-t border-border py-16 md:py-24">
       <div className="shell">
-        <SectionHead heading={journey.heading} />
-        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-          {journey.body}
-        </p>
-
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {journey.challenges.map((challenge, i) => (
-            <Reveal as="li" key={challenge.title} delay={i * 0.08} className="h-full">
-              <div className="flex h-full flex-col gap-5 rounded-2xl border border-border bg-background p-6">
-                <IconTile name={challenge.icon} />
-                <p className="font-display text-lg leading-snug font-bold text-foreground">
-                  {challenge.title}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/* ── How it works: the space and its formats ────────────────────────────────── */
-
-export function ExchangeHow({
-  how,
-  groundRules,
-}: {
-  how: Exchange["how"];
-  groundRules: Exchange["groundRules"];
-}) {
-  return (
-    <section className="border-t border-border py-16 md:py-20">
-      <div className="shell grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <SectionHead heading={how.heading} />
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">{how.body}</p>
-
-          <ul className="mt-8 space-y-4">
-            {how.formats.map((format, i) => (
-              <Reveal as="li" key={format.title} delay={i * 0.08}>
-                <div className="flex gap-4 rounded-2xl border border-border bg-background p-5">
-                  <IconTile name={format.icon} />
-                  <div>
-                    <p className="font-display text-lg font-bold text-foreground">{format.title}</p>
-                    <p className="mt-1 leading-relaxed text-muted-foreground">{format.line}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </ul>
-
-          {/* Shown only once it is agreed the room's rules belong in public. */}
-          {groundRules.show ? (
-            <div className="mt-8 rounded-2xl border border-border p-6">
-              <p className="font-display text-lg font-bold text-foreground">{groundRules.heading}</p>
-              <ul className="mt-4 space-y-3">
-                {groundRules.rules.map((rule) => (
-                  <li key={rule} className="flex gap-3 leading-relaxed text-muted-foreground">
-                    <span aria-hidden className="mt-2.5 size-2 shrink-0 rounded-full bg-exchange" />
-                    {rule}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <Marker number={what.number} label={what.label} />
+          <p className="text-[clamp(1.15rem,1.9vw,1.45rem)] leading-relaxed text-foreground">
+            {what.body}
+          </p>
         </div>
 
-        <Reveal className="lg:sticky lg:top-28">
-          <Photo media={how.photo} sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/5] w-full" />
-        </Reveal>
+        {/* One wide photograph and two beside it: full of people, never full screen. */}
+        <div className="mt-14 grid gap-4 md:grid-cols-3 md:grid-rows-2">
+          <Reveal className="md:col-span-2 md:row-span-2">
+            <Photo
+              media={lead}
+              sizes="(min-width: 768px) 66vw, 100vw"
+              className="aspect-[4/3] w-full md:aspect-auto md:h-full md:min-h-[28rem]"
+            />
+          </Reveal>
+          {rest.map((photo, i) => (
+            <Reveal key={photo.src || photo.placeholder} delay={(i + 1) * 0.1}>
+              <Photo media={photo} sizes="(min-width: 768px) 33vw, 100vw" className="aspect-[4/3] w-full" />
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-/* ── Why we are doing it ────────────────────────────────────────────────────── */
+/* ── 02 Why are we doing it? ────────────────────────────────────────────────── */
 
+/** Solid Exchange teal. Rebecca's words lead; the short note from us follows. */
 export function ExchangeWhy({ why }: { why: Exchange["why"] }) {
   const { quote } = why;
   return (
-    <section className="border-t border-border py-16 md:py-20">
+    <section className="bg-exchange py-16 text-exchange-ink md:py-24">
       <div className="shell">
-        <SectionHead heading={why.heading} />
-        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">{why.lead}</p>
+        <Marker number={why.number} label={why.label} onTeal />
 
-        {/*
-          Rebecca's words, with her photo beside them once `showPhoto` is on. Without the
-          photo the quote takes the card's full width.
-        */}
-        <Reveal>
-          <figure
-            className={`mt-12 grid gap-8 rounded-3xl border border-border p-8 md:p-12 ${
-              quote.showPhoto ? "md:grid-cols-[auto_1fr] md:items-center" : ""
-            }`}
-          >
-            {quote.showPhoto ? (
-              <Photo media={quote.photo} sizes="176px" className="size-36 md:size-44" />
-            ) : null}
-            <div>
-              <Quote className="size-8 text-exchange-sun" aria-hidden />
-              {quote.text ? (
-                <blockquote className="mt-3 max-w-4xl font-display text-[clamp(1.125rem,1.9vw,1.4rem)] leading-relaxed font-semibold text-pretty text-foreground">
-                  {quote.text}
-                </blockquote>
-              ) : (
-                <p className="mt-3 rounded-xl border-2 border-dashed border-exchange/45 bg-exchange-mist px-5 py-4 text-exchange-ink">
-                  {quote.placeholder}
-                </p>
-              )}
-              <figcaption className="mt-6 text-muted-foreground">
-                <span className="font-semibold text-foreground">{quote.name}</span>
-                {quote.title ? `, ${quote.title}` : null}
-              </figcaption>
-            </div>
+        <div className="mt-10 grid items-center gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
+          <figure>
+            <Quote className="size-10 text-exchange-sun" aria-hidden />
+            <blockquote className="mt-4 font-display text-[clamp(1.3rem,2.4vw,1.85rem)] leading-snug font-bold text-pretty">
+              {quote.text}
+            </blockquote>
+            <figcaption className="mt-6">
+              <span className="font-bold">{quote.name}</span>
+              <span className="opacity-80">, {quote.title}</span>
+            </figcaption>
+            <p className="mt-10 max-w-2xl border-t border-exchange-ink/20 pt-8 text-lg leading-relaxed">
+              {why.intro}
+            </p>
           </figure>
-        </Reveal>
+
+          <Reveal>
+            <Photo
+              media={why.photo}
+              sizes="(min-width: 1024px) 34vw, 100vw"
+              className="aspect-[4/5] w-full"
+            />
+          </Reveal>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ── Closing ────────────────────────────────────────────────────────────────── */
+/* ── 03 Who is it for? ──────────────────────────────────────────────────────── */
 
-/** A warm sign-off on the teal, with no button. */
-export function ExchangeClosing({ closing }: { closing: Exchange["closing"] }) {
-  const [first, ...rest] = closing.lines;
+export function ExchangeWho({
+  who,
+  founderQuotes,
+}: {
+  who: Exchange["who"];
+  founderQuotes: Exchange["founderQuotes"];
+}) {
+  const [first, second] = who.photos;
   return (
-    <section className="bg-exchange text-exchange-ink">
-      <div className="shell py-16 text-center md:py-20">
-        <p className="mx-auto max-w-2xl font-display text-[clamp(1.25rem,2.6vw,1.75rem)] leading-snug font-bold">
-          {first}
-        </p>
-        {rest.map((line) => (
-          <p key={line} className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed">
-            {line}
-          </p>
-        ))}
+    <section className="py-16 md:py-24">
+      <div className="shell">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          <div>
+            <Marker number={who.number} label={who.label} />
+            <h2 className="display mt-8 text-[clamp(2rem,4.2vw,3.25rem)] text-foreground">
+              {who.heading}
+            </h2>
+            <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground">
+              {who.paragraphs.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+            <ButtonLink
+              href={who.cta.href}
+              size="lg"
+              className="mt-9 h-auto bg-exchange py-4 text-left whitespace-normal text-exchange-ink shadow-none hover:bg-exchange/85 hover:shadow-none"
+            >
+              {who.cta.label}
+              <ArrowRight className="size-4 shrink-0" aria-hidden />
+            </ButtonLink>
+          </div>
+
+          {/* Two photographs, overlapping slightly, so the column reads as a gathering. */}
+          <div className="relative">
+            <Reveal>
+              <Photo media={first} sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/3] w-full lg:w-[85%]" />
+            </Reveal>
+            <Reveal delay={0.12} className="relative -mt-16 ml-auto w-3/4 lg:w-[62%]">
+              <Photo
+                media={second}
+                sizes="(min-width: 1024px) 28vw, 75vw"
+                className="aspect-[4/3] w-full ring-8 ring-background"
+              />
+            </Reveal>
+          </div>
+        </div>
+
+        {founderQuotes.show ? (
+          <div className="mt-20">
+            <p className="text-sm font-bold tracking-[0.14em] text-exchange uppercase">
+              {founderQuotes.label}
+            </p>
+            <ul className="mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible">
+              {founderQuotes.quotes.map((q, i) => (
+                <li key={i} className="w-[80%] shrink-0 snap-start md:w-auto">
+                  {q.text ? (
+                    <blockquote className="h-full rounded-3xl bg-exchange-mist p-7 text-lg leading-relaxed text-exchange-ink">
+                      <Quote className="mb-3 size-6 text-exchange-sun" aria-hidden />
+                      {q.text}
+                    </blockquote>
+                  ) : (
+                    <div className="grid h-full min-h-40 place-items-center rounded-3xl border-2 border-dashed border-exchange/45 bg-exchange-mist p-7 text-center text-exchange-ink">
+                      <span>
+                        <Quote className="mx-auto mb-3 size-6 text-exchange-sun" aria-hidden />
+                        {q.placeholder}
+                      </span>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     </section>
   );

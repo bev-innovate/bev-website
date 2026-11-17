@@ -1,23 +1,26 @@
 /**
  * Better Earth Exchange: page content.
  *
- * The three paragraphs in `hero.intro`, `journey.body` and `how.body` are the company's own
- * wording and are kept exactly as given. Everything around them is written to match: warm,
- * plain British English.
+ * Follows the finalised structure of 17 November: a three-part scroll (what it is, why we
+ * are doing it, who it is for) that reads as a personal invitation, not a sales pitch.
+ * Plenty of white space, the Exchange's teal and gold, real photographs from Better Earth
+ * Ventures gatherings and no stock imagery.
  *
  * - `EXCHANGE_LIVE`: while false the page is left out of search engines and the sitemap,
- *   and nothing on the site links to it. It can still be opened by its address for review.
- * - Media with an empty `src` render as labelled placeholders until the real file is added.
- * - `groundRules.show`: whether the room's rules appear publicly is still an open question.
+ *   and nothing on the site links to it.
+ * - Media with an empty `src` render as labelled placeholders until the file is added.
+ * - The mark is cropped from a screenshot for preview only; swap in the original logo
+ *   file before launch.
  */
+
+const IMG = "/images";
 
 export const EXCHANGE_LIVE = false;
 
-/** A photo or film still to come: a path once it exists, and a note on what it should be. */
+/** A photo or film: a path once it exists, and a note on what belongs there until then. */
 export interface ExchangeMedia {
   src: string;
   alt: string;
-  /** Shown in the placeholder box until `src` is filled in. */
   placeholder: string;
 }
 
@@ -25,98 +28,111 @@ export const exchange = {
   slug: "exchange",
 
   meta: {
-    title: "Better Earth Exchange: by founders, for founders",
+    title: "Better Earth Exchange: a place for founders to talk openly",
     description:
-      "A curated, founder-only community for climate and agrifoodtech entrepreneurs scaling their solutions across Asia-Pacific and beyond.",
+      "Small groups of climate founders and business leaders, talking candidly about the challenges of growing a company. By invitation, from Better Earth Ventures.",
   },
+
+  /** Preview stand-in, cropped from the LinkedIn page. Replace with the original file. */
+  mark: { src: `${IMG}/exchange-mark-preview.webp`, alt: "Better Earth Exchange" },
 
   hero: {
     name: "Better Earth Exchange",
-    lockup: "Climate and agrifoodtech founders · Asia-Pacific and beyond",
-    strapline: "By founders, for founders.",
-    intro:
-      "Better Earth Exchange is a curated, founder-only community for climate and agrifoodtech entrepreneurs who are actively scaling their solutions across Asia-Pacific and beyond.",
+    headline: "A place for founders to talk openly.",
+    /** The LinkedIn line, kept short: who it is for, in one breath. */
+    lede: "A curated, founder-only community for climate and agrifoodtech entrepreneurs scaling their solutions across Asia-Pacific and beyond.",
+    /**
+     * A 20 to 30 second loop cut from the first London Exchange pilot: a soundbite from
+     * each founder, real voices, no text on screen.
+     */
     video: {
       src: "",
       captions: "",
       poster: "",
-      label: "Video: voices of the Exchange",
-      placeholder: "About 30 seconds of founders from our July meetups, in their own words.",
-      caption: "Voices of the Exchange: founders at our July meetups.",
-      playLabel: "Play · 30 seconds",
+      label: "Video: voices from the first London Exchange",
+      placeholder: "A 20 to 30 second loop with a soundbite from each founder. Real voices, no text.",
     },
   },
 
-  journey: {
-    heading: "For the steepest part of the journey",
-    body: "We bring together founders who have moved past the early-stage scramble and are now navigating the steepest part of the journey: securing major customers, entering new markets, fundraising internationally, and turning real deployments into lasting climate impact.",
-    challenges: [
-      { icon: "customers", title: "Securing major customers" },
-      { icon: "markets", title: "Entering new markets" },
-      { icon: "fundraising", title: "Fundraising internationally" },
-      { icon: "impact", title: "Turning deployments into lasting impact" },
-    ],
-  },
-
-  how: {
-    heading: "A trusted space to talk it through",
-    body: "The Exchange provides a trusted space for candid conversations, practical insights, and peer support that you cannot find in open communities. Members share hard-won experience, access warm pathways into global ecosystems, and learn from one another through structured roundtables, scaling sprints, and VIP networking events.",
-    formats: [
+  what: {
+    number: "01",
+    label: "What is it?",
+    body: "Building a business can be exciting, difficult and, at times, lonely. Better Earth Exchange brings small groups of founders and business leaders together to talk candidly about the challenges of growing a company. It is a trusted space to share what is working, what is not, and what others have learned along the way. No pitches, no presentations and no pressure to impress anyone. Just useful conversations with people who understand.",
+    /** Real gatherings. Swap for photos from the London pilot when they are ready. */
+    photos: [
       {
-        icon: "roundtables",
-        title: "Structured roundtables",
-        line: "Small, candid conversations with founders who know exactly what you are facing",
+        src: `${IMG}/climate-summit-4.webp`,
+        alt: "Founders deep in conversation around a table",
+        placeholder: "",
       },
       {
-        icon: "sprints",
-        title: "Scaling sprints",
-        line: "Focused time with peers on the hurdle in front of you right now",
+        src: `${IMG}/climate-summit-6.webp`,
+        alt: "Two founders smiling together",
+        placeholder: "",
       },
       {
-        icon: "networking",
-        title: "VIP networking events",
-        line: "Warm introductions into the ecosystems you are looking to grow into",
+        src: `${IMG}/climate-summit-2.webp`,
+        alt: "A founder listening closely during a session",
+        placeholder: "",
       },
-    ],
-    photo: {
-      src: "",
-      alt: "",
-      placeholder: "Photo: founders around the table at one of our roundtables.",
-    } satisfies ExchangeMedia,
-  },
-
-  groundRules: {
-    show: false,
-    heading: "What we ask of everyone at the table",
-    rules: [
-      "What is said in the room stays in the room.",
-      "Bring your questions and leave the pitch at the door.",
-      "Give as much as you take.",
-    ],
+    ] satisfies ExchangeMedia[],
   },
 
   why: {
-    heading: "Why we started the Exchange",
-    lead: "For years we have had the joy of bringing climate founders together through our programmes, from Singapore to London. The Exchange is our way of saying thank you, and of giving something back to the founders who have taught us so much.",
-    /** Rebecca's own words, as she wrote them. No photo for now: set `showPhoto` to add one. */
+    number: "02",
+    label: "Why are we doing it?",
     quote: {
       text: "Being a founder can feel lonely, even when you’re surrounded by people who want you to succeed. There’s a real relief in telling another founder what’s been keeping you up at night and hearing them say, ‘I’ve been there too.’ We created the Better Earth Exchange to bring founders together for those conversations, so they can learn from what others have tried and leave with a clearer sense of what to do next.",
-      placeholder: "Quote: Rebecca, in her own words, on why the Exchange matters to her.",
       name: "Rebecca Sharpe",
       title: "Founder and Director, Better Earth Ventures",
-      showPhoto: false,
-      photo: {
-        src: "",
-        alt: "Rebecca Sharpe",
-        placeholder: "Photo: Rebecca Sharpe",
-      } satisfies ExchangeMedia,
     },
+    intro:
+      "Better Earth Ventures works with founders through programmes, summits, mentoring and visits. The Exchange is a way of giving back to the people we have met along the way, by creating room for the conversations that do not always happen at a conference or in a boardroom.",
+    photo: {
+      src: `${IMG}/hero-miscellaneous-climaccelerator-2025-cohort-photo.webp`,
+      alt: "Founders from a Better Earth Ventures cohort celebrating together on stage",
+      placeholder: "",
+    } satisfies ExchangeMedia,
   },
 
-  closing: {
-    lines: [
-      "If you have met us along the way, at a summit, on a programme or over a coffee, we would love to see you at the table.",
-      "Better Earth Ventures simply brings everyone together and puts the kettle on. The conversations belong to the founders.",
+  who: {
+    number: "03",
+    label: "Who is it for?",
+    heading: "Founders we have met along the way",
+    paragraphs: [
+      "We bring together founders and senior leaders of growing climate and environmental businesses who have taken part in one of our initiatives. That might be a summit, a project or delegation visit, a mentoring session, a meetup, an accelerator, an incubator or another programme.",
+      "Typically, they have a product in pilot or in market and are dealing with the realities of growth. There is no fixed revenue, investment or headcount threshold.",
+      "Membership is by invitation only. If you have worked with us before and would like to be considered, we would be pleased to hear from you.",
+    ],
+    cta: {
+      label: "I’ve worked with Better Earth Ventures: express interest",
+      href: "/contact?interest=exchange#enquiry",
+    },
+    photos: [
+      {
+        src: `${IMG}/climate-summit-10.webp`,
+        alt: "Founders and partners smiling together at the Climate Innovation Summit",
+        placeholder: "",
+      },
+      {
+        src: `${IMG}/hero-miscellaneous-iuk-enterprise-singapore-group.webp`,
+        alt: "A visiting founder delegation in Singapore",
+        placeholder: "",
+      },
+    ] satisfies ExchangeMedia[],
+  },
+
+  /**
+   * Optional: 3 to 5 short, anonymous founder quotes, once consent is obtained. Placeholders
+   * show until then; set `show` to false to leave the row out entirely.
+   */
+  founderQuotes: {
+    show: true,
+    label: "In founders’ words",
+    quotes: [
+      { text: "", placeholder: "Anonymous founder quote, added once consent is given." },
+      { text: "", placeholder: "Anonymous founder quote, added once consent is given." },
+      { text: "", placeholder: "Anonymous founder quote, added once consent is given." },
     ],
   },
 } as const;

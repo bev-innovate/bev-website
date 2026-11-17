@@ -26,7 +26,19 @@ export const interestOptions = [
     value: "embed-programme",
     label: "Embed a new innovation programme or collaborate on an existing one",
   },
+  {
+    value: "exchange",
+    label: "Join Better Earth Exchange (I have worked with Better Earth Ventures before)",
+  },
 ] as const;
+
+export type InterestValue = (typeof interestOptions)[number]["value"];
+
+/** A `?interest=` value from a link, if it names one of the options; otherwise nothing. */
+export function interestFromQuery(value: string | string[] | undefined): InterestValue | "" {
+  const v = Array.isArray(value) ? value[0] : value;
+  return interestOptions.some((o) => o.value === v) ? (v as InterestValue) : "";
+}
 
 export const interestValues = interestOptions.map((o) => o.value);
 
