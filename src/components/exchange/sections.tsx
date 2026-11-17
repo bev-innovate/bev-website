@@ -40,36 +40,17 @@ function Photo({
 }
 
 /**
- * The section marker: a large numeral and the question it answers. The same three
+ * The section title: a small numeral over the question, set large. The same three
  * questions run down the page, so a reader always knows which one they are in.
  */
-function Marker({
-  number,
-  label,
-  onTeal = false,
-}: {
-  number: string;
-  label: string;
-  onTeal?: boolean;
-}) {
+function SectionTitle({ number, label }: { number: string; label: string }) {
   return (
-    <div className="flex items-baseline gap-4">
-      <span
-        className={cn(
-          "font-display text-[clamp(3rem,7vw,5.5rem)] leading-none font-extrabold tracking-[-0.04em]",
-          onTeal ? "text-exchange-sun" : "text-exchange",
-        )}
-      >
+    <div>
+      <p className="flex items-center gap-3 font-display text-lg font-extrabold text-exchange">
         {number}
-      </span>
-      <span
-        className={cn(
-          "text-sm font-bold tracking-[0.14em] uppercase",
-          onTeal ? "text-exchange-ink" : "text-foreground",
-        )}
-      >
-        {label}
-      </span>
+        <span aria-hidden className="h-0.5 w-12 rounded-full bg-exchange-sun" />
+      </p>
+      <h2 className="display mt-4 text-[clamp(2.75rem,6.5vw,5.25rem)] text-foreground">{label}</h2>
     </div>
   );
 }
@@ -127,8 +108,8 @@ export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
     <section className="border-t border-border py-16 md:py-24">
       <div className="shell">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <Marker number={what.number} label={what.label} />
-          <p className="text-[clamp(1.15rem,1.9vw,1.45rem)] leading-relaxed text-foreground">
+          <SectionTitle number={what.number} label={what.label} />
+          <p className="text-[clamp(1.15rem,1.9vw,1.45rem)] leading-relaxed text-foreground lg:pt-12">
             {what.body}
           </p>
         </div>
@@ -155,37 +136,38 @@ export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
 
 /* ── 02 Why are we doing it? ────────────────────────────────────────────────── */
 
-/** Solid Exchange teal. Rebecca's words lead; the short note from us follows. */
+/**
+ * Solid Exchange teal around a white card, so the words sit on white and stay easy to
+ * read. Rebecca's words lead; the short note from us follows.
+ */
 export function ExchangeWhy({ why }: { why: Exchange["why"] }) {
   const { quote } = why;
   return (
-    <section className="bg-exchange py-16 text-exchange-ink md:py-24">
-      <div className="shell">
-        <Marker number={why.number} label={why.label} onTeal />
-
-        <div className="mt-10 grid items-center gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
-          <figure>
-            <Quote className="size-10 text-exchange-sun" aria-hidden />
-            <blockquote className="mt-4 font-display text-[clamp(1.3rem,2.4vw,1.85rem)] leading-snug font-bold text-pretty">
+    <section className="bg-exchange py-16 md:py-24">
+      <div className="shell grid items-center gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:gap-10">
+        <Reveal>
+          <figure className="rounded-[2rem] bg-white p-8 text-foreground shadow-[0_30px_60px_-30px_rgba(6,45,43,0.45)] md:p-12 lg:p-14">
+            <SectionTitle number={why.number} label={why.label} />
+            <Quote className="mt-10 size-10 text-exchange-sun" aria-hidden />
+            <blockquote className="mt-4 font-display text-[clamp(1.3rem,2.3vw,1.8rem)] leading-snug font-bold text-pretty">
               {quote.text}
             </blockquote>
-            <figcaption className="mt-6">
-              <span className="font-bold">{quote.name}</span>
-              <span className="opacity-80">, {quote.title}</span>
+            <figcaption className="mt-6 text-muted-foreground">
+              <span className="font-bold text-foreground">{quote.name}</span>, {quote.title}
             </figcaption>
-            <p className="mt-10 max-w-2xl border-t border-exchange-ink/20 pt-8 text-lg leading-relaxed">
+            <p className="mt-10 border-t border-border pt-8 text-lg leading-relaxed text-muted-foreground">
               {why.intro}
             </p>
           </figure>
+        </Reveal>
 
-          <Reveal>
-            <Photo
-              media={why.photo}
-              sizes="(min-width: 1024px) 34vw, 100vw"
-              className="aspect-[4/5] w-full"
-            />
-          </Reveal>
-        </div>
+        <Reveal delay={0.1}>
+          <Photo
+            media={why.photo}
+            sizes="(min-width: 1024px) 30vw, 100vw"
+            className="aspect-[4/5] w-full"
+          />
+        </Reveal>
       </div>
     </section>
   );
@@ -206,10 +188,10 @@ export function ExchangeWho({
       <div className="shell">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
-            <Marker number={who.number} label={who.label} />
-            <h2 className="display mt-8 text-[clamp(2rem,4.2vw,3.25rem)] text-foreground">
+            <SectionTitle number={who.number} label={who.label} />
+            <p className="mt-6 font-display text-[clamp(1.4rem,2.4vw,1.9rem)] leading-snug font-bold text-teal-deep">
               {who.heading}
-            </h2>
+            </p>
             <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground">
               {who.paragraphs.map((p) => (
                 <p key={p}>{p}</p>
@@ -218,7 +200,7 @@ export function ExchangeWho({
             <ButtonLink
               href={who.cta.href}
               size="lg"
-              className="mt-9 h-auto bg-exchange py-4 text-left whitespace-normal text-exchange-ink shadow-none hover:bg-exchange/85 hover:shadow-none"
+              className="mt-9 h-auto bg-exchange-ink py-4 text-left whitespace-normal text-white shadow-none hover:bg-exchange hover:text-exchange-ink hover:shadow-none"
             >
               {who.cta.label}
               <ArrowRight className="size-4 shrink-0" aria-hidden />
