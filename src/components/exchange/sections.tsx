@@ -1,6 +1,7 @@
 import {
   ArrowUpRight,
   CalendarHeart,
+  Compass,
   DoorOpen,
   Globe2,
   Handshake,
@@ -12,6 +13,7 @@ import {
   Target,
   UserPlus,
   Users,
+  UsersRound,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -34,6 +36,8 @@ const icons = {
   markets: Globe2,
   fundraising: Landmark,
   impact: Sprout,
+  team: UsersRound,
+  journey: Compass,
   roundtable: Users,
   sprint: Target,
   evening: CalendarHeart,
@@ -105,15 +109,28 @@ function PointGrid({
 
 /* ── Opening ────────────────────────────────────────────────────────────────── */
 
-/** Two thirds words, one third the vertical voices film on desktop. */
+/**
+ * Two thirds words, one third the vertical voices film on desktop.
+ *
+ * A soft wash of Exchange teal warming into leaf green sits behind it, so the banner has
+ * colour like the other pages' headers and sits easily beside footage shot among trees.
+ * It is light enough that the dark type stays easy to read.
+ */
 export function ExchangeHero({ hero, mark }: { hero: Exchange["hero"]; mark: Exchange["mark"] }) {
   const { video } = hero;
   return (
-    <header className="pt-14 pb-12 md:pt-20 md:pb-16">
+    <header className="relative isolate overflow-hidden pt-14 pb-14 md:pt-20 md:pb-20">
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-exchange/20 via-exchange/10 to-[#7fb069]/25" />
+        <div className="absolute -top-32 -left-24 size-[30rem] rounded-full bg-exchange/20 blur-[110px]" />
+        <div className="absolute -right-24 -bottom-40 size-[34rem] rounded-full bg-[#9cc97a]/30 blur-[120px]" />
+      </div>
+
       <div className="shell grid items-center gap-12 lg:grid-cols-[2fr_1fr] lg:gap-16">
         <div>
-          <div className="flex animate-rise items-center gap-3">
-            <Image src={mark.src} alt="" width={56} height={56} priority className="size-12 md:size-14" />
+          {/* The mark sits in a white pill: its file carries a white background of its own. */}
+          <div className="inline-flex animate-rise items-center gap-3 rounded-full bg-white py-1.5 pr-5 pl-1.5 shadow-[0_8px_24px_-16px_rgba(6,45,43,0.5)]">
+            <Image src={mark.src} alt="" width={56} height={56} priority className="size-10 rounded-full md:size-11" />
             <Text variant="eyebrow" className="text-exchange">
               {hero.name}
             </Text>
@@ -177,7 +194,7 @@ export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
           <Photo media={what.mobilePhoto} sizes="100vw" className="aspect-[4/3] w-full" />
         </Reveal>
 
-        <PointGrid heading={what.challenges.heading} points={what.challenges.points} columns={4} />
+        <PointGrid heading={what.challenges.heading} points={what.challenges.points} columns={3} />
         <PointGrid heading={what.formats.heading} points={what.formats.points} columns={4} />
       </div>
     </section>

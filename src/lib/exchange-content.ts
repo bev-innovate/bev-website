@@ -35,6 +35,8 @@ export type ExchangeIcon =
   | "markets"
   | "fundraising"
   | "impact"
+  | "team"
+  | "journey"
   | "roundtable"
   | "sprint"
   | "evening"
@@ -88,6 +90,11 @@ export const exchange = {
       heading: "What we talk about",
       points: [
         {
+          icon: "team",
+          title: "Hiring and leading your team",
+          description: "Bringing the right people in, keeping co-founders aligned and managing a growing team.",
+        },
+        {
           icon: "customers",
           title: "Securing major customers",
           description: "Landing the contracts that change your trajectory.",
@@ -106,6 +113,11 @@ export const exchange = {
           icon: "impact",
           title: "Lasting climate impact",
           description: "Turning real deployments into results that hold.",
+        },
+        {
+          icon: "journey",
+          title: "Your own founder journey",
+          description: "Looking after yourself through the highs, the doubts and the long weeks.",
         },
       ] satisfies ExchangePoint[],
     },
