@@ -158,8 +158,11 @@ export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
   return (
     <section className="py-16 md:py-24">
       <div className="shell space-y-10 md:space-y-14">
+        {/* Photos first: above the title on phones, on the left on wide screens. */}
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
-          <div className="lg:order-2">
+          <ParallaxCollage photos={what.photos} />
+
+          <div>
             <SectionTitle number={what.number} label={what.label} />
             <ScrollHighlight text={what.lead} className={cn(textVariants({ variant: "lead" }), "mt-8")} />
             <ScrollHighlight
@@ -168,11 +171,11 @@ export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
               className={cn(textVariants({ variant: "body" }), "mt-4")}
             />
           </div>
-
-          <div className="lg:order-1">
-            <ParallaxCollage photos={what.photos} />
-          </div>
         </div>
+
+        <Reveal className="lg:hidden">
+          <Photo media={what.mobilePhoto} sizes="100vw" className="aspect-[4/3] w-full" />
+        </Reveal>
 
         <PointGrid heading={what.challenges.heading} points={what.challenges.points} columns={4} />
         <PointGrid heading={what.formats.heading} points={what.formats.points} columns={4} />

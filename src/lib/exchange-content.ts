@@ -134,6 +134,12 @@ export const exchange = {
         },
       ] satisfies ExchangePoint[],
     },
+    /** Phones only: one more photo between the words and "What we talk about". */
+    mobilePhoto: {
+      src: `${IMG}/exchange-circle-discussion.webp`,
+      alt: "A founder talking through a challenge in a small circle of peers",
+      placeholder: "",
+    } satisfies ExchangeMedia,
     /** Small-group conversations, stacked and overlapping. */
     photos: [
       {
