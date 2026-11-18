@@ -27,7 +27,7 @@ const IMG = "/images";
 
 export const siteSettings: SiteSettings = {
   title: "Better Earth Ventures",
-  tagline: "Closing the gap between climate innovation and cross-border impact",
+  tagline: "Where Climate Founders Come To Scale",
   description:
     "We help international climate and innovation companies scale in Singapore and Southeast Asia by creating tangible commercial outcomes through trusted local market access, strategic partnerships, and growth-focused ecosystem support.",
   stats: [

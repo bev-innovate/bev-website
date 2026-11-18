@@ -19,26 +19,29 @@ export function VoicesVideo({
   poster,
   label,
   placeholder,
+  aspect = "aspect-video",
 }: {
   src: string;
   captions: string;
   poster: string;
   label: string;
   placeholder: string;
+  /** The frame's shape: landscape by default, `aspect-[9/16]` for the vertical cut. */
+  aspect?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
   const reduce = useReducedMotion();
 
   if (!src) {
-    return <MediaPlaceholder kind="video" label={label} note={placeholder} className="aspect-video" />;
+    return <MediaPlaceholder kind="video" label={label} note={placeholder} className={aspect} />;
   }
 
   return (
     <div className="relative overflow-hidden rounded-3xl bg-exchange-ink">
       <video
         ref={ref}
-        className="aspect-video w-full object-cover"
+        className={`${aspect} w-full object-cover`}
         src={src}
         poster={poster || undefined}
         muted={muted}
