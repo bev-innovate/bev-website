@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
 import { Card } from "@/components/ui/card";
+import { Text } from "@/components/ui/typography";
 import type { Person } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -63,7 +64,9 @@ export function PersonCard({
 
   const detail = (
     <div className="min-w-0">
-      <p className="font-display text-lg font-bold text-foreground">{person.name}</p>
+      <Text variant="heading" as="p" className="text-lg">
+        {person.name}
+      </Text>
       {person.role ? <p className="mt-1 text-muted-foreground">{person.role}</p> : null}
       {person.organisation ? (
         <p className="text-muted-foreground italic">{person.organisation}</p>

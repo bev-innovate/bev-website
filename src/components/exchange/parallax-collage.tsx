@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useSyncExternalStore } from "react";
 
 import { MediaPlaceholder } from "@/components/exchange/media-placeholder";
 import type { ExchangeMedia } from "@/lib/exchange-content";
@@ -46,20 +46,37 @@ const layouts: Record<2 | 3, Slot[]> = {
   ],
 };
 
+/** Phones get a gentler drift, so the stack needs far less room beneath it. */
+const WIDE = "(min-width: 1024px)";
+function useDriftScale() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const query = window.matchMedia(WIDE);
+      query.addEventListener("change", onChange);
+      return () => query.removeEventListener("change", onChange);
+    },
+    () => (window.matchMedia(WIDE).matches ? 1 : 0.35),
+    () => 1,
+  );
+}
+
 function Layer({
   media,
   slot,
   progress,
   index,
   reduce,
+  scale,
 }: {
   media: ExchangeMedia;
   slot: Slot;
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
   index: number;
   reduce: boolean;
+  scale: number;
 }) {
-  const y = useTransform(progress, [0, 1], [slot.drift, -slot.drift]);
+  const drift = slot.drift * scale;
+  const y = useTransform(progress, [0, 1], [drift, -drift]);
   return (
     <motion.div
       style={reduce ? undefined : { y }}
@@ -93,11 +110,12 @@ export function ParallaxCollage({ photos }: { photos: readonly ExchangeMedia[] }
   const reduce = Boolean(useReducedMotion());
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const slots = layouts[photos.length >= 3 ? 3 : 2];
+  const scale = useDriftScale();
 
   return (
     // Bottom padding as deep as the furthest drift, so a photo travelling down never runs
-    // into whatever follows the collage.
-    <div ref={ref} className="relative pb-24">
+    // into whatever follows the collage. Phones drift about a third as far.
+    <div ref={ref} className="relative pb-9 lg:pb-24">
       {photos.slice(0, slots.length).map((media, i) => (
         <Layer
           key={media.src || media.placeholder}
@@ -106,6 +124,7 @@ export function ParallaxCollage({ photos }: { photos: readonly ExchangeMedia[] }
           progress={scrollYProgress}
           index={i}
           reduce={reduce}
+          scale={scale}
         />
       ))}
     </div>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
 import { RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Text } from "@/components/ui/typography";
 
 /**
  * "How we deliver climate innovation engagements".
@@ -52,15 +53,19 @@ export function Delivery({
         {/* The statement arrives a line at a time, so the claim lands before its support. */}
         <RevealGroup className="max-w-4xl" stagger={0.16}>
           <RevealItem>
-            <span className="text-white/60">{eyebrow}</span>
+            <Text variant="eyebrow" className="text-white/70">
+              {eyebrow}
+            </Text>
           </RevealItem>
           <RevealItem>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.05] font-bold text-balance">
+            <Text variant="title" className="mt-3 text-white">
               {statement}
-            </h2>
+            </Text>
           </RevealItem>
           <RevealItem>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">{heading}</p>
+            <Text variant="lead" className="mt-6 max-w-2xl text-white/80">
+              {heading}
+            </Text>
           </RevealItem>
         </RevealGroup>
 
@@ -90,22 +95,22 @@ export function Delivery({
             >
               <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                 <div>
-                  <h3 className="font-display text-2xl leading-snug font-bold md:text-3xl">
+                  <Text variant="subtitle" className="text-white">
                     {pillar.title}
-                  </h3>
+                  </Text>
 
                   <ul className="mt-7 space-y-4">
                     {pillar.points.map((point) => (
-                      <li key={point} className="flex gap-3 leading-relaxed text-white/80">
-                        <ArrowRight className="mt-1 size-4 shrink-0 text-yellow" aria-hidden />
+                      <li key={point} className="flex gap-3 text-lg leading-relaxed text-white/85">
+                        <ArrowRight className="mt-1.5 size-4 shrink-0 text-yellow" aria-hidden />
                         {point}
                       </li>
                     ))}
                   </ul>
 
-                  <p className="mt-8 border-t border-white/15 pt-5 text-white/60">
+                  <Text variant="caption" className="mt-8 border-t border-white/15 pt-5 text-base text-white/65">
                     {pillar.formats}
-                  </p>
+                  </Text>
                 </div>
 
                 <figure className="relative aspect-4/3 overflow-hidden rounded-(--radius) ring-1 ring-white/20 lg:aspect-16/11">
@@ -123,9 +128,9 @@ export function Delivery({
         </Tabs>
 
         <div className="mt-14 flex flex-wrap items-center gap-4 border-t border-white/15 pt-10">
-          <p className="max-w-xl text-lg text-white/70">
+          <Text className="max-w-xl text-white/80">
             Every engagement is built from these four, in the proportion the brief needs.
-          </p>
+          </Text>
           <ButtonLink href="/contact" variant="white" size="lg" className="ml-auto shrink-0">
             Design an engagement with us
             <ArrowRight className="size-4" aria-hidden />

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import * as React from "react";
 
+import { Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
 /**
@@ -49,24 +50,25 @@ export function PageHeader({
       */}
       <div className="shell relative py-16 md:py-20">
         {eyebrow ? (
-          <span className="block animate-rise text-white/70">{eyebrow}</span>
+          <Text variant="eyebrow" className="animate-rise text-white/75">
+            {eyebrow}
+          </Text>
         ) : null}
-        <h1
-          className={cn(
-            "max-w-4xl animate-rise font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05] font-bold tracking-[-0.02em] text-balance",
-            eyebrow && "mt-4",
-          )}
+        <Text
+          variant="display"
+          className={cn("max-w-5xl animate-rise text-white", eyebrow && "mt-4")}
           style={{ animationDelay: "0.1s" }}
         >
           {title}
-        </h1>
+        </Text>
         {intro ? (
-          <p
-            className="mt-6 max-w-3xl animate-rise text-lg leading-relaxed text-pretty text-white/85"
+          <Text
+            variant="lead"
+            className="mt-6 max-w-3xl animate-rise text-white/90"
             style={{ animationDelay: "0.22s" }}
           >
             {intro}
-          </p>
+          </Text>
         ) : null}
         {children ? (
           <div className="mt-9 animate-rise" style={{ animationDelay: "0.34s" }}>

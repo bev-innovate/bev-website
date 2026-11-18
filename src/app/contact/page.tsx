@@ -1,10 +1,11 @@
-import { Mail, MapPin } from "lucide-react";
+import { Building2, Mail, MapPin, Megaphone, Rocket, UserRoundCheck } from "lucide-react";
 import type { Metadata } from "next";
 
 import { EnquiryForm } from "@/components/site/enquiry-form";
 import { PageHeader } from "@/components/site/page-header";
+import { FeatureCard } from "@/components/ui/feature-card";
+import { Text } from "@/components/ui/typography";
 import { getSiteSettings } from "@/lib/content";
-import { interestFromQuery } from "@/lib/enquiry";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -14,31 +15,29 @@ export const metadata: Metadata = {
 
 const routes = [
   {
+    icon: Rocket,
     title: "Founders",
     body: "Applying to a programme, or want to know when the next call opens.",
   },
   {
+    icon: Building2,
     title: "Corporates & funds",
     body: "Designing an acceleration pathway, sourcing technology or backing a cohort.",
   },
   {
+    icon: UserRoundCheck,
     title: "Mentors & experts",
     body: "Operators and investors who want to work directly with founders in the region.",
   },
   {
+    icon: Megaphone,
     title: "Media & speaking",
     body: "Press enquiries, panels and events across the climate and agrifood ecosystem.",
   },
 ];
 
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+export default async function ContactPage() {
   const settings = await getSiteSettings();
-  // Links can arrive with the interest already chosen, e.g. /contact?interest=exchange.
-  const defaultInterest = interestFromQuery((await searchParams).interest);
 
   return (
     <>
@@ -57,8 +56,8 @@ export default async function ContactPage({
                 <Mail className="size-4" aria-hidden />
               </span>
               <div>
-                <dt className="text-sm font-medium text-ink">Email</dt>
-                <dd className="mt-1">
+                <dt className="font-display text-lg font-bold text-ink">Email</dt>
+                <dd className="mt-1 text-lg">
                   <a
                     href={`mailto:${settings.contact.email}`}
                     className="text-ink-muted underline underline-offset-4 hover:text-orange"
@@ -74,8 +73,8 @@ export default async function ContactPage({
                 <MapPin className="size-4" aria-hidden />
               </span>
               <div>
-                <dt className="text-sm font-medium text-ink">Based in</dt>
-                <dd className="mt-1 text-ink-muted">
+                <dt className="font-display text-lg font-bold text-ink">Based in</dt>
+                <dd className="mt-1 text-lg text-ink-muted">
                   {settings.contact.location} · working across Asia-Pacific
                 </dd>
               </div>
@@ -83,12 +82,18 @@ export default async function ContactPage({
           </dl>
 
           <div className="mt-12 border-t border-border pt-10">
-            <h2 className="text-primary">Who gets in touch</h2>
-            <ul className="mt-6 space-y-6">
+            <Text variant="subtitle" as="h2">
+              Who gets in touch
+            </Text>
+            <ul className="mt-6 grid gap-4 sm:grid-cols-2">
               {routes.map((route) => (
                 <li key={route.title}>
-                  <p className="font-display text-lg font-bold text-ink">{route.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-ink-muted">{route.body}</p>
+                  <FeatureCard
+                    icon={route.icon}
+                    title={route.title}
+                    description={route.body}
+                    tone="orange"
+                  />
                 </li>
               ))}
             </ul>
@@ -96,9 +101,7 @@ export default async function ContactPage({
         </div>
 
         {/* The form brings its own panel now, so it no longer needs wrapping in one. */}
-        <div id="enquiry" className="scroll-mt-28">
-          <EnquiryForm defaultInterest={defaultInterest} />
-        </div>
+        <EnquiryForm />
       </div>
     </>
   );

@@ -8,6 +8,7 @@ import { PersonCard } from "@/components/site/person-card";
 import { PillarsAccordion } from "@/components/site/pillars-accordion";
 import { Section, SectionHeading } from "@/components/site/section";
 import { Reveal } from "@/components/ui/reveal";
+import { Text } from "@/components/ui/typography";
 import { getPartners, getPeople, getSiteSettings } from "@/lib/content";
 import { pillars } from "@/lib/seed-content";
 
@@ -57,26 +58,26 @@ export default async function AboutPage() {
 
           <Reveal delay={0.08}>
             <div className="max-w-xl">
-              <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight font-bold text-balance text-ink">
+              <Text variant="headline">
                 Founded in 2024, built on a much longer track record
-              </h2>
-              <div className="mt-6 space-y-5 text-[1.0625rem] leading-relaxed text-ink-muted">
-                <p>
-                  Better Earth Ventures accelerates the development and deployment of
-                  technologies that mitigate climate change and make food systems more
-                  resilient. We are a small team in Singapore working across the region.
-                </p>
-                <p>
+              </Text>
+              <Text variant="lead" className="mt-6">
+                Better Earth Ventures accelerates the development and deployment of
+                technologies that mitigate climate change and make food systems more
+                resilient. We are a small team in Singapore working across the region.
+              </Text>
+              <div className="mt-5 space-y-4">
+                <Text>
                   Between us, our team has supported more than 370 startups, which have gone
                   on to raise over US$500m. We bring that operating experience to programmes
                   delivered with EIT Climate-KIC, Innovate UK, ClimateLaunchpad and partners
                   across Asia-Pacific.
-                </p>
-                <p>
+                </Text>
+                <Text>
                   We spend as much time on farms and factory floors as we do in boardrooms.
                   Real climate progress is relational, systemic and slower than slides
                   suggest: designing for that is the whole job.
-                </p>
+                </Text>
               </div>
 
               <dl className="mt-10 grid grid-cols-2 gap-8">
@@ -87,7 +88,9 @@ export default async function AboutPage() {
                       <p className="font-display text-4xl font-bold text-purple">
                         {stat.value}
                       </p>
-                      <p className="mt-2 text-sm text-ink-muted">{stat.label}</p>
+                      <Text variant="caption" className="mt-2">
+                        {stat.label}
+                      </Text>
                     </dd>
                   </div>
                 ))}
@@ -103,7 +106,9 @@ export default async function AboutPage() {
       */}
       <section className="bg-purple py-16 text-white md:py-20">
         <div className="shell">
-          <h2 className="font-display text-3xl font-bold lg:text-4xl">What we run</h2>
+          <Text variant="title" className="text-white">
+            What we run
+          </Text>
           <div className="mt-10">
             <PillarsAccordion items={pillars} />
           </div>
@@ -124,9 +129,9 @@ export default async function AboutPage() {
             <div className="mt-12 space-y-12">
               {locations.map((location) => (
                 <div key={location}>
-                  <h3 className="border-b border-line pb-3 font-display text-xl font-bold text-ink">
+                  <Text variant="subtitle" className="border-b border-line pb-3">
                     {location}
-                  </h3>
+                  </Text>
                   {/* Three up, so Singapore fills a row exactly and the smaller
                       offices do not trail a mostly empty one. */}
                   <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -177,7 +182,9 @@ export default async function AboutPage() {
 
       {/* Logo cloud lead-in from Tailark's `logo-cloud/two` (MIT, github.com/tailark/blocks). */}
       <section className="border-t border-border bg-background py-10">
-        <p className="shell mb-6 text-muted-foreground">Partners and collaborators</p>
+        <Text variant="eyebrow" className="shell mb-6 text-muted-foreground">
+          Partners and collaborators
+        </Text>
         <PartnerMarquee partners={partners} />
       </section>
 

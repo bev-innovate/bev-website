@@ -11,6 +11,7 @@ import { StatusBadge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { Timeline } from "@/components/ui/timeline";
+import { Text } from "@/components/ui/typography";
 import { getProgramme, getProgrammes } from "@/lib/content";
 import { formatDate } from "@/lib/utils";
 
@@ -76,16 +77,18 @@ export default async function ProgrammePage({ params }: Params) {
           <div className="flex flex-wrap items-center gap-3">
             <StatusBadge status={programme.status} />
             {programme.kicker ? (
-              <span className="text-sm text-canvas/70">{programme.kicker}</span>
+              <Text variant="eyebrow" as="span" className="text-canvas/75">
+                {programme.kicker}
+              </Text>
             ) : null}
           </div>
 
-          <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.02] font-bold tracking-[-0.02em] text-balance">
+          <Text variant="display" className="mt-6 max-w-5xl text-canvas">
             {programme.title}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-canvas/80">
+          </Text>
+          <Text variant="lead" className="mt-6 max-w-3xl text-canvas/90">
             {programme.summary}
-          </p>
+          </Text>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <ButtonLink href={ctaHref} variant="primary" size="lg">
@@ -123,7 +126,9 @@ export default async function ProgrammePage({ params }: Params) {
       {programme.partners?.length ? (
         <section className={hasBody ? "border-b border-line bg-canvas" : "bg-canvas"}>
           <div className="shell flex flex-col gap-5 py-10 md:flex-row md:items-center md:gap-12">
-            <p className="shrink-0 text-muted-foreground">Delivered with</p>
+            <Text variant="eyebrow" className="shrink-0 text-muted-foreground">
+              Delivered with
+            </Text>
             <ul className="flex flex-wrap items-center gap-x-12 gap-y-6">
               {programme.partners.map((partner) => (
                 <li key={partner.name} className="flex h-12 items-center">
@@ -156,13 +161,9 @@ export default async function ProgrammePage({ params }: Params) {
               {programme.verticals.map((vertical, i) => (
                 <Reveal as="li" key={vertical.title} delay={Math.min(i, 5) * 0.11}>
                   <div className="h-full bg-canvas-raised p-8">
-                    <p className="font-display text-xl font-bold text-ink">
-                      {vertical.title}
-                    </p>
+                    <Text variant="heading">{vertical.title}</Text>
                     {vertical.description ? (
-                      <p className="mt-2.5 text-sm leading-relaxed text-ink-muted">
-                        {vertical.description}
-                      </p>
+                      <Text className="mt-2.5 text-base">{vertical.description}</Text>
                     ) : null}
                   </div>
                 </Reveal>
@@ -177,16 +178,16 @@ export default async function ProgrammePage({ params }: Params) {
           <div className="shell grid gap-14 lg:grid-cols-2">
             {programme.benefits?.length ? (
               <div>
-                <h2 className="font-display text-3xl font-bold text-ink">
+                <Text variant="headline">
                   What you get
-                </h2>
+                </Text>
                 <ul className="mt-8 space-y-4">
                   {programme.benefits.map((benefit) => (
                     <li key={benefit} className="flex items-start gap-3">
-                      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-orange text-canvas">
+                      <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-full bg-orange text-canvas">
                         <Check className="size-3" aria-hidden />
                       </span>
-                      <span className="text-[0.9375rem] leading-relaxed text-ink">{benefit}</span>
+                      <span className="text-lg leading-relaxed text-ink">{benefit}</span>
                     </li>
                   ))}
                 </ul>
@@ -195,12 +196,14 @@ export default async function ProgrammePage({ params }: Params) {
 
             {programme.eligibility?.length ? (
               <div className="rounded-[1.75rem] border border-line bg-canvas-raised p-8 md:p-10">
-                <h2 className="font-display text-3xl font-bold text-ink">Who it&rsquo;s for</h2>
+                <Text variant="headline">
+                  Who it&rsquo;s for
+                </Text>
                 <ul className="mt-8 space-y-4">
                   {programme.eligibility.map((item) => (
                     <li
                       key={item}
-                      className="border-b border-line pb-4 text-[0.9375rem] leading-relaxed text-ink-muted last:border-0 last:pb-0"
+                      className="border-b border-line pb-4 text-lg leading-relaxed text-ink-muted last:border-0 last:pb-0"
                     >
                       {item}
                     </li>
@@ -224,9 +227,7 @@ export default async function ProgrammePage({ params }: Params) {
                 subtitle: phase.phase,
                 content: phase.description ? (
                   <div className="rounded-2xl border border-line bg-canvas-raised p-6 md:p-8">
-                    <p className="text-[0.9375rem] leading-relaxed text-ink-muted">
-                      {phase.description}
-                    </p>
+                    <Text>{phase.description}</Text>
                   </div>
                 ) : null,
               }))}

@@ -83,9 +83,7 @@ export const exchange = {
     number: "01",
     label: "What is it?",
     lead: "Building a business can be exciting, difficult and, at times, [[lonely]].",
-    body: "Better Earth Exchange brings [[small groups of founders]] together to talk candidly about the [[steepest part of the journey]], in a trusted space where you can say how things really are.",
-    /** One short, human line, set apart from the body. */
-    aside: "Nobody is pitching and nobody is keeping score.",
+    body: "Better Earth Exchange brings [[small groups of founders]] together to talk candidly about the [[steepest part of the journey]]. There’s no pitching and nobody keeping score, just a trusted room where you can say how things really are.",
     challenges: {
       heading: "What we talk about",
       points: [
@@ -160,7 +158,7 @@ export const exchange = {
     number: "02",
     label: "Why are we doing it?",
     quote: {
-      text: "Being a founder can [[feel lonely]], even when you’re surrounded by people who want you to succeed. There’s a real relief in telling another founder what’s been keeping you up at night and hearing them say, [[‘I’ve been there too.’]] We created the Better Earth Exchange to [[bring founders together]] for those conversations, so they can [[learn from what others have tried]] and leave with [[a clearer sense of what to do next]].",
+      text: "Being a founder can [[feel lonely]], even when you’re surrounded by people who want you to succeed. There’s a real relief in telling another founder what’s been keeping you up at night and hearing them say, [[‘I’ve been there too.’]]\nWe created the Better Earth Exchange to [[bring founders together]] for those conversations, so they can [[learn from what others have tried]] and leave with [[a clearer sense of what to do next]].",
       name: "Rebecca Sharpe",
       title: "Founder and Director, Better Earth Ventures",
     },
@@ -198,7 +196,8 @@ export const exchange = {
       "Membership is by invitation. If you have worked with us before and would like to join, let us know and we will be in touch.",
     cta: {
       label: "I want to join the Exchange",
-      href: "/contact?interest=exchange#enquiry",
+      /** The expression-of-interest form, which opens in a new tab. */
+      href: "https://airtable.com/app6n4lZRApZX9cfG/pagorb7YfLuddVvXS/form",
     },
     photos: [
       {

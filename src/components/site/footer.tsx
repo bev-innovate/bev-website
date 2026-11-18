@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import { NewsletterForm } from "@/components/site/newsletter-form";
+import { siteSettings as brand } from "@/lib/seed-content";
 import type { SiteSettings } from "@/lib/types";
 
 const columns = [
@@ -31,9 +32,9 @@ export function Footer({ settings }: { settings: SiteSettings }) {
       <div className="shell relative z-10 py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr]">
           <div>
-            <p className="font-display text-2xl leading-tight text-balance">
-              {settings.tagline}
-            </p>
+            {/* The brand line is fixed in code, so an old value in Studio cannot bring
+                back a retired tagline. */}
+            <p className="font-display text-2xl leading-tight text-balance">{brand.tagline}</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-canvas/65">
               {settings.contact.location} · {" "}
               <a

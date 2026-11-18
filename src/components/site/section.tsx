@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
 export function SectionHeading({
@@ -25,23 +26,20 @@ export function SectionHeading({
         className,
       )}
     >
-      <div className={cn("max-w-2xl", align === "center" && "mx-auto")}>
-        {/*
-          Plain accent-coloured lead-in rather than a letterspaced small-caps eyebrow.
-          Borrowed from Tailark's `content/two` (MIT, github.com/tailark/blocks), where
-          the section label is just `text-primary` set at body size.
-        */}
-        {eyebrow ? <span className="text-primary">{eyebrow}</span> : null}
-        <h2
-          className={cn(
-            "font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.05] font-bold tracking-[-0.015em] text-balance text-ink",
-            eyebrow && "mt-4",
-          )}
-        >
+      <div className={cn("max-w-3xl", align === "center" && "mx-auto")}>
+        {/* The shared type scale: eyebrow, title, then a lead-sized intro. */}
+        {eyebrow ? (
+          <Text variant="eyebrow" className="text-primary">
+            {eyebrow}
+          </Text>
+        ) : null}
+        <Text variant="title" className={cn(eyebrow && "mt-3")}>
           {title}
-        </h2>
+        </Text>
         {intro ? (
-          <p className="mt-4 text-lg leading-relaxed text-pretty text-ink-muted">{intro}</p>
+          <Text variant="lead" className="mt-5 text-muted-foreground">
+            {intro}
+          </Text>
         ) : null}
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}

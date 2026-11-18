@@ -6,6 +6,7 @@ import { TrackRecord } from "@/components/site/track-record";
 import { Verticals } from "@/components/site/verticals";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
+import { Text } from "@/components/ui/typography";
 import { getPartners, getProgrammes, getSiteSettings } from "@/lib/content";
 import { delivery, verticals, whoWeAre } from "@/lib/seed-content";
 import { ArrowRight } from "lucide-react";
@@ -37,7 +38,9 @@ export default async function HomePage() {
       */}
       <section className="border-b border-border bg-background py-10">
         <div className="shell">
-          <p className="text-muted-foreground">Trusted by teams at</p>
+          <Text variant="eyebrow" className="text-muted-foreground">
+            Trusted by teams at
+          </Text>
         </div>
         <div className="mt-6">
           <PartnerMarquee partners={partners} />
@@ -45,34 +48,37 @@ export default async function HomePage() {
       </section>
 
       {/*
-        Who we are. Two-column split from Tailark's `content/two` block (MIT,
-        github.com/tailark/blocks): the heading sits in the narrow column, the prose in the
-        wide one behind a left rule.
+        Who we are. The statement runs across the top on the shared title step; the prose
+        sits beneath it, set in from the left behind a rule on wide screens.
       */}
-      <section className="py-16 md:py-20">
-        <div className="shell grid gap-10 lg:grid-cols-5 lg:gap-0">
-          <Reveal className="lg:col-span-2">
-            <div className="lg:sticky lg:top-28 lg:pr-12">
-              <span className="text-primary">{whoWeAre.eyebrow}</span>
-              <h2 className="mt-4 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] font-bold text-ink">
-                {whoWeAre.heading}
-              </h2>
-            </div>
+      <section className="py-16 md:py-24">
+        <div className="shell">
+          <Reveal>
+            <Text variant="eyebrow" className="text-primary">
+              {whoWeAre.eyebrow}
+            </Text>
+            <Text variant="title" className="mt-3 max-w-5xl">
+              {whoWeAre.heading}
+            </Text>
           </Reveal>
 
-          <Reveal delay={0.08} className="lg:col-span-3 lg:border-l lg:border-border lg:pl-12">
-            <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground">
+          <Reveal delay={0.08} className="mt-10 lg:ml-[40%] lg:border-l lg:border-border lg:pl-12">
+            <div className="max-w-2xl space-y-5">
               {whoWeAre.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <Text key={paragraph}>{paragraph}</Text>
               ))}
 
-              <p className="font-medium text-foreground">{whoWeAre.highlight}</p>
+              <Text variant="lead" className="font-medium">
+                {whoWeAre.highlight}
+              </Text>
 
               {whoWeAre.paragraphsAfter.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <Text key={paragraph}>{paragraph}</Text>
               ))}
 
-              <p className="font-medium text-primary">{whoWeAre.closing}</p>
+              <Text variant="lead" className="font-medium text-primary">
+                {whoWeAre.closing}
+              </Text>
             </div>
           </Reveal>
         </div>
@@ -95,16 +101,16 @@ export default async function HomePage() {
           <div className="shell">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-3xl">
-                <span className="text-primary">Programmes</span>
-                {/* `text-nowrap` from md up: the line is short enough to hold, and
-                    breaking it after "where" reads as a mistake. */}
-                <h2 className="mt-4 font-display text-[clamp(1.9rem,4vw,3rem)] font-bold text-ink md:text-nowrap">
+                <Text variant="eyebrow" className="text-primary">
+                  Programmes
+                </Text>
+                <Text variant="title" className="mt-3">
                   Meeting founders where they are
-                </h2>
-                <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+                </Text>
+                <Text variant="lead" className="mt-5 text-muted-foreground">
                   Some begin at the first version of an idea. Others pick up a company that
                   already has customers and needs a new market.
-                </p>
+                </Text>
               </div>
               <ButtonLink href="/programmes" variant="outline" className="shrink-0">
                 All programmes

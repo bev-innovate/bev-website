@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 
+import { Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
 /**
@@ -41,9 +42,11 @@ export function FeatureCard({
         <Icon className="size-6" aria-hidden />
       </span>
       <div>
-        <h3 className="font-display text-lg leading-snug font-bold text-foreground">{title}</h3>
+        <Text variant="heading" className="text-lg">
+          {title}
+        </Text>
         {description ? (
-          <p className="mt-1.5 leading-relaxed text-muted-foreground">{description}</p>
+          <Text className="mt-1.5 text-base">{description}</Text>
         ) : null}
       </div>
     </div>

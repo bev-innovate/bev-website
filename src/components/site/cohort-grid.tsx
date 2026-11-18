@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
+import { Text } from "@/components/ui/typography";
 import type { Company } from "@/lib/types";
 
 export function CohortGrid({ companies }: { companies: Company[] }) {
@@ -18,7 +19,7 @@ export function CohortGrid({ companies }: { companies: Company[] }) {
               className="group flex h-full flex-col rounded-2xl border border-line bg-canvas-raised p-6 transition-colors hover:border-line-strong"
             >
               <div className="flex items-start justify-between gap-3">
-                <h3 className="font-display text-xl font-bold text-ink">{company.name}</h3>
+                <Text variant="heading">{company.name}</Text>
                 {company.url ? (
                   <ArrowUpRight
                     className="size-4 shrink-0 text-ink-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

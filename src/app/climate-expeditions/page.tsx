@@ -6,6 +6,7 @@ import { ExpeditionCarousel } from "@/components/site/expedition-carousel";
 import { PageHeader } from "@/components/site/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
+import { Text } from "@/components/ui/typography";
 import { expeditions } from "@/lib/seed-content";
 
 export const metadata: Metadata = {
@@ -38,17 +39,21 @@ export default function ClimateExpeditionsPage() {
       </PageHeader>
 
       <section className="py-16 md:py-20">
-        <div className="shell max-w-4xl text-lg leading-relaxed text-ink-muted">
+        <Text variant="lead" className="shell max-w-4xl text-muted-foreground">
           {expeditions.intro}
-        </div>
+        </Text>
       </section>
 
       <section className="bg-purple py-16 text-white md:py-20">
         <div className="shell max-w-4xl">
-          <h2 className="display text-[clamp(1.6rem,3.4vw,2.25rem)]">{expeditions.why.title}</h2>
-          <div className="mt-8 space-y-5 leading-relaxed text-white/85">
+          <Text variant="title" className="text-white">
+            {expeditions.why.title}
+          </Text>
+          <div className="mt-8 space-y-5">
             {expeditions.why.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <Text key={paragraph} className="text-white/85">
+                {paragraph}
+              </Text>
             ))}
           </div>
         </div>
@@ -57,12 +62,10 @@ export default function ClimateExpeditionsPage() {
       <section className="py-16 md:py-20">
         <div className="shell">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="display text-[clamp(1.75rem,3.6vw,2.5rem)] text-ink">
-              {expeditions.whereWeveBeen.title}
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+            <Text variant="title">{expeditions.whereWeveBeen.title}</Text>
+            <Text variant="lead" className="mt-5 text-muted-foreground">
               {expeditions.whereWeveBeen.lede}
-            </p>
+            </Text>
           </div>
 
           <ul className="mt-14 grid gap-6 md:grid-cols-3">
@@ -79,9 +82,13 @@ export default function ClimateExpeditionsPage() {
                     />
                   </div>
                   <div className={`flex flex-1 flex-col p-6 ${placeAccent[place.accent]}`}>
-                    <p className="text-sm opacity-90">{place.location}</p>
-                    <h3 className="mt-1 text-xl font-bold">{place.name}</h3>
-                    <p className="mt-3 text-sm leading-relaxed opacity-95">{place.body}</p>
+                    <Text variant="eyebrow" className="text-xs text-current opacity-90">
+                      {place.location}
+                    </Text>
+                    <Text variant="heading" className="mt-1.5 text-current">
+                      {place.name}
+                    </Text>
+                    <Text className="mt-3 text-base text-current opacity-95">{place.body}</Text>
                   </div>
                 </article>
               </Reveal>
@@ -93,10 +100,12 @@ export default function ClimateExpeditionsPage() {
       <section className="bg-teal py-16 text-white md:py-20">
         <div className="shell">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="display text-[clamp(1.75rem,3.6vw,2.5rem)]">
+            <Text variant="title" className="text-white">
               {expeditions.whoFor.title}
-            </h2>
-            <p className="mt-6 leading-relaxed text-white/90">{expeditions.whoFor.lede}</p>
+            </Text>
+            <Text variant="lead" className="mx-auto mt-6 max-w-3xl text-white/90">
+              {expeditions.whoFor.lede}
+            </Text>
           </div>
 
           <div className="mx-auto mt-14 max-w-5xl">
@@ -107,9 +116,9 @@ export default function ClimateExpeditionsPage() {
 
       <section className="py-16 md:py-20">
         <div className="shell">
-          <h2 className="display text-center text-[clamp(1.75rem,3.6vw,2.5rem)] text-ink">
+          <Text variant="title" className="text-center">
             {expeditions.experience.title}
-          </h2>
+          </Text>
           <div className="mx-auto mt-16 max-w-5xl">
             <ExpeditionCarousel slides={expeditions.experience.slides} />
           </div>
@@ -119,12 +128,14 @@ export default function ClimateExpeditionsPage() {
       <section className="bg-teal py-16 text-white md:py-20">
         <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
-            <h2 className="display text-[clamp(1.75rem,3.8vw,2.75rem)]">
+            <Text variant="title" className="text-white">
               {expeditions.next.title}
-            </h2>
-            <div className="mt-6 space-y-4 leading-relaxed text-white/90">
+            </Text>
+            <div className="mt-6 space-y-4">
               {expeditions.next.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <Text key={paragraph} className="text-white/90">
+                  {paragraph}
+                </Text>
               ))}
             </div>
             <div className="mt-9 flex flex-wrap gap-4">

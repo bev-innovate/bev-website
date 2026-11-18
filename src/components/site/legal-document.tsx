@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/site/page-header";
 import type { LegalDocument as Doc } from "@/lib/legal";
+import { Text } from "@/components/ui/typography";
 
 /**
  * Renders a legal document: numbered sections, generous measure, nothing decorative.
@@ -22,36 +23,33 @@ export function LegalDocument({ doc }: { doc: Doc }) {
       */}
       <div className="shell pt-14 pb-24 md:pt-16">
         <div className="max-w-2xl">
-          <p className="text-sm text-ink-faint">Last updated: {doc.updated}</p>
+          <Text variant="caption">Last updated: {doc.updated}</Text>
 
           <ol className="mt-10 space-y-12">
             {doc.sections.map((section, i) => (
               <li key={section.title}>
-                <h2 className="font-display text-xl font-bold text-ink md:text-2xl">
+                <Text variant="subtitle" as="h2">
                   {/* The number lives in the markup rather than the copy, so reordering a
                     section cannot leave the list mis-numbered. */}
                   <span className="text-ink-faint tabular-nums">{i + 1}.</span>{" "}
                   {section.title}
-                </h2>
+                </Text>
                 {section.paragraphs.map((paragraph) => (
-                  <p
-                    key={paragraph}
-                    className="mt-4 text-[1.0625rem] leading-relaxed text-ink-muted"
-                  >
+                  <Text key={paragraph} className="mt-4">
                     {paragraph}
-                  </p>
+                  </Text>
                 ))}
               </li>
             ))}
 
             <li>
-              <h2 className="font-display text-xl font-bold text-ink md:text-2xl">
+              <Text variant="subtitle" as="h2">
                 <span className="text-ink-faint tabular-nums">
                   {doc.sections.length + 1}.
                 </span>{" "}
                 Contact
-              </h2>
-              <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink-muted">
+              </Text>
+              <Text className="mt-4">
                 {doc.contact.lead}{" "}
                 <a
                   href={`mailto:${doc.contact.email}`}
@@ -59,7 +57,7 @@ export function LegalDocument({ doc }: { doc: Doc }) {
                 >
                   {doc.contact.email}
                 </a>
-              </p>
+              </Text>
             </li>
           </ol>
         </div>

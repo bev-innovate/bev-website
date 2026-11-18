@@ -10,6 +10,7 @@ import { SectionHead, Tbc } from "@/components/summit/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
+import { Text } from "@/components/ui/typography";
 import { REGISTRATION_OPEN } from "@/lib/summit-content";
 import type {
   AgendaDay,
@@ -101,21 +102,24 @@ export function SummitHero({
             days={hero.days}
             className="mb-6 animate-rise"
           />
-          <h1 className="display max-w-4xl animate-rise text-[clamp(2.25rem,5.5vw,3.75rem)]">
+          <Text variant="display" className="max-w-5xl animate-rise text-white">
             {name}
-          </h1>
-          <p
-            className="mt-4 max-w-3xl animate-rise font-display text-[clamp(1.25rem,2.4vw,1.75rem)] font-bold text-white/90"
+          </Text>
+          <Text
+            variant="subtitle"
+            as="p"
+            className="mt-5 max-w-3xl animate-rise text-white/90"
             style={{ animationDelay: "0.1s" }}
           >
             {hero.headline}
-          </p>
-          <p
-            className="mt-6 max-w-3xl animate-rise text-lg leading-relaxed text-pretty text-white/85"
+          </Text>
+          <Text
+            variant="lead"
+            className="mt-6 max-w-3xl animate-rise text-white/85"
             style={{ animationDelay: "0.22s" }}
           >
             {hero.standfirst}
-          </p>
+          </Text>
 
           <div
             className="mt-9 flex animate-rise flex-wrap gap-4"
@@ -242,11 +246,17 @@ export function SummitAbout({ about }: { about: Summit["about"] }) {
     <section className="relative overflow-hidden py-16 md:py-20">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
         <div>
-          <SectionHead heading={about.heading} />
-          <div className="mt-8 max-w-2xl space-y-5 text-[1.0625rem] leading-relaxed text-ink-muted">
-            {about.paragraphs.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
+          <Text variant="headline">{about.heading}</Text>
+          <div className="mt-8 max-w-2xl space-y-5">
+            {about.paragraphs.map((p, i) =>
+              i === 0 ? (
+                <Text key={p} variant="lead">
+                  {p}
+                </Text>
+              ) : (
+                <Text key={p}>{p}</Text>
+              ),
+            )}
           </div>
         </div>
 
@@ -323,11 +333,11 @@ export function SummitZones({ zones }: { zones: Summit["zones"] }) {
                   </div>
 
                   <div className="flex flex-1 flex-col p-8">
-                    <h3 className={cn("font-display text-2xl font-bold", accent.text)}>
+                    <Text variant="subtitle" className={accent.text}>
                       {zone.name}
-                    </h3>
+                    </Text>
 
-                    <p className="mt-4 leading-relaxed text-muted-foreground">{zone.purpose}</p>
+                    <Text className="mt-4 text-base">{zone.purpose}</Text>
 
                     <ul className="mt-6 space-y-3 border-t border-border pt-6">
                       {zone.activities.map((activity) => (
@@ -946,12 +956,8 @@ export function SummitStartups({ startups }: { startups: Summit["startups"] }) {
           {startups.items.map((company, i) => (
             <Reveal as="li" key={company.ref} delay={Math.min(i, 5) * 0.11} className="h-full">
               <Card variant="soft" className="flex h-full flex-col p-6">
-                <h3 className="font-display text-xl font-bold text-foreground">
-                  {company.name}
-                </h3>
-                <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">
-                  {company.blurb}
-                </p>
+                <Text variant="heading">{company.name}</Text>
+                <Text className="mt-3 flex-1 text-base">{company.blurb}</Text>
                 <ul className="mt-5 flex flex-wrap gap-2 border-t border-foreground/10 pt-4">
                   <li className="rounded-full border border-foreground/10 px-3 py-1 text-sm text-muted-foreground">
                     {company.sector}
@@ -986,12 +992,12 @@ export function SummitRegister({ register }: { register: Summit["register"] }) {
       <div aria-hidden className="contours pointer-events-none absolute inset-0 text-white opacity-20" />
       <div className="shell relative">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="display text-[clamp(1.75rem,3.6vw,2.6rem)]">
+          <Text variant="title" className="text-white">
             {REGISTRATION_OPEN ? register.heading : register.closed.heading}
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-white/85">
+          </Text>
+          <Text variant="lead" className="mx-auto mt-5 text-white/85">
             {REGISTRATION_OPEN ? register.body : register.closed.body}
-          </p>
+          </Text>
           {REGISTRATION_OPEN ? (
             <ButtonLink href={register.cta.href} size="lg" className="mt-9" {...link.props}>
               {register.cta.label}

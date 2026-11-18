@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { PostCard } from "@/components/site/post-card";
 import { RichText } from "@/components/site/portable-text";
 import { Badge } from "@/components/ui/badge";
+import { Text } from "@/components/ui/typography";
 import { getPost, getPosts } from "@/lib/content";
 import { formatDate } from "@/lib/utils";
 
@@ -62,12 +63,14 @@ export default async function InsightPage({ params }: Params) {
           {post.readingTime ? <span>{post.readingTime} min read</span> : null}
         </div>
 
-        <h1 className="mt-5 font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] font-bold tracking-[-0.02em] text-balance text-ink">
+        <Text variant="headline" as="h1" className="mt-5">
           {post.title}
-        </h1>
+        </Text>
 
         {post.excerpt ? (
-          <p className="mt-6 text-xl leading-relaxed text-pretty text-ink-muted">{post.excerpt}</p>
+          <Text variant="lead" className="mt-6 text-muted-foreground">
+            {post.excerpt}
+          </Text>
         ) : null}
       </header>
 
@@ -126,7 +129,7 @@ export default async function InsightPage({ params }: Params) {
 
       {related.length ? (
         <section className="shell mt-24 border-t border-line pt-16">
-          <h2 className="font-display text-2xl font-bold text-ink">Keep reading</h2>
+          <Text variant="headline">Keep reading</Text>
           <div className="mt-10 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((item) => (
               <PostCard key={item.slug} post={item} />

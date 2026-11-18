@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/site/page-header";
 import { ProgrammeCard } from "@/components/site/programme-card";
 import { Reveal } from "@/components/ui/reveal";
+import { Text } from "@/components/ui/typography";
 import { getProgrammes } from "@/lib/content";
 import { programmesIntro } from "@/lib/seed-content";
 
@@ -24,11 +25,19 @@ export default async function ProgrammesPage() {
       />
 
       <section className="py-16 md:py-20">
-        <div className="shell max-w-4xl space-y-5 text-[1.0625rem] leading-relaxed text-ink-muted">
-          {programmesIntro.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          <p className="pt-2 font-semibold text-orange-deep">{programmesIntro.highlight}</p>
+        <div className="shell max-w-4xl space-y-5">
+          {programmesIntro.paragraphs.map((paragraph, i) =>
+            i === 0 ? (
+              <Text key={paragraph} variant="lead">
+                {paragraph}
+              </Text>
+            ) : (
+              <Text key={paragraph}>{paragraph}</Text>
+            ),
+          )}
+          <Text variant="lead" className="pt-2 font-semibold text-orange-deep">
+            {programmesIntro.highlight}
+          </Text>
         </div>
       </section>
 

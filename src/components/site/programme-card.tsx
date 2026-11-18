@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { StatusBadge } from "@/components/ui/badge";
 import { cardVariants } from "@/components/ui/card";
+import { textVariants } from "@/components/ui/typography";
 import type { Programme } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -83,8 +84,10 @@ export function ProgrammeCard({
 
           <h3
             className={cn(
-              "mt-5 font-display font-bold text-foreground",
-              featured ? "text-3xl md:text-4xl" : compact ? "text-xl" : "text-2xl",
+              textVariants({ variant: featured ? "subtitle" : "heading" }),
+              "mt-5",
+              featured && "text-3xl md:text-4xl",
+              !featured && !compact && "text-2xl",
             )}
           >
             {programme.title}
@@ -92,8 +95,9 @@ export function ProgrammeCard({
 
           <p
             className={cn(
-              "mt-3 leading-relaxed text-muted-foreground",
-              compact ? "line-clamp-2 text-sm" : "line-clamp-3 text-[0.9375rem]",
+              textVariants({ variant: "body" }),
+              "mt-3",
+              compact ? "line-clamp-2 text-base" : "line-clamp-3 text-base",
             )}
           >
             {programme.summary}

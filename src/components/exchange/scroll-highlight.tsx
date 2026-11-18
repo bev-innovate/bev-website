@@ -7,7 +7,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 
 /**
  * Text whose key phrases warm to the Exchange teal as the reader scrolls through it.
@@ -66,7 +66,16 @@ export function ScrollHighlight({
   const order = isPhrase.map((flag, i) => (flag ? isPhrase.slice(0, i).filter(Boolean).length : -1));
 
   const children = parts.map((part, i) => {
-    if (!isPhrase[i]) return part;
+    // A line break in the text starts a new paragraph, with a little air above it.
+    if (!isPhrase[i]) {
+      if (!part.includes("\n")) return part;
+      return part.split("\n").map((line, j) => (
+        <Fragment key={`${i}-${j}`}>
+          {j > 0 ? <span aria-hidden className="block h-[0.8em]" /> : null}
+          {line}
+        </Fragment>
+      ));
+    }
     const words = part.slice(2, -2);
     const index = order[i];
     if (reduce) {

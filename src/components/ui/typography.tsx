@@ -11,7 +11,9 @@ import { cn } from "@/lib/utils";
  *   eyebrow   small caps label above a title          (who/what this is)
  *   display   the page's one big statement             (h1)
  *   title     a section's title                        (h2)
+ *   headline  a title in a half-width column, or an article's headline
  *   subtitle  a group inside a section                 (h3)
+ *   heading   the title on a card or list item          (h3)
  *   lead      one or two sentences that open a section (the point)
  *   body      supporting text, kept to short paragraphs
  *   caption   small print, attributions, notes
@@ -25,9 +27,11 @@ const textVariants = cva("", {
       eyebrow: "text-sm font-bold tracking-[0.14em] uppercase",
       display: "display text-[clamp(2.75rem,7vw,5.75rem)] text-foreground",
       title: "display text-[clamp(2.5rem,5.5vw,4.5rem)] text-foreground",
-      subtitle: "font-display text-[clamp(1.5rem,2.4vw,2rem)] leading-tight font-bold text-foreground",
-      lead: "text-[clamp(1.25rem,2vw,1.5rem)] leading-snug text-foreground",
-      body: "max-w-prose text-lg leading-relaxed text-muted-foreground",
+      headline: "display text-[clamp(2.25rem,4.2vw,3.5rem)] text-foreground",
+      subtitle: "font-display text-[clamp(1.5rem,2.4vw,2rem)] leading-tight font-bold text-balance text-foreground",
+      heading: "font-display text-xl leading-snug font-bold text-balance text-foreground",
+      lead: "text-[clamp(1.25rem,2vw,1.5rem)] leading-snug text-pretty text-foreground",
+      body: "max-w-prose text-lg leading-relaxed text-pretty text-muted-foreground",
       caption: "text-sm leading-relaxed text-muted-foreground",
     },
   },
@@ -38,7 +42,9 @@ const defaultTag = {
   eyebrow: "p",
   display: "h1",
   title: "h2",
+  headline: "h2",
   subtitle: "h3",
+  heading: "h3",
   lead: "p",
   body: "p",
   caption: "p",

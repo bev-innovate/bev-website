@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { Reveal } from "@/components/ui/reveal";
+import { Text } from "@/components/ui/typography";
 
 /**
  * "Who Climate Expeditions Are For".
@@ -46,10 +47,10 @@ export function AudienceGrid({
                   <Icon className="size-5" aria-hidden />
                 </span>
 
-                <h3 className="mt-5 pr-12 text-lg leading-snug font-bold text-white">
+                <Text variant="heading" className="mt-5 pr-12 text-lg text-white">
                   {audience.question}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/85">{audience.answer}</p>
+                </Text>
+                <Text className="mt-3 text-base text-white/85">{audience.answer}</Text>
               </div>
             </article>
           </Reveal>

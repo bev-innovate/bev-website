@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 
 import { ButtonLink } from "@/components/ui/button";
+import { Text } from "@/components/ui/typography";
 
 /**
  * Closing call to action.
@@ -26,13 +27,19 @@ export function CtaBand({
     <section className="py-16 md:py-20">
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-8 border-t border-border pt-12">
-          <div className="max-w-2xl">
-            {eyebrow ? <span className="text-primary">{eyebrow}</span> : null}
-            <h2 className="mt-4 font-display text-3xl font-bold text-balance text-ink lg:text-4xl">
+          <div className="max-w-3xl">
+            {eyebrow ? (
+              <Text variant="eyebrow" className="text-primary">
+                {eyebrow}
+              </Text>
+            ) : null}
+            <Text variant="title" className={eyebrow ? "mt-3" : undefined}>
               {title}
-            </h2>
+            </Text>
             {intro ? (
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{intro}</p>
+              <Text variant="lead" className="mt-5 text-muted-foreground">
+                {intro}
+              </Text>
             ) : null}
           </div>
 

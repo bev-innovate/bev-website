@@ -3,7 +3,9 @@
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+import { textVariants } from "@/components/ui/typography";
 import type { Stat } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 /** Splits "370+" / "$500M" into prefix, number and suffix so only the digits animate. */
 function parseValue(value: string) {
@@ -114,13 +116,13 @@ export function TrackRecord({
         className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-mangrove-deep via-mangrove to-teal"
       />
       <div className="shell" ref={ref}>
-        <motion.h2 {...rise(0)} className="font-display text-3xl font-bold lg:text-4xl">
+        <motion.h2 {...rise(0)} className={cn(textVariants({ variant: "title" }), "text-white")}>
           {heading}
         </motion.h2>
         {intro ? (
           <motion.p
             {...rise(0.12)}
-            className="mt-4 max-w-2xl text-lg leading-relaxed text-balance text-white/75"
+            className={cn(textVariants({ variant: "lead" }), "mt-5 max-w-2xl text-white/85")}
           >
             {intro}
           </motion.p>

@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
 /**
@@ -56,23 +57,16 @@ export function SectionHead({
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      <h2
-        className={cn(
-          "font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.1] font-bold text-balance",
-          onDark ? "text-white" : "text-foreground",
-        )}
-      >
+      <Text variant="title" className={cn(onDark && "text-white")}>
         {heading}
-      </h2>
+      </Text>
       {intro ? (
-        <p
-          className={cn(
-            "mt-4 text-lg leading-relaxed",
-            onDark ? "text-white/80" : "text-muted-foreground",
-          )}
+        <Text
+          variant="lead"
+          className={cn("mt-5", onDark ? "text-white/85" : "text-muted-foreground", align === "center" && "mx-auto")}
         >
           {intro}
-        </p>
+        </Text>
       ) : null}
     </div>
   );

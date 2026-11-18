@@ -5,6 +5,8 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 import { ButtonLink } from "@/components/ui/button";
+import { textVariants } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -47,8 +49,8 @@ export function Hero({
       </div>
 
       <div className="shell relative py-16 md:py-20 lg:py-36">
-        <div className="max-w-3xl">
-          <motion.h1 {...step(0)} className="display text-[clamp(2.25rem,5.6vw,4rem)]">
+        <div className="max-w-4xl">
+          <motion.h1 {...step(0)} className={cn(textVariants({ variant: "display" }), "text-white")}>
             {headline[0]}
             <br />
             {headline[1]}
@@ -56,7 +58,7 @@ export function Hero({
 
           <motion.p
             {...step(1)}
-            className="mt-7 max-w-2xl text-lg leading-relaxed text-white/85 md:text-xl"
+            className={cn(textVariants({ variant: "lead" }), "mt-7 max-w-2xl text-white/90")}
           >
             {intro}
           </motion.p>

@@ -3,22 +3,23 @@ import type { PortableTextBlock } from "@portabletext/types";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Text } from "@/components/ui/typography";
 import { resolveImage } from "@/sanity/image";
 
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="mt-6 text-[1.0625rem] leading-[1.75] text-ink-muted">{children}</p>
+      <Text className="mt-6 leading-[1.75]">{children}</Text>
     ),
     h2: ({ children }) => (
-      <h2 className="mt-14 font-display text-3xl leading-tight font-bold text-ink">
+      <Text variant="subtitle" as="h2" className="mt-14">
         {children}
-      </h2>
+      </Text>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-10 font-display text-2xl leading-tight font-bold text-ink">
+      <Text variant="heading" className="mt-10">
         {children}
-      </h3>
+      </Text>
     ),
     blockquote: ({ children }) => (
       <blockquote className="mt-10 border-l-2 border-yellow pl-6 font-display text-2xl leading-snug text-ink">

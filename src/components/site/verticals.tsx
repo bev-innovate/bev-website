@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
+import { Text } from "@/components/ui/typography";
 
 /**
  * "Our sectors of focus".
@@ -36,12 +37,10 @@ export function Verticals({
     <section className="py-16 md:py-20">
       <div className="shell">
         <Reveal className="max-w-3xl">
-          <h2 className="font-display text-[clamp(1.75rem,3.8vw,2.75rem)] font-bold text-ink">
-            {heading}
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-balance text-muted-foreground">
+          <Text variant="title">{heading}</Text>
+          <Text variant="lead" className="mt-5 text-muted-foreground">
             {intro}
-          </p>
+          </Text>
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -64,14 +63,10 @@ export function Verticals({
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <h3
-                      className={`font-display text-xl leading-snug font-bold ${accent.title}`}
-                    >
+                    <Text variant="heading" className={accent.title}>
                       {vertical.title}
-                    </h3>
-                    <p className="mt-2.5 leading-relaxed text-muted-foreground">
-                      {vertical.tagline}
-                    </p>
+                    </Text>
+                    <Text className="mt-2.5 text-base">{vertical.tagline}</Text>
                   </div>
                 </Card>
               </Reveal>
@@ -80,10 +75,10 @@ export function Verticals({
         </div>
 
         <Reveal className="mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-border pt-10">
-          <p className="max-w-xl text-lg text-balance text-muted-foreground">
+          <Text className="max-w-xl">
             Building in one of these? We would love to put you in front of the customers and
             capital who can take it further.
-          </p>
+          </Text>
           <ButtonLink href="/contact" size="lg" variant="purple" className="shrink-0">
             Join our ecosystem
             <ArrowRight className="size-4" aria-hidden />

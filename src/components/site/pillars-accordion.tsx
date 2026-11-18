@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useId, useState } from "react";
 
+import { textVariants } from "@/components/ui/typography";
 import { pillars } from "@/lib/seed-content";
 import { cn } from "@/lib/utils";
 
@@ -39,7 +40,10 @@ export function PillarsAccordion({ items }: { items: Pillar[] }) {
                   aria-expanded={open}
                   aria-controls={panelId}
                   onClick={() => setOpenIndex(open ? -1 : i)}
-                  className="flex w-full items-center justify-between gap-6 py-6 text-left text-xl font-semibold text-white transition-opacity hover:opacity-80 md:text-2xl"
+                  className={cn(
+                    textVariants({ variant: "subtitle" }),
+                    "flex w-full items-center justify-between gap-6 py-6 text-left text-white transition-opacity hover:opacity-80",
+                  )}
                 >
                   {pillar.title}
                   <span className="grid size-7 shrink-0 place-items-center text-white/80">
@@ -60,8 +64,10 @@ export function PillarsAccordion({ items }: { items: Pillar[] }) {
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="space-y-4 pb-8 text-[0.9375rem] leading-relaxed text-white/85">
-                      <p>{pillar.description}</p>
+                    <div className="max-w-prose space-y-4 pb-8 text-lg leading-relaxed text-white/85">
+                      <p className={cn(textVariants({ variant: "lead" }), "text-white")}>
+                        {pillar.description}
+                      </p>
 
                       {"body" in pillar && pillar.body
                         ? pillar.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)

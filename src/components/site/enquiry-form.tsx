@@ -54,14 +54,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   );
 }
 
-export function EnquiryForm({
-  className,
-  defaultInterest = "",
-}: {
-  className?: string;
-  /** Pre-selects the interest, e.g. from the Exchange page's "express interest" link. */
-  defaultInterest?: string;
-}) {
+export function EnquiryForm({ className }: { className?: string }) {
   const [state, formAction] = useActionState(enquiryAction, initial);
   const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
   const reduceMotion = useReducedMotion();
@@ -216,7 +209,7 @@ export function EnquiryForm({
             <select
               id="interest"
               name="interest"
-              defaultValue={defaultInterest}
+              defaultValue=""
               className={cn(
                 "flex h-11 w-full appearance-none rounded-(--radius) border border-input bg-background px-4 pr-10 text-foreground",
                 "transition-[color,box-shadow,border-color] duration-200",

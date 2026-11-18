@@ -104,7 +104,7 @@ export function ExpeditionCarousel({ slides }: { slides: Slide[] }) {
               panel[slide.accent],
             )}
           >
-            <div className="space-y-4 text-[0.9375rem] leading-relaxed md:text-base">
+            <div className="max-w-prose space-y-4 text-lg leading-relaxed">
               {slide.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

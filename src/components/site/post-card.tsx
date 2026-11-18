@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { cardVariants } from "@/components/ui/card";
+import { Text } from "@/components/ui/typography";
 import type { Post } from "@/lib/types";
 import { cn, formatDate } from "@/lib/utils";
 
@@ -45,14 +46,12 @@ export function PostCard({ post }: { post: Post }) {
           {post.readingTime ? <span>{post.readingTime} min read</span> : null}
         </div>
 
-        <h3 className="mt-3 font-display text-xl leading-snug font-bold text-balance text-foreground">
+        <Text variant="heading" className="mt-3">
           {post.title}
-        </h3>
+        </Text>
 
         {post.excerpt ? (
-          <p className="mt-3 line-clamp-3 leading-relaxed text-muted-foreground">
-            {post.excerpt}
-          </p>
+          <Text className="mt-3 line-clamp-3 text-base">{post.excerpt}</Text>
         ) : null}
 
         <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-medium text-primary">

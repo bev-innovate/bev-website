@@ -1,5 +1,5 @@
 import {
-  ArrowRight,
+  ArrowUpRight,
   CalendarHeart,
   DoorOpen,
   Globe2,
@@ -7,7 +7,6 @@ import {
   HeartHandshake,
   Landmark,
   Leaf,
-  MessageCircleHeart,
   Quote,
   Sprout,
   Target,
@@ -151,14 +150,14 @@ export function ExchangeHero({ hero, mark }: { hero: Exchange["hero"]; mark: Exc
 /* ── 01 What is it? ─────────────────────────────────────────────────────────── */
 
 /**
- * Title, one-line lead, a sentence of body and a short aside beside the photographs;
+ * Title, one-line lead and a couple of sentences of body beside the photographs;
  * then the topics and the formats as cards, so nothing runs to a long paragraph.
  */
 export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
   return (
     <section className="py-16 md:py-24">
-      <div className="shell space-y-12 md:space-y-16">
-        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+      <div className="shell space-y-10 md:space-y-14">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
           <div className="lg:order-2">
             <SectionTitle number={what.number} label={what.label} />
             <ScrollHighlight text={what.lead} className={cn(textVariants({ variant: "lead" }), "mt-8")} />
@@ -167,10 +166,6 @@ export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
               ink="muted"
               className={cn(textVariants({ variant: "body" }), "mt-4")}
             />
-            <p className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-exchange-mist px-5 py-4 font-display text-lg font-bold text-exchange-ink">
-              <MessageCircleHeart className="size-6 shrink-0 text-exchange" aria-hidden />
-              {what.aside}
-            </p>
           </div>
 
           <div className="lg:order-1">
@@ -231,8 +226,8 @@ export function ExchangeWho({
 }) {
   return (
     <section className="py-16 md:py-24">
-      <div className="shell space-y-16 md:space-y-20">
-        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+      <div className="shell space-y-10 md:space-y-14">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionTitle number={who.number} label={who.label} />
             <ScrollHighlight text={who.lead} className={cn(textVariants({ variant: "lead" }), "mt-8")} />
@@ -247,12 +242,15 @@ export function ExchangeWho({
           <Text className="text-exchange-ink">{who.membership}</Text>
           <ButtonLink
             href={who.cta.href}
+            target="_blank"
+            rel="noopener noreferrer"
             size="lg"
-            className="group h-auto shrink-0 bg-exchange px-8 py-4 text-[1.1875rem] font-bold text-white shadow-none transition-all hover:-translate-y-0.5 hover:bg-exchange hover:shadow-[0_14px_30px_-14px_rgba(12,161,157,0.8)]"
+            className="group h-auto w-full shrink-0 bg-exchange px-6 py-4 text-center text-[1.1875rem] whitespace-normal md:w-auto md:px-8 font-bold text-white shadow-none transition-all hover:-translate-y-0.5 hover:bg-exchange hover:shadow-[0_14px_30px_-14px_rgba(12,161,157,0.8)]"
           >
             {who.cta.label}
-            <ArrowRight
-              className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+            <span className="sr-only"> (opens in a new tab)</span>
+            <ArrowUpRight
+              className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               aria-hidden
             />
           </ButtonLink>
