@@ -17,6 +17,7 @@ import Image from "next/image";
 
 import { MediaPlaceholder } from "@/components/exchange/media-placeholder";
 import { ParallaxCollage } from "@/components/exchange/parallax-collage";
+import { QuoteMarquee } from "@/components/exchange/quote-marquee";
 import { ScrollHighlight } from "@/components/exchange/scroll-highlight";
 import { VoicesVideo } from "@/components/exchange/voices-video";
 import { ButtonLink } from "@/components/ui/button";
@@ -238,14 +239,14 @@ export function ExchangeWho({
         <PointGrid points={who.points} columns={3} />
 
         {/* The invitation, then the one action on the page. */}
-        <div className="flex flex-col items-start gap-6 rounded-[2rem] bg-exchange-mist p-8 md:flex-row md:items-center md:justify-between md:p-10">
-          <Text className="text-exchange-ink">{who.membership}</Text>
+        <div className="flex flex-col items-center gap-7 rounded-[2rem] bg-exchange-mist px-5 py-10 text-center md:px-10 md:py-14">
+          <Text className="mx-auto text-exchange-ink">{who.membership}</Text>
           <ButtonLink
             href={who.cta.href}
             target="_blank"
             rel="noopener noreferrer"
             size="lg"
-            className="group h-auto w-full shrink-0 bg-exchange px-6 py-4 text-center text-[1.1875rem] whitespace-normal md:w-auto md:px-8 font-bold text-white shadow-none transition-all hover:-translate-y-0.5 hover:bg-exchange hover:shadow-[0_14px_30px_-14px_rgba(12,161,157,0.8)]"
+            className="group h-auto max-w-full shrink-0 justify-center bg-exchange px-4 py-4 text-center text-base whitespace-normal min-[340px]:whitespace-nowrap sm:px-8 sm:text-[1.1875rem] font-bold text-white shadow-none transition-all hover:-translate-y-0.5 hover:bg-exchange hover:shadow-[0_14px_30px_-14px_rgba(12,161,157,0.8)]"
           >
             {who.cta.label}
             <span className="sr-only"> (opens in a new tab)</span>
@@ -261,30 +262,7 @@ export function ExchangeWho({
             <Text variant="eyebrow" className="text-exchange">
               {founderQuotes.label}
             </Text>
-            <ul className="mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible">
-              {founderQuotes.quotes.map((q, i) => (
-                <Reveal
-                  as="li"
-                  key={i}
-                  delay={i * 0.1}
-                  className="w-[80%] shrink-0 snap-start transition-transform duration-300 hover:-translate-y-1 md:w-auto"
-                >
-                  {q.text ? (
-                    <blockquote className="h-full rounded-3xl bg-exchange-mist p-7 text-lg leading-relaxed text-exchange-ink">
-                      <Quote className="mb-3 size-6 text-exchange-sun" aria-hidden />
-                      {q.text}
-                    </blockquote>
-                  ) : (
-                    <div className="grid h-full min-h-40 place-items-center rounded-3xl border-2 border-dashed border-exchange/45 bg-exchange-mist p-7 text-center text-exchange-ink">
-                      <span>
-                        <Quote className="mx-auto mb-3 size-6 text-exchange-sun" aria-hidden />
-                        {q.placeholder}
-                      </span>
-                    </div>
-                  )}
-                </Reveal>
-              ))}
-            </ul>
+            <QuoteMarquee quotes={founderQuotes.quotes} className="mt-5" />
           </div>
         ) : null}
       </div>
