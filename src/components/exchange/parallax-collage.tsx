@@ -95,7 +95,9 @@ export function ParallaxCollage({ photos }: { photos: readonly ExchangeMedia[] }
   const slots = layouts[photos.length >= 3 ? 3 : 2];
 
   return (
-    <div ref={ref} className="relative">
+    // Bottom padding as deep as the furthest drift, so a photo travelling down never runs
+    // into whatever follows the collage.
+    <div ref={ref} className="relative pb-24">
       {photos.slice(0, slots.length).map((media, i) => (
         <Layer
           key={media.src || media.placeholder}

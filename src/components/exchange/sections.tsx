@@ -1,4 +1,19 @@
-import { ArrowRight, Quote } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarHeart,
+  DoorOpen,
+  Globe2,
+  Handshake,
+  HeartHandshake,
+  Landmark,
+  Leaf,
+  MessageCircleHeart,
+  Quote,
+  Sprout,
+  Target,
+  UserPlus,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
 
 import { MediaPlaceholder } from "@/components/exchange/media-placeholder";
@@ -6,11 +21,27 @@ import { ParallaxCollage } from "@/components/exchange/parallax-collage";
 import { ScrollHighlight } from "@/components/exchange/scroll-highlight";
 import { VoicesVideo } from "@/components/exchange/voices-video";
 import { ButtonLink } from "@/components/ui/button";
+import { FeatureCard } from "@/components/ui/feature-card";
 import { Reveal } from "@/components/ui/reveal";
-import type { ExchangeMedia, exchange } from "@/lib/exchange-content";
+import { Text, textVariants } from "@/components/ui/typography";
+import type { ExchangeIcon, ExchangeMedia, ExchangePoint, exchange } from "@/lib/exchange-content";
 import { cn } from "@/lib/utils";
 
 type Exchange = typeof exchange;
+
+const icons = {
+  customers: Handshake,
+  markets: Globe2,
+  fundraising: Landmark,
+  impact: Sprout,
+  roundtable: Users,
+  sprint: Target,
+  evening: CalendarHeart,
+  introduction: UserPlus,
+  growing: Leaf,
+  met: HeartHandshake,
+  open: DoorOpen,
+} satisfies Record<ExchangeIcon, unknown>;
 
 /** A photograph in a rounded frame, or a labelled placeholder in the same frame. */
 function Photo({ media, sizes, className }: { media: ExchangeMedia; sizes: string; className: string }) {
@@ -30,25 +61,51 @@ function Photo({ media, sizes, className }: { media: ExchangeMedia; sizes: strin
   );
 }
 
-/**
- * The section title: the numeral sits tight above the question, set large. The same three
- * questions run down the page, so a reader always knows which one they are in.
- */
+/** The numeral tight above the section's question, on the shared `title` step. */
 function SectionTitle({ number, label }: { number: string; label: string }) {
   return (
     <div>
       <p className="font-display text-2xl leading-none font-extrabold text-exchange">{number}</p>
-      <h2 className="display mt-1 text-[clamp(2.75rem,6.5vw,5.25rem)] text-foreground">{label}</h2>
+      <Text variant="title" className="mt-1">
+        {label}
+      </Text>
+    </div>
+  );
+}
+
+/** A small group of cards under its own subtitle, revealed one after another. */
+function PointGrid({
+  heading,
+  points,
+  columns,
+}: {
+  heading?: string;
+  points: readonly ExchangePoint[];
+  columns: 3 | 4;
+}) {
+  return (
+    <div>
+      {heading ? <Text variant="subtitle">{heading}</Text> : null}
+      <ul
+        className={cn(
+          "grid gap-4 sm:grid-cols-2",
+          heading && "mt-6",
+          columns === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3",
+        )}
+      >
+        {points.map((point, i) => (
+          <Reveal as="li" key={point.title} delay={i * 0.08} distance={16} className="h-full">
+            <FeatureCard icon={icons[point.icon]} title={point.title} description={point.description} />
+          </Reveal>
+        ))}
+      </ul>
     </div>
   );
 }
 
 /* ── Opening ────────────────────────────────────────────────────────────────── */
 
-/**
- * Two thirds words, one third the vertical voices film on desktop; the film drops below
- * the words on a phone. No rule underneath: the page runs straight into "What is it?".
- */
+/** Two thirds words, one third the vertical voices film on desktop. */
 export function ExchangeHero({ hero, mark }: { hero: Exchange["hero"]; mark: Exchange["mark"] }) {
   const { video } = hero;
   return (
@@ -57,21 +114,18 @@ export function ExchangeHero({ hero, mark }: { hero: Exchange["hero"]; mark: Exc
         <div>
           <div className="flex animate-rise items-center gap-3">
             <Image src={mark.src} alt="" width={56} height={56} priority className="size-12 md:size-14" />
-            <span className="text-sm font-bold tracking-[0.14em] text-exchange uppercase">
+            <Text variant="eyebrow" className="text-exchange">
               {hero.name}
-            </span>
+            </Text>
           </div>
 
-          <h1
-            className="display mt-8 animate-rise text-[clamp(2.75rem,7vw,5.75rem)] text-foreground"
-            style={{ animationDelay: "0.08s" }}
-          >
+          <Text variant="display" className="mt-8 animate-rise" style={{ animationDelay: "0.08s" }}>
             {hero.headline}
-          </h1>
+          </Text>
           <div className="animate-rise" style={{ animationDelay: "0.16s" }}>
             <ScrollHighlight
               text={hero.lede}
-              className="mt-6 max-w-2xl text-xl leading-relaxed text-foreground"
+              className={cn(textVariants({ variant: "lead" }), "mt-6 max-w-2xl")}
             />
           </div>
         </div>
@@ -96,30 +150,36 @@ export function ExchangeHero({ hero, mark }: { hero: Exchange["hero"]; mark: Exc
 
 /* ── 01 What is it? ─────────────────────────────────────────────────────────── */
 
-/** Words on the right, the overlapping photographs on the left drifting at their own pace. */
+/**
+ * Title, one-line lead, a sentence of body and a short aside beside the photographs;
+ * then the topics and the formats as cards, so nothing runs to a long paragraph.
+ */
 export function ExchangeWhat({ what }: { what: Exchange["what"] }) {
   return (
     <section className="py-16 md:py-24">
-      <div className="shell grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-        <div className="lg:order-2">
-          <SectionTitle number={what.number} label={what.label} />
-          <div className="mt-8 space-y-5">
-            {what.paragraphs.map((p, i) => (
-              <ScrollHighlight
-                key={p}
-                text={p}
-                className={cn(
-                  "leading-relaxed text-foreground",
-                  i === 0 ? "text-[clamp(1.2rem,2vw,1.45rem)]" : "text-lg",
-                )}
-              />
-            ))}
+      <div className="shell space-y-12 md:space-y-16">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          <div className="lg:order-2">
+            <SectionTitle number={what.number} label={what.label} />
+            <ScrollHighlight text={what.lead} className={cn(textVariants({ variant: "lead" }), "mt-8")} />
+            <ScrollHighlight
+              text={what.body}
+              ink="muted"
+              className={cn(textVariants({ variant: "body" }), "mt-4")}
+            />
+            <p className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-exchange-mist px-5 py-4 font-display text-lg font-bold text-exchange-ink">
+              <MessageCircleHeart className="size-6 shrink-0 text-exchange" aria-hidden />
+              {what.aside}
+            </p>
+          </div>
+
+          <div className="lg:order-1">
+            <ParallaxCollage photos={what.photos} />
           </div>
         </div>
 
-        <div className="lg:order-1">
-          <ParallaxCollage photos={what.photos} />
-        </div>
+        <PointGrid heading={what.challenges.heading} points={what.challenges.points} columns={4} />
+        <PointGrid heading={what.formats.heading} points={what.formats.points} columns={4} />
       </div>
     </section>
   );
@@ -143,14 +203,12 @@ export function ExchangeWhy({ why }: { why: Exchange["why"] }) {
             <ScrollHighlight
               as="blockquote"
               text={quote.text}
-              className="mt-4 font-display text-[clamp(1.3rem,2.3vw,1.8rem)] leading-snug font-bold text-pretty"
+              className="mt-4 font-display text-[clamp(1.25rem,2.1vw,1.65rem)] leading-snug font-bold text-pretty"
             />
-            <figcaption className="mt-6 text-muted-foreground">
+            <figcaption className={cn(textVariants({ variant: "caption" }), "mt-6 text-base")}>
               <span className="font-bold text-foreground">{quote.name}</span>, {quote.title}
             </figcaption>
-            <p className="mt-10 border-t border-border pt-8 text-lg leading-relaxed text-muted-foreground">
-              {why.intro}
-            </p>
+            <Text className="mt-10 border-t border-border pt-8">{why.intro}</Text>
           </figure>
         </Reveal>
 
@@ -173,40 +231,38 @@ export function ExchangeWho({
 }) {
   return (
     <section className="py-16 md:py-24">
-      <div className="shell">
+      <div className="shell space-y-16 md:space-y-20">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionTitle number={who.number} label={who.label} />
-            <div className="mt-8 space-y-4">
-              {who.paragraphs.map((p) => (
-                <ScrollHighlight key={p} text={p} className="text-lg leading-relaxed text-foreground" />
-              ))}
-            </div>
-            {/*
-              The Exchange teal with white words, set large and bold so they hold their
-              contrast. The arrow nudges forward on hover.
-            */}
-            <ButtonLink
-              href={who.cta.href}
-              size="lg"
-              className="group mt-9 h-auto bg-exchange px-8 py-4 text-[1.1875rem] font-bold text-white shadow-none transition-all hover:-translate-y-0.5 hover:bg-exchange hover:shadow-[0_14px_30px_-14px_rgba(12,161,157,0.8)]"
-            >
-              {who.cta.label}
-              <ArrowRight
-                className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                aria-hidden
-              />
-            </ButtonLink>
+            <ScrollHighlight text={who.lead} className={cn(textVariants({ variant: "lead" }), "mt-8")} />
           </div>
-
           <ParallaxCollage photos={who.photos} />
         </div>
 
+        <PointGrid points={who.points} columns={3} />
+
+        {/* The invitation, then the one action on the page. */}
+        <div className="flex flex-col items-start gap-6 rounded-[2rem] bg-exchange-mist p-8 md:flex-row md:items-center md:justify-between md:p-10">
+          <Text className="text-exchange-ink">{who.membership}</Text>
+          <ButtonLink
+            href={who.cta.href}
+            size="lg"
+            className="group h-auto shrink-0 bg-exchange px-8 py-4 text-[1.1875rem] font-bold text-white shadow-none transition-all hover:-translate-y-0.5 hover:bg-exchange hover:shadow-[0_14px_30px_-14px_rgba(12,161,157,0.8)]"
+          >
+            {who.cta.label}
+            <ArrowRight
+              className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+              aria-hidden
+            />
+          </ButtonLink>
+        </div>
+
         {founderQuotes.show ? (
-          <div className="mt-24">
-            <p className="text-sm font-bold tracking-[0.14em] text-exchange uppercase">
+          <div>
+            <Text variant="eyebrow" className="text-exchange">
               {founderQuotes.label}
-            </p>
+            </Text>
             <ul className="mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible">
               {founderQuotes.quotes.map((q, i) => (
                 <Reveal
