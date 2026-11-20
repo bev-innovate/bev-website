@@ -17,25 +17,22 @@ import { cn } from "@/lib/utils";
 
 export interface MarqueeQuote {
   text: string;
-  placeholder: string;
+  name: string;
+  company: string;
 }
 
 /** Pixels per frame at 60fps. */
 const SPEED = 0.45;
 
 function Card({ quote }: { quote: MarqueeQuote }) {
-  return quote.text ? (
-    <blockquote className="flex h-full flex-col rounded-3xl bg-exchange-mist p-7 text-lg leading-relaxed text-exchange-ink">
+  return (
+    <figure className="flex h-full flex-col rounded-3xl bg-exchange-mist p-7 text-exchange-ink">
       <Quote className="mb-3 size-6 shrink-0 text-exchange-sun" aria-hidden />
-      {quote.text}
-    </blockquote>
-  ) : (
-    <div className="grid h-full min-h-40 place-items-center rounded-3xl border-2 border-dashed border-exchange/45 bg-exchange-mist p-7 text-center text-exchange-ink">
-      <span>
-        <Quote className="mx-auto mb-3 size-6 text-exchange-sun" aria-hidden />
-        {quote.placeholder}
-      </span>
-    </div>
+      <blockquote className="text-lg leading-relaxed">{quote.text}</blockquote>
+      <figcaption className="mt-auto pt-5 text-base">
+        <span className="font-bold">{quote.name}</span>, {quote.company}
+      </figcaption>
+    </figure>
   );
 }
 

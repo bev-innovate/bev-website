@@ -232,16 +232,43 @@ export const exchange = {
   },
 
   /**
-   * Optional: 3 to 5 short, anonymous founder quotes, once consent is obtained. Placeholders
-   * show until then; set `show` to false to leave the row out entirely.
+   * Founder quotes from Exchange sessions, shown as a two-way marquee at the foot of the
+   * page. Set `show` to false to leave the row out entirely.
    */
   founderQuotes: {
     show: true,
     label: "In founders’ words",
     quotes: [
-      { text: "", placeholder: "Anonymous founder quote, added once consent is given." },
-      { text: "", placeholder: "Anonymous founder quote, added once consent is given." },
-      { text: "", placeholder: "Anonymous founder quote, added once consent is given." },
+      {
+        text: "It was almost like therapy! It’s unbelievable how much support we founders can get from each other. We need a community like this!",
+        name: "Dan Tennakoon",
+        company: "RE24",
+      },
+      {
+        text: "I feel privileged to have been part of it. A nice group, and we shared our ups and downs together. ‘Alcoholics Anonymous for Entrepreneurs’!",
+        name: "Craig Jamieson",
+        company: "Straw Innovations",
+      },
+      {
+        text: "Today’s roundtable was great, and I found it really valuable to discuss each other’s main challenges in detail. Lots of great overlap, and insights learnt!",
+        name: "Anjali Devadasan",
+        company: "Treeva",
+      },
+      {
+        text: "I thought the session was excellent. Small groups like we had generate the best results.",
+        name: "John Farley",
+        company: "iBoxit",
+      },
+      {
+        text: "Access to independent, open, honest feedback with no agenda is invaluable.",
+        name: "Alec Anderson",
+        company: "Koolmill Systems",
+      },
+      {
+        text: "Curated groups around specific climate themes would be more valuable.",
+        name: "Ben Warren",
+        company: "Adaptation Asia",
+      },
     ],
   },
 } as const;
