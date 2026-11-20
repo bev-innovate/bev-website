@@ -8,7 +8,7 @@
  * `body` to a sentence or two, and puts its points on cards (an icon, a short heading and
  * one line) rather than in long paragraphs.
  *
- * Phrases in [[double brackets]] warm to the Exchange teal as the reader scrolls past
+ * Phrases in [[double brackets]] warm to golden yellow as the reader scrolls past
  * them (see ScrollHighlight). The brackets never show on the page.
  *
  * - `EXCHANGE_LIVE`: while false the page is left out of search engines and the sitemap,
