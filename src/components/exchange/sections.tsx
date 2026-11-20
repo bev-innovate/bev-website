@@ -19,11 +19,11 @@ import Image from "next/image";
 
 import { MediaPlaceholder } from "@/components/exchange/media-placeholder";
 import { ParallaxCollage } from "@/components/exchange/parallax-collage";
+import { PointCard } from "@/components/exchange/point-card";
 import { QuoteMarquee } from "@/components/exchange/quote-marquee";
 import { ScrollHighlight } from "@/components/exchange/scroll-highlight";
 import { VoicesVideo } from "@/components/exchange/voices-video";
 import { ButtonLink } from "@/components/ui/button";
-import { FeatureCard } from "@/components/ui/feature-card";
 import { Reveal } from "@/components/ui/reveal";
 import { Text, textVariants } from "@/components/ui/typography";
 import type { ExchangeIcon, ExchangeMedia, ExchangePoint, exchange } from "@/lib/exchange-content";
@@ -46,6 +46,11 @@ const icons = {
   met: HeartHandshake,
   open: DoorOpen,
 } satisfies Record<ExchangeIcon, unknown>;
+
+function Icon({ name }: { name: ExchangeIcon }) {
+  const Glyph = icons[name];
+  return <Glyph className="size-6" aria-hidden />;
+}
 
 /** A photograph in a rounded frame, or a labelled placeholder in the same frame. */
 function Photo({ media, sizes, className }: { media: ExchangeMedia; sizes: string; className: string }) {
@@ -99,7 +104,7 @@ function PointGrid({
       >
         {points.map((point, i) => (
           <Reveal as="li" key={point.title} delay={i * 0.08} distance={16} className="h-full">
-            <FeatureCard icon={icons[point.icon]} title={point.title} description={point.description} />
+            <PointCard icon={<Icon name={point.icon} />} title={point.title} description={point.description} />
           </Reveal>
         ))}
       </ul>
