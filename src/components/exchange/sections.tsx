@@ -147,6 +147,7 @@ export function ExchangeHero({ hero, mark }: { hero: Exchange["hero"]; mark: Exc
           <div className="animate-rise" style={{ animationDelay: "0.16s" }}>
             <ScrollHighlight
               text={hero.lede}
+              onLoad
               className={cn(textVariants({ variant: "lead" }), "mt-6 max-w-2xl")}
             />
           </div>

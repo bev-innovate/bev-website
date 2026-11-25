@@ -40,14 +40,33 @@ function Phrase({
   return <motion.span style={{ color }}>{children}</motion.span>;
 }
 
+/** A phrase that warms on its own shortly after the page opens, for text already on screen. */
+function TimedPhrase({ children, index, from }: { children: string; index: number; from: string }) {
+  return (
+    <motion.span
+      initial={{ color: from }}
+      animate={{ color: TO }}
+      transition={{ delay: 0.6 + index * 0.35, duration: 0.7, ease: "easeOut" }}
+    >
+      {children}
+    </motion.span>
+  );
+}
+
 export function ScrollHighlight({
   text,
   as = "p",
   ink = "foreground",
+  onLoad = false,
   className,
 }: {
   text: string;
   as?: "p" | "blockquote";
+  /**
+   * Warm the phrases one after another as the page opens instead of on scroll, for text
+   * that is already on screen at the top of the page and could never be scrolled through.
+   */
+  onLoad?: boolean;
   /** The colour of the surrounding text, so phrases start out matching it. */
   ink?: keyof typeof INKS;
   className?: string;
@@ -84,6 +103,13 @@ export function ScrollHighlight({
         <span key={i} style={{ color: TO }}>
           {words}
         </span>
+      );
+    }
+    if (onLoad) {
+      return (
+        <TimedPhrase key={i} index={index} from={INKS[ink]}>
+          {words}
+        </TimedPhrase>
       );
     }
     // Each phrase gets its own slice of the scroll, overlapping its neighbours slightly.
