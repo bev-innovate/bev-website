@@ -221,7 +221,7 @@ export function ExchangeWhy({ why }: { why: Exchange["why"] }) {
         <Reveal>
           <figure className="rounded-[2rem] bg-white p-8 text-foreground shadow-[0_30px_60px_-30px_rgba(6,45,43,0.45)] md:p-12 lg:p-14">
             <SectionTitle number={why.number} label={why.label} />
-            <Quote className="mt-10 size-10 text-exchange-sun" aria-hidden />
+            <Quote className="mt-10 size-10 rotate-180 text-exchange-sun" aria-hidden />
             <ScrollHighlight
               as="blockquote"
               text={quote.text}

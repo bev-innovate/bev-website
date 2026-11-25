@@ -10,7 +10,7 @@ import {
 import { Fragment, useRef } from "react";
 
 /**
- * Text whose key phrases warm to golden yellow as the reader scrolls through it.
+ * Text whose key phrases warm to the Exchange yellow as the reader scrolls through it.
  *
  * Mark a phrase with double square brackets: "the [[steepest part of the journey]]".
  * Phrases change one after another across the paragraph's passage up the screen, so the
@@ -20,8 +20,8 @@ import { Fragment, useRef } from "react";
 
 /** Where phrases start: the ink of the text they sit in. */
 const INKS = { foreground: "#2e2833", muted: "#5b545f" } as const;
-/** A warm golden yellow, deep enough to read on white at these large sizes. */
-const TO = "#b8860b";
+/** The Exchange sun yellow, the same as the quotation marks (--color-exchange-sun). */
+const TO = "#f2b92b";
 
 function Phrase({
   children,

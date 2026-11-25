@@ -27,7 +27,7 @@ const SPEED = 0.45;
 function Card({ quote }: { quote: MarqueeQuote }) {
   return (
     <figure className="flex h-full flex-col rounded-3xl bg-exchange-mist p-7 text-exchange-ink">
-      <Quote className="mb-3 size-6 shrink-0 text-exchange-sun" aria-hidden />
+      <Quote className="mb-3 size-6 shrink-0 rotate-180 text-exchange-sun" aria-hidden />
       <blockquote className="text-lg leading-relaxed">{quote.text}</blockquote>
       <figcaption className="mt-auto pt-5 text-base">
         <span className="font-bold">{quote.name}</span>, {quote.company}
